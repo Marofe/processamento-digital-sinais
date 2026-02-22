@@ -1,0 +1,995 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  <!-- <script type="text/javascript">
+		var data = null;
+		var graph = null;
+  
+	
+		// Called when the Visualization API is loaded.
+		function drawVisualization() {
+		  // Create and populate a data table.
+		  data = new vis.DataSet();
+		  // create some nice looking data with sin/cos
+		  var counter = 0;
+		  var steps = 1000; // number of datapoints will be steps*steps
+		  var axisMax = 20;
+		  var axisStep = axisMax / steps;
+		  for (var t = 0*axisStep; t < axisMax; t += axisStep) {
+			  data.add({ id: counter++, y: Math.cos(t), x: t, z:Math.sin(t), style: t });
+		  }
+  
+		  // specify options
+		  var options = {
+			width: "600px",
+			height: "600px",
+			style: "line",
+			dataColor: '#ff0000',
+			showPerspective: false,
+			showGrid: true,
+			showShadow: false,
+			keepAspectRatio: false,
+			verticalRatio: 1,
+			xLabel: "t",
+			zLabel: "Imaginário",
+			yLabel: "Real",
+			showAnimationControls 	: true
+		  };
+  
+		  // Instantiate our graph object.
+		  var container = document.getElementById("mygraph");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -1.57, vertical: 0, distance: 1.5});
+
+
+		  var container = document.getElementById("mygraph2");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -0.5, vertical: 0.5, distance: 1.5});
+		}
+	  </script> -->
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 11: <br>Transformada de Fourier: <br> Aplicações em Modulação de Sinais<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">29 de setembro de 2025</p>
+				</div>
+
+				</section>
+
+
+
+				
+			
+			
+
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Par Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+		$$
+			g(t)\Longleftrightarrow G(\omega)
+		$$
+		<img src="../../images/transformada_fourier_par.png" width="900">
+		</center>
+		
+
+	
+		
+				   </div>
+
+		</section>
+
+
+
+			
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+		<ul>
+			<li>Dualidade;</li>
+			<li>Simetria do conjugado;</li>
+			<li>Linearidade;</li>
+			<li>Deslocamento no tempo;</li>
+			<li>Deslocamento na frequência;</li>
+			<li>Scaling;</li>
+			<li>Convolução no tempo;</li>
+			<li>Diferenciação;</li>
+			<li>Integração;</li>
+
+
+		</ul>
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Exemplo </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $g(t)=e^{-\alpha |t|}$ com $\alpha >0$.
+	 
+		<center class="lightup">
+		$$ G(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Objetivos
+				</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+		
+				<ul>
+					<li>Propriedade: sinal real e par;</li>
+					<li>Propriedade: sinal real e ímpar;</li>
+					<li>Propriedade: produto no tempo;</li>
+					<li>Aplicação em Modulação de sinais;</li>
+					<li>Exemplos.</li>
+				
+				</ul>
+			
+		</div>
+		
+	</section>
+
+
+
+	
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Sinal real e par </h2>
+			</div>
+			<div class="slide-content">	
+	 
+		<center class="lightup">
+		Se $g:\mathbb{R}\to\mathbb{R}$ (sinal real) e $g(-t)=g(t)$ (sinal par), então 
+		$$
+			\mathcal{F}\{g(t)\}=G(\omega)\in\mathbb{R}, \forall \omega \in \mathbb{R}
+		$$
+		
+		</center>
+		<center>
+			Pois,
+		$$
+			\text{par}\cdot \text{ímpar} = \text{ímpar}\\
+			\int_{-a}^a \text{ímpar} = 0
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $g(t)=\frac{1}{1+t^2}$.
+	 
+		<center class="lightup">
+		$$ G(\omega)=\mathcal{F}\{\frac{1}{1+t^2}\}=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Sinal real e ímpar </h2>
+			</div>
+			<div class="slide-content">	
+	 
+		<center class="lightup">
+		Se $g:\mathbb{R}\to\mathbb{R}$ (sinal real) e $g(-t)=-g(t)$ (sinal ímpar), então 
+		$$
+			\mathcal{F}\{g(t)\}=G(\omega)\in\mathcal{I}, \forall \omega \in \mathbb{R}
+		$$
+		
+		</center>
+		<center>
+			Pois,
+		$$
+			\text{par}\cdot \text{ímpar} = \text{ímpar}\\
+			\int_{-a}^a \text{ímpar} = 0
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo </h2>
+			</div>
+			<div class="slide-content">
+
+			Considere $$\text{sign}(t)=\begin{cases}+1, \text{ se } t\ge 0\\ -1, \text{ se } t< 0.\end{cases}$$
+	 
+		<center class="lightup">
+		$$ G(\omega)=\mathcal{F}\{\text{sign}(t)\}=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Seja 
+			$$
+				g(t)=\frac{2e^{j5t}}{(t+1)^2}
+			$$
+		<center class="lightup">
+		$$ G(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Convolução no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere dois sinais $g:\mathbb{R}\to\mathbb{C}$ e $h:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega),\quad h(t)\Longleftrightarrow H(\omega)
+			$$
+			então
+			$$
+			g(t)\ast h(t) \Longleftrightarrow G(\omega) H(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Produto no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere dois sinais $g:\mathbb{R}\to\mathbb{C}$ e $h:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega),\quad h(t)\Longleftrightarrow H(\omega)
+			$$
+			então
+			$$
+			g(t)h(t) \Longleftrightarrow \frac{1}{2\pi }G(\omega)\ast H(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Modulação em Amplitude (Rádio AM) </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g(t)\cos(\omega_0 t) \Longleftrightarrow \frac{1}{2}G(\omega-\omega_0)+\frac{1}{2}G(\omega+\omega_0)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Modulação em Amplitude (Rádio AM) </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center>
+		<img src="../../images/sinal_am.png" width="800">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: TX </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center>
+		<img src="../../images/AM_modulation_TX.png" width="1100">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: TX </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center class="lightup">
+			Sinal Modulado:
+	$$
+			f(t)=g(t)\cos(\omega_c t)
+	$$
+		</center>
+
+		<center>
+			$$
+			\Rightarrow f(t)=g(t)\frac{e^{j\omega_c t}+e^{-j\omega_c t}}{2}
+			$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: TX </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	 
+		<center class="lightup">
+			Sinal Modulado:
+	$$
+			F(\omega)=\frac{1}{2}G(\omega+\omega_c)+\frac{1}{2}G(\omega-\omega_c)
+	$$
+		</center>
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: TX </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center class="">
+			<img src="../../images/espectro_fourier_AM.png" width="850">
+		</center>
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+		<img src="../../images/AM_modulation_RX_no_filter.png" width="1000">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	 
+		<center class="lightup">
+			Sinal De-Modulado:
+	$$
+			y(t)=f(t)\cos(\omega_c t)
+	$$
+		</center>
+		Mas,
+		$$
+		f(t)=g(t)\cos(\omega_c t)
+		$$
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	 
+		<center class="lightup">
+			Sinal De-Modulado:
+	$$
+			y(t)=g(t)\cos^2(\omega_c t)
+	$$
+		</center>
+		Identidade trigonométrica:
+		$$
+		\cos^2(x)=\frac{1+\cos(2x)}{2}
+		$$
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	 
+		<center class="lightup">
+			Sinal De-Modulado:
+	$$
+			y(t)=\frac{1}{2}g(t)+\frac{1}{2}g(t)\cos(2\omega_c t)
+	$$
+		</center>
+
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	 
+		<center class="lightup">
+			Sinal De-Modulado:
+	$$
+			Y(\omega)=\frac{1}{2}G(\omega)+\frac{1}{4}G(\omega-2\omega_c)+\frac{1}{4}G(\omega+2\omega_c)
+	$$
+		</center>
+
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+
+		<center class="">
+		<img src="../../images/espectro_fourier_AM_demodulated.png" width="1050">
+		</center>
+
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+
+		<center class="">
+		<img src="../../images/espectro_fourier_AM_demodulated_FPB.png" width="1050">
+		</center>
+
+
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: RX </h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+		<img src="../../images/AM_modulation_RX.png" width="1000">
+		<P><b>FPB=Filtro Passa Baixa</b></P>
+		$$
+			H(\omega)=2G_B(\omega)
+		$$
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: TX-RX </h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+		<img src="../../images/AM_modulation_TX_RX.png" width="1300">
+		$$
+			f(t)=g(t)\cos(\omega_c t)\\
+			y(t)=f(t)\cos(\omega_c t)\\
+			g(t)=\mathcal{F}^{-1}\{Y(\omega)H(\omega)\}
+		$$
+		
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Rádio AM: Multi-estações </h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+		<img src="../../images/AM_modulation_multistation.png" width="900">
+			
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Multiplexação em Frequência </h2>
+			</div>
+			<div class="slide-content">
+<p>&nbsp;</p>
+		<center>
+		<img src="../../images/espectro_fourier_AM_multistation.png" width="1200">
+			
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Multiplexação em Frequência </h2>
+			</div>
+			<div class="slide-content">
+<p>&nbsp;</p>
+		<center>
+		<img src="../../images/espectro_fourier_AM_multistation_filter.png" width="1200">
+			
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Multiplexação em Frequência </h2>
+			</div>
+			<div class="slide-content">
+<p>&nbsp;</p>
+		<center>
+		<img src="../../images/espectro_fourier_AM_multistation_filter_w2.png" width="1200">
+			
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Demodulação </h2>
+			</div>
+			<div class="slide-content">
+<p>&nbsp;</p>
+		<center>
+		<img src="../../images/AM_modulation_multistation_dem.png" width="1000">
+			
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Smoke-Amplitude Modulation</h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+			<video src="../../images/smodulation.mp4" width="1000" controls>
+				<p style="font-size: 20px;">
+				Fonte: B. P. Lathi. Linear Systems and Signals. Oxford University Press, Inc., USA, 2nd edition, 2009.
+				</p>
+			</video>
+		
+		
+		</center>
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Modulação em Frequência (Rádio FM) </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center>
+		<img src="../../images/sinal_fm.png" width="1000">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<!-- <section>
+
+			<div class="slide-title">
+				<h2>Modulação em Frequência (Rádio FM) </h2>
+			</div>
+			<div class="slide-content">
+	 
+		<center>
+		$$
+			f(t)=\cos\left(\omega_c t + K_c \int_0^t g(\tau) d\tau \right)
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section> -->
+
+
+		
+
+
+
+		
+
+
+
+			
+
+
+
+
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								Aplicações  da Transformada de Fourier para solução de Integrais
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

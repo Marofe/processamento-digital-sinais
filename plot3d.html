@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Graph 3D demo</title>
+    <script
+      type="text/javascript"
+      src="dist/vis-graph3d.min.js"
+    ></script>
+    <script type="text/javascript">
+      var data = null;
+      var graph = null;
+
+  
+      // Called when the Visualization API is loaded.
+      function drawVisualization() {
+        // Create and populate a data table.
+        data = new vis.DataSet();
+        // create some nice looking data with sin/cos
+        var counter = 0;
+        var steps = 1000; // number of datapoints will be steps*steps
+        var axisMax = 30;
+        var axisStep = axisMax / steps;
+        for (var t = 0; t < axisMax; t += axisStep) {
+            data.add({ id: counter++, y: Math.sin(t), x: t, z:Math.cos(t), style: t });
+        }
+
+        // specify options
+        var options = {
+          width: "600px",
+          height: "600px",
+          style: "line",
+          dataColor: '#ff0000',
+          showPerspective: false,
+          showGrid: true,
+          showShadow: false,
+          keepAspectRatio: false,
+          verticalRatio: 1,
+          xLabel: "t",
+          zLabel: "Imaginário",
+          yLabel: "Real"
+        };
+
+        // Instantiate our graph object.
+        var container = document.getElementById("mygraph");
+        graph = new vis.Graph3d(container, data, options);
+        graph.setCameraPosition({horizontal: 0, vertical: 0, distance: 1.5});
+      }
+    </script>
+  </head>
+  <body onload="drawVisualization();">
+    <div id="mygraph"></div>
+  </body>
+</html>

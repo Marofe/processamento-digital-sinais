@@ -1,0 +1,1408 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  <!-- <script type="text/javascript">
+		var data = null;
+		var graph = null;
+  
+	
+		// Called when the Visualization API is loaded.
+		function drawVisualization() {
+		  // Create and populate a data table.
+		  data = new vis.DataSet();
+		  // create some nice looking data with sin/cos
+		  var counter = 0;
+		  var steps = 1000; // number of datapoints will be steps*steps
+		  var axisMax = 20;
+		  var axisStep = axisMax / steps;
+		  for (var t = 0*axisStep; t < axisMax; t += axisStep) {
+			  data.add({ id: counter++, y: Math.cos(t), x: t, z:Math.sin(t), style: t });
+		  }
+  
+		  // specify options
+		  var options = {
+			width: "600px",
+			height: "600px",
+			style: "line",
+			dataColor: '#ff0000',
+			showPerspective: false,
+			showGrid: true,
+			showShadow: false,
+			keepAspectRatio: false,
+			verticalRatio: 1,
+			xLabel: "t",
+			zLabel: "Imaginário",
+			yLabel: "Real",
+			showAnimationControls 	: true
+		  };
+  
+		  // Instantiate our graph object.
+		  var container = document.getElementById("mygraph");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -1.57, vertical: 0, distance: 1.5});
+
+
+		  var container = document.getElementById("mygraph2");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -0.5, vertical: 0.5, distance: 1.5});
+		}
+	  </script> -->
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 14: <br>Filtros Realizáveis (Analógicos)<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">7 de outubro de 2025</p>
+				</div>
+
+				</section>
+
+
+
+				
+		<section>
+
+			<div class="slide-title">
+				<h2>Filtros Ideais
+				</h2>
+			</div>
+			<div class="slide-content">
+			<center class="lightup">
+				Um filtro ideal é um <b>sistema</b> projetado especificamente para remover certas frequências de um sinal sem alterar as demais frequências.
+			</center>
+			<center>
+				<ul>
+				<li>Filtro Passa-Baixa (FPB);</li>
+				<li>Filtro Passa-Alta (FPA)</li>
+				<li>Filtros Passa-Faixa (FPF).</li>
+				<li>Filtros Rejeita-Faixa (FRF).</li>
+			</ul>
+			</center>
+		</div>
+		
+	</section>
+
+
+	
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtros Passa Baixa
+		</h2>
+	</div>
+	<div class="slide-content">
+	<center>
+	<img src="../../images/filtro_passa_baixa_positivo.png" width="800">
+	
+	</center>
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtros Passa Alta
+		</h2>
+	</div>
+	<div class="slide-content">
+	<center>
+	<img src="../../images/filtro_passa_alta_positivo.png" width="800">
+	
+	</center>
+</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtros Passa Faixa
+		</h2>
+	</div>
+	<div class="slide-content">
+	<center>
+	<img src="../../images/filtro_passa_faixa_positivo.png" width="800">
+	
+	</center>
+	<center class="lightup">
+	FPF=FPA+FPB		
+	</center>
+</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtros Rejeita Faixa
+		</h2>
+	</div>
+	<div class="slide-content">
+	<center>
+	<img src="../../images/filtro_rejeita_faixa_positiva.png" width="750">
+	
+	</center>
+	<center class="lightup">
+	FPF=FPB+FPA		
+	</center>
+</div>
+
+</section>
+
+			
+			
+<section>
+
+	<div class="slide-title">
+		<h2>Objetivos
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Filtro Analógico Passa Baixa RC</li>
+			<li>Filtro Analógico Passa Alta RL</li>
+			<li>Filtros Analógico Passa-Faixa RLC</li>
+			<li>Filtros Analógico Rejeita-Faixa RLC</li>
+			<li>Exemplos.</li>
+		
+		</ul>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Divisor de tensão
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+		<img src="../../images/divisor_tensao.png" width="700">
+		<p class="lightup">
+		$
+			V_o(\omega)=V_i(\omega)\frac{Z_2}{Z_1+Z_2}
+		$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Impedância do Resistor
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+			<p>&nbsp;</p>
+		<img src="../../images/resistor.png" width="500">
+		<p class="lightup">
+		$$
+			Z_R=R
+		$$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Impedância do Capacitor
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+					<img src="../../images/capacitor.png" width="300">
+		<p class="lightup">
+		$$
+			Z_C=\frac{1}{j\omega C}
+		$$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Impedância do Indutor
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+		<center>
+					<img src="../../images/indutor.png" width="500">
+		<p class="lightup">
+		$$
+			Z_L=j\omega L
+		$$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Impedância
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+		<center>
+			<table>
+				<tr><td align="center">Resistor</td><td align="center">Capacitor</td><td align="center">Indutor</td></tr>
+				<tr><td><img src="../../images/resistor.png" width="400"></td>
+				<td><img src="../../images/capacitor.png" width="250"></td>
+				<td><img src="../../images/indutor.png" width="400"></td></tr>
+				<tr><td align="center">$Z_R=R$</td><td align="center">$Z_C=\frac{1}{j\omega C}$</td><td align="center">$Z_L=j\omega L$</td></tr>
+			</table>				
+					
+	
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RC.png" width="600">
+		<p class="lightup">
+		$
+			H(\omega)=\frac{\frac{1}{RC}}{j\omega+\frac{1}{RC}}
+		$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RC.png" width="600">
+		<p class="lightup">
+		$
+			|H(\omega)|=\frac{\frac{1}{RC}}{\sqrt{\omega^2+\frac{1}{(RC)^2}}},\quad \theta(\omega)=-\arctan(\frac{\omega}{RC})
+		$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rc_espectro.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Módulo em dB
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+		<center class="lightup">
+				$$
+					|H(\omega)|_{dB}=20\log_{10}(|H(\omega)|)
+				$$
+	</center>
+	<p>&nbsp;</p>
+
+	<center class="lightup">
+		Espectro de Fourier (parte positiva) = Diagrama de Bode
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rc_espectro_db.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+		Teorema de Parseval:				
+			$$
+			\|h(t)\|^2=\frac{1}{2\pi}\int_{-\infty}^\infty |H(\omega)|^2d\omega 
+			$$
+		Portanto,
+		<p class="lightup">
+		$$
+			|H(\omega)|^2\to \text{densidade de potência}
+		$$
+	</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+		
+		Supondo o espectro normalizado:
+		$$
+			\max_\omega |H(\omega)|=1
+		$$
+		<p class="lightup">
+			Meia-potência
+		$$
+			|H(B)|^2=\frac{1}{2}
+		$$
+	</p>
+	<p>$\Rightarrow B$ é a frequência de corte do filtro.</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+		
+		Supondo o espectro normalizado:
+		$$
+			\max_\omega |H(\omega)|=1
+		$$
+		<p class="lightup">
+			Meia-potência
+		$$
+			|H(B)|=\frac{1}{\sqrt{2}}
+		$$
+	</p>
+	<p>$\Rightarrow B$ é a frequência de corte do filtro.</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+		
+		Supondo o espectro normalizado:
+		$$
+			\max_\omega |H(\omega)|=1
+		$$
+		<p class="lightup">
+			Meia-potência
+		$$
+			|H(B)|_{dB}=20\log_{10}(\frac{1}{\sqrt{2}})\approx -3dB
+		$$
+	</p>
+	<p>$\Rightarrow B$ é a frequência de corte do filtro.</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RC_meia_potencia.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RC_meia_potencia2.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte (B) p/ filtro RC
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+		<center>
+		$$
+			|H(B)|=\frac{1}{\sqrt{2}}=\frac{\frac{1}{RC}}{\sqrt{B^2+\frac{1}{(RC)^2}}}
+		$$
+		
+	</center>
+
+	<center class="lightup">
+		$$
+		B=\frac{1}{RC}
+		$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-baixa RC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RC.png" width="600">
+					<center class="lightup">
+						$$
+						B=\frac{1}{RC}
+						$$
+					</center>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Exemplo: 
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+				Obter um filtro RC para remover a componente de $25\rad/s$ do sinal
+
+				$$
+			g(t)=\cos(2t)+\cos(25t)
+				$$
+				<img src="../../images/sinal_para_filtrar.png" alt="">
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Exemplo: 
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+				Escolhendo $R=330\Omega$ e $C=1000uC$, resulta em 
+				<br>
+				$
+			B\approx 3 rad/s
+				$
+				<br>
+				<img src="../../images/sinal_filtrado.png" alt="">
+	</center>
+	
+</div>
+
+</section>
+
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RL.png" width="600">
+					<center class="lightup">
+						$
+						H(\omega)=\frac{j\omega}{j\omega+\frac{R}{L}}
+						$
+					</center>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RL.png" width="600">
+					<center class="lightup">
+						$
+						|H(\omega)|=\frac{\omega}{\sqrt{\omega^2+(\frac{R}{L})^2}},\quad \theta(\omega)=\arctan(\frac{R}{\omega L})
+						$
+					</center>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rl_espectro.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL (Diagram de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rl_espectro_db.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL (Diagram de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rl_meia_potencia.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL (Diagram de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rl_meia_potencia2.png" width="800">
+		
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Frequência de corte (B) p/ filtro RL
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+		<center>
+		$$
+			|H(B)|=\frac{1}{\sqrt{2}}=\frac{B}{\sqrt{B^2+(\frac{R}{L})^2}}
+		$$
+		
+	</center>
+
+	<center class="lightup">
+		$$
+		B=\frac{R}{L}
+		$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Alta RL
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RL.png" width="600">
+			
+	<center class="lightup">
+		$
+		B=\frac{R}{L}
+		$
+	</center>
+
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Faixa RLC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RLC.png" width="600">
+			
+	<center class="lightup">
+		$
+		H(\omega)=\frac{R}{R+j(\omega L-\frac{1}{\omega C})}
+		$
+	</center>
+
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Faixa RLC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_RLC.png" width="600">
+			
+	<center class="lightup">
+		$
+		B_0=\frac{1}{\sqrt{LC}}
+		$
+	</center>
+
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_espectro.png" width="800">
+			
+
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_meia_potencia.png" width="800">
+			
+
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_meia_potencia2.png" width="800">
+			
+
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Rejeita-Faixa RLC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/circuito_RLC_rejeita.png" width="700">
+			
+			<p class="lightup">$H(\omega)=\frac{j(\omega L-\frac{1}{\omega C})}{R+j(\omega L-\frac{1}{\omega C})}$
+			</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Rejeita-Faixa RLC
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/circuito_RLC_rejeita.png" width="700">
+			
+			<p class="lightup">$B_0=\frac{1}{\sqrt{LC}}$
+			</p>
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Rejeita-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_rejeita_espectro.png" width="800">
+			
+	
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Rejeita-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_rejeita_meia_potencia.png" width="800">
+			
+	
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Rejeita-Faixa RLC (Diagrama de Bode)
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/filtro_rlc_rejeita_meia_potencia2.png" width="800">
+			
+	
+	</center>
+	
+</div>
+
+</section>
+
+
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2></h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<h1>Parte II: Filtros de Ordem Superiores</h1>
+			</center>
+			
+			   </div>
+
+		</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa RC vs Ideal
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/lowpass_ideal_vs_RC.png" width="800">
+			
+	
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Exemplo: 
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+				Escolhendo $R=330\Omega$ e $C=1000uF$, resulta em 
+				<br>
+				$
+			B\approx 3 rad/s
+				$
+				<br>
+				<img src="../../images/sinal_filtrado.png" alt="">
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtros de de ordem superiores
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Cascateamento;</li>
+			<li>Filtro Analógico Butterworth</li>
+			<li>Filtro Analógico Bessel</li>
+			<li>Filtros Analógico Chebyshev</li>
+		</ul>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa RC em Cascata
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			<p>&nbsp;</p>
+					<img src="../../images/filtros_rc_cascata.png" width="1000">
+	<p class="lightup">		
+	$$
+			H(\omega)=\Bigl(\frac{B}{j\omega +B}\Bigr)^N
+	$$
+</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa RC em Cascata
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/high_orderm_lowpass_rc_filter.png" width="800">
+			
+	
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			<p>&nbsp;</p>
+					<img src="../../images/Cauer_lowpass_cascate.png" width="950">
+			<p class="lightup">
+	$
+			|H(\omega)|=\frac{1}{\sqrt{1+(\frac{\omega}{B})^{2N}}}
+	$
+</p>
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/lowpass_butterworth_3rd_order.png" width="850">
+			<p class="lightup">
+	$
+			|H(\omega)|=\frac{1}{\sqrt{1+(\frac{\omega}{B})^{6}}}
+	$
+</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+					<img src="../../images/butterworth.png" width="850">
+			<p class="lightup">
+	$
+			|H(\omega)|=\frac{1}{\sqrt{1+(\frac{\omega}{B})^{2N}}}
+	$
+</p>
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			
+					<img src="../../images/butter_2.png" width="1300">
+			
+	</center>
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			
+					<img src="../../images/butter_3.png" width="1300">
+			
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			
+					<img src="../../images/butter_4.png" width="1300">
+			
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			
+					<img src="../../images/butter_5.png" width="1300">
+			
+	</center>
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Filtro Passa-Baixa Butterworth
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+		<center>
+			
+					<img src="../../images/butter_6.png" width="1300">
+			
+	</center>
+	
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+							Transformada de Fourier para sinais em tempo discreto
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

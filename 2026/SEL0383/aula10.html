@@ -1,0 +1,1259 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  <!-- <script type="text/javascript">
+		var data = null;
+		var graph = null;
+  
+	
+		// Called when the Visualization API is loaded.
+		function drawVisualization() {
+		  // Create and populate a data table.
+		  data = new vis.DataSet();
+		  // create some nice looking data with sin/cos
+		  var counter = 0;
+		  var steps = 1000; // number of datapoints will be steps*steps
+		  var axisMax = 20;
+		  var axisStep = axisMax / steps;
+		  for (var t = 0*axisStep; t < axisMax; t += axisStep) {
+			  data.add({ id: counter++, y: Math.cos(t), x: t, z:Math.sin(t), style: t });
+		  }
+  
+		  // specify options
+		  var options = {
+			width: "600px",
+			height: "600px",
+			style: "line",
+			dataColor: '#ff0000',
+			showPerspective: false,
+			showGrid: true,
+			showShadow: false,
+			keepAspectRatio: false,
+			verticalRatio: 1,
+			xLabel: "t",
+			zLabel: "Imaginário",
+			yLabel: "Real",
+			showAnimationControls 	: true
+		  };
+  
+		  // Instantiate our graph object.
+		  var container = document.getElementById("mygraph");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -1.57, vertical: 0, distance: 1.5});
+
+
+		  var container = document.getElementById("mygraph2");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -0.5, vertical: 0.5, distance: 1.5});
+		}
+	  </script> -->
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 10: <br>Propriedades da Transformada de Fourier<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">16 de setembro de 2025</p>
+				</div>
+
+				</section>
+
+
+
+				
+			
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Objetivos
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+			
+					<ul>
+						<li>Principais propriedades;</li>
+						<li>Simetria Tempo vs Frequência;</li>
+						<li>Convolução no tempo;</li>
+						<li>Diferenciação no tempo;</li>
+						<li>Integração no tempo;</li>
+						<li>Exemplos.</li>
+					
+					</ul>
+				
+			</div>
+			
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação da Função Impulso</h2>
+			</div>
+			<div class="slide-content">
+
+				<center>
+					$$
+					
+					\delta(t)=\begin{cases}0,\quad \forall t\neq 0,\\
+					+\infty, \quad t=0.\end{cases}, \quad \int_{-\infty}^\infty \delta(t)dt = 1.
+			
+					$$
+					
+				</center>
+
+
+				
+			
+				<center class="lightup">
+					$$
+							\delta(t)=\frac{1}{2\pi} \int_{-\infty}^\infty e^{j\omega t}d\omega
+					$$
+				</center>
+		
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	
+		<center class="lightup">
+		
+			$$
+			G(\omega)=\mathcal{F}\{g(t)\}\\
+			
+			$$
+		</center>
+
+			   </div>
+
+		</section>
+
+	
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+	
+		<center class="lightup">
+		
+			$$
+			G(\omega)=\langle g, e^{j\omega t}\rangle^*=\int_{-\infty}^\infty g(t)e^{-j\omega t}dt\\
+			
+			$$
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier0.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier2.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier3.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier4.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier5.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier6.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier7.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier8.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier9.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+	
+		<center class="">
+		
+		<img src="../../images/tranf_fourier10.png" alt="">
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada Inversa de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+	<p>&nbsp;</p>
+		<center class="lightup">
+		
+			$$
+			\mathcal{F}^{-1}\{G(\omega)\}=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)e^{j\omega t}d\omega=g(t)
+			$$
+		</center>
+		<p align="center">$\mathcal{F}^{-1}\{\cdot\}$ é o operador Transformada Inversa de Fourier!</p>
+
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Mudança de Base</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+		
+			$$
+			g(t)=\int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)e^{j\omega t}d\omega
+			$$
+		</center>
+		<center>
+			<img src="../../images/transformada_fourier_par.png" width="700">
+		</center>
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Par Transformada de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+		
+			$$
+			g(t)=\int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)e^{j\omega t}d\omega
+			$$
+		</center>
+		<center class="">
+			<p>&nbsp;</p>
+			Par Transformada de Fourier:
+		$$
+			g(t)\Longleftrightarrow G(\omega)
+		$$
+		</center>
+		
+				   </div>
+
+		</section>
+
+
+
+			
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplos</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			<p>Pulso:</p>
+			<p class="lightup">
+		$$
+			G_a(t) \Longleftrightarrow a\cdot \text{sinc}\Bigl(\frac{\omega a}{2}\Bigr)
+		$$
+	</p>
+		</center>
+
+		<center class="fragment">
+			<p>Exponencial:</p>
+			<p class="lightup">
+		$$
+			e^{-\sigma t}u(t) \Longleftrightarrow \frac{1}{j\omega+\sigma}
+		$$
+	</p>
+		</center>
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+
+
+		<center>
+			<p>Impulso:</p>
+			
+			$$
+			
+			\delta(t)=\begin{cases}0,\quad \forall t\neq 0,\\
+			+\infty, \quad t=0.\end{cases}, \quad \int_{-\infty}^\infty \delta(t)dt = 1.
+	
+			$$
+			<img src="../../images/impulso_unitario.png" width="500">
+			
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+					
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo: Impulso Unitário</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			
+			<p class="lightup">
+		$$
+			\delta(t)\Longleftrightarrow 1
+		$$
+	</p>
+	<img class="fragment" src="../../images/impulso_unitario_fourier_transform.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo: Função constante</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			
+			<p class="lightup">
+		$$
+			1\Longleftrightarrow 2\pi \delta(\omega)
+		$$
+	</p>
+	<img class="" src="../../images/constante_fourier_transform.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Dualidade</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			
+			<p class="lightup">
+				Se 
+		$$
+			g(t)\Longleftrightarrow G(\omega)
+		$$
+		então 
+		$$
+		  G(t) \Longleftrightarrow 2\pi g(-\omega)
+		$$
+	</p>
+			</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Dualidade</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			
+			<p class="lightup">
+				Exemplo:
+		$$
+			\delta(t) \Longleftrightarrow 1
+		$$
+		então 
+		$$
+		  1 \Longleftrightarrow 2\pi \delta(-\omega)
+		$$
+	</p>
+			</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Dualidade</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			
+			<p class="lightup">
+				Exemplo:
+		$$
+			G_a(t) \Longleftrightarrow a\cdot \text{sinc}\Bigl(\frac{\omega a}{2}\Bigr)
+		$$
+		então 
+		$$
+		a\cdot \text{sinc}\Bigl(\frac{t a}{2}\Bigr) \Longleftrightarrow \quad ?
+		$$
+	</p>
+			</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Dualidade</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="">
+			<p>&nbsp;</p>
+			<img src="../../images/sinc_transf_fourier_dualidade.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Simetria do Conjugado</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+			Se
+			$$
+			g(t)\Longleftrightarrow G(\omega)
+			$$
+			então 
+$$
+g^*(t) \Longleftrightarrow G^*(-\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+		
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Simetria do Conjugado: Sinal real</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+			Se $g:\mathbb{R}\to\mathbb{R}$, então
+			$$
+			g^*(t)=g(t)
+			$$
+			Logo,
+$$
+g(t) \Longleftrightarrow G(\omega)=G^*(-\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Simetria do Conjugado: Sinal real</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+			$
+			|G(-\omega)|=|G(\omega)|
+			$
+		</center>
+		<center>
+		<img src="../../images/espectro_fourier_transform.png" width="800">
+	</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Simetria do Conjugado: Sinal real</h2>
+			</div>
+			<div class="slide-content">
+			
+	
+		<center class="lightup">
+			$ 
+			\theta(-\omega)=-\theta(\omega)
+			$
+		</center>
+		<center>
+		<img src="../../images/espectro_fourier_transform_fase.png" width="600">
+	</center>
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade da Linearidade </h2>
+			</div>
+			<div class="slide-content">
+			Considere dois sinais $g:\mathbb{R}\to\mathbb{C}$ e $h:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega), \quad h(t) \Longleftrightarrow H(\omega)
+			$$
+			então
+			$$
+			\alpha g(t)+\beta h(t) \Longleftrightarrow \alpha G(\omega)+\beta H(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Deslocamento no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g(t-t_0) \Longleftrightarrow e^{-j\omega t_0}G(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Deslocamento na frequência </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			e^{j\omega_0 t}g(t) \Longleftrightarrow G(\omega-\omega_0)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: <i>Scaling</i></h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g(at) \Longleftrightarrow \frac{1}{|a|}G(\frac{\omega}{a})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Inversão no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g(-t) \Longleftrightarrow G(-\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Convolução no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere dois sinais $g:\mathbb{R}\to\mathbb{C}$ e $h:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega),\quad h(t)\Longleftrightarrow H(\omega)
+			$$
+			então
+			$$
+			g(t)\ast h(t) \Longleftrightarrow G(\omega)H(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Nível DC </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g_\text{DC}=G(0)=\int_{-\infty}^\infty g(t)dt
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Instante Zero </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			g(0)=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)d\omega
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferenciação no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			\frac{dg}{dt}\Longleftrightarrow j\omega G(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferenciação no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			\frac{d^ng}{dt^n}\Longleftrightarrow (j\omega)^n G(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Integração no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			\int_{-\infty}^t g(\tau)d\tau \Longleftrightarrow \quad ?
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Integração no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+			
+		<center class="lightup">
+			Primeiro passo:
+			$$
+			\int_{-\infty}^t g(\tau)d\tau = g(t)\ast u(t)
+			$$
+		</center>
+		<center class="lightup">
+			Segundo passo:
+			<p>
+			$
+			u(t) \Longleftrightarrow \frac{1}{j\omega}+\pi\delta(\omega)
+			$
+		</p>
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Integração no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+			
+		<center class="lightup">
+
+			$$
+			\int_{-\infty}^t g(\tau)d\tau \Longleftrightarrow G(\omega)U(\omega)
+			$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Integração no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g:\mathbb{R}\to\mathbb{C}$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g(t) \Longleftrightarrow G(\omega)
+			$$
+			então
+			$$
+			\int_{-\infty}^t g(\tau)d\tau \Longleftrightarrow  \frac{G(\omega)}{j\omega}+G(0)\pi \delta(\omega)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $g(t)=e^{-\alpha |t|}$ com $\alpha >0$.
+	 
+		<center class="lightup">
+		$$ G(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+
+
+		
+
+
+
+			
+
+
+
+
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								Aplicações da Transformada de Fourier
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

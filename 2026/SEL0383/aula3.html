@@ -1,0 +1,1727 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas em Eng. Elétrica</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 3: <br>Espaço de Funções<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">11 de agosto de 2025</p>
+				</div>
+
+				</section>
+
+
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+							<li>Conceituar <b>espaço de funções</b>;</li>
+							<li>Produto escalar;</li>
+							<li>Norma;</li>
+							<li>Base de representação;</li>
+							<li>Operadores lineares;</li>
+							<li>*Convolução.</li>
+						</p>
+						</div>
+
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+					 <p class="lightup" >Números Inteiros maior que um</p>
+			<center>
+			$$\mathbb{Z}_{>1}=\{2,3,4,5,\cdots\}$$
+		<p>Todo número em $\mathbb{Z}_{>1}$ pode ser representado através do produto de <b>números primos</b>.</p>
+		$$\mathcal{P}=\{2, 3, 5, 7, 11, 13, 17, 19, 23, \cdots\}$$
+		<p>Ex: $10=2\cdot 5;\quad 21=3\cdot 7;$ </p>
+			</center>
+			
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear 
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear?</p>
+<center>
+<p>Um conjunto $V$ em que seus elementos podem ser <b>adicionados</b>, <b>reescalonados</b> e contém <b>elemento nulo</b>.</p>
+<img src="../../images/espaco_linear.png" alt="" width="500">
+</center>
+
+	
+</div>
+
+</section>
+		
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear 
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear?</p>
+<center>
+	<p>Um conjunto $V$ em que seus elementos podem ser <b>adicionados</b>, <b>reescalonados</b> e contém <b>elemento nulo</b>.</p>
+<img src="../../images/espaco_linear.png" alt="" width="500">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>O conjunto $\mathcal{C}(\mathbb{R})$ de todas as <b>funções contínuas</b> é um espaço linear!</p>
+<img src="../../images/espaco_linear_funcoes.png" alt="">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>$\mathcal{C}^1(\mathbb{R})=\{g: \exists \frac{d g}{dt}\}$</p>
+<img src="../../images/espaco_linear_funcoes_C1.png" alt="">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>$\mathcal{C}^\infty(\mathbb{R})=\{g: \exists \frac{d^n g}{dt^n},\forall n=1,2,\ldots,\infty\}$</p>
+<img src="../../images/espaco_linear_funcoes_Cinf.png" alt="">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>$P^n(\mathbb{R})=\{a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\}$</p>
+<img src="../../images/espaco_linear_funcoes_Pn.png" alt="">
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>Toda função $g(x) \in P^n(\mathbb{R})$ pode ser escrita na forma</p>
+$$
+g(x)=\sum_{i=0}^n a_ix^i
+$$
+<p class="fragment">
+$A=\{1,x,x^2,\ldots,x^n\}$ é uma base de representação de $P^n(\mathbb{R})$!
+</p>
+<p class="fragment">
+	O conjunto $\{a_0,a_1,\ldots,a_n\}$ são as coordenadas de $g(x)$ na base $A$.
+	</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+<center>
+
+<img src="../../images/bases_Pn.png" width="750">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>Se para toda função $g(x) \in \mathcal{C}(\mathbb{R})$ for possível escrever </p>
+$$
+g(x)=\sum_{i=-\infty}^\infty \alpha_ig_i(x)
+$$
+<p class="fragment">
+$A=\{\ldots,g_{-1},g_{0},g_1,\ldots\}$ é uma base de representação de $\mathcal{C}(\mathbb{R})$.
+<br>
+	O conjunto $\{\ldots,\alpha_{-1},\alpha_0,\alpha_1,\ldots\}$ são as coordenadas de $g(x)$ na base $A$.
+	</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>Se para toda função $g(x) \in \mathcal{C}(\mathbb{R})$ for possível escrever </p>
+$$
+g(x)=\sum_{i=-\infty}^\infty \alpha_ig_i(x)
+$$
+<p class="lightup">
+	Espaço de dimensão infinita!
+</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>Toda função $g(x) \in \mathcal{C}^\infty(\mathbb{R})$ pode ser escrita na forma,</p>
+<p class="fragment">
+$$
+g(x)=\sum_{n=0}^\infty \frac{1}{n!}\frac{d^n g}{dx^n}(x-a)^n 
+$$
+que corresponde a <b>série de Taylor</b> em torno de $x=a$.
+</p>
+</center>
+
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>Toda função $g(x) \in \mathcal{C}^\infty(\mathbb{R})$ pode ser escrita na forma,</p>
+<p>
+$$
+g(x)=\sum_{n=0}^\infty \underbrace{\frac{1}{n!}\frac{d^n g(a)}{dx^n}}_{\alpha_n}\underbrace{(x-a)^n}_{g_n(x)}
+$$
+que corresponde a <b>série de Taylor</b> em torno de $x=a$.
+</p>
+</center>
+
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma espaço linear de funções?</p>
+<center>
+
+<p>A função $g(x) =\sin(x) \in \mathcal{C}^\infty(\mathbb{R})$ pode ser escrita na forma,</p>
+<p>
+$$
+g(x)=\sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}x^{2n+1}, \quad a=0
+$$
+que corresponde a <b>série de Taylor</b> em torno de $x=0$.
+</p>
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g(x)=\sin(x) \in \mathcal{C}^\infty(\mathbb{R})$</p>
+<img src="../../images/bases_seno.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g_a(x)=x$</p>
+<img src="../../images/seno_taylor_1.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g_a(x)=x-\frac{1}{3!}x^3$</p>
+<img src="../../images/seno_taylor_2.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g_a(x)=x-\frac{1}{3!}x^3+\frac{1}{5!}x^5$</p>
+<img src="../../images/seno_taylor_3.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g_a(x)=x-\frac{1}{3!}x^3+\frac{1}{5!}x^5-\frac{1}{7!}x^7$</p>
+<img src="../../images/seno_taylor_4.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$g_a(x)=x+\frac{1}{3!}x^3+\frac{1}{5!}x^5+\frac{1}{7!}x^7+\frac{1}{9!}x^9$</p>
+<img src="../../images/seno_taylor_5.png" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+
+<p>$\sin(x)=x+\frac{1}{3!}x^3+\frac{1}{5!}x^5+\frac{1}{7!}x^7+\frac{1}{9!}x^9+\cdots$</p>
+<img src="../../images/taylor_seno.gif" width="650">
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Sinais são como vetores em um espaço de funções!</p>
+<center>
+<img src="../../images/sinal.png" alt="">
+$$
+\mathcal{L}^2(\mathbb{R})=\{g:\int_{-\infty}^\infty |g(t)|^2dt < \infty \}
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+<img src="../../images/espaco_linear_funcoes_L2.png" alt="">
+$$
+\mathcal{L}^2(\mathbb{R})=\{g:\int_{-\infty}^\infty |g(t)|^2dt < \infty \}
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		
+<center>
+<img src="../../images/espaco_linear_funcoes_L2_ab.png" alt="">
+$$
+\mathcal{L}^2([a,b])=\{g:\int_{a}^b |g(t)|^2dt < \infty \}
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Produto escalar</p>
+<center>
+	Seja $g,h \in \mathcal{L}^2(\mathbb{R})$, então
+$$
+\langle g,h \rangle = \int_{-\infty}^\infty g^*(t)h(t)dt
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Recapitulando: Espaço Vetorial
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Produto escalar</p>
+<center>
+	Seja $\vec v , \vec w \in V$, tal que 
+$$
+\vec v = \begin{bmatrix}
+v_1\\ 
+v_2\\
+\vdots \\
+v_n
+\end{bmatrix}; \quad \vec w = \begin{bmatrix}
+w_1\\ 
+w_2\\
+\vdots \\
+w_n
+\end{bmatrix}
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Recapitulando: Espaço Vetorial
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Produto escalar</p>
+<center>
+	Então, 
+	$$ \langle \vec v, \vec w\rangle =\sum_{k=1}^n v_k^*w_k $$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	Seja $g , h \in \mathcal{L}^2(\mathbb{R})$, tal que 
+$$
+g = \begin{bmatrix}
+\vdots\\ 
+g_{-2}\\
+g_{-1}\\
+g_0\\
+g_1\\
+g_2\\
+\vdots 
+\end{bmatrix}; \quad h = \begin{bmatrix}
+\vdots\\ 
+h_{-2}\\
+h_{-1}\\
+h_0\\
+h_1\\
+h_2\\
+\vdots 
+\end{bmatrix};
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	Seja $g , h \in \mathcal{L}^2(\mathbb{R})$, tal que 
+$$
+g_k=g(k\Delta t),\\ h_k=h(k\Delta t),\\ \forall k\in \mathbb{Z}.
+$$
+</center>
+
+<center class="fragment">
+	$$
+\langle g, h \rangle = \lim_{\Delta t \to 0}\sum_{k=-\infty}^\infty g_k^*h_k \Delta t
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	Seja $g , h \in \mathcal{L}^2(\mathbb{R})$, tal que 
+$$
+g_k=g(k\Delta t),\\ h_k=h(k\Delta t),\\ \forall k\in \mathbb{Z}.
+$$
+</center>
+
+<center >
+	<p class="lightup">
+	$$
+\langle g, h \rangle = \int_{-\infty}^\infty g(t)^*h(t)d t
+$$
+</p>
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Norma</p>
+<center>
+	Seja $g \in \mathcal{L}^2(\mathbb{R})$, então
+$$
+\|g\| = \sqrt{\langle g,g\rangle } = \sqrt{\int_{-\infty}^\infty g^*(t)g(t)dt}
+$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Norma</p>
+<center>
+	Seja $g \in \mathcal{L}^2(\mathbb{R})$, então
+$$
+\|g\| = \sqrt{\langle g,g\rangle } = \sqrt{\int_{-\infty}^\infty |g(t)|^2 dt}
+$$
+<p class="lightup">Energia de $g(t)=\|g(t)\|^2$</p>
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Projeção</p>
+<center>
+	Seja $g, h \in \mathcal{L}^2(\mathbb{R})$, então
+$$
+\text{proj}_h g = \frac{\langle g,h \rangle^*}{\|h\|^2} h(t)
+$$
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço Linear de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Ortogonalidade</p>
+<center>
+	Seja $g, h \in \mathcal{L}^2(\mathbb{R})$, então
+$$
+ g \perp h \Leftrightarrow \langle g, h \rangle = 0
+$$
+<p class="fragment">
+$$
+ g \perp h \Leftrightarrow \int_{-\infty}^\infty g(t)^* h(t)dt = 0
+$$
+</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Representação de sinais
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Funções bases ortonormais</p>
+<center>
+	Seja $g \in \mathcal{L}^2(\mathbb{R})$, um sinal de interesse, e $$A=\{\ldots,\hat g_{-2},\hat g_{-1},\hat g_0,\hat g_1,\hat g_2,\ldots\}$$ um conjunto infinito de <b>funções bases ortonormais</b>,
+$$
+ \langle \hat g_i, \hat g_j \rangle = \begin{cases}
+ 1, \text{ se } i=j, \\
+ 0, \text{ caso contrário.}
+ \end{cases}
+$$
+
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Representação de sinais
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Funções bases ortonormais</p>
+<center>
+	Então,
+$$
+ g(t)=\sum_{i=-\infty}^\infty \alpha_i \hat g_i(t),\quad \forall t\in \mathbb{R}
+$$
+
+<p class="fragment current-visible">
+	$$\alpha_i=\langle \hat g_i, g\rangle ,\quad \forall i \in \mathbb{Z}$$
+</p>
+<p class="fragment current-visible">
+	$$\alpha_i=\int_{-\infty}^\infty \hat g_i(t)^* g(t)dt$$
+</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Operadores Lineares</p>
+<center>
+	<img src="../../images/operador_espaco_funcoes.png" alt="">
+	$$f\{y\}=x$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Equações Diferênciais Lineares</p>
+<center>
+	<img src="../../images/operador_espaco_funcoes.png" alt="">
+	$$f\{y\}=x$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Equações Diferênciais Lineares</p>
+<center>
+$$
+a\frac{d^2y}{dt^2}+b\frac{dy}{dt}+y = 0
+$$
+</center>
+
+<center class="fragment">
+	$$
+	\Rightarrow aD^2 y+bDy+y = 0
+	$$
+	</center>
+
+
+	<center class="fragment">
+		$$
+		\Rightarrow (aD^2 +bD+1)y = 0
+		$$
+		</center>
+	
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Equações Diferênciais Lineares</p>
+<center>
+$$
+a\frac{d^2y}{dt^2}+b\frac{dy}{dt}+y = 0
+$$
+</center>
+
+<center>
+	$$
+	\Rightarrow aD^2 y+bDy+y = 0
+	$$
+	</center>
+
+
+	<center>
+		$$
+		\Rightarrow \underbrace{(aD^2 +bD+1)}_{f}y = 0
+		$$
+		</center>
+
+
+		<center class="fragment">
+			$$
+			\Rightarrow f\{y\}=0
+			$$
+			</center>	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Autofunção e autovalores</p>
+<center>
+$$
+D v = \lambda v
+$$
+</center>
+
+<center class="fragment">
+			$$
+			\Rightarrow v(t)=e^{\lambda t}
+			$$
+</center>
+
+<center class="fragment">
+	$$
+	\Rightarrow f\{e^{\lambda t}\}=(aD^2+bD+1)e^{\lambda t}
+	$$
+</center>
+
+<center class="fragment">
+	$$
+	=(a\lambda^2+b\lambda+1)e^{\lambda t}
+	$$
+</center>
+
+
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Espaço de Funções
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Base de Autofunções</p>
+
+
+<center >
+	$$
+	\Rightarrow f\{e^{\lambda t}\}=(\lambda-\lambda_1)(\lambda-\lambda_2)e^{\lambda t}=0
+	$$
+</center>
+
+<center class="fragment">
+	<p class="lightup">
+	$$
+y(t)=\alpha_1e^{\lambda_1 t}+\alpha_2e^{\lambda_2 t}
+	$$
+</p>
+</center>
+
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+
+	<h2>Parte II
+	</h2>
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	Seja $g:\mathbb{R}\to \mathbb{C}$ e $h:\mathbb{R}\to \mathbb{C}$, então
+	<p class="lightup">
+	$$g(t)\ast h(t) = \int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau$$
+</p>
+</center>
+
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	Seja $g:\mathbb{R}\to \mathbb{C}$ e $h:\mathbb{R}\to \mathbb{C}$, então
+	<p class="lightup">
+	$$g(t)\ast h(t) = \int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau$$
+
+</p>
+Operação associativa, distributiva e comutativa
+<p class="fragment current-visible">
+	$$
+	g(t) \ast (h(t)\ast m(t))=(g(t)\ast h(t))\ast m(t)
+	$$
+	</p>
+<p class="fragment current-visible">
+$$
+(g_1(t)+g_2(t))\ast h(t)=g_1(t)\ast h(t)+g_2(t)\ast h(t)
+$$
+</p>
+<p class="fragment current-visible">
+	$$
+	g(t) \ast h(t)=h(t)\ast g(t)
+	$$
+	</p>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	$$
+c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+	$$
+<p><b>Passos:</b></p>
+<ul><li>
+Espelhamento $h(-\tau);$ 	
+</li>
+<li>Translação de $h(-\tau+t)$ para $t\in\mathbb{R}$;</li>
+<li>Cálculo da área de $g(\tau)h(-\tau+t)$;</li>
+</ul>
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate2.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/convolution_gate.gif" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate0.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate01.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate02.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate03.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate04.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate05.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_reta_gate06.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/convolution_gate_ramp.gif" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_gate.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/convolution_gate_gate.gif" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_exp_gate.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/convolution_gate_exp.gif" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/conv_exp_exp.png" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center>
+	<img src="../../images/convolution_exp_exp.gif" width="800">
+
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center class="fragment">
+	$$
+c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+	$$
+</center>
+
+<center class="fragment">
+	$$
+=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty g(k\Delta t)h(t-k\Delta t)\Delta t
+	$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center >
+	$$
+c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+	$$
+</center>
+
+
+<center>
+	$$
+=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty g(k\Delta t)\Delta t\cdot h(t-k\Delta t)
+	$$
+</center>
+
+
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+	
+<center >
+	$$
+c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+	$$
+</center>
+
+
+<center>
+	$$
+=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty \underbrace{g(k\Delta t)\Delta t}_{\alpha_k}\cdot\underbrace{h(t-k\Delta t)}_{b_k(t)}
+	$$
+</center>
+
+
+<center class="fragment">
+	$$
+=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty \alpha_kb_k(t).
+	$$
+</center>
+
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Convolução
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p align="center" class="fragment">A convolução pode não existir!</p>
+<center class="fragment">
+	
+	$$
+c(t)=1 \ast 1 =\int_{-\infty}^\infty 1\cdot 1 d\tau=\infty
+	$$
+</center>
+
+
+
+	
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+						Convolução utilizando função Impulso
+					</h3>
+					
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

@@ -1,0 +1,1173 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 7: <br>Séries de Fourier: exemplos e aplicações<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">25 de agosto de 2025</p>
+				</div>
+
+				</section>
+
+						
+			<section>
+
+				<div class="slide-title">
+					<h2>Objetivos
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+			
+					<ul>
+	   				    <li>Exemplos de Serie de Fourier na forma Complexa;</li>
+						<li>Propriedades da Série de Fourier;</li>
+						<li>Solução de EDO via Séries de Fourier;</li>
+						<li>Série de Fourier em 2D.</li>
+					</ul>
+				
+			</div>
+			
+		</section>
+
+
+
+	
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p class="lightup">
+						$$
+						G=\Bigl\{g_n(t)=e^{jn\omega_0 t}:\omega_0=\frac{2\pi}{T}, n\in\mathbb{Z}\Bigr\}
+						$$
+					</p>
+					$$
+					g(t)=\sum_{n=-\infty}^\infty c_n e^{jn\omega_0 t}
+					$$
+		</center>
+		<p align="center">
+			
+			$$
+			c_n=\frac{1}{T}\int_0^T g(t)e^{-jn\omega_0 t}dt
+			$$
+		</p>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+					<div class="slide-title">
+						<h2>Exponencial Complexa</h2>
+					</div>
+					<div>
+					<p>
+						$$z=e^{j\omega t}$$
+					</p>
+							
+						<img src="../../images/complex_exp.gif" alt="">
+					   </div>
+
+				</section>
+
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: módulo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					c_n=|c_n|e^{j\theta_n}
+					$$
+				</p>
+				<img src="../../images/espectro_fourier_mag.png" width="600">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					c_n=|c_n|e^{j\theta_n}
+					$$
+				</p>
+				<img src="../../images/espectro_fourier_fase.png" width="600">
+		</center>
+			   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: $g:\mathbb{R}\to\mathbb{R}$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup2">
+					$$
+					g(t)=\sum_{n=-\infty}^\infty |c_n|\cos(n\omega_0 t+\theta_n)
+					$$
+				</p>
+				<img src="../../images/espectro_fourier.gif" width="600">
+				
+		</center>
+			   </div>
+
+		</section>
+
+
+				
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: $g:\mathbb{R}\to\mathbb{C}$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup2">
+					$$
+					g(t)=\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t}=\sum_{n=0}^\infty |c_n|e^{j(n\omega_0 t+\theta_n)}
+					$$
+				</p>
+				<img src="../../images/complex_exp.gif" width="450">
+				
+		</center>
+			   </div>
+
+		</section>
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Dado uma função periódica $g(t)$ com período $T$, cuja série de Fourier é 
+					$
+					g(t)=\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t},
+					$
+					então 
+					<p class="lightup">
+					$$
+					\|g(t)\|^2_\text{efz}=\sum_{n=-\infty}^\infty |c_n|^2
+					$$
+				</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		
+
+
+		
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere a função periódica dada por
+					$$
+					g(t)=\sum_{k=-\infty}^\infty \delta(t-kT)
+					$$
+	<img src="../../images/trem_impulsos.png" width="750"><br>Ex: T=4
+		
+			
+						
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+			<p>&nbsp;</p>
+					<center class="lightup">
+						$$g(t)=\sum_{n=-\infty}^\infty \frac{1}{T}e^{jn\omega_0t}$$
+			
+					</center>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0
+				$
+			
+<img src="../../images/trem_impulsos_c0.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\mathcal{Re}\{ c_1e^{j\omega_0 t}\}
+				$
+			
+<img src="../../images/trem_impulsos_c1.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{2}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/trem_impulsos_c2.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{3}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/trem_impulsos_c3.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 1: trem de impulsos</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{4}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/trem_impulsos_c4.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere a função periódica cujo primeiro período é dado por
+					$$
+					g(t)=at,\forall t:|t|\le \frac{T}{2}
+					$$
+	<img src="../../images/dente_serra.png" width="750"><br>Ex: T=4, a=1
+		
+			
+						
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+						$$
+						\begin{aligned}
+					c_0&=0\\
+					c_n&=j\frac{a}{n\omega_0}\cos(n\pi), \forall n\in\mathbb{Z}_{n\neq0}
+					\end{aligned}
+						$$
+		</center>
+
+		<center class="lightup">
+			$$g(t)=\sum_{n\in\mathbb{Z}_{n\neq 0}} j\frac{a}{n\omega_0}\cos(n\pi)e^{jn\omega_0t}$$
+
+		</center>
+
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0
+				$
+			
+<img src="../../images/dente_serra_c0.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\mathcal{Re}\{ c_1e^{j\omega_0 t}\}
+				$
+			
+<img src="../../images/dente_serra_c1.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{2}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/dente_serra_c2.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{3}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/dente_serra_c3.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{4}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/dente_serra_c4.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo 2: dente de serra</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			<center >
+				$
+				g(t)=c_0+2\sum_{n=1}^{100}\mathcal{Re}\{ c_ne^{jn\omega_0 t}\}
+				$
+			
+<img src="../../images/dente_serra_c100.png" alt="">
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+
+<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				Defina o operador $\mathcal{S}_F\{\cdot\}$ tal que, dado duas funções de mesmo período, $g(t)=g(T+T)$ e $h(t)=h(t+T)$, tem-se
+				<center>
+					<p class="lightup">
+				$$ 
+					\mathcal{S}_F\{g(t)\}=c_n,\quad \mathcal{S}_F\{h(t)\}=d_n
+				$$
+			</p>
+			<p>Em que, $c_n$ corresponde ao n-ésimo coeficiente da série de Fourier de $g(t)$, e $d_n$ ao n-ésimo coeficiente da série de Fourier de $h(t)$.</p>
+				
+		</center>
+			   </div>
+
+		</section>
+
+
+			
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+<center>
+				<ul>
+
+					<li>
+						Linearidade:
+						$$
+						\mathcal{S}_F\{\alpha g(t)+\beta h(t)\}=\alpha c_n+\beta d_n
+						$$
+					</li>
+					<li>
+						Deslocamento no tempo:
+						$$
+						\mathcal{S}_F\{g(t-t_0)\}=e^{-jn\omega_0 t_0}c_n
+						$$
+					</li>
+					<li>
+						Deslocamento na frequência:
+						$$
+						\mathcal{S}_F\{e^{jm\omega_0 t}g(t)\}=c_{n-m}
+						$$
+					</li>
+				</ul>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				<ul>
+
+					
+					<li>Inversão no tempo:
+						$$
+						\mathcal{S}_F\{g(-t)\}=c_{-n}
+						$$
+					</li>
+					<li>
+						Convolução periódica:
+						$$
+						\mathcal{S}_F\{g(t)\ast h(t)\}=Tc_n d_n
+						$$
+					</li>
+					
+				</ul>
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				<ul>
+
+				
+					<li>Multiplicação no tempo:
+$$
+\mathcal{S}_F\{g(t)h(t)\}=\sum_{l=-\infty}^\infty c_l d_{n-l}
+$$
+
+					</li>
+					<li>
+						Derivadas
+						$$
+						\mathcal{S}_F\Bigl\{\frac{dg}{dt}\Bigr\}=jn\omega_0 c_n
+						$$
+
+					</li>
+				</ul>
+			</center>
+			   </div>
+
+		</section>
+		
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Sabendo que 
+						$$
+						\mathcal{S}_F\Bigl\{\frac{dg}{dt}\Bigr\}=jn\omega_0 c_n
+						$$
+					Determine a série de Fourier da função 
+					$$
+					g(t)=at,\forall t:|t|\le \frac{T}{2}
+					$$
+	
+			</center>
+			   </div>
+
+		</section>
+
+
+
+
+
+
+
+					<section>
+
+			<div class="slide-title">
+				
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+
+				<h1>Parte II</h1>
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		
+
+		
+
+
+
+			
+
+
+
+		
+
+		
+	<section>
+
+		<div class="slide-title">
+			<h2>Solução de EDO
+			</h2>
+		</div>
+		<div class="slide-content">
+			<center>
+			<img src="../../images/mass_spring.png" width="700">
+			$$
+				M\frac{d^2y}{dt^2}+Ky=F(t)
+			$$
+		</center>
+
+		
+	</div>
+	
+</section>
+
+
+			
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+		<img src="../../images/mass_spring2.png" width="800">
+	</center>
+	
+</div>
+
+</section>
+
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+			Força: 
+			$$
+			F(t)=\sum_{n=-\infty}^\infty d_ne^{jn\omega_0 t}
+			$$
+			Oscilação:
+		$$
+		y(t)=\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t}
+		$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO: exemplo
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+
+			$$
+			\frac{d^2y}{dt^2}+2y=F(t)
+			$$
+			em que 
+			$$
+			F(t)=\begin{cases} 
+			1, \text{ se } -1\le t < 0,\\
+			0, \text{ se } 0\le t \le 1.
+			\end{cases}
+			$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO: exemplo
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+	
+			$$
+			\frac{d^2y}{dt^2}+2y=F(t)
+			$$
+			em que 
+			$$
+			F(t)=\frac{1}{2}+\sum_{n=1}^\infty 2\mathcal{Re}\Bigl\{\underbrace{\Bigl(j\frac{1-(-1)^n}{2\pi n}\Bigr)}_{d_n}e^{jn\omega_0 t}\Bigr\}
+			$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO: exemplo
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+			
+			$$
+			\frac{d^2y}{dt^2}+2y=F(t)
+			$$
+	</center>
+
+	<center class="fragment">
+		$$
+		=\Bigl( -\sum_{n=-\infty}^\infty n^2\omega_0^2 c_n e^{jn\omega_0 t}\Bigr)+2\Bigl( \sum_{n=-\infty}^\infty c_n e^{jn\omega_0 t}\Bigr)\\
+		=\Bigl( \sum_{n=-\infty}^\infty d_n e^{jn\omega_0 t}\Bigr)
+		$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Solução de EDO: exemplo
+		</h2>
+	</div>
+	<div class="slide-content">
+		<center>
+
+			$$
+			\frac{d^2y}{dt^2}+2y=F(t)
+			$$
+	</center>
+
+	<center class="lightup">
+		Solução estacionária:
+		$$
+		y(t)=\frac{1}{4}+\sum_{n=1}^\infty 2\mathcal{Re}\Bigl\{j\frac{1-(-1)^n}{2\pi n(2-n^2\omega_0^2)}e^{jn\omega_0 t}\Bigr\}
+		$$
+	</center>
+	
+</div>
+
+</section>
+		
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+
+				<h1>Exemplo em 2D</h1>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Série de Fourier em 1D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					Seja $g:[0,T]\to \mathbb{R}$, então 
+					<p class="lightup">
+			
+			$$
+					g(t)=a_{0}+ \sum_{n=1}^\infty a_{n}\cos(n\omega_0 t)\\+\sum_{n=1}^\infty b_{n}\sin(n\omega_0 t)
+			$$	
+		</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Série de Fourier em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					Seja $g:[0,T]\times [0,T]\to \mathbb{R}$, então 
+					<p class="lightup">
+			
+			$$
+					g(x,y)=a_{00}+\sum_{k=1}^\infty \sum_{n=1}^\infty a_{kn}\cos(k\omega_0 x)\cos(n\omega_0 y)\\+\sum_{k=1}^\infty \sum_{n=1}^\infty b_{kn}\sin(k\omega_0 x)\sin(n\omega_0 y)
+			$$	
+		</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Harmônicos em 1D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+				<img src="../../images/cossenos_harmonicos.png" width="800">
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Harmônicos em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<P>&nbsp;</P>
+				<img src="../../images/cossenos_harmonicos2D_view.png" width="1350">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Harmônicos em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<P>&nbsp;</P>
+				<img src="../../images/cossenos_harmonicos2D.png" width="1350">
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Harmônicos em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<P>&nbsp;</P>
+				<img src="../../images/cossenos_harmonicos2D_2.png" width="1350">
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Produto Escalar em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+				$$
+					\langle g, h\rangle = \int_0^T \int_0^T g(x,y)h(x,y)dxdy
+				$$
+		</center>
+
+		<center class="fragment">
+			$$
+				a_{00}=\frac{\langle g, 1\rangle}{\|1\|^2} = \frac{1}{T^2}\int_0^T \int_0^T g(x,y)dxdy	
+					$$
+	</center>
+
+	<center class="fragment">
+		$$
+			\phi_{kn}(x,y)=\cos(k\omega_0 x)\cos(n\omega_0 y)\\
+			\psi_{kn}(x,y)=\sin(k\omega_0 x)\sin(n\omega_0 y)
+				$$
+</center>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Coeficientes em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+						
+
+	<center>
+		$$
+			a_{kn}=\frac{\langle g, \phi_{kn}(x,y)\rangle}{\|\phi_{kn}(x,y)\|^2}\\
+			=A_{kn}\int_0^T\int_0^T g(x,y)\cos(k\omega_0 x)\cos(n\omega_0 y)dxdy
+				$$
+</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Coeficientes em 2D
+				</h2>
+			</div>
+			<div class="slide-content">
+				
+						
+
+				<center>
+					$$
+						a_{kn}=\frac{\langle g, \phi_{kn}(x,y)\rangle}{\|\phi_{kn}(x,y)\|^2}\\
+						=A_{kn}\int_0^T\int_0^T g(x,y)\cos(k\omega_0 x)\cos(n\omega_0 y)dxdy
+							$$
+			</center>
+
+			<center>
+				$$
+					b_{kn}=\frac{\langle g, \psi_{kn}(x,y)\rangle}{\|\psi_{kn}(x,y)\|^2}\\
+					=B_{kn}\int_0^T\int_0^T g(x,y)\sin(k\omega_0 x)\sin(n\omega_0 y)dxdy
+						$$
+		</center>
+			   </div>
+
+		</section>
+
+
+
+
+
+
+
+		
+
+
+		
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+						Introdução aos sinais em tempo discreto
+					</h3>
+					
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

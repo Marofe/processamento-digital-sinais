@@ -1,0 +1,918 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  <!-- <script type="text/javascript">
+		var data = null;
+		var graph = null;
+  
+	
+		// Called when the Visualization API is loaded.
+		function drawVisualization() {
+		  // Create and populate a data table.
+		  data = new vis.DataSet();
+		  // create some nice looking data with sin/cos
+		  var counter = 0;
+		  var steps = 1000; // number of datapoints will be steps*steps
+		  var axisMax = 20;
+		  var axisStep = axisMax / steps;
+		  for (var t = 0*axisStep; t < axisMax; t += axisStep) {
+			  data.add({ id: counter++, y: Math.cos(t), x: t, z:Math.sin(t), style: t });
+		  }
+  
+		  // specify options
+		  var options = {
+			width: "600px",
+			height: "600px",
+			style: "line",
+			dataColor: '#ff0000',
+			showPerspective: false,
+			showGrid: true,
+			showShadow: false,
+			keepAspectRatio: false,
+			verticalRatio: 1,
+			xLabel: "t",
+			zLabel: "Imaginário",
+			yLabel: "Real",
+			showAnimationControls 	: true
+		  };
+  
+		  // Instantiate our graph object.
+		  var container = document.getElementById("mygraph");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -1.57, vertical: 0, distance: 1.5});
+
+
+		  var container = document.getElementById("mygraph2");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -0.5, vertical: 0.5, distance: 1.5});
+		}
+	  </script> -->
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 12: <br>Transformada de Fourier: <br>Solução de Integrais<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">30 de setembro de 2025</p>
+				</div>
+
+				</section>
+
+
+
+				
+			
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Objetivos
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+			
+					<ul>
+						<li>Aplicação das propriedades;</li>
+						<li>Sinal Triangular</li>
+						<li>Resolução de integrais;</li>
+						<li>Teorema de Parseval;</li>
+						<li>Propriedade da diferenciação em frequência;</li>
+						<li>Exemplos.</li>
+					
+					</ul>
+				
+			</div>
+			
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Gate </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $$g(t)=G_T(t)=\begin{cases}
+			1, \text{ se } |t|\le \frac{T}{2}\\
+			0, \text{ se } |t|>\frac{T}{2} 
+			\end{cases}$$ 
+	 
+		<center class="lightup">
+		$$ G(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Gate </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $$g(t)=G_T(t)=\begin{cases}
+			1, \text{ se } |t|\le \frac{T}{2}\\
+			0, \text{ se } |t|>\frac{T}{2} 
+			\end{cases}$$ 
+	 
+		<center class="lightup">
+		$$ G(\omega)=T\text{sinc}\Bigl(\frac{\omega T}{2}\Bigr)$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinc </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $$x(t)=\text{sinc}(at)=\begin{cases}
+			\frac{\sin(at)}{at}, \text{ se } t\neq 0\\
+			1, \text{ se } t=0 
+			\end{cases}$$ 
+	 
+		<center class="lightup">
+		$$ X(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Sinc </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $$x(t)=\text{sinc}(at)=\begin{cases}
+			\frac{\sin(at)}{at}, \text{ se } t\neq 0\\
+			1, \text{ se } t=0 
+			\end{cases}$$ 
+	 
+		<center class="lightup">
+		$$ X(\omega)=\frac{\pi}{a}G_{2a}(\omega)$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Integral da função sinc </h2>
+			</div>
+			<div class="slide-content">	
+	 <p>&nbsp;</p>
+	 <p>&nbsp;</p>
+		<center class="lightup">
+			
+		$$
+			I=\int_{-\infty}^\infty \text{sinc}(t)dt =?
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Energia da função sinc </h2>
+			</div>
+			<div class="slide-content">	
+				Seja $$g(t)=\text{sinc}(at)$$ com $a>0$.
+		<center class="lightup">
+			
+		$$
+			\|g(t)\|^2=?
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Energia da função sinc </h2>
+			</div>
+			<div class="slide-content">	
+				Seja $$g(t)=\text{sinc}(at)$$ com $a>0$.
+		<center class="lightup">
+			
+		$$
+			\|g(t)\|^2=\frac{\pi}{a}
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+	
+
+		
+		
+
+	
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinal Triangular </h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+			Considere o sinal $$\Lambda_T(t)=\begin{cases}
+			t+T, \text{ se } -T \le t \le 0\\
+			-t+T, \text{ se } 0 < t \le T
+			\end{cases}$$ 
+	 
+		<center class="lightup">
+		$$ G(\omega)=?$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinal Triangular </h2>
+			</div>
+			<div class="slide-content">
+		
+		<center class="">
+			<img src="../../images/convolution_gate_gate.gif" width="800">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinal Triangular </h2>
+			</div>
+			<div class="slide-content">
+<p class="lightup">
+			 $$\Lambda_T(t)=G_{T}(t)\ast G_{T}(t)$$
+			</p>
+	 <center>
+	<img src="../../images/sinal_triangular.png" width="800">
+</center>
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinal Triangular </h2>
+			</div>
+			<div class="slide-content">
+<p class="lightup">
+			 $$\mathcal{F}\{\Lambda_T(t)\}=\mathcal{F}\{G_{T}(t)\}^2$$
+			</p>
+	 <center>
+	<img src="../../images/sinal_triangular.png" width="800">
+</center>
+
+		
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Sinal Triangular </h2>
+			</div>
+			<div class="slide-content">
+<p class="lightup">
+			 $$\mathcal{F}\{\Lambda_T(t)\}=T^2\text{sinc}^2\Bigl(\frac{\omega T}{2}\Bigr)$$
+			</p>
+	 <center>
+	<img src="../../images/sinal_triangular.png" width="800">
+</center>
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinc^2</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+<p class="lightup">
+			 $$\mathcal{F}\{\text{sinc}^2(at)\}=?$$
+			</p>
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinc^2</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+<p class="lightup">
+			 $$\mathcal{F}\{\text{sinc}^2(at)\}=\frac{\pi}{2a^2}\Lambda_{2a}(\omega)$$
+			</p>
+
+
+		
+				   </div>
+
+		</section>
+		
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Integral da função sinc </h2>
+			</div>
+			<div class="slide-content">	
+	 <p>&nbsp;</p>
+		<center class="lightup">
+			
+		$$
+			I=\int_{-\infty}^\infty \text{sinc}(5t)\text{sinc}^2(3t)dt = ?
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2></h2>
+			</div>
+			<div class="slide-content">	
+
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+			<center>
+		<h1>PARTE II</h1>
+</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval</h2>
+			</div>
+			<div class="slide-content">	
+			<p>&nbsp;</p>
+		<center class="lightup">
+			
+		$$
+			\|g(t)\|^2=\frac{1}{2\pi}\int_{-\infty}^\infty |G(\omega)|^2 d\omega 
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Energia da função sinc </h2>
+			</div>
+			<div class="slide-content">	
+				Seja $$g(t)=\text{sinc}(at)$$ com $a>0$.
+		<center class="lightup">
+			
+		$$
+			\|g(t)\|=?
+		$$
+		
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferenciação na frequência </h2>
+			</div>
+			<div class="slide-content">	
+	 
+		<center class="lightup">
+		Se
+		$$
+		g(t)\Longleftrightarrow G(\omega)
+	$$
+
+		então
+		$$
+			t g(t)\Longleftrightarrow j\frac{dG(\omega)}{d\omega}
+		$$
+
+		
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferenciação na frequência </h2>
+			</div>
+			<div class="slide-content">	
+	 
+		<center class="lightup">
+		Se
+		$$
+		g(t)\Longleftrightarrow G(\omega)
+	$$
+
+		então
+		$$
+			t^n g(t)\Longleftrightarrow (j)^n\frac{d^nG(\omega)}{d\omega^n}
+		$$
+
+		
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferenciação na frequência </h2>
+			</div>
+			<div class="slide-content">	
+				Se
+				$$
+				g(t)=te^{-at}u(t)
+			$$
+		
+				então
+		<center class="lightup">
+
+		$$
+			G(\omega)=?
+		$$
+
+		
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier na Mecânica Quântica</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<a href="https://www.physicswithelliot.com/fourier-mini-notes" target="_blank">https://www.physicswithelliot.com/fourier-mini-notes</a>
+
+		<a href="https://www.youtube.com/watch?v=W8QZ-yxebFA" target="_blank"><img src="../../images/quantum_fourier_transform.png" width="900"></a>
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+				
+		<center class="lightup">
+$$\Delta x \Delta p \ge \frac{\hslash}{4\pi}$$
+		</center>
+		Equação de onda:
+		$$
+		\Psi(x) \Longleftrightarrow \hat{\Psi}(k)
+		$$
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle1.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle0.5.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle0.2.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle0.1.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle0.01.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle1.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle2.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle3.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+				
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle4.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle5.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Princípio da Incerteza Heisenberg</h2>
+			</div>
+			<div class="slide-content">	
+		<center class="">
+<img src="../../images/uncertainty_principle8.png" alt="">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+
+
+
+			
+
+
+
+
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								Transformada de Fourier de sinais periódicos
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

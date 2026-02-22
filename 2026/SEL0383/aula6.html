@@ -1,0 +1,902 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		<script
+		type="text/javascript"
+		src="../../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  <!-- <script type="text/javascript">
+		var data = null;
+		var graph = null;
+  
+	
+		// Called when the Visualization API is loaded.
+		function drawVisualization() {
+		  // Create and populate a data table.
+		  data = new vis.DataSet();
+		  // create some nice looking data with sin/cos
+		  var counter = 0;
+		  var steps = 1000; // number of datapoints will be steps*steps
+		  var axisMax = 20;
+		  var axisStep = axisMax / steps;
+		  for (var t = 0*axisStep; t < axisMax; t += axisStep) {
+			  data.add({ id: counter++, y: Math.cos(t), x: t, z:Math.sin(t), style: t });
+		  }
+  
+		  // specify options
+		  var options = {
+			width: "600px",
+			height: "600px",
+			style: "line",
+			dataColor: '#ff0000',
+			showPerspective: false,
+			showGrid: true,
+			showShadow: false,
+			keepAspectRatio: false,
+			verticalRatio: 1,
+			xLabel: "t",
+			zLabel: "Imaginário",
+			yLabel: "Real",
+			showAnimationControls 	: true
+		  };
+  
+		  // Instantiate our graph object.
+		  var container = document.getElementById("mygraph");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -1.57, vertical: 0, distance: 1.5});
+
+
+		  var container = document.getElementById("mygraph2");
+		  graph = new vis.Graph3d(container, data, options);
+		  graph.setCameraPosition({horizontal: -0.5, vertical: 0.5, distance: 1.5});
+		}
+	  </script> -->
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 6: <br>Espectro de Fourier<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">19 de agosto de 2025</p>
+				</div>
+
+				</section>
+
+						
+		
+
+
+
+	
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Contribuição de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<img src="../../images/joseph_fourier.webp" alt=""><br>
+					(1768-1830)
+					<p>Todo sinal periódico (absolutamente integrável e com número finito de máximos e mínimos) pode ser representado através da soma de cossenos e senos.</p>
+		
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Série de Fourier (cossenos e senos)</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<img src="../../images/joseph_fourier.webp" alt=""><br>
+					<p class="lightup">
+						$$
+						g(t)=a_0+\sum_{n=1}^\infty a_n\cos(n\omega_0t)+b_n\sin(n\omega_0t)
+						$$
+				</p>
+		
+		</center>
+			   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Base de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<img src="../../images/joseph_fourier.webp" alt=""><br>
+					<p class="lightup">
+						$$
+						B=\{1,\cos(n\omega_0t),\sin(n\omega_0t),\forall n\in\mathbb{N}\}
+						$$
+				</p>
+		
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Coeficientes de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				Suponha $g:\mathbb{R}\to\mathbb{R}$, periódica e contínua em $[0,T]$, então
+				<center>
+					$$a_0=\frac{\langle g, 1\rangle}{\|1\|^2}=\frac{1}{T}\int_0^T g(t)dt$$
+
+					$$a_n=\frac{\langle g, \cos(n\omega_0t)\rangle}{\|\cos(n\omega_0t)\|^2}=\frac{2}{T}\int_0^T g(t)\cos(n\omega_0 t)dt$$
+					$$b_n=\frac{\langle g, \sin(n\omega_0t)\rangle}{\|\sin(n\omega_0t)\|^2}=\frac{2}{T}\int_0^T g(t)\sin(n\omega_0 t)dt$$
+		
+		</center>
+			   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Coeficientes de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				Suponha $g:\mathbb{R}\to\mathbb{R}$, periódica e contínua em $[-T/2,T/2]$, então
+				<center>
+					$$a_0=\frac{\langle g, 1\rangle}{\|1\|^2}=\frac{1}{T}\int_{-\frac{T}{2}}^\frac{T}{2} g(t)dt$$
+
+					$$a_n=\frac{\langle g, \cos(n\omega_0t)\rangle}{\|\cos(n\omega_0t)\|^2}=\frac{2}{T}\int_{-\frac{T}{2}}^\frac{T}{2} g(t)\cos(n\omega_0 t)dt$$
+					$$b_n=\frac{\langle g, \sin(n\omega_0t)\rangle}{\|\sin(n\omega_0t)\|^2}=\frac{2}{T}\int_{-\frac{T}{2}}^\frac{T}{2} g(t)\sin(n\omega_0 t)dt$$
+		
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+				
+		<section>
+
+			<div class="slide-title">
+				<h2>Série de Fourier (Exponencial Complexa)</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+			
+				<p class="lightup">
+		$$
+					g(t)=\sum_{n=-\infty}^\infty c_n e^{jn\omega_0t}
+					$$
+				</p>
+					em que
+					<p class="lightup2">
+					$$
+					c_n=\frac{a_n-jb_n}{2}
+					$$
+					</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+
+	
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p class="lightup">
+						$$
+						G=\Bigl\{g_n(t)=e^{jn\omega_0 t}:\omega_0=\frac{2\pi}{T}, n\in\mathbb{Z}\Bigr\}
+						$$
+					</p>
+					$$
+					\langle e^{jn\omega_0 t}, e^{jm\omega_0 t} \rangle = \begin{cases}
+					T, \text{ se } n=m\\
+					0, \text{ caso contrário.} 
+					\end{cases}
+					$$
+		</center>
+		<p align="center" class=""><b>É uma base ortogonal!</b></p>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p class="lightup">
+						$$
+						G=\Bigl\{g_n(t)=e^{jn\omega_0 t}:\omega_0=\frac{2\pi}{T}, n\in\mathbb{Z}\Bigr\}
+						$$
+					</p>
+					$$
+					g(t)=\sum_{n=-\infty}^\infty c_n e^{jn\omega_0 t},\quad g:\mathbb{R}\to\mathbb{C}
+					$$
+		</center>
+		<p align="center" class="">
+			
+			$$
+			c_n=\frac{\langle g, e^{jn\omega_0 t}\rangle^* }{\|e^{jn\omega_0 t}\|^2}=\frac{1}{T}\int_0^T g(t)e^{-jn\omega_0 t}dt
+			$$
+		</p>
+			   </div>
+
+		</section>
+
+
+
+		
+
+
+		
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação de Fourier (Real)</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Seja $g:\mathbb{R}\to\mathbb{R}$, uma função periódica, de período $T$, então
+					</p>
+					$$
+					g(t)=c_0+\sum_{n=1}^\infty 2\mathcal{Re}\Bigl(c_n e^{jn\omega_0 t}\Bigr)
+					$$
+		</center>
+		
+			   </div>
+
+		</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Objetivos
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+			
+					<ul>
+						<li>Espectro de Fourier</li>
+						<li>Teorema de Parseval;</li>
+						<li>Propriedades da Série de Fourier;</li>
+						<li>*Exemplos</li>
+					
+					</ul>
+				
+			</div>
+			
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Dado uma função periódica $g(t)$ com período $T$, cuja série de Fourier é 
+					$$
+					g(t)=\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t},
+					$$
+					então 
+					<p class="lightup">
+					$$
+					c_n=|c_n|e^{j\theta_n}
+					$$
+				</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: módulo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					c_n=|c_n|e^{j\theta_n}
+					$$
+				</p>
+				<img src="../../images/espectro_fourier_mag.png" width="600">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					c_n=|c_n|e^{j\theta_n}
+					$$
+				</p>
+				<img src="../../images/espectro_fourier_fase.png" width="600">
+		</center>
+			   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: visualmente</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/espectro_fourier.gif" width="850">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					g(t)=1+\sin(\omega_0 t)+\cos(2\omega_0t),\quad \omega_0=\frac{2\pi}{T}
+					$$
+				</p>
+				<h3>Obtenha o espectro de módulo e fase de $g(t)$</h3>
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					g(t)=1+\sin(\omega_0 t)+\cos(2\omega_0t),\quad \omega_0=\frac{2\pi}{T}
+					$$
+				</p>
+				$$
+				g(t)=1+2\mathcal{Re}\Bigl\{\frac{1}{2}e^{-j\frac{\pi}{2}}e^{j\omega_0t}+\frac{1}{2}e^{j2\omega_0 t}\Bigr\}
+				$$
+				$$
+				\Rightarrow |c_0|=1;\quad |c_1|=|c_{-1}|=\frac{1}{2};\quad |c_2|=|c_{-2}|=\frac{1}{2};
+	\\
+				\Rightarrow \theta_0=0;\quad \theta_1=-\frac{\pi}{2};\quad \theta_{-1}=+\frac{\pi}{2};\quad \theta_{2}=\theta_{-2}=0;
+				$$
+			
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: módulo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>
+					$
+					g(t)=1+\sin(\omega_0 t)+\cos(2\omega_0t),\quad \omega_0=\frac{2\pi}{T}
+					$
+				</p>
+				<img src="../../images/espectro_fourier_mod_ex.png" width="700">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>
+					$
+					g(t)=1+\sin(\omega_0 t)+\cos(2\omega_0t),\quad \omega_0=\frac{2\pi}{T}
+					$
+				</p>
+				<img src="../../images/espectro_fourier_fase_ex.png" width="700">
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Para sinais reais $g:\mathbb{R}\to\mathbb{R}$, tem-se 
+				$$
+					g(t)=g^*(t),
+				$$	
+				Logo,
+				$$
+				c_n^*=\Bigl(\frac{1}{T}\int_{0}^T g(t)e^{-jn\omega_0 t}dt\Bigr)^*
+				$$
+			</center>
+			<center class="fragment">
+				$$
+				=\frac{1}{T}\int_{0}^T g^*(t)e^{jn\omega_0 t}dt
+				$$
+
+			</center>
+			   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Para sinais reais $g:\mathbb{R}\to\mathbb{R}$, tem-se 
+				$$
+					g(t)=g^*(t),
+				$$	
+				Logo,
+				$$
+				c_n^*=\Bigl(\frac{1}{T}\int_{0}^T g(t)e^{-jn\omega_0 t}dt\Bigr)^*
+				$$
+
+				$$
+				=\frac{1}{T}\int_{0}^T g(t)e^{jn\omega_0 t}dt=c_{-n}
+				$$
+
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Para sinais reais $g:\mathbb{R}\to\mathbb{R}$, tem-se 
+				$$
+					g(t)=g^*(t),
+				$$	
+				Logo,
+				<p class="lightup">
+				$$
+				c_n^*=c_{-n}
+				$$
+				</p>
+
+			</center>
+			<center class="fragment">
+				<p class="">
+				$$
+				|c_n|=|c_{-n}| \quad \text{e}\quad \theta_n=-\theta_{-n}
+				$$
+				</p>
+
+			</center>
+			   </div>
+
+		</section>
+
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Produto de sinais pares e ímpares:
+				
+				$$
+					par \cdot par = par \\
+					par \cdot ímpar = ímpar \\
+					ímpar \cdot ímpar = par
+				$$
+				e 
+				$$
+							\int_{-a}^a ímpar = 0,\quad \int_{-a}^a par = 2\int_0^a par
+				$$
+
+			</center>
+			   </div>
+
+		</section>
+
+	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedades da Série de Fourier</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+				Coeficiente de sinais pares e ímpares:
+				$$
+				c_n=\frac{1}{T}\int_{0}^T g(t)[\cos(n\omega_0 t)+j\sin(n\omega_0 t)]dt
+			$$
+			Note que
+			<p class="lightup">
+				$$
+					c_n=\begin{cases} 
+					\in\mathbb{R}, \text{se } g(t) \text{ é par}, \\
+					\text{puramente imaginário}, \text{ se } g(t) \text{ é ímpar.}
+					\end{cases}
+				$$
+			</p>
+			</center>
+			   </div>
+
+		</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				
+			</div>
+			<div class="slide-content">
+				
+				<center>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+
+				<h1>Parte II</h1>
+		</center>
+			   </div>
+
+		</section>
+
+
+
+
+		
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Valor Eficaz</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	
+					Dado uma função periódica $g(t)$ com período $T$, então
+					<p class="lightup">
+					$$
+					\|g(t)\|_\text{efz}=\sqrt{\frac{1}{T}\int_0^T |g(t)|^2dt}=\frac{1}{\sqrt{T}}\|g(t)\|
+					$$
+				</p>
+					<p>Eficaz=RMS=Root Mean Square</p>
+					$$
+					P_\text{med}=\|g(t)\|_\text{efz}^2
+					$$
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Dado uma função periódica $g(t)$ com período $T$, cuja série de Fourier é 
+					$
+					g(t)=\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t},
+					$
+					então 
+					<p class="lightup">
+					$$
+					\|g(t)\|^2_\text{efz}=\sum_{n=-\infty}^\infty |c_n|^2
+					$$
+				</p>
+		</center>
+			   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval: prova</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					<p>
+					$$
+					\|g(t)\|^2_\text{efz}=\frac{1}{T}\int_{0}^T g^*(t)g(t)dt
+					$$
+				</p>
+		</center> 
+		<center class="fragment">
+
+			$$
+			= \frac{1}{T}\int_{0}^T \Bigl(\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t}\Bigr)^*\Bigl(\sum_{k=-\infty}^\infty c_ke^{jk\omega_0 t}\Bigl)dt
+			$$
+		</center>
+		<center class="fragment">
+
+			$$
+			= \frac{1}{T}\sum_{n=-\infty}^\infty\sum_{k=-\infty}^\infty c_n^*c_k\int_{0}^T e^{j(k-n)\omega_0 t}dt
+			$$
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval: prova</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					<p>
+					$$
+					\|g(t)\|^2_\text{efz}=\frac{1}{T}\int_{-\infty}^\infty g^*(t)g(t)dt
+					$$
+				</p>
+
+
+				$$
+			= \frac{1}{T}\int_{-\infty}^\infty \Bigl(\sum_{n=-\infty}^\infty c_ne^{jn\omega_0 t}\Bigr)^*\Bigl(\sum_{k=-\infty}^\infty c_ke^{jk\omega_0 t}\Bigl)dt
+			$$
+	
+
+			$$
+			=  \sum_{n=-\infty}^\infty c_n^*c_n \quad\square
+			$$
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval: exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					g(t)=1+\sin(\omega_0 t)+\cos(2\omega_0t),\quad \omega_0=\frac{2\pi}{T}
+					$$
+				</p>
+				<h3>Obtenha o valor eficaz de $g(t)$</h3>
+				$$
+\|g(t)\|^2_\text{efz}=?
+				$$
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: módulo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+				<img src="../../images/espectro_fourier_mod_ex.png" width="700">
+				$$
+					\|g(t)\|^2_\text{efz}=|c_0|^2+2\sum_{n=1}^\infty |c_n|^2
+				$$
+		</center>
+			   </div>
+
+		</section>
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Espectro de Fourier: módulo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+				<img src="../../images/espectro_fourier_mod_ex.png" width="700">
+				$$
+					\|g(t)\|^2_\text{efz}=1+4\Bigl(\frac{1}{2}\Bigr)^2=2=P_\text{med}
+				$$
+		</center>
+			   </div>
+
+		</section>
+
+
+		
+
+		
+		
+
+
+
+
+		
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+						Propriedades, Exemplos e aplicações das séries de Fourier 
+					</h3>
+					
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+

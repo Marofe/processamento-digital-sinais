@@ -1,0 +1,1360 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas em Eng. Elétrica</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+		
+	</head>
+	<body onload="drawVisualization();">
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 1: <br>Introdução à disciplina Sinais e Sistemas em Eng. Elétrica<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">4 de agosto de 2025</p>
+				</div>
+
+				</section>
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+							<li><b>Apresentar a disciplina</b>: estrutura e avaliação;</li> 
+							<li>Introduzir <b>conceitos básicos</b> de sinais e sistemas;</li>
+							<li>Ilustrar as <b>aplicações</b> de sinais e sistemas com exemplos práticos;</li>
+							<li>Evidenciar a <b>importância</b> do estudo de sinais e sistemas para engenharia.</li>
+							<li>*Começar revisão de <b>álgebra linear</b>.</li>
+						</p>
+						</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>SEL0383 - Sinais e Sistemas em Eng. Elétrica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p><h3>Dúvidas:</h3></p>
+					<p>&nbsp;</p>
+					
+					<p>Contato: marofe@usp.br</p>
+					
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>SEL0383 - Sinais e Sistemas em Eng. Elétrica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<h3>Monitoria:</h3>
+						<p><ul>
+							<li>Nicolas Maximo Lombardi de Carvalho <br>
+							email: nicolasmaximo@usp.br</li>
+							<li>Pedro Toni Talhavini <br>
+							email: pedrottalhavini@usp.br</li>
+							</ul>
+						<p>&nbsp;</p>
+					
+					
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Tópicos</h2>
+				</div>
+				<div class="slide-content">
+
+						<ul>
+							<li>Propriedades de sinais;</li>
+							<li>Representação de sinais no tempo;</li> 
+							<li>Representação de sinais na frequência;</li> 
+							<li>Series de Fourier e suas aplicações;</li> 
+							<li>Transformada de Fourier e suas aplicações;</li>
+							<li>Filtragem de sinais;</li>
+							<li>Representação e Propriedades de sistemas;</li>
+							<li>Sistemas Lineares Invariantes no Tempo (SLIT);</li>
+						    <li>Transformada de Laplace e suas aplicações.</li>
+					  </ul>
+						
+
+				</div>
+
+			</section>
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+
+					<a href="https://edisciplinas.usp.br/course/view.php?id=132328" target="_blank">
+						<div style="background-color: rgb(55, 147, 201);border-radius: 50%;"><img src="../../images/edisciplina.png" width="400"></div>
+						https://edisciplinas.usp.br/course/view.php?id=132328</a>
+						<p>&nbsp;</p>	
+						<ul>
+							<li>Slides;</li>
+							<li>Notas de aula;</li>
+							<li>Listas de exercícios;</li>
+							<li>Vídeos relacionados aos tópicos;</li>
+							<li>Códigos, exemplos ilustrativos, etc...</li>
+						</ul>
+					
+										
+				</center>
+
+				</div>
+
+			</section>
+
+
+			
+
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					
+						<h3>Referências</h3>
+						<p>&nbsp;</p>	
+						<ul>
+							<li><b>[1] E.R. Martins. Essentials of Signals and Systems. Wiley, 2023.</b></li>
+							<li><b>[2] J.C. Geromel and G.S. Deaecto. Análise linear de sinais: teoria, ensaios práticos e exercícios. Editora Blucher, 2019.</b></li>
+							<li>[3] Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. Signals & systems (2nd ed.).
+								Prentice-Hall, Inc., USA, 1996.	</li>
+							<li>[4] B. P. Lathi. Linear Systems and Signals. Oxford University Press, Inc., USA, 2nd edition, 2009.</li>
+						</ul>
+
+				</center>
+
+				</div>
+
+			</section>
+
+
+				<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material complementar</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+
+					<a href="https://app.jove.com/science-education/v/16029/signal-and-system" target="_blank">
+						<div style="background-color: rgb(55, 147, 201);border-radius: 50%;"><img src="../../images/jove_signal_and_systems.png" width="850"></div>
+						https://app.jove.com/science-education/v/16029/signal-and-system</a>
+						
+					
+										
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>Serão realizadas:</p>
+				
+						
+						<p><ul>
+							<li>
+							 Três provas: $P_1$, $P_2$ e $P_3$; </li>
+							<li>Listas de exercícios teóricos: $L_1,L_2,L_3,\cdots,L_n$; </li>
+							<li>Listas de exercícios computacionais: $T_1,T_2,T_3,\cdots,T_m$; </li>
+						<li>Ao final do semestre, um <b>trabalho computacional final</b> $T_f$.</li></ul></p>
+					
+					
+				</div>
+
+			</section>
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+						
+						<p>$\Rightarrow $Cada aula terá um conjunto de exercícios propostos; </p>
+						<p>$\Rightarrow $As provas serão baseadas nos exercícios propostos nas aulas; </p>
+						<p>$\Rightarrow $As listas $L_1, L_2, L_3,\cdots,L_n$ serão compostas por 5 dos exercícios propostos nas aulas (escolha livre); </p>
+						<p>$\Rightarrow $As listas $T_1, T_2, T_3,\cdots,T_m$ serão compostas por até 3 exercícios computacionais (Matlab); </p>
+						<p>$\Rightarrow$ As listas poderam se entregues em até 2 semanas após a respectiva semana de aula no <b>e-disciplina</b>; </p>
+
+				</div>
+
+
+			</section>
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Curso de Matlab</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../../images/matlab_onramp.png" width="750"><br>
+				<a href="https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted">https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted</a>
+			</center>
+						</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+			
+					<p>A média final é dada por:
+						<p class="lightup">$$MF=0.7P+0.1L+0.1T+0.1T_f$$</p>
+	
+						$$P=mean(P_1,P_2,P_3)$$
+						$$L=mean(L_1,L_2,L_3,\cdots,L_n)$$ </p>
+						$$T=mean(T_1,T_2,T_3,\cdots,T_m)$$ </p>
+		
+
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					Para aprovação, é necessário:	
+<ul>
+<li>Ao menos $70\%$ de frequência, $P\ge 4.0$ e $MF\ge 5.0$.</li>
+<li>Se $3.0\le P < 4.0$, aluno ficará de recuperação independente da MF. </li>
+<li>Se $P < 3.0$ mas $MF \ge 3.0$, aluno poderá fazer a recuperação. </li>
+<li>Se $MF<3.0$ ou menos de $70\%$ de frequência o aluno é reprovado. </li>
+</ul>
+
+				</div>
+
+			</section>
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Dúvidas?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<img src="../../images/duvida.jpg" width="800">
+					
+					
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			
+
+
+
+		
+
+
+		
+
+
+
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						 <p class="lightup fragment current-visible" >O que é um sinal?</p>
+						<center class="fragment current-visible">
+							<p class="lightup"><b>Sinal</b> é tudo que carrega informação.</p>
+						<img src="../../images/sinal.png" width="800">
+					</center>
+					<p class="lightup fragment current-visible">O que é um sistema?</p>
+					<center class="fragment current-visible" >
+						<p class="lightup"><b>Sistema</b> é tudo que modifica um sinal.</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+	
+					<p>	<img src="../../images/sistema.png" width="650"></p>
+				</center> 
+
+					<center class="fragment current-visible" >
+						<p class="lightup"><b>Sistema</b> é tudo que modifica um sinal.</p>
+					
+			<p>&nbsp;</p>
+	
+					<p>	<img src="../../images/sistema2.png" width="800"></p>
+				</center> 
+
+
+			</div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de sinais e sistemas</h2>
+			</div>
+			<div>
+				<center class="fragment current-visible">
+					<p>Telecomunicações</p>
+					<img src="../../images/torres_celular.png" width="650" style="transform: translate(10rem,0rem);">
+
+					<img src="../../images/smartphone.png" width="280" style="transform: translate(-5rem,2rem);">
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Telecomunicações</p>
+				<img src="../../images/transmit_signal.png" width="950">
+
+				
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Internet</p>
+					<img src="../../images/internet.webp" width="750">
+
+					
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Indústria: variáveis de processo</p>
+					<img src="../../images/instrumentation.png" width="800">
+
+					
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Carros inteligentes</p>
+					<img src="../../images/Collision-Avoidance-System.webp" width="800">
+
+					
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Corpo Humano</p>
+					<img src="../../images/brain_waves.png" width="800">
+					<img src="../../images/eeg.png" width="400" style="transform: translate(-1rem,-1rem);">
+
+					
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Corpo Humano</p>
+					<img src="../../images/heart.jpg" width="500">
+					<img src="../../images/monitor-gif.webp" width="500" style="transform: translate(-1rem,-5rem);">
+
+					
+				</center>
+
+				<center class="fragment current-visible">
+					<p>Mercado Financeiro</p>
+					<img src="../../images/stock_market.gif" width="800">					
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Objetivo principal do curso</h2>
+			</div>
+			<div class="fragment current-visible"> 
+				<p>&nbsp;</p>
+				Aprender propriedades que os sinais obdecem quando passam por uma classe especial de sistemas:<br> 
+				<P class="lightup">
+				Sistemas Lineares e Invariantes no Tempo (SLIT)
+				
+			</P>
+			<img src="../../images/sistema.png" width="650">
+			</div>
+
+			
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Representação matemática</h2>
+			</div>
+			
+			<div class="fragment current-visible"> 
+				
+				<p>Função matemática $g:\mathbb{R}\to\mathbb{R}$</p>
+				<img src="../../images/sinal.png" width="650">
+				<p>Os mesmos conceitos são validos para dimensões maiores<br> ($\mathbb{R}^2,\mathbb{R}^3$,...$\mathbb{R}^n$)</p>
+			</div>
+
+			<div class="fragment current-visible"> 
+				
+				<p>Função matemática $g:\mathbb{R}\to\mathbb{C}$</p>
+				<p class="lightup">Números complexos trazem benefícios na análise de sinais.</p>
+				<img src="../../images/complex_set.png" width="380">
+				
+			</div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Número Complexo</h2>
+			</div>
+			<div>
+			<p>
+				$$z=a+jb$$
+			</p>
+					
+					<img src="../../images/complex_number.png" width="450">
+					<p>$j=\sqrt{-1}$</p>
+			   </div>
+
+		</section>
+
+		
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Exponencial Complexa</h2>
+					</div>
+					<div>
+					<p>
+						$$z=e^{j\omega t}$$
+					</p>
+							
+						<img src="../../images/complex_exp.gif" alt="">
+					   </div>
+
+				</section>
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Exponencial Complexa</h2>
+					</div>
+					<div>
+					<p>
+						$$z=e^{j\omega t}$$
+					</p>
+							
+						<img src="../../images/complex_exp.png" alt="">
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Fórmula de Euler</h2>
+					</div>
+					<div class="slide-content">
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+					<p class="lightup">
+						$$\Large e^{j\omega t}=\cos(\omega t)+j\sin(\omega t)$$
+					</p>
+								
+					
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Classificações dos sinais</h2>
+					</div>
+					<div class="slide-content">
+						<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../../images/sinal_continuo.png" alt="">
+						<p>$g:\mathbb{R}\to\mathbb{R}$</p>
+						</center>
+					
+						
+						<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../../images/sinal_discreto.png" alt="">
+							<p style="transform: translate(0,-2rem);">$g:\mathbb{Z}\to\mathbb{R}$</p>
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Determinístico vs Estocástico</p>
+							<img src="../../images/sinal_continuo.png" alt="">
+							<p>Ex: Tensão e corrente de um circuito elétrico.</p>
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Determinístico vs Estocástico</p>
+							<img src="../../images/randomwalk.png" width="550">
+							<p>Ex: mercado de ações, volume de chuvas, etc.</p>
+						</center>
+							
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades dos sinais</h2>
+					</div>
+					<div class="slide-content">
+						
+					
+					
+						
+						<center class="fragment current-visible"><p align="center">Sinal de energia</p>
+							$$\begin{equation}
+							E=\int_{-\infty}^\infty g(t)^2dt < \infty
+							\end{equation}$$
+							<img src="../../images/sinal_energia.png" width="550">
+						</center>
+						<center class="fragment current-visible"><p align="center">Sinal de energia</p>
+							$$\begin{equation}
+							E=\int_{-\infty}^\infty g(t)^2dt < \infty
+							\end{equation}$$
+							<img src="../../images/sinal_energia2.png" width="550">
+						</center>
+						<center class="fragment current-visible"><p align="center">Sinal de energia</p>
+							$$\begin{equation}
+							E=\int_{-\infty}^\infty g(t)^2dt < \infty
+							\end{equation}$$
+							<img src="../../images/sinal_energia3.png" width="550">
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Sinal de energia</p>
+							$$\begin{equation}
+							E=\int_{-\infty}^\infty g(t)^2dt < \infty
+							\end{equation}$$
+							<p>&nbsp;</p>
+							<p class="lightup">Sinais de energia são utilizados para transmitir informação!</p>
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Sinal de potência</p>
+							$$\begin{equation}
+							P_\text{med}= \lim_{\tau\to\infty} \frac{1}{2\tau}\int_{-\tau}^\tau g(t)^2dt 
+							\end{equation}$$
+							<img src="../../images/sinal_potencia.png" width="550">
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Sinal de potência</p>
+							$$\begin{equation}
+							P_\text{med}= \lim_{\tau\to\infty} \frac{1}{2\tau}\int_{-\tau}^\tau g(t)^2dt 
+							\end{equation}$$
+							<img src="../../images/sinal_potencia2.png" width="550">
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Sinal de potência</p>
+							$$\begin{equation}
+							P_\text{med}= \lim_{\tau\to\infty} \frac{1}{2\tau}\int_{-\tau}^\tau g(t)^2dt 
+							\end{equation}$$
+							<img src="../../images/sinal_potencia3.png" width="550">
+						</center>
+
+						<center class="fragment current-visible"><p align="center">Sinal de potência</p>
+							$$\begin{equation}
+							P_\text{med}= \lim_{\tau\to\infty} \frac{1}{2\tau}\int_{-\tau}^\tau g(t)^2dt 
+							\end{equation}$$
+							<p>&nbsp;</p>
+							<p class="lightup">Sinais de potência são utilizados para fornecer energia para um sistema!</p>
+						</center>
+
+						<center class="fragment current-visible">
+							<p>Energia vs Potência</p>
+									$$\begin{equation}
+									E=\int_{-\infty}^\infty g(t)^2dt 
+									\end{equation}$$
+									$$\begin{equation}
+									P_\text{med}= \lim_{\tau\to\infty} \frac{1}{2\tau}\int_{-\tau}^\tau g(t)^2dt
+									\end{equation}$$
+									<p class="lightup">Sinal de energia não pode ser sinal de potência e vice-versa</p>
+								</center>
+
+
+								<center class="fragment current-visible">
+										
+								<p>Sinal ímpar:</p>
+									$$  g(t)=-g(-t),\quad \forall t\in\R $$
+
+									
+								
+										</center>
+
+										<center class="fragment current-visible">
+										
+											<p>Sinal ímpar:</p>
+												$$  g(t)=-g(-t),\quad \forall t\in\R $$
+			
+												<img  src="../../images/sinal_impar.png" width="550" style="transform: translate(0,-2rem);">
+											
+													</center>
+
+
+										<center class="fragment current-visible">
+										
+											<p>Sinal ímpar:</p>
+												$$  g(t)=-g(-t),\quad \forall t\in\R $$
+			
+												<img src="../../images/sinal_impar2.png" width="550" style="transform: translate(0,-2rem);">
+											
+													</center>
+
+													<center class="fragment current-visible">
+										
+														<p>Sinal par:</p>
+															$$  g(t)=g(-t),\quad \forall t\in\R $$
+						
+															
+														
+													</center>
+
+													<center class="fragment current-visible">
+										
+														<p>Sinal par:</p>
+															$$  g(t)=g(-t),\quad \forall t\in\R $$
+						
+															<img src="../../images/sinal_par.png" width="550" style="transform: translate(0,-2rem);">
+														
+													</center>
+
+
+													<center class="fragment current-visible">
+										
+														<p>Sinal par:</p>
+															$$  g(t)=g(-t),\quad \forall t\in\R $$
+						
+															<img src="../../images/sinal_par2.png" width="550" style="transform: translate(0,-2rem);">
+														
+													</center>
+
+
+
+										<center class="fragment current-visible">
+											<p class="lightup">Todo sinal pode ser escrito como a soma da parte par com a ímpar</p>
+											 $$g(t)=g_p(t)+g_i(t)$$ em que
+											$$\small\begin{align*}
+												g_p(t)&=\frac{1}{2}(g(t)+g(-t))\\
+												g_i(t)&=\frac{1}{2}(g(t)-g(-t))
+											\end{align*}$$
+												</center>
+
+										
+							
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					
+					<div class="slide-content">
+
+						<center class="fragment current-visible">
+							<div class="slide-title">
+								<h2>Sinais especiais</h2>
+							</div>
+							<p>&nbsp;</p>
+							<ul><li>Degrau Unitário;</li>
+							<li>Retângulo Unitário;</li>
+							<li>Sinc (seno normalizado);</li>
+							<li>Impulso Unitário;</li>
+							</ul>
+						</center>	
+			<center class="fragment current-visible">
+		
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					$$
+				
+    u(t)=\begin{cases}
+    1, \text{ se } t>0,\\ 
+    0, \text{ se } t\le 0.
+    \end{cases}
+
+					$$
+					<img src="../../images/degrau_unitario.png" width="550">
+				</center>	
+				
+				
+				<center class="fragment current-visible">
+	
+					<div class="slide-title">
+						<h2>Retângulo unitário (Gate)</h2>
+					</div>
+					$$
+				
+    G_T(t)=\begin{cases}
+    1, \text{ se } |t| < \frac{T}{2},\\ 
+    0, \text{ caso contrário.}
+    \end{cases}
+
+					$$
+					<img src="../../images/retangulo_unitario.png" style="transform:translate(0,-3rem)" width="500">
+				</center>	
+
+
+				<center class="fragment current-visible">	
+					<div class="slide-title">
+					<h2>Sinc (seno normalizado)</h2>
+				</div>
+					
+			
+					$$
+			
+    \text{sinc}(x)=\begin{cases} 1, \text{ se } x=0,\\
+    \frac{\sin (x)}{x}, \text{caso contrário.}
+    \end{cases}
+
+					$$
+					<img src="../../images/sinc.png" style="transform:translate(0,-3rem)" width="700">
+				</center>	
+
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário (Delta de Dirac)</h2>
+					</div>
+
+	
+					$$
+					
+					\delta(t)=\begin{cases}0,\quad \forall t\neq 0,\\
+					+\infty, \quad t=0.\end{cases}, \quad \int_{-\infty}^\infty \delta(t)dt = 1.
+			
+					$$
+					<img src="../../images/impulso_unitario.png" style="transform:translate(0,-2rem)" width="550">
+				</center>	
+
+
+				<center class="fragment current-visible">
+	
+					<div class="slide-title">
+						<h2>Impulso unitário (Aprox. Retângular)</h2>
+					</div>
+					$$
+				
+					\lim_{T\to 0}\delta_T(t)=\lim_{T\to 0}\begin{cases}
+						\frac{1}{T},\text{ se } |t|\le \frac{T}{2}\\
+						0, \text{ caso contrário.}
+					\end{cases}
+	
+					$$
+					<img src="../../images/impulso_aprox_retangular.png" style="transform:translate(0,-2rem)" width="500">
+				</center>	
+
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário (Aprox. Retângular)</h2>
+					</div>
+					$$
+				
+					\lim_{T\to 0}\delta_T(t)=\lim_{T\to 0}\begin{cases}
+						\frac{1}{T},\text{ se } |t|\le \frac{T}{2}\\
+						0, \text{ caso contrário.}
+					\end{cases}
+				
+					$$
+					<img src="../../images/impulso_aprox_retangular2.png" style="transform:translate(0,-2rem)" width="500">
+				</center>
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário (Aprox. Retângular)</h2>
+					</div>
+					$$
+				
+					\lim_{T\to 0}\delta_T(t)=\lim_{T\to 0}\begin{cases}
+						\frac{1}{T},\text{ se } |t|\le \frac{T}{2}\\
+						0, \text{ caso contrário.}
+					\end{cases}
+			
+					$$
+					<img src="../../images/impulso_aprox_retangular3.png" style="transform:translate(0,-2rem)" width="500">
+				</center>
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário (Aprox. Retângular)</h2>
+					</div>
+					$$
+			
+					\lim_{T\to 0}\delta_T(t)=\lim_{T\to 0}\begin{cases}
+						\frac{1}{T},\text{ se } |t|\le \frac{T}{2}\\
+						0, \text{ caso contrário.}
+					\end{cases}
+			
+					$$
+					<img src="../../images/impulso_aprox_retangular4.png" style="transform:translate(0,-2rem)" width="500">
+				</center>
+
+				<center class="fragment current-visible">
+		
+					<div class="slide-title">
+						<h2>Impulso unitário "Derivada de $u(t)$"</h2>
+					</div>
+					$$
+			
+					\delta(t)=\lim_{\epsilon\to 0^+} \frac{u(t)-u(t-\epsilon)}{\epsilon}
+			
+					$$
+					<img src="../../images/impulso_derivada_u.png" style="transform:translate(0,-3rem)" width="550">
+				</center>
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário "Derivada de $u(t)$"</h2>
+					</div>
+					$$
+			
+					\delta(t)=\lim_{\epsilon\to 0^+} \frac{u(t)-u(t-\epsilon)}{\epsilon}
+			
+					$$
+					<img src="../../images/impulso_derivada_u2.png" style="transform:translate(0,-3rem)" width="550">
+				</center>
+
+
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário "Derivada de $u(t)$"</h2>
+					</div>
+					$$
+			
+					\delta(t)=\lim_{\epsilon\to 0^+} \frac{u(t)-u(t-\epsilon)}{\epsilon}
+			
+					$$
+					<img src="../../images/impulso_derivada_u3.png" style="transform:translate(0,-3rem)" width="550">
+				</center>
+
+				
+				<center class="fragment current-visible">
+					<div class="slide-title">
+						<h2>Impulso unitário "Derivada de $u(t)$"</h2>
+					</div>
+					$$
+			
+					\delta(t)=\lim_{\epsilon\to 0^+} \frac{u(t)-u(t-\epsilon)}{\epsilon}
+			
+					$$
+					<img src="../../images/impulso_derivada_u4.png" style="transform:translate(0,-1rem)" width="650">
+				</center>
+				
+					   </div>
+
+				</section>
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2></h2>
+					</div>
+					<div class="slide-content">
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<center>
+				<h2>PARTE II</h2>
+				<h3>Revisão de Álgebra Linear</h3>
+							</center>			
+								
+					
+					   </div>
+
+				</section>
+
+
+				<!------------------------------>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Revisão de Álgebra Linear
+						</h2>
+					</div>
+					<div class="slide-content">
+						 <p class="lightup" >O que é um vetor?</p>
+						<center class="fragment current-visible">
+							$$\vec{v}=\sum_{i=1}^n v_i \hat{e}_i\in V$$
+							<p>$V$ é um espaço vetorial (ex: $\mathbb{R}^n$);</p>
+							<p>$E=\{\hat{e}_1,\ldots,\hat{e}_n\}$ é uma <b>base de representação</b>;</p>
+							<p>$\{v_1,\ldots,v_n\}$ são as <b>coordenadas</b> em relação a base $E$.</p>
+					</center>
+
+					<center class="fragment current-visible">
+						$$\vec{v}=v_1 \hat{e}_1+v_2 \hat{e}_2+v_3 \hat{e}_3$$
+						<img src="../../images/vetor_3d.png" width="400">
+				</center>
+				<center class="fragment current-visible">
+					$$\vec{v}=v_1 \hat{e}_1+v_2 \hat{e}_2+v_3 \hat{e}_3$$
+					<img src="../../images/vetor_3d1.png" width="400">
+			</center>
+			<center class="fragment current-visible">
+				$$\vec{v}=v_1 \hat{e}_1+v_2 \hat{e}_2+v_3 \hat{e}_3$$
+				<img src="../../images/vetor_3d2.png" width="400">
+		</center>
+		<center class="fragment current-visible">
+			$$\vec{v}=v_1 \hat{e}_1+v_2 \hat{e}_2+v_3 \hat{e}_3$$
+			<img src="../../images/vetor_3d3.png" width="400">
+	</center>
+
+	<center class="fragment current-visible">
+		$$\vec{v}=v_1 \hat{e}_1+v_2 \hat{e}_2+v_3 \hat{e}_3$$
+		<img src="../../images/vetor_3d.png" width="400">
+</center>
+
+
+<center class="fragment current-visible">
+	$$\vec{v}=\|\vec{v}\|\hat{a}_1$$
+	<img src="../../images/vetor_3d_baseA.png" width="400" style="transform: translate(0,-3rem);">
+</center>
+
+<center class="fragment current-visible">
+	$$\vec{v}=\|\vec{v}\|\hat{a}_1$$
+	<img src="../../images/vetor_3d_baseA2.png" width="400" style="transform: translate(0,-3rem);">
+</center>
+					
+			</div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear
+				</h2>
+			</div>
+			<div class="slide-content">
+				 <p class="lightup" >O que é um produto escalar?</p>
+				<center>
+				<ul><li class="fragment">Resultado é um Escalar:
+					$$\langle \vec v, \vec w\rangle = c, \text{ com } c \text{ é um escalar.}$$</li>
+				<li class="fragment">Linear pela direita:
+					$$\langle \vec v, (\alpha \vec w_1 + \beta \vec w_2)\rangle = \alpha\langle \vec v,\vec w_1\rangle + \beta \langle \vec v,\vec w_2\rangle $$
+
+				</li>
+				</ul>
+			</center>
+
+						
+			
+	</div>
+
+</section>
+
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é um produto escalar?</p>
+
+	<center>
+		<ul><li>Comutação:
+			$$\langle \vec v, \vec w\rangle = \langle\vec  w, \vec v\rangle ^*$$
+		</li>
+		<p class="fragment">
+		Consequência $\Rightarrow $ combinação linear pela esquerda:
+			$$\langle (\alpha\vec  v_1 + \beta \vec v_2), w\rangle = \alpha^*\langle\vec  v_1,\vec w\rangle + \beta^* \langle \vec v_2,\vec w\rangle  $$
+		</p>
+		</li>
+		</ul>
+	</center>
+
+	
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Combinação linear direita/esquerda</p>
+
+	<center>
+		Direita:
+		$$\langle \vec v, (\alpha \vec w_1 + \beta \vec w_2)\rangle = \alpha\langle \vec v,\vec w_1\rangle + \beta \langle \vec v,\vec w_2\rangle $$
+		Esquerda:
+		$$\langle (\alpha\vec  v_1 + \beta \vec v_2), w\rangle = \alpha^*\langle\vec  v_1,\vec w\rangle + \beta^* \langle \vec v_2,\vec w\rangle  $$
+	</center>
+
+	
+	
+</div>
+
+</section>
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma norma?</p>
+		
+
+	<center class="fragment current-visible">
+			
+		$$
+		\|\vec a-\vec b\|=\sqrt{\langle \vec a-\vec b, \vec a-\vec b\rangle}
+		$$
+		<p>Medida de <b>distância</b> dentro do espaço vetorial<br><img src="../../images/espaco_vetorial_norma_ab.png" width="300"></p>
+		
+	</center>
+
+	<center class="fragment current-visible">
+			
+		$$
+		\|\vec v\|=\sqrt{\langle \vec v, \vec v\rangle}
+		$$
+		<p>Medida de <b>tamanho</b> de um vetor</p>
+
+		
+		<img src="../../images/espaco_vetorial_norma.png" width="300">
+	</center>
+
+	<center class="fragment current-visible">
+			
+		$$
+		\|\vec v\|=\sqrt{\langle \vec v, \vec v\rangle}
+		$$
+		<p>Se $\|\vec v\|=1$ então $\vec v$ é dito ser <b>vetor unitário</b> e é denotado por $\hat{v}$.</p>
+
+		
+		<img src="../../images/espaco_vetorial_norma.png" width="300">
+	</center>
+	
+	
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma projeção?</p>
+
+	<center class="fragment current-visible">
+			
+		$$
+		 \langle \vec a, \vec b\rangle \rightarrow \text{medida de projeção}
+		$$
+		<img src="../../images/projecao_vetor.png" width="450" style="transform: translate(0,0rem);">
+	</center>
+
+	<center class="fragment current-visible">
+			
+		$$
+		 \text{proj}_{\vec b}~\vec a = \frac{\langle \vec a, \vec b\rangle^* }{\|\vec b\|^2} \vec b
+		$$
+		<img src="../../images/projecao_vetor.png" width="350">
+	</center>
+	
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é ortogonalidade?</p>
+		
+		 <center class="fragment current-visible"r>
+			
+			$$
+			\vec a \perp \vec b \Leftrightarrow \text{proj}_{\vec b}~ \vec a=\vec 0
+			$$
+			<img src="../../images/ortogonalidade.png" width="250" style="transform: translate(0,0rem);">
+		</center>
+	
+	<center class="fragment current-visible"r>
+			
+		$$
+		\vec a \perp \vec b \Leftrightarrow \langle \vec a, \vec b\rangle=0
+		$$
+		<img src="../../images/ortogonalidade.png" width="250" style="transform: translate(0,0rem);">
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma base ortogonal?</p>
+		
+		 <center class="fragment current-visible"r>
+					<img src="../../images/espaco_vetorial.png" width="500">
+		</center>
+	
+
+<center class="fragment current-visible"r>
+	
+	$$\vec a_1 \perp \vec a_2 \perp \vec a_3 \cdots \perp \vec a_n$$
+	<img src="../../images/espaco_vetorial_base.png" width="450">
+</center>
+
+</section>
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >O que é uma base ortonormal?</p>
+<center>
+	
+	$$\hat a_1 \perp \hat a_2 \perp \hat a_3 \cdots \perp \hat a_n$$
+	<img src="../../images/espaco_vetorial_base_unitaria.png" width="450">
+</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Representação de um vetor na base $A=\{\hat a_1,\cdots,\hat a_n\}$</p>
+<center>
+$$
+\vec v = \alpha_1\hat{a}_1+\alpha_2\hat a_2+\cdots +\alpha_n \hat a_n
+$$
+</center>
+
+<center class="fragment current-visible">
+	$$
+	v^A = \begin{bmatrix} \alpha_1\\ \alpha_2 \\ \vdots \\ \alpha_n \end{bmatrix}
+	$$
+	</center>
+	
+</div>
+
+</section>
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Revisão de Álgebra Linear
+		</h2>
+	</div>
+	<div class="slide-content">
+		 <p class="lightup" >Representação de um vetor na base $A=\{\hat a_1,\cdots,\hat a_n\}$</p>
+<center>
+$$
+\langle \hat a_i, \vec v\rangle  = \langle \hat a_i, (\alpha_1\hat{a}_1+\alpha_2\hat a_2+\cdots +\alpha_n \hat a_n)\rangle 
+$$
+</center>
+
+<center class="fragment">
+	$$
+	 = \alpha_1\langle \hat a_i, \hat{a}_1\rangle +\alpha_2\langle \hat a_i,\hat a_2\rangle +\cdots +\alpha_n \langle \hat a_i,\hat a_n\rangle 
+	$$
+
+</center>
+
+<center class="fragment">
+	$$
+	 = \alpha_i\langle \hat a_i, \hat{a}_i\rangle 
+	$$
+
+</center>
+
+<center class="fragment">
+	$$
+	\Rightarrow\alpha_i = \langle \hat a_i, \vec v\rangle
+	$$
+	<div class="redSquare" style="transform: translate(34rem,-6.6rem);height: 4rem;width: 16rem;"></div>
+	</center>
+	
+</div>
+
+
+</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+						Continuação da revisão de álgebra linear
+					</h3>
+				
+								
+				</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+	</body>
+</html>
+

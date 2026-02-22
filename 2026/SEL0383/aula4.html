@@ -1,0 +1,2085 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas</title>
+
+		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../../style.css">
+
+	
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../../images/sel.png"/> </div>
+					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 4: <br>Convolução e Função Impulso<br>SEL0383</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">12 de agosto de 2025</p>
+				</div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Aula anterior
+						</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+				
+						<ul>
+							<li>Definição de <b>Espaço de funções</b>;</li>
+							<li><b>Exemplos</b> de espaços de funções;</li>
+							<li>Espaço $\mathcal{L}^2(\mathbb{R})$;</li>
+							<li>Produto escalar de <b>funções</b>;</li>
+							<li>Norma, Projeção, bases <b>ortonormais</b>;</li>
+							<li>Operador linear (Eq. Diferênciais Lineares);</li>
+							<li>Convolução</li>
+						
+						</ul>
+					
+				</div>
+				
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução
+					</h2>
+				</div>
+				<div class="slide-content">
+				
+			<center>
+				$$
+			c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+				$$
+			<p><b>Passos:</b></p>
+			<ul><li>
+			Espelhamento $h(-\tau);$ 	
+			</li>
+			<li>Translação de $h(-\tau+t)$ para $t\in\mathbb{R}$;</li>
+			<li>Cálculo da área de $g(\tau)h(-\tau+t)$;</li>
+			</ul>
+			
+			</center>
+			
+				
+			</div>
+			
+			</section>
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução
+					</h2>
+				</div>
+				<div class="slide-content">
+				
+			<center>
+				<img src="../../images/convolution_gate_exp.gif" width="800">
+			
+			</center>
+			
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução
+					</h2>
+				</div>
+				<div class="slide-content">
+				
+			<center >
+				$$
+			c(t)=g(t)\ast h(t)=\int_{-\infty}^\infty g(\tau)h(t-\tau)d\tau
+				$$
+			</center>
+			
+			
+			<center>
+				$$
+			=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty \underbrace{g(k\Delta t)\Delta t}_{\alpha_k}\cdot\underbrace{h(t-k\Delta t)}_{b_k(t)}
+				$$
+			</center>
+			
+			
+			<center>
+				$$
+			=\lim_{\Delta t \to 0} \sum_{k=-\infty}^\infty \alpha_kb_k(t).
+				$$
+			</center>
+			
+				
+			</div>
+			
+			</section>
+
+
+
+
+
+
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+								<li>Integral com multiplicação pela função impulso;</li>
+							<li>Convolução com <b>função impulso</b>;</li>
+							<li><b>Base canônica</b> do espaço de funções;</li>
+							<li>Aproximação de funções;</li>
+								<li>Método de <b>ortogonalização de funções</b>;</li>
+						<li><b>Exemplos</b> de ortogonalização de funções;</li>
+						</p>
+						</div>
+
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					$$
+					
+					\delta(t)=\begin{cases}0,\quad \forall t\neq 0,\\
+					+\infty, \quad t=0.\end{cases}, \quad \int_{-\infty}^\infty \delta(t)dt = 1.
+			
+					$$
+					<img src="../../images/impulso_unitario.png" style="transform:translate(0,-2rem)" width="550">
+				</center>
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+		
+					<center >
+	
+						$$
+					
+						\delta_T(t)=\begin{cases}
+							\frac{1}{T},\text{ se } |t|\le \frac{T}{2}\\
+							0, \text{ caso contrário.}
+						\end{cases}
+		
+						$$
+						<img src="../../images/impulso_aprox_retangular.png" style="transform:translate(0,-2rem)" width="550">
+					</center>
+		
+				
+			</div>
+			
+			</section>
+
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t)dt = ?
+			
+					$$
+				
+					
+				</center>
+
+				<center class="fragment">
+
+					$$
+						\delta(t)=\lim_{T\to 0} \delta_T(t)
+					$$
+		
+					<img src="../../images/impulso_aprox_retangular3.png" style="transform:translate(0,-2rem)" width="550">
+
+				</center>
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t)dt = \lim_{T\to 0} \int_{-\infty}^\infty g(t)\delta_T(t)dt
+			
+					$$
+				
+					
+				</center>
+
+
+				<center class="fragment">
+						
+					$$
+					
+					
+					 = \lim_{T\to 0} \frac{1}{T}\int_{-\frac{T}{2}}^\frac{T}{2} g(t)dt
+			
+					$$
+				
+					
+				</center>
+
+		
+
+				
+			</div>
+			
+			</section>
+
+
+
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+		
+				<center>
+					<p>&nbsp;</p>
+									
+					<img src="../../images/integral_impulso.png" width="900">
+
+				</center>
+				
+			</div>
+			
+			</section>
+
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t)dt = \lim_{T\to 0} \int_{-\infty}^\infty g(t)\delta_T(t)dt
+			
+					$$
+				
+					
+				</center>
+
+
+				<center>
+						
+					$$
+					
+					
+					 = \lim_{T\to 0} \frac{1}{T}\int_{-\frac{T}{2}}^\frac{T}{2} g(t)dt
+			
+					$$
+				
+					
+				</center>
+
+				<center>
+						
+					$$
+					
+					
+					 = \lim_{T\to 0} g(0)\cdot\frac{1}{T}\int_{-\frac{T}{2}}^\frac{T}{2}dt
+			
+					$$
+				
+					
+				</center>
+
+				<center class="fragment">
+						
+					$$
+					
+					
+					 = g(0)
+			
+					$$
+				
+					
+				</center>
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t)dt = g(0)
+			
+					$$
+
+					<img src="../../images/integral_impulso2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t)dt = g(0)
+			
+					$$
+
+					<img src="../../images/integral_impulso3.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t-t_0)dt = ?
+			
+					$$
+
+					<img src="../../images/integral_impulso_t0.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t-t_0)dt = g(t_0)
+			
+					$$
+
+					<img src="../../images/integral_impulso_t0_2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+
+						$$
+\delta(t)=\delta(-t)
+						$$
+						
+			<img src="../../images/impulso_unitario.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t-t_0)dt = g(t_0)
+			
+					$$
+
+					<img src="../../images/integral_impulso_t0_2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(-(t-t_0))dt = g(t_0)
+			
+					$$
+
+					<img src="../../images/integral_impulso_t0_2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(t)\delta(t_0-t)dt = g(t_0)
+			
+					$$
+
+					<img src="../../images/integral_impulso_t0_2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Função Impulso (Delta de Dirac)
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					\int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau = g(t)
+			
+					$$
+
+					<img src="../../images/conv_impulso2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução com o Impulso 
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					g(t)\ast \delta(t) = g(t)
+			
+					$$
+
+					<img src="../../images/conv_impulso2.png" width="700">
+				
+					
+				</center>
+
+
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução com o Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					g(t)\ast \delta (t)=\int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau
+			
+					$$
+
+				
+				
+					
+				</center>
+
+
+						
+
+
+				<center class="fragment">
+						
+					$$
+					
+					
+					=\lim_{\Delta t\to 0}\sum_{k=-\infty}^{\infty} g(k\Delta t)\Delta t\cdot \delta(t-k\Delta t)
+			
+					$$
+
+				
+				
+					
+				</center>
+
+
+							
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Convolução com o Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						
+					$$
+					
+					
+					g(t)\ast \delta (t)=\int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau
+			
+					$$
+
+				
+				
+					
+				</center>
+
+				<center>
+						
+					$$
+					
+					
+					=\lim_{\Delta t\to 0}\sum_{k=-\infty}^{\infty} \underbrace{g(k\Delta t)\Delta t}_{\alpha_k}\cdot \underbrace{\delta(t-k\Delta t)}_{\hat{e}_k(t)}
+			
+					$$
+
+				
+				
+					
+				</center>
+
+
+				
+				
+			
+
+ 				
+
+
+				<center class="fragment">
+						 
+					$$
+					
+					
+					=\lim_{\Delta t\to 0}\sum_{k=-\infty}^{\infty} \alpha_k\hat{e}_k(t)
+			
+					$$
+
+				
+				
+					
+				</center>
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+		
+					<section>
+
+				<div class="slide-title">
+					<h2>Convolução com o Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center>
+$$\Delta t\to 0$$
+					<img src="../../images/base_canonica.png" width="850">
+				</center>
+
+
+				
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+
+			
+
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Recapitulando: Base Canônica de $\mathbb{R}^n$
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p class="lightup">
+					$$
+					
+					
+				E=\{\hat e_1,\hat e_2,\cdots,\hat e_n\}
+			
+					$$
+				</p>
+
+	
+				
+					
+				</center>
+
+				<center >
+
+					$$\langle \hat e_i, \hat e_j\rangle = 
+					\begin{cases}
+					1,\text{ se } i=j\\
+					0,\text{ caso contrário.}
+					\end{cases}
+					$$
+					
+				</center>
+
+				<p align="center" >
+<b>É uma base ortonormal!</b>
+
+				</p>
+
+
+				
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Recapitulando: Base Canônica de $\mathbb{R}^n$
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+				
+				<center >
+
+					$$\hat e_1=\begin{bmatrix} 
+					1\\
+					0\\
+					\vdots\\
+					0
+					\end{bmatrix}, \hat e_2 =\begin{bmatrix} 
+					0\\
+					1\\
+					\vdots\\
+					0
+					\end{bmatrix},\cdots,\hat e_n = \begin{bmatrix} 
+					0\\
+					0\\
+					\vdots\\
+					1
+					\end{bmatrix}
+					$$
+					
+				</center>
+			
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Base de Funções Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p class="lightup">
+					$$
+					
+					
+				E=\{\delta_{\tau}(t)=\delta(t-\tau): \tau\in\mathbb{R}\}
+			
+					$$
+				</p>
+
+	
+				
+					
+				</center>
+
+				<center class="fragment">
+
+					$$\langle \delta_{\tau_1}(t), \delta_{\tau_2}(t)\rangle = 
+					\begin{cases}
+					\infty,\text{ se } \tau_1=\tau_2\\
+					0,\text{ caso contrário.}
+					\end{cases}
+					$$
+					
+				</center>
+
+				<p align="center" class="fragment">
+<b>É uma base ortogonal!</b>
+
+				</p>
+
+
+				
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Base de Funções Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p class="lightup">
+					$$
+					
+					
+				E=\{\delta_{\tau}(t)=\delta(t-\tau): \tau\in\mathbb{R}\}
+			
+					$$
+				</p>
+
+	
+				
+					
+				</center>
+
+				<center >
+
+			<img src="../../images/impulso_ortogonal.png" width="600">
+				</center>
+
+
+
+				
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Base de Funções Impulso
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					
+			<img src="../../images/base_impulsos.png" width="850">
+				</center>
+
+
+
+				
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Base Canônica de $\mathcal{C}(\mathbb{R})$
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						
+							Seja $g(t)\in\mathcal{C}(\mathbb{R})$, então
+					$$			
+							g(t)= \lim_{\Delta t\to 0}\sum_{k=-\infty}^\infty g(k\Delta t)\Delta t\cdot \delta_{k\Delta t}(t)
+					$$
+		
+
+	
+				
+					
+				</center>
+				<center class="fragment">
+						
+			$$			
+					= \int_{-\infty}^\infty g(\tau)\delta(t-\tau)d\tau
+			$$
+
+
+
+		
+			
+		</center>
+
+							
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Base Canônica de $\mathcal{C}(\mathbb{R})$
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						
+							Seja $g(t)\in\mathcal{C}(\mathbb{R})$, então
+					$$			
+							g(t)= \lim_{\Delta t\to 0}\sum_{k=-\infty}^\infty g(k\Delta t)\Delta t\cdot \delta_{k\Delta t}(t)
+					$$
+		
+
+	
+				
+					
+				</center>
+				<center>
+						
+			$$			
+					= \int_{-\infty}^\infty \underbrace{g(\tau)}_{\text{coef.}}\underbrace{\delta(t-\tau)}_{\text{base}}d\tau
+			$$
+
+
+
+		
+			
+		</center>
+
+							
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Base Canônica de $\mathcal{L}^2(\mathbb{R})$
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						
+							Seja $g(t)\in\mathcal{C}(\mathbb{R})$, então
+					$$			
+							g(t)= \lim_{\Delta t\to 0}\sum_{k=-\infty}^\infty g(k\Delta t)\Delta t\cdot \delta_{k\Delta t}(t)
+					$$
+		
+
+	
+				
+					
+				</center>
+				<center>
+						
+			$$			
+			= \int_{-\infty}^\infty \underbrace{g(\tau)}_{\text{coef.}}\underbrace{\delta(t-\tau)}_{\text{base}}d\tau
+			$$
+
+
+
+		
+			
+		</center>
+
+							
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center><p>&nbsp;</p>
+					
+				<img src="../../images/funcao_rect.png" width="900">
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center><p>&nbsp;</p>
+					
+				<img src="../../images/funcao_rect2.png" width="900">
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center><p>&nbsp;</p>
+					
+				<img src="../../images/funcao_rect3.png" width="900">
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center><p>&nbsp;</p>
+					
+				<img src="../../images/funcao_rect4.png" width="900">
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+Considere as funções
+					$$
+					a_i(t)=u(t-\tau_i)-u(t-\tau_{i+1}),\\ \tau_{i+1}-\tau_i=\Delta t\\
+					i\in\mathbb{Z}
+					$$
+			
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						
+							Seja $g(t)\in\mathcal{L}^2(\mathbb{R})$, então, dado uma conjunto de funções
+							$$
+							A=\{\cdots,a_1(t),a_2(t),a_3(t),\cdots\},
+							$$
+							busca-se <b>a melhor</b> aproximação da função $g(t)$ na forma
+					$$			
+							g_a(t)= \sum_{i} \alpha_i a_i(t)
+					$$
+		
+
+	
+				
+					
+				</center>
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais
+					</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						Define-se o <b>erro de aproximação </b> na forma
+						$$
+						\epsilon(t)=g(t)-g_a(t)
+						$$
+							
+	
+				
+					
+				</center>
+
+			<center class="fragment">
+					
+				$$
+				=g(t)-\sum_{i=1}^n\alpha_i a_i(t)
+				$$
+					
+
+		
+			
+		</center>
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais
+					</h2>
+				</div>
+				<div class="slide-content">
+					
+					<center>
+						<p>	<b>Erros Mínimos Quadrados (EMQ)</b></p>
+					
+						A melhor aproximação é obtida através da seguinte otimização
+						$$
+					\min_{\alpha_1,\alpha_2,\ldots,\alpha_n} \|\epsilon(t)\|^2
+						$$
+							
+	
+				
+					
+				</center>
+
+
+				<center class="fragment" >
+					<p class="lightup">
+						
+					$$\alpha_i^\text{EMQ} = \frac{\langle g(t),a_i(t) \rangle^*}{\|a_i(t)\|^2}.					$$
+				</p>
+			
+				
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center><p>&nbsp;</p>
+				
+					$$g_a(t)=\sum_{i=-\infty}^\infty \alpha_i a_i(t)$$
+				
+			</center>
+
+			<center class="fragment">
+				$$\alpha_i=\frac{\langle g(t),a_i(t)\rangle^*}{\|a_i(t)\|^2}$$
+
+			</center>
+			<center class="fragment">
+				$$=\frac{1}{\Delta t}\int_{\tau_i}^{\tau_{i+1}} g(t)dt$$
+
+			</center>
+
+				
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center>				
+				<img src="../../images/approx_rect.png" width="800">
+				
+			</center>
+		
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center>				
+				<img src="../../images/approx_rect2.png" width="800">
+				
+			</center>
+		
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Aproximação de sinais: exemplo
+					</h2>
+				</div>
+				<div class="slide-content">
+				<center>				
+				<img src="../../images/approx_rect3.png" width="800">
+				
+			</center>
+		
+									
+				
+
+				
+			</div>
+			
+			</section>
+
+
+
+
+
+			
+
+
+
+			<section>
+
+				<div class="slide-title">
+					
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+		
+				<h1>
+					PARTE II
+				</h1>
+				
+							
+			</center>
+				   </div>
+
+			</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				Seja $A=\{\vec a_1,\vec a_2, \vec a_3\}$ <b>linearmente independente</b> (LI), dado por
+			<center>
+					$$
+					\vec a_1=\begin{bmatrix}
+					1\\
+					-1\\
+					1
+					\end{bmatrix},\quad \vec a_2=\begin{bmatrix}
+					1\\
+					0\\
+					1
+					\end{bmatrix},\quad \vec a_3=\begin{bmatrix}
+					1\\
+					1\\
+					2
+					\end{bmatrix}
+					$$		
+					Deseja-se obter um conjunto $B=\{\vec b_1,\vec b_2,\vec b_3\}$ de <b>vetores ortogonais</b>
+		    </center>
+		
+			   </div>
+
+		</section>	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/ortogo_vec.png" width="750">
+			</center>
+			   </div>
+
+		</section>	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/ortogo_vec2.png" width="750">
+			</center>
+			   </div>
+
+		</section>	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/ortogo_vec3.png" width="750">
+			</center>
+			   </div>
+
+		</section>	
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/ortogo_vec4.png" width="750">
+			</center>
+			   </div>
+
+		</section>	
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo $\mathbb{R}^3$</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../../images/ortogo_vec5.png" width="750">
+			</center>
+			   </div>
+
+		</section>	
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização ($\mathbb{R}^n$): exemplo</h2>
+			</div>
+			<div class="slide-content">
+					Pode-se construir $B$ na seguinte forma,
+			<center>
+					$$
+					\begin{align*}
+					\vec b_1&=\vec a_1;\\ 
+					\vec b_2&=\vec a_2-\frac{\langle \vec a_2, \vec b_1\rangle}{\|\vec b_{1}\|^2} \vec b_{1};\\
+					\vec b_3&=\vec a_3-\frac{\langle \vec a_3, \vec b_1\rangle}{\|\vec b_{1}\|^2} \vec b_{1}-\frac{\langle \vec a_3, \vec b_2\rangle}{\|\vec b_{2}\|^2} \vec b_{2};
+					\end{align*}
+					$$		
+		    </center>
+			   </div>
+
+		</section>	
+
+
+
+
+				
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização de Gram-Schmidt ($\mathbb{R}^n$)</h2>
+			</div>
+			<div class="slide-content">
+		
+					Uma base ortogonal $\{\vec b_i\}_{i=1,\ldots,n}$ pode ser obtida a partir de um conjunto de vetores $\{\vec a_i\}_{i=1,\ldots,n}$ LI pelo procedimento a seguir,
+					<center>
+					<p class="lightup">
+					$$
+					\begin{align*}
+					\vec b_1&=\vec a_1;\\ \vec b_i&=\vec a_i-\sum_{\ell=1}^{i-1} \frac{\langle \vec a_i, \vec b_{\ell}\rangle}{\|\vec b_{\ell}\|^2} \vec b_{\ell} ,\quad i=2, \ldots, n
+					\end{align*}
+					$$	
+				</p>				
+		</center>
+			   </div>
+
+		</section>	
+
+
+
+		
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização de Gram-Schmidt ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+					Uma base ortogonal $\{g_i(t)\}_{i\in\mathbb{Z}}$ pode ser obtida a partir de um conjunto de funções $\{a_i(t)\}_{i\in\mathbb{Z}}$ pelo procedimento a seguir,
+					<center>
+					<p class="lightup">
+					$$
+					\begin{align*}
+					g_1(t)&=a_1(t);\\ g_i(t)&=a_i(t)-\sum_{\ell=1}^{i-1} \frac{\langle a_i, g_{\ell}\rangle}{\|g_{\ell}\|^2} g_{\ell}(t) ,\quad \forall i\in\mathbb{Z}
+					\end{align*}
+					$$	
+				</p>				
+		</center>
+			   </div>
+
+		</section>	
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+		
+				Considere o conjunto de sinais linearmente independentes no intervalo $[0,1]$ a seguir
+				<center>
+				$$
+				\begin{align*}
+				a_1(t)&=5, \\
+				a_2(t)&=4t+1,\\ 
+				a_3(t)&=\sin(2 \pi t)
+				\end{align*}
+				$$
+				Porém, 
+				$$
+				a_1(t)\not\perp a_2(t)\not\perp a_3(t)
+				$$	
+		</center>
+			   </div>
+
+		</section>	
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+			
+				<center>
+						
+			<img src="../../images/orto_sinais.png" width="800">
+		
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=a_1(t);\\
+g_2(t)&=a_2(t)-\frac{\langle a_2,g_1\rangle}{\|g_1\|^2}g_1(t);\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=(4t+1)-3;\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+t&\in[0,1]
+\end{align*}
+						$$
+					<img src="../../images/g2_orto.png" width="800">		
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+g_3(t)&=a_3(t)-\frac{\langle a_3,g_1\rangle}{\|g_1\|^2}g_1(t)-\frac{\langle a_3,g_2\rangle}{\|g_2\|^2}g_2(t)\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+g_3(t)&=a_3(t)-\underbrace{\frac{\langle a_3,g_1\rangle}{\|g_1\|^2}}_{=0}g_1(t)-\frac{\langle a_3,g_2\rangle}{\|g_2\|^2}g_2(t)\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+g_3(t)&=a_3(t)-\frac{\langle a_3,g_2\rangle}{\|g_2\|^2}g_2(t)\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+g_3(t)&=\sin(2\pi t)-\frac{3}{2\pi}(4t-2)\\
+t&\in[0,1]
+\end{align*}
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+
+				<center>
+				<img src="../../images/g3_orto.png" width="800">			
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+						$$
+						\begin{align*}
+g_1(t)&=5;\\
+g_2(t)&=4t-2;\\
+g_3(t)&=\sin(2\pi t)+\frac{6}{\pi}t-\frac{3}{\pi}\\
+t&\in[0,1]
+\end{align*}
+						$$
+						Assim, 
+						$$
+						g_1(t)\perp g_2(t)\perp g_3(t)
+						$$
+							
+		</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Ortogonalização: exemplo ($\mathcal{L}^2(\mathbb{R})$)</h2>
+			</div>
+			<div class="slide-content">
+				
+			
+		
+
+				<center>
+					<img src="../../images/orto_sinais2.png" width="800">
+		</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Pitágoras</h2>
+			</div>
+			<div class="slide-content">
+		<center>
+			<p>&nbsp;</p>
+			
+			Seja $x(t)$ e $y(t)$ sinais ortogonais, então
+			<p>&nbsp;</p>
+			<p class="lightup">
+			$$
+\|x(t)+y(t)\|^2=\|x(t)\|^2+\|y(t)\|^2
+			$$
+		</p>
+		</center>
+			   </div>
+
+		</section>
+
+
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+		Representação de Sinais Periódicos
+					</h3>
+					
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../../reveal.js/dist/reveal.js"></script>
+		<script src="../../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../../reveal.js/plugin/math/math.js"></script>
+		<script src="../../init.js"></script>
+		
+	</body>
+</html>
+
