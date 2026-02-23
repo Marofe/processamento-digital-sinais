@@ -1,0 +1,1140 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0383 - Sinais e Sistemas em Eng. Elétrica</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+
+		
+	</head>
+	<body onload="drawVisualization();">
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 1: <br>Introdução à disciplina de Processamento Digital de Sinais (PDS)<br>SEL0343</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">24 de fevereiro de 2026</p>
+				</div>
+
+				</section>
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<p>&nbsp;</p>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+							<li><b>Apresentar a disciplina</b>: estrutura e avaliação;</li> 
+							<li>Introduzir <b>conceitos básicos</b> de processamento digital de sinais (PDS);</li>
+							<li>Ilustrar as <b>aplicações</b> de PDS em exemplos práticos;</li>
+							<li>Evidenciar a <b>importância</b> do estudo de PDS para engenharia;</li>
+							<li>Revisão de proprieades de sinais e sistemas.</li>
+						</p>
+						</div>
+
+			</section>
+
+
+			
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Tópicos</h2>
+				</div>
+				<div class="slide-content">
+
+						<ul>
+							<li>Propriedades de sinais em tempo discreto;</li> 
+							<li>Amostragem e Teorema de Nyquist;</li> 
+							<li>Convolução em tempo discreto;</li> 
+							<li>Transformada de Fourier em tempo discreto;</li>
+							<li>Janelamento;</li>
+							<li>Análise Tempo-Frequência e Wavelets;</li>
+							<li>Transformada Z;</li>
+						    <li>Projeto de Filtros FIR e IIR;</li>
+							<li>Processamento de sinais estocásticos.</li>
+					  </ul>
+						
+
+				</div>
+
+			</section>
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+
+					<a href="https://edisciplinas.usp.br/course/view.php?id=137239" target="_blank">
+						<div style="background-color: rgb(55, 147, 201);border-radius: 50%;"><img src="../images/edisciplina.png" width="400"></div>
+						https://edisciplinas.usp.br/course/view.php?id=137239</a>
+						<p>&nbsp;</p>	
+						<ul>
+							<li>Slides;</li>
+							<li>Notas de aula;</li>
+							<li>Listas de exercícios;</li>
+							<li>Vídeos relacionados aos tópicos;</li>
+							<li>Códigos, exemplos ilustrativos, etc...</li>
+						</ul>
+					
+										
+				</center>
+
+				</div>
+
+			</section>
+
+
+			
+
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					
+						<h3>Referências</h3>
+				
+						<ul>
+							<li>[1] A. V. Oppenheim e R.W. Schafer: Discrete-Time Signal Processing, 3a. Ed., Prentice Hall, 2009</li>
+							<li>[2] J.C. Geromel and G.S. Deaecto. Análise linear de sinais: teoria, ensaios práticos e exercícios. Editora Blucher, 2019.</li>
+							<li>[3] Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab. Signals & systems (2nd ed.).
+								Prentice-Hall, Inc., USA, 1996.	</li>
+							<li>[4] B. P. Lathi. Linear Systems and Signals. Oxford University Press, Inc., USA, 2nd edition, 2009.</li>
+						</ul>
+
+				</center>
+
+				</div>
+
+			</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>Serão realizadas:</p>
+				
+						
+						<p>
+							<ul>
+							<li>Listas de exercícios teóricos/computacionais: $L_1,L_2,L_3,\cdots,L_n$; </li>
+							<li>Ao final do semestre, um <b>trabalho computacional final</b> $T$.</li>
+							<li>Não terá prova.</li>
+						</ul>
+					</p>
+						<p>$\Rightarrow $Cada aula terá um conjunto de exercícios propostos; </p>
+						<p>$\Rightarrow$ As listas poderam se entregues em até 2 semanas após a respectiva semana de aula no <b>e-disciplina</b>; </p>
+
+					
+				</div>
+
+			</section>
+
+
+			
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+			
+					<p>A média final é dada por:
+						<p class="lightup">$$MF=0.7L+0.3T$$</p>
+	
+						$$L=mean(L_1,L_2,L_3,\cdots,L_n)$$ </p>
+						$$0\le T \le 10$$ </p>
+		
+
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					Para aprovação, é necessário:	
+<ul>
+<li>Ao menos $70\%$ de frequência, $L\ge 4.0$ e $MF\ge 5.0$.</li>
+<li>Se $3.0\le L < 4.0$, aluno ficará de recuperação independente da MF. </li>
+<li>Se $L < 3.0$ mas $MF \ge 3.0$, aluno poderá fazer a recuperação. </li>
+<li>Se $MF<3.0$ ou menos de $70\%$ de frequência o aluno é reprovado. </li>
+</ul>
+
+				</div>
+
+			</section>
+
+
+					
+			<section>
+
+				<div class="slide-title">
+					<h2>Curso de Matlab</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_onramp.png" width="750"><br>
+				<a href="https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted" target="_blank">https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted</a>
+			</center>
+						</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Curso de Matlab</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/signal_processing_matlab.png" width="750"><br>
+				<a href="https://matlabacademy.mathworks.com/details/signal-processing-onramp/signalprocessing" target="_blank">https://matlabacademy.mathworks.com/details/signal-processing-onramp/signalprocessing</a>
+			</center>
+						</div>
+
+			</section>
+
+
+			
+
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Dúvidas?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<img src="../images/duvida.jpg" width="800">
+					
+					
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			
+
+
+
+		
+
+
+		
+
+
+
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						 <p class="" align="center" >O que é um sinal?</p>
+						<center class="fragment current-visible">
+							<p class="lightup"><b>Sinal</b> é tudo que carrega informação.</p>
+						<img src="../images/sinal.png" width="800">
+					</center>
+							
+
+			</div>
+
+		</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						<p class="" align="center">O que é um sistema?</p>
+					<center class="fragment current-visible" >
+						<p class="lightup"><b>Sistema</b> é tudo que modifica um sinal.</p>
+					<p>&nbsp;</p>
+
+					<p>	<img src="../images/sistema.png" width="650"></p>
+				</center> 
+
+				
+
+			</div>
+
+		</section>
+
+
+
+		
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						 <p class="" align="center">O que é Processamento de Sinais?</p>
+						<center class="fragment">
+							<p class="lightup">Técnicas de <b>Extração/Manipulação de Informação</b> em sinais!</p>
+						<img src="../images/sistema_PS.png" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						 <p class="" align="center">O que é Processamento Digital de Sinais?</p>
+						<center class="">
+							<p class="lightup">Técnicas de <b>Extração/Manipulação de Informação</b> de sinais!</p>
+						<img src="../images/sistema_PDS.png" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+		
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Medicina: EEG, ECG, etc</p>
+						<img src="../images/exemplo_eeg.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Indústria: análise de vibração de máquinas</p>
+						<img src="../images/exemplo_industria.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Segurança militar: sistemas de radares</p>
+						<img src="../images/exemplo_tracking.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Segurança militar: sistemas de radares</p>
+						<img src="../images/exemplo_tracking.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Carros autonômos: detecção de objetos, fusão de dados, etc</p>
+						<img src="../images/exemplo_car.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Engenharia de som: equalização, cancelamento de ruído, etc</p>
+						<img src="../images/exemplo_audio.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Aplicações</h2>
+					</div>
+					<div class="slide-content">
+			
+						<center class="">
+							<p class="lightup">Astronomia: sensoriamento remoto, processamento de imagens, etc</p>
+						<img src="../images/exemplo_astro.jpg" width="800">
+					</center>
+				
+				
+
+			</div>
+
+		</section>
+
+
+
+
+
+
+					<section>
+							<div class="slide-title">
+								<h2>Sinal digital</h2>
+							</div>
+							<div class="slide-content">
+								<center class="fragment current-visible">
+									<p>&nbsp;</p>
+								<img src="../images/sinal_continuo.png" width="700" alt="">
+
+							</center>
+
+							<center class="fragment current-visible">
+								<p>Amostragem</p>
+								<img src="../images/sinal_amostrado.png" width="700" alt="">
+								
+							</center>
+
+							<center class="fragment current-visible">
+									<p>Sinal em tempo discreto</p>
+								<img src="../images/sinal_discreto.png" width="700" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+									<p>Quantização</p>
+								<img src="../images/sinal_digital.png" width="700" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<p>&nbsp;</p>
+								<img src="../images/sinal_digital2.png" width="700" alt="">
+							</center>
+							</div>
+			
+						</section>
+
+
+
+						
+					<section>
+							<div class="slide-title">
+								<h2>Erro de Quantização</h2>
+							</div>
+							<div class="slide-content">
+						
+							<center class="">
+								<p class="lightup2">$$
+									Q = 2^N-1
+									$$</p>
+								<img src="../images/arduino.png" width="300" alt="">
+								$$
+								\Delta V = \frac{5 V}{2^{10}-1}=\frac{5}{1023}\approx 4.89mV
+
+								$$
+							</center>
+							</div>
+			
+						</section>
+
+
+							<section>
+							<div class="slide-title">
+								<h2>Erro de Quantização</h2>
+							</div>
+							<div class="slide-content">
+						
+							<center class="">
+								<p class="lightup2">$$
+									Q = 2^N-1
+									$$</p>
+								<img src="../images/ESP32.webp" width="250" alt="">
+								$$
+								\Delta V = \frac{3.3 V}{2^{12}-1}=\frac{3.3}{4095}\approx 0.8mV
+
+								$$
+							</center>
+							</div>
+			
+						</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Notação do Sinal em Tempo Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+						<center class="">
+							<p>Tempo contínuo:</p>
+							<p class="lightup2">
+							$$
+							g:\mathbb{R}\to\mathbb{R} \Rightarrow g(t),\quad t\in\mathbb{R}
+							$$
+							</p>
+							<p>Tempo discreto:</p>
+							<p class="lightup2">
+							$$
+							g:\mathbb{Z}\to\mathbb{R} \Rightarrow g[k],\quad k \in\mathbb{Z}
+							$$
+							</p>
+						</center>
+
+		</div>
+		
+	</section>
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Principal Diferença
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/integral_discreta_vs_continua.jpg" width="600">
+				</center>
+
+		</div>
+		
+	</section>
+<section>
+
+			<div class="slide-title">
+				<h2>Produto escalar
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+						<p>O produto escalar entre dois sinais $x[k]$ e $y[k]$ é definido como:</p>
+					<p class="lightup">
+						$$\langle x[k],y[k]\rangle = \sum_{k=-\infty}^{\infty} x[k]^*y[k]$$
+						</p>
+						<p>Se o produto escalar for zero, os sinais são ortogonais.</p>
+						$$x[k]\perp y[k] \Leftrightarrow \langle x[k],y[k]\rangle = 0$$
+
+		</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Norma
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+						A norma de um sinal $x[k]$ é definida como:
+						<p class="lightup">
+						$$\|x[k]\| = \sqrt{\langle x[k],x[k]\rangle} = \sqrt{\sum_{k=-\infty}^{\infty} |x[k]|^2}$$
+						</p>
+					
+		</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Energia
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+						A energia de um sinal $x[k]$ é definida como:
+						<p class="lightup">
+						$$E = \sum_{k=-\infty}^{\infty} |x[k]|^2$$
+						</p>
+						<p align="center">Um sinal é de energia se $\|x[k]\| < \infty$.</p>				
+
+		</div>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Potência
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+					A  potência de um sinal $x[k]$ é definida como:
+						<p class="lightup">
+						$$P_\text{med} = \lim_{N\to\infty} \frac{1}{2N+1}\sum_{k=-N}^{N} |x[k]|^2$$
+						</p>
+						<p  align="center">Um sinal é de potência finita se $\lim_{N\to\infty} \frac{1}{2N+1}\sum_{n=-N}^{N} |x[k]|^2 < \infty$</p>	
+
+		</div>
+		
+	</section>
+
+
+		
+					<section>
+
+			<div class="slide-title">
+				<h2>Sinal Par
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+					<center>
+						<img src="../images/cossenoide_discreta.png" width="700">
+							$$x[k] = x[-k]$$
+				</center>
+						
+
+		</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinal Ímpar
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+					<center>
+						<img src="../images/senoide_discreta.png" width="700">
+						$$x[k] = -x[-k]$$
+				</center>
+						
+
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinal Par vs Ímpar
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+				
+	<p>Todo sinal pode ser escrito como a soma de um sinal par e um ímpar:</p>
+	<p class="lightup">
+					$$x[k] = x_{p}[k] + x_{i}[k]$$
+					</p>
+					em que:
+					$$x_{p}[k] = \frac{x[k] + x[-k]}{2}$$
+					$$x_{i}[k] = \frac{x[k] - x[-k]}{2}$$		
+		</div>
+		
+	</section>
+
+
+	
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinais básicos:
+				</h2>
+			</div>
+			<div class="slide-content">
+							
+					<center>
+						<p>Impulso Unitário</p>
+						<p>$\delta[k] = \begin{cases} 1, & k=0 \\ 0, & k\neq 0 \end{cases}$</p>
+							<img src="../images/impulso_discreto.png" width="500">
+						</center>
+								
+		</div>
+		
+	</section>
+
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Sinais básicos:
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+								<p>Degrau unitário </p>
+					<p>$u[k] = \begin{cases} 1, & k\geq 0 \\ 0, & k< 0 \end{cases}$</p>
+						<img src="../images/degrau_unitario_discreto.png" width="500">
+					</center>
+	
+		</div>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinais básicos:
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+			<p>Sinal retangular ($N$ ímpar)</p>
+				$G_N[k] = \begin{cases} 1, & |k|\leq \frac{N-1}{2} \\ 0, & |k|> \frac{N-1}{2} \end{cases}$
+				<p>
+				<img src="../images/gate_discreto.png" width="500">
+				</p>
+				</center>
+									
+		</div>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinais básicos:
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+			<center>
+			<p>
+			Sinal exponencial: $$x[k] = a^ku[k]$$</p>
+			</p>
+			<img src="../images/exp_discreta.png" width="500">
+			</center>
+		</div>
+		
+	</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+		A Convolução entre dois sinais $x[k]$ e $h[k]$ é definida como:
+		<p class="lightup">
+			$$y[k] = x[k] * h[k] = \sum_{k=-\infty}^{\infty} x[n]h[k-n]$$
+			</p>
+			<p>ou seja, o sinal $y[k]$ é a soma ponderada de todas as versões deslocadas do sinal $h[k]$, no qual os pesos são dados pelos valores	 do sinal $x[k]$.</p>	
+			
+									
+		</div>
+		
+	</section>
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+		<img src="../images/convolucao_exemplo0.png" width="850">
+		</center>
+									
+		</div>
+		
+	</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+		<img src="../images/convolution_discrete_gate_gate.gif" width="1400">
+		</center>
+									
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+				</h2>
+			</div>
+			<div class="slide-content">
+						
+		A Convolução entre dois sinais $x[k]$ e $h[k]$ é definida como:
+		
+			<p align="center">Propriedades:</p>	
+			<center>
+			<ul>
+				<li>Comutatividade: <br>$x_1[k]*x_2[k]=x_2[k]*x_1[k]$</li>
+				<li>Distributividade: <br>$x_1[k]*(x_2[k]+x_3[k])=x_1[k]*x_2[k]+x_1[k]*x_3[k]$</li>
+				<li>Associatividade: <br>$x_1[k]*(x_2[k]*x_3[k])=(x_1[k]*x_2[k])*x_3[k]$</li>
+			</ul>
+			</center>
+									
+		</div>
+		
+	</section>
+
+
+		
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Convolução com o Impulso:
+				</h2>
+			</div>
+			<div class="slide-content">
+		<center>
+			<p>&nbsp;</p>
+		A convolução com o impulso unitário não altera o sinal:
+		
+		<p class="lightup">
+			$$x[k] * \delta[k] = x[k]$$
+			</p>
+			<p>ou seja, o impulso é o elemento neutro da convolução.</p>					
+			</center>				
+		</div>
+		
+	</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução com o Impulso:
+				</h2>
+			</div>
+			<div class="slide-content">
+		<center>
+					<p>&nbsp;</p>
+		A convolução com o impulso unitário não altera o sinal:
+
+		<p class="lightup">
+			$$x[k] * \delta[k-d] = x[k-d]$$
+			</p>
+			<p>ou seja, o impulso é o elemento neutro da convolução.</p>					
+			</center>				
+		</div>
+		
+	</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Convolução com o Impulso:
+				</h2>
+			</div>
+			<div class="slide-content">
+		<center>
+				<p>&nbsp;</p>
+		A convolução com o impulso unitário não altera o sinal:
+	
+		<p class="lightup">
+			$$x[k]=\sum_{n=-\infty}^\infty x[n]\delta[n-k] $$
+			</p>
+			<p>ou seja, o impulso também é uma base de representação em tempo discreto.</p>					
+			</center>				
+		</div>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução com o Impulso:
+				</h2>
+			</div>
+			<div class="slide-content">
+		<center>
+				<p>&nbsp;</p>
+		Para caso de sinais finitos ($x[k]\neq 0: k\in [0,N]$):
+	
+		<p class="lightup">
+			$$x[k]=\sum_{n=0}^{N} x[n]\delta[n-k] $$
+			</p>
+			<p>ou seja, o impulso também é uma base de representação em tempo discreto.</p>					
+			</center>				
+		</div>
+		
+	</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução:
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+		<img src="../images/convolucao_discreta_exemplo1.png" width="850">
+		</center>
+									
+		</div>
+			</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Convolução:
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+		<img src="../images/convolution_discrete_exemplo1.gif" width="1400">
+		</center>
+									
+		</div>
+			</section>
+
+
+
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Sinais periódicos:
+				</h2>
+			</div>
+			<div class="slide-content">
+						<p>&nbsp;</p>
+		Um sinal $x[k]$ é periódico se existir um inteiro positivo $N$ tal que:
+		<p class="lightup">
+			$$x[k] = x[k+N], \forall k$$
+			</p>
+			<p>O menor valor de $N$ que satisfaz a equação acima é chamado de <b>período fundamental</b> do sinal.</p>
+		
+		</div>
+		
+	</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Dente de Serra
+				</h2>
+			</div>
+			<div class="slide-content">
+						<center>
+		<img src="../images/dente_serra_discreto.png" width="1100">
+		</center>
+									
+		</div>
+			</section>
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+					<h3>
+					Amostragem e o Teorema de Nyquist
+					</h3>
+				
+								
+				</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+

@@ -6,17 +6,17 @@
 
 		<title>SEL0383 - Sinais e Sistemas</title>
 
-		<link rel="stylesheet" href="../../reveal.js/dist/reset.css">
-		<link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme">
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="../../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
-		<link rel="stylesheet" href="../../style.css">
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
 
 		<script
 		type="text/javascript"
-		src="../../reveal.js/dist/vis-graph3d.min.js"
+		src="../reveal.js/dist/vis-graph3d.min.js"
 	  ></script>
 	</head>
 	<!-- <body onload="drawVisualization();"> -->
@@ -26,8 +26,8 @@
 			<div class="slides">
 				
 				<section data-hide-slide-number="true" data-transition="slide">
-					<div class="logo"><img src="../../images/sel.png"/> </div>
-					<div class="logo2"><img src="../../images/usp.png"/> </div>
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/usp.png"/> </div>
 					<div class="title">
 					<h2>Aula 8: <br>Introdução aos Sinais em tempo discreto<br>SEL0383</h2>
 					</div>
@@ -81,13 +81,13 @@
 			</div>
 			<div class="slide-content">
 				<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
-							<img src="../../images/sinal_continuo.png" alt="">
+							<img src="../images/sinal_continuo.png" alt="">
 						<p>$g:\mathbb{R}\to\mathbb{R}$</p>
 						</center>
 					
 						
 						<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
-							<img src="../../images/sinal_discreto.png" alt="">
+							<img src="../images/sinal_discreto.png" alt="">
 							<p style="transform: translate(0,-2rem);">$g:\mathbb{Z}\to\mathbb{R}$</p>
 						</center>
 
@@ -135,7 +135,7 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<img src="../../images/conversao_amostragem_quantizacao.png" width="900">
+					<img src="../images/conversao_amostragem_quantizacao.png" width="900">
 				</center>
 
 		</div>
@@ -151,7 +151,7 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<img src="../../images/conversor_adc.png" width="800">
+					<img src="../images/conversor_adc.png" width="800">
 				</center>
 
 		</div>
@@ -167,7 +167,7 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<img src="../../images/integral_discreta_vs_continua.jpg" width="600">
+					<img src="../images/integral_discreta_vs_continua.jpg" width="600">
 				</center>
 
 		</div>
@@ -264,7 +264,7 @@
 			<div class="slide-content">
 						
 					<center>
-						<img src="../../images/cossenoide_discreta.png" width="700">
+						<img src="../images/cossenoide_discreta.png" width="700">
 							$$x[k] = x[-k]$$
 				</center>
 						
@@ -284,7 +284,7 @@
 			<div class="slide-content">
 						
 					<center>
-						<img src="../../images/senoide_discreta.png" width="700">
+						<img src="../images/senoide_discreta.png" width="700">
 						$$x[k] = -x[-k]$$
 				</center>
 						
@@ -330,7 +330,7 @@
 					<center>
 						<p>Impulso Unitário</p>
 						<p>$\delta[k] = \begin{cases} 1, & k=0 \\ 0, & k\neq 0 \end{cases}$</p>
-							<img src="../../images/impulso_discreto.png" width="500">
+							<img src="../images/impulso_discreto.png" width="500">
 						</center>
 								
 		</div>
@@ -350,7 +350,7 @@
 				<center>
 								<p>Degrau unitário </p>
 					<p>$u[k] = \begin{cases} 1, & k\geq 0 \\ 0, & k< 0 \end{cases}$</p>
-						<img src="../../images/degrau_unitario_discreto.png" width="500">
+						<img src="../images/degrau_unitario_discreto.png" width="500">
 					</center>
 	
 		</div>
@@ -369,7 +369,7 @@
 			<p>Sinal retangular</p>
 				$G_N[k] = \begin{cases} 1, & |k|\leq \frac{N}{2} \\ 0, & |k|> \frac{N}{2} \end{cases}$
 				<p>
-				<img src="../../images/gate_discreto.png" width="500">
+				<img src="../images/gate_discreto.png" width="500">
 				</p>
 				</center>
 									
@@ -391,7 +391,7 @@
 			<p>
 			Sinal exponencial: $$x[k] = a^k$$</p>
 			</p>
-			<img src="../../images/exp_discreta.png" width="500">
+			<img src="../images/exp_discreta.png" width="500">
 			</center>
 		</div>
 		
@@ -425,7 +425,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/convolucao_exemplo0.png" width="850">
+		<img src="../images/convolucao_exemplo0.png" width="850">
 		</center>
 									
 		</div>
@@ -441,7 +441,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/convolution_discrete_gate_gate.gif" width="1400">
+		<img src="../images/convolution_discrete_gate_gate.gif" width="1400">
 		</center>
 									
 		</div>
@@ -566,7 +566,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/convolucao_discreta_exemplo1.png" width="850">
+		<img src="../images/convolucao_discreta_exemplo1.png" width="850">
 		</center>
 									
 		</div>
@@ -581,7 +581,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/convolution_discrete_exemplo1.gif" width="1400">
+		<img src="../images/convolution_discrete_exemplo1.gif" width="1400">
 		</center>
 									
 		</div>
@@ -597,7 +597,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/convolucao_simples_discreta.png" width="1000">
+		<img src="../images/convolucao_simples_discreta.png" width="1000">
 		</center>
 									
 		</div>
@@ -634,7 +634,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/dente_serra_discreto.png" width="1100">
+		<img src="../images/dente_serra_discreto.png" width="1100">
 		</center>
 									
 		</div>
@@ -671,7 +671,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/serie_fourier_discreta_1.png" width="1100">
+		<img src="../images/serie_fourier_discreta_1.png" width="1100">
 		</center>
 									
 		</div>
@@ -686,7 +686,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/serie_fourier_discreta_2.png" width="1100">
+		<img src="../images/serie_fourier_discreta_2.png" width="1100">
 		</center>
 									
 		</div>
@@ -702,7 +702,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/serie_fourier_discreta_3.png" width="1100">
+		<img src="../images/serie_fourier_discreta_3.png" width="1100">
 		</center>
 									
 		</div>
@@ -718,7 +718,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/serie_fourier_discreta_4.png" width="1100">
+		<img src="../images/serie_fourier_discreta_4.png" width="1100">
 		</center>
 									
 		</div>
@@ -733,7 +733,7 @@
 			</div>
 			<div class="slide-content">
 						<center>
-		<img src="../../images/serie_fourier_discreta_5.png" width="1100">
+		<img src="../images/serie_fourier_discreta_5.png" width="1100">
 		</center>
 									
 		</div>
@@ -802,12 +802,12 @@
 
 		
 
-		<script src="../../reveal.js/dist/reveal.js"></script>
-		<script src="../../reveal.js/plugin/notes/notes.js"></script>
-		<script src="../../reveal.js/plugin/markdown/markdown.js"></script>
-		<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
-		<script src="../../reveal.js/plugin/math/math.js"></script>
-		<script src="../../init.js"></script>
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
 		
 	</body>
 </html>
