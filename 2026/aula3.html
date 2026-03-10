@@ -549,11 +549,11 @@
 			</div>
 			<div class="slide-content">
 					 <p>&nbsp;</p>
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 
 		<center class="lightup">
 		$$
-			G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}=\sum_{m=0}^{N} g[m]e^{j\omega m},\quad \omega\in\mathbb{R}?
+			G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}=\sum_{m=0}^{N-1} g[m]e^{j\omega m},\quad \omega\in\mathbb{R}?
 		$$
 
 		</center>
@@ -576,12 +576,12 @@
 			</div>
 			<div class="slide-content">
 					 <p>&nbsp;</p>
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 
 		<center class="lightup">
 		Como o sinal é finito, pode-se tomar
 		$$
-			\omega=n\frac{2\pi}{N},\quad n=0,1,\ldots,N
+			\omega=n\frac{2\pi}{N}=n\omega_0,\quad n=0,1,\ldots,N-1
 		$$
 
 		</center>
@@ -601,11 +601,11 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 		<center class="lightup">
 		$$
-			\hat{g}_n=G_d(e^{jn\frac{2\pi}{N}})=\sum_{m=0}^{N} g[m]e^{jn\frac{2\pi}{N} m},\quad n=0,1,\ldots,N
+			\hat{g}_n=G_d(e^{jn\frac{2\pi}{N}})=\sum_{m=0}^{N-1} g[m]e^{jn\frac{2\pi}{N} m},\quad n=0,1,\ldots,N-1
 		$$
 
 		</center>
@@ -623,7 +623,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 
 		<center class="lightup">
 		$$
@@ -632,13 +632,13 @@
 			g_1\\
 			g_2\\
 			\vdots\\
-			g_N
+			g_{N-1}
 			\end{bmatrix}}_{\text{tempo}} \Longleftrightarrow \underbrace{\begin{bmatrix}
 			\hat{g}_0 \\
 			\hat{g}_1\\
 			\hat{g}_2\\
 			\vdots\\
-			\hat{g}_N
+			\hat{g}_{N-1}
 			\end{bmatrix}}_{\text{frequência}}
 		$$
 		</center>
@@ -657,11 +657,11 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 		<center class="lightup">
 		$$
-			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N-1]e^0
 		$$
 
 		</center>
@@ -678,12 +678,12 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 		<center class="lightup">
 		$$
-			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0\\
-			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N]e^{j\frac{2\pi}{N}N}\\
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N-1]e^0\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)}\\
 		$$
 
 		</center>
@@ -701,14 +701,14 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 		<center class="lightup">
 		$$
-			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0\\
-			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N]e^{j\frac{2\pi}{N}N}\\
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N-1]e^0\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)}\\
 			\vdots\\
-			\hat{g}_N=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}N}+\ldots+g[N]e^{j\frac{2\pi}{N}N^2}
+			\hat{g}_N=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}(N-1)}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)^2}
 		$$
 
 		</center>
@@ -720,14 +720,14 @@
 		</section>
 
 
-
+<!-- 
 		<section>
 
 			<div class="slide-title">
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 
 		<center class="lightup">
 		$$
@@ -736,20 +736,20 @@
 			\hat{g}_1\\
 			\hat{g}_2\\
 			\vdots\\
-			\hat{g}_N
+			\hat{g}_{N-1}
 			\end{bmatrix}=\begin{bmatrix}
 			1 & 1 & 1 & \ldots & 1\\
-			1 & e^{j\frac{2\pi}{N}} & e^{j\frac{2\pi}{N}2} & \ldots & e^{j\frac{2\pi}{N}N}\\
-			1 & e^{j\frac{2\pi}{N}2} & e^{j\frac{2\pi		}{N}4} & \ldots & e^{j\frac{2\pi}{N}2N}\\
+			1 & e^{j\frac{2\pi}{N}} & e^{j\frac{2\pi}{N}2} & \ldots & e^{j\frac{2\pi}{N}(N-1)}\\
+			1 & e^{j\frac{2\pi}{N}2} & e^{j\frac{2\pi}{N}4} & \ldots & e^{j\frac{2\pi}{N}2(N-1)}\\
 			\vdots & \vdots & \vdots & \ddots & \vdots\\
-			1 & e^{j\frac{2\pi}{N}N} & e^{j\frac{2\pi}{N}2N} & \ldots & e^{j\frac{2\pi}{N}N^2}
+			1 & e^{j\frac{2\pi}{N}(N-1)} & e^{j\frac{2\pi}{N}2(N-1)} & \ldots & e^{j\frac{2\pi}{N}(N-1)^2}
 			\end{bmatrix}						
 			\begin{bmatrix}
 			g_0 \\
 			g_1\\
 			g_2\\	
 			\vdots\\
-			g_N
+			g_{N-1}
 			\end{bmatrix}	
 		$$
 
@@ -759,7 +759,7 @@
 		
 				   </div>
 
-		</section>
+		</section> -->
 
 
 
@@ -769,7 +769,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 
 		<center class="lightup">
 		$$
@@ -778,23 +778,26 @@
 			\hat{g}_1\\
 			\hat{g}_2\\
 			\vdots\\
-			\hat{g}_N
+			\hat{g}_{N-1}
 			\end{bmatrix}=\begin{bmatrix}
 			1 & 1 & 1 & \ldots & 1\\
-			1 & \phi & \phi^2 & \ldots & \phi^N\\
-			1 & \phi^2 & \phi^4 & \ldots & \phi^{2N}\\
+			1 & \phi & \phi^2 & \ldots & \phi^{N-1}\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2(N-1)}\\
 			\vdots & \vdots & \vdots & \ddots & \vdots\\
-			1 & \phi^N & \phi^{2N} & \ldots & \phi^{N^2}
+			1 & \phi^{N-1} & \phi^{2(N-1)} & \ldots & \phi^{(N-1)^2}
 			\end{bmatrix}						
 			\begin{bmatrix}
 			g_0 \\
 			g_1\\
 			g_2\\	
 			\vdots\\
-			g_N
+			g_{N-1}
 			\end{bmatrix}	
 		$$
 
+		</center>
+		<center>
+		$\phi=e^{\frac{j2\pi}{N}}$
 		</center>
 
 
@@ -811,7 +814,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 
 		<center class="lightup">
 		$$
@@ -820,20 +823,20 @@
 			\hat{g}_1\\
 			\hat{g}_2\\
 			\vdots\\
-			\hat{g}_N
+			\hat{g}_{N-1}
 			\end{bmatrix}=\underbrace{\begin{bmatrix}
 			1 & 1 & 1 & \ldots & 1\\
-			1 & \phi & \phi^2 & \ldots & \phi^N\\
-			1 & \phi^2 & \phi^4 & \ldots & \phi^{2N}\\
+			1 & \phi & \phi^2 & \ldots & \phi^{N-1}\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2(N-1)}\\
 			\vdots & \vdots & \vdots & \ddots & \vdots\\
-			1 & \phi^N & \phi^{2N} & \ldots & \phi^{N^2}
+			1 & \phi^{N-1} & \phi^{2(N-1)} & \ldots & \phi^{(N-1)^2}
 			\end{bmatrix}}_{\text{Matriz de Fourier}}						
 			\begin{bmatrix}
 			g_0 \\
 			g_1\\
 			g_2\\	
 			\vdots\\
-			g_N
+			g_{N-1}
 			\end{bmatrix}	
 		$$
 
@@ -853,7 +856,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 	<p align="center">		Transformada de Fourier é apenas uma mudança de base!</p>
 		<center class="lightup">
@@ -877,7 +880,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 <p>&nbsp;</p>
 	<p align="center">		Transformada de Fourier Inversa é apenas uma mudança de base!</p>
 		<center class="lightup">
@@ -902,7 +905,7 @@
 				<h2>Transformada de Fourier Discreta (DFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 
 		<center class="lightup">
 		$$
@@ -943,7 +946,7 @@ $N=659568$, logo o custo computacional é da ordem de $4.3\times 10^{11}$ opera�
 				<h2>Transformada de Fourier Rápida (FFT)</h2>
 			</div>
 			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
 	 
 		<center class="lightup">
 		$$
