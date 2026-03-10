@@ -1,0 +1,1046 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+
+		<script
+		type="text/javascript"
+		src="../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 3: <br>Transformada de Fourier em Tempo Discreto<br>SEL0343</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;"> 10 de março de 2026</p>
+				</div>
+
+				</section>
+
+
+
+				
+					
+			
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Objetivos
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Transformada de Fourier em Tempo Discreto (DTFT)</li>
+			<li>Propriedades</li>
+			<li>Transformada de Fourier Discreta (DFT)</li>
+			<li>Exemplos</li>
+		
+		</ul>
+	
+</div>
+
+</section>
+
+
+<section>
+
+			<div class="slide-title">
+				<h2>Contínuo vs Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../images/sinal_continuo.png" alt="">
+						<p>$g:\mathbb{R}\to\mathbb{R}$</p>
+						</center>
+					
+						
+						<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../images/sinal_discreto.png" alt="">
+							<p style="transform: translate(0,-2rem);">$g:\mathbb{Z}\to\mathbb{R}$</p>
+						</center>
+
+		</div>
+		
+	</section>
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Análise Espectral
+				</h2>
+			</div>
+			<div class="slide-content">
+			
+				<center>
+							<img src="../images/espectro_fourier.gif" width="800">
+				</center>
+					
+
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Análise Espectral
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+							<img src="../images/espectro_fourier_discreto.gif" width="800">
+				</center>
+					
+
+		</div>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Mudança de Base de Representação
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+							<img src="../images/transformada_fourier_par.png" width="800">
+				</center>
+					
+
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Contínua
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+						Considere um sinal $g(t)$ com $t\in \mathbb{R}$. A Transformada de Fourier Contínua é dada por:
+					<p class="lightup">
+				$$
+					G_c(\omega)=\langle g(t),e^{j\omega t}\rangle ,\quad \forall \omega \in \mathbb{R}
+				$$
+				</p>
+				Então,
+				$$
+					g(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty} G_c(\omega)e^{j\omega t} d\omega
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+			
+			
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Contínua
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+						Considere um sinal $g(t)$ com $t\in \mathbb{R}$. A Transformada de Fourier Contínua é dada por:
+					<p class="lightup">
+				$$
+					G_c(\omega)=\int_{-\infty}^{\infty} g(t)e^{-j\omega t} dt,\quad \forall \omega \in \mathbb{R}
+				$$
+				</p>
+				Então,
+				$$
+					g(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty} G_c(\omega)e^{j\omega t} d\omega
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier em Tempo Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere um sinal $g[k]$ com $k\in \mathbb{Z}$. A Transformada de Fourier em Tempo Discreto é dada por:
+					<p class="lightup">
+				$$
+					G_d(e^{j\omega})=\langle g[k],e^{j\omega k}\rangle ,\quad \forall \omega \in \mathbb{R}
+				$$
+				</p>
+				Então,
+				$$
+					g[k]=\frac{1}{2\pi}\int_{-\pi}^{\pi} G_d(e^{j\omega})e^{j\omega k} d\omega
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier em Tempo Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere um sinal $g[k]$ com $k\in \mathbb{Z}$. A Transformada de Fourier em Tempo Discreto é dada por:
+					<p class="lightup2">
+				$$
+					G_d(e^{j\omega})=\sum_{k=-\infty}^{\infty} g[k]e^{-j\omega k}
+				$$
+				</p>
+				Então,
+				$$
+					g[k]=\frac{1}{2\pi}\int_{-\pi}^{\pi} G_d(e^{j\omega})e^{j\omega k} d\omega
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier em Tempo Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere um sinal $g[k]$ com $k\in \mathbb{Z}$. A Transformada de Fourier em Tempo Discreto é dada por:
+					<p class="lightup">
+				$$
+					G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}
+				$$
+				</p>
+				Então,
+				$$
+					g[k]=\mathcal{F}_d^{-1}\{G_d(e^{j\omega})\}
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier em Tempo Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere um sinal $g[k]$ com $k\in \mathbb{Z}$. A Transformada de Fourier em Tempo Discreto é dada por:
+					<p class="lightup">
+				$$
+					G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}
+				$$
+				</p>
+				Par transformada de Fourier em Tempo Discreto:
+				$$
+					g[k]\Leftrightarrow G_d(e^{j\omega})
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplo
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					
+					<p class="lightup">
+				$$
+					\mathcal{F}_d\{a^ku[k]\}=?
+				$$
+				com $|a|<1$.
+				</p>
+				
+				</center>
+
+		</div>
+		
+	</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade da Linearidade </h2>
+			</div>
+			<div class="slide-content">
+			Considere dois sinais $g[k]$ e $h[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega}), \quad h[k] \Longleftrightarrow H_d(e^{j\omega})
+			$$
+			então
+			$$
+			\alpha g[k]+\beta h[k] \Longleftrightarrow \alpha G_d(e^{j\omega})+\beta H_d(e^{j\omega})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Deslocamento no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega})
+			$$
+			então
+			$$
+			g[k-n_0] \Longleftrightarrow e^{-j\omega n_0}G_d(e^{j\omega})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Deslocamento na frequência </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega})
+			$$
+			então
+			$$
+			e^{j\omega_0 k}g[k] \Longleftrightarrow G_d(e^{j(\omega-\omega_0)})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Diferença no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega})
+			$$
+			então
+			$$
+			g[k]-g[k-1] \Longleftrightarrow (1-e^{-j\omega})G_d(e^{j\omega})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: Somatório no tempo </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega})
+			$$
+			então
+			$$
+			\sum_{n=-\infty}^k g[n] \Leftrightarrow \frac{1}{1-e^{-j\omega}}G_d(e^{j\omega})+\pi G_d(1)\sum_{m=-\infty}^{\infty}\delta(\omega-2\pi m)
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: diferenciação na frequência</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega})
+			$$
+			então
+			$$
+			kg[k] \Leftrightarrow j\frac{dG_d(e^{j\omega})}{d\omega}
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Propriedade: convolução no tempo</h2>
+			</div>
+			<div class="slide-content">
+			Considere os sinais $g[k]$ e $h[k]$.
+	 
+		<center class="lightup">
+			Se 
+			$$ 
+			g[k] \Longleftrightarrow G_d(e^{j\omega}),\quad 	h[k] \Longleftrightarrow H_d(e^{j\omega})
+			$$
+			então
+			$$
+			g[k]\ast h[k] \Leftrightarrow G_d(e^{j\omega})H_d(e^{j\omega})
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Teorema de Parseval </h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$.
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\sum_{k=-\infty}^{\infty} |g[k]|^2=\frac{1}{2\pi}\int_{-\pi}^{\pi} |G_d(e^{j\omega})|^2 d\omega
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier de sinais finitos</h2>
+			</div>
+			<div class="slide-content">
+					 <p>&nbsp;</p>
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+
+		<center class="lightup">
+		$$
+			G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}=\sum_{m=0}^{N} g[m]e^{j\omega m},\quad \omega\in\mathbb{R}?
+		$$
+
+		</center>
+
+		
+		
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier de sinais finitos</h2>
+			</div>
+			<div class="slide-content">
+					 <p>&nbsp;</p>
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+
+		<center class="lightup">
+		Como o sinal é finito, pode-se tomar
+		$$
+			\omega=n\frac{2\pi}{N},\quad n=0,1,\ldots,N
+		$$
+
+		</center>
+
+	
+
+
+		
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\hat{g}_n=G_d(e^{jn\frac{2\pi}{N}})=\sum_{m=0}^{N} g[m]e^{jn\frac{2\pi}{N} m},\quad n=0,1,\ldots,N
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 
+		<center class="lightup">
+		$$
+			\underbrace{\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\
+			\vdots\\
+			g_N
+			\end{bmatrix}}_{\text{tempo}} \Longleftrightarrow \underbrace{\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_N
+			\end{bmatrix}}_{\text{frequência}}
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+							<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N]e^{j\frac{2\pi}{N}N}\\
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+								<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N]e^0\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N]e^{j\frac{2\pi}{N}N}\\
+			\vdots\\
+			\hat{g}_N=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}N}+\ldots+g[N]e^{j\frac{2\pi}{N}N^2}
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_N
+			\end{bmatrix}=\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & e^{j\frac{2\pi}{N}} & e^{j\frac{2\pi}{N}2} & \ldots & e^{j\frac{2\pi}{N}N}\\
+			1 & e^{j\frac{2\pi}{N}2} & e^{j\frac{2\pi		}{N}4} & \ldots & e^{j\frac{2\pi}{N}2N}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & e^{j\frac{2\pi}{N}N} & e^{j\frac{2\pi}{N}2N} & \ldots & e^{j\frac{2\pi}{N}N^2}
+			\end{bmatrix}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_N
+			\end{bmatrix}	
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_N
+			\end{bmatrix}=\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & \phi & \phi^2 & \ldots & \phi^N\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2N}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & \phi^N & \phi^{2N} & \ldots & \phi^{N^2}
+			\end{bmatrix}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_N
+			\end{bmatrix}	
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_N
+			\end{bmatrix}=\underbrace{\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & \phi & \phi^2 & \ldots & \phi^N\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2N}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & \phi^N & \phi^{2N} & \ldots & \phi^{N^2}
+			\end{bmatrix}}_{\text{Matriz de Fourier}}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_N
+			\end{bmatrix}	
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+	<p align="center">		Transformada de Fourier é apenas uma mudança de base!</p>
+		<center class="lightup">
+		$$
+		\hat{g}=F g
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 <p>&nbsp;</p>
+	<p align="center">		Transformada de Fourier Inversa é apenas uma mudança de base!</p>
+		<center class="lightup">
+		$$
+		g=F^{-1} \hat{g}
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		
+		
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 
+		<center class="lightup">
+		$$
+		\hat{g}=F g
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N^2)$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Exemplo de sinal real
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/15s_beethoven.png" width="850">
+				</center>
+$N=659568$, logo o custo computacional é da ordem de $4.3\times 10^{11}$ operações.
+		</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N$.
+	 
+		<center class="lightup">
+		$$
+		\hat{g}=\text{fft}(g)
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N\log(N))$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Exemplo de sinal real (FFT)
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/15s_beethoven.png" width="850">
+				</center>
+$N=659568$, logo o custo computacional é da ordem de $1.3\times 10^{7}$ operações.
+		</div>
+		
+	</section>
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								FFT e Aplicações da Transformada de Fourier Discreta
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+		
+	</body>
+</html>
+
