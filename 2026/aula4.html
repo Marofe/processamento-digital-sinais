@@ -1192,7 +1192,7 @@ $$
 			<center class="">
 		 <pre><code class="language-matlab">
 		X=fftshift(fft(x));
-		f=Fs/N*(N/2:N/2-1);
+		f=Fs/N*(-N/2:N/2-1);
 		stem(f,abs(X)) // bilateral
       </code></pre>
 		
@@ -1220,7 +1220,7 @@ $$
 				
 		 <pre><code class="language-matlab">
 		X=fftshift(fft(x));
-		f=Fs/N*(N/2:N/2-1);
+		f=Fs/N*(-N/2:N/2-1);
 		stem(f,abs(X)) // bilateral
       </code></pre>
 		
