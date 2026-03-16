@@ -1,0 +1,1680 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+
+		<script
+		type="text/javascript"
+		src="../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 4: <br>Transformada de Fourier Rápida (FFT)<br>SEL0343</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;"> 17 de março de 2026</p>
+				</div>
+
+				</section>
+
+
+
+				
+					
+			
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Objetivos
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Transformada de Fourier Discreta (DFT)</li>
+			<li>Transformada de Fourier Discreta Inversa (IDFT)</li>
+			<li>Transformada de Fourier Ráida (FFT)</li>
+			<li>Exemplos</li>
+		</ul>
+	
+</div>
+
+</section>
+
+
+<section>
+
+			<div class="slide-title">
+				<h2>Contínuo vs Discreto
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../images/sinal_continuo.png" alt="">
+						<p>$g:\mathbb{R}\to\mathbb{R}$</p>
+						</center>
+					
+						
+						<center class="fragment current-visible"><p align="center">Tempo Contínuo vs Tempo Discreto</p>
+							<img src="../images/sinal_discreto.png" alt="">
+							<p style="transform: translate(0,-2rem);">$g:\mathbb{Z}\to\mathbb{R}$</p>
+						</center>
+
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Análise Espectral
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+							<img src="../images/espectro_fourier_discreto.gif" width="800">
+				</center>
+					
+
+		</div>
+		
+	</section>
+
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier em Tempo Discreto  (DTFT)
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				
+					<p class="lightup2">
+				$$
+					G_d(e^{j\omega})=\sum_{k=-\infty}^{\infty} g[k]e^{-j\omega k},\quad \omega \in \mathbb{R}
+				$$
+				</p>
+				Então, a IDTFT é dada por
+				$$
+					g[k]=\frac{1}{2\pi}\int_{-\pi}^{\pi} G_d(e^{j\omega})e^{j\omega k} d\omega
+				$$
+				</center>
+
+		</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 		<center class="lightup">
+		$$
+			\hat{g}_n=G_d[n]=\sum_{k=0}^{N-1} g[k]e^{-j\frac{2\pi}{N}nk}
+		$$
+			com  $n=0,1,\ldots,N-1$
+		</center>
+		$$
+			\omega = \frac{2\pi }{N}n
+		$$
+
+
+		
+				   </div>
+
+		</section>
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup2">
+		$$
+			g[k]=\frac{1}{2\pi}\int_{-\pi}^\pi G_d[n]e^{j\frac{2\pi}{N} nk} d\omega 
+		$$
+
+		</center>
+		em que 
+$$
+\omega \in  \mathbb{R}
+$$
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup2">
+		$$
+			g[k]=\frac{1}{2\pi}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk} \Delta \omega 
+		$$
+
+		</center>
+em que 
+$$
+\Delta \omega = \frac{2\pi}{N}			
+$$
+
+		
+				   </div>
+
+		</section>
+
+
+
+	
+
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup2">
+		$$
+			g[k]=\frac{1}{2\pi}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk} \frac{2\pi}{N}
+		$$
+
+		</center>
+em que 
+$$
+\Delta \omega = \frac{2\pi}{N}			
+$$
+
+		
+				   </div>
+
+		</section>
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup">
+		$$
+			g[k]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk}
+		$$
+
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado $g[k]$ um sinal finito com $k=0,\ldots, N-1$, note que
+	 		<center class="lightup">
+		$$
+			g[k+N]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} n(k+N)}
+		$$
+
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado $g[k]$ um sinal finito com $k=0,\ldots, N-1$, note que
+	 		<center class="lightup">
+		$$
+			g[k+N]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk}e^{j\frac{2\pi}{N} nN}
+		$$
+
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado $g[k]$ um sinal finito com $k=0,\ldots, N-1$, note que
+	 		<center class="lightup">
+		$$
+			g[k+N]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk}e^{j2\pi n}
+		$$
+
+		</center>
+		Portanto,
+		$$
+			g[k+N]=g[k]
+		$$
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta</h2>
+			</div>
+			<div class="slide-content">
+
+				<p>&nbsp;</p>
+	 		<center class="lightup">
+		Discretização no tempo causa periodicidade na frequência (DTFT)!
+		</center>
+		<center>
+		<img src="../images/DTFT_sinal_discreto_periodicidade_frequencia.png" width="1100">
+</center>
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta</h2>
+			</div>
+			<div class="slide-content">
+					<p>&nbsp;</p>
+		<center class="lightup">
+		Discretização na frequência causa periodicidade no tempo (IDFT)
+		</center>
+	<center>
+		<img src="../images/DFT_sinal_discreto_periodicidade_tempo.png" width="1100">
+</center>
+		
+		
+				   </div>
+
+		</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+			\underbrace{\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\
+			\vdots\\
+			g_{N-1}
+			\end{bmatrix}}_{\text{tempo}} \Longleftrightarrow \underbrace{\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}}_{\text{frequência}}
+		$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}=\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & \phi & \phi^2 & \ldots & \phi^{N-1}\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2(N-1)}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & \phi^{N-1} & \phi^{2(N-1)} & \ldots & \phi^{(N-1)^2}
+			\end{bmatrix}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_{N-1}
+			\end{bmatrix}	
+		$$
+
+		</center>
+		<center>
+		$\phi=e^{-j\frac{2\pi}{N}}$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}=\underbrace{\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & \phi & \phi^2 & \ldots & \phi^{N-1}\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2(N-1)}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & \phi^{N-1} & \phi^{2(N-1)} & \ldots & \phi^{(N-1)^2}
+			\end{bmatrix}}_{\text{Matriz de Fourier}}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_{N-1}
+			\end{bmatrix}	
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}=\begin{bmatrix}
+			F_0^\trp\\
+			F_1^\trp\\
+			F_2^\trp\\
+			\vdots \\
+			F_{N-1}^\trp
+			\end{bmatrix}					
+			g
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}=\begin{bmatrix}
+			\langle F_0,g\rangle \\
+			\langle F_1,g\rangle\\
+			\langle F_2,g\rangle\\
+			\vdots \\
+			\langle F_{N-1},g\rangle
+			\end{bmatrix}					
+			
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+	<img src="../images/bases_DFT.png" width="900">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\hat{g}=F g
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N^2)$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida (FFT)
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/james-cooley-fft.jpeg" width="600">
+				</center>
+				<p>Em 1965, Cooley (IBM) and Turkey (Princeton) desenvolveram a FFT.</p>
+		</div>
+		
+	</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida (FFT)
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/gauss_fft.png" width="350">
+					<p>Em 1805, Gauss já tinha utilizado a mesma lógica para analisar dados de asteróides!</p>
+				</center>
+				
+
+				
+		</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+		$$
+		\begin{bmatrix}
+			\hat{g}_0 \\
+			\hat{g}_1\\
+			\hat{g}_2\\
+			\vdots\\
+			\hat{g}_{N-1}
+			\end{bmatrix}=\underbrace{\begin{bmatrix}
+			1 & 1 & 1 & \ldots & 1\\
+			1 & \phi & \phi^2 & \ldots & \phi^{N-1}\\
+			1 & \phi^2 & \phi^4 & \ldots & \phi^{2(N-1)}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots\\
+			1 & \phi^{N-1} & \phi^{2(N-1)} & \ldots & \phi^{(N-1)^2}
+			\end{bmatrix}}_{\text{Matriz de Fourier}}						
+			\begin{bmatrix}
+			g_0 \\
+			g_1\\
+			g_2\\	
+			\vdots\\
+			g_{N-1}
+			\end{bmatrix}	
+		$$
+
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		O princípio da FFT é decompor a DFT de uma sequência de $N$ amostras em transformadas DFT de sequências menores e depois combinar os resultados.
+		(Dividir-para-conquistar)
+
+		</center>
+			 <p>&nbsp;</p>
+<center class="">
+		$$
+		\hat{g}_{N\times 1}=F_{N\times N} g_{N\times 1}
+		$$
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+		N=2^p
+		$$
+			Obs: se não for, basta completar com zeros!
+		</center>
+
+		<center>
+	
+Note que existem simetrias para $\phi=e^{-j\frac{2\pi}{N}}$:
+<p class="lightup">
+$$
+				\phi^{kn}=\phi^{(k+N)n}=\phi^{k(n+N)}\\
+				\phi^{k(N-n)}=\phi^{-kn}=(\phi^{kn})^*
+$$
+</p>
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=\sum_{k=0}^{N-1} g[k]\phi_N^{nk}
+		$$
+		</center>
+		em que
+		$$
+			\phi_N=e^{-j\frac{2\pi}{N}}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=\sum_{k\text{ é par}} g[k]\phi_N^{nk}+\sum_{k\text{ é ímpar}} g[k]\phi_N^{nk}
+		$$
+		</center>
+		em que
+		$$
+			\phi_N=e^{-j\frac{2\pi}{N}}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=\sum_{r=0}^{\frac{N}{2}-1} g[2r]\phi_N^{n2r}+\sum_{r=0}^{\frac{N}{2}-1} g[2r+1]\phi_N^{n(2r+1)}
+		$$
+		</center>
+		em que
+		$$
+			\phi_N=e^{-j\frac{2\pi}{N}}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+
+		
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=\sum_{r=0}^{\frac{N}{2}-1} g[2r](\phi_N^2)^{nr}+\sum_{r=0}^{\frac{N}{2}-1} g[2r+1](\phi_N^2)^{nr}\phi_N^{n}
+		$$
+		</center>
+		Note que
+		$$
+			(\phi_N)^{2}=e^{-j2\frac{2\pi}{N}}=e^{-j\frac{2\pi}{N/2}}=\phi_{N/2}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=\underbrace{\sum_{r=0}^{\frac{N}{2}-1} g[2r](\phi_{N/2})^{nr}}_{\text{DFT par}}+\phi_N^{n}\underbrace{\sum_{r=0}^{\frac{N}{2}-1} g[2r+1](\phi_{N/2})^{nr}}_{\text{DFT ímpar}}
+		$$
+		</center>
+		Note que
+		$$
+			(\phi_N)^{2}=e^{-j2\frac{2\pi}{N}}=e^{-j\frac{2\pi}{N/2}}=\phi_{N/2}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+		
+		
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=P[n]+\phi_N^{n}I[n],\quad \forall n=0,1,\ldots,N-1
+		$$
+		</center>
+	em que
+		$$
+			P[n]=\sum_{r=0}^{\frac{N}{2}-1} g[2r]\phi_{N/2}^{nr}\\
+			I[n]=\sum_{r=0}^{\frac{N}{2}-1} g[2r+1]\phi_{N/2}^{nr}
+		$$
+
+
+	
+				   </div>
+
+		</section>
+
+
+			
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=P[n]+\phi_N^{n}I[n],\quad \forall n=0,1,\ldots,N-1
+		$$
+		</center>
+<p>&nbsp;</p>
+		<center>
+
+				Custo computacional = $N^2/2$
+
+		</center>
+
+
+	
+				   </div>
+
+		</section>
+
+
+		
+					<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=P[n]+\phi_N^{n}I[n],\quad \forall n=0,1,\ldots,N-1
+		$$
+		</center>
+ faz novamente a decomposição em par e ímpar:
+ 		$$
+			P[n]=\sum_{l=0}^{\frac{N}{4}-1} p[2l]\phi_{N/4}^{nl}+\phi_{N/2}^{n}\sum_{l=0}^{\frac{N}{4}-1} p[2l+1]\phi_{N/4}^{nl}\\
+			I[n]=\sum_{r=0}^{\frac{N}{4}-1} i[2l]\phi_{N/4}^{nl}+\phi_{N/2}^{n}\sum_{l=0}^{\frac{N}{4}-1} i[2l+1]\phi_{N/4}^{nl}
+		$$
+
+	
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 Considere que o número de amostra é sempre uma potência de 2
+		<center class="lightup2">
+		$$
+			\hat{g}_n=P[n]+\phi_N^{n}I[n],\quad \forall n=0,1,\ldots,N-1
+		$$
+		</center>
+ faz novamente a decomposição em par e ímpar:
+		$$
+			P[n]=P_{2l}[n]+\phi_{N/2}^{n}P_{2l+1}[n]\\
+			I[n]=I_{2l}[n]+\phi_{N/2}^{n}I_{2l+1}[n]
+		$$
+<center>
+
+				Custo computacional = $N^2/4$
+
+		</center>
+	
+				   </div>
+
+		</section>
+
+
+
+
+		
+						<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+		<center>
+				<img src="../images/fft_sinal_discreto.png"  width="800">
+				$$
+					N=8
+				$$
+	</center>
+				   </div>
+
+		</section>
+
+
+
+			
+						<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+				<img src="../images/fft_sinal_discreto_decomposition.png"  width="1000">
+		
+	</center>
+				   </div>
+
+		</section>
+		
+
+
+	
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\hat{g}=\text{fft}(g)
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N\log(N))$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida Inversa (IFFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $\hat{g}_n$ com $n=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		g=\text{ifft}(\hat{g})
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N\log(N))$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Exemplo de sinal real (DFT)
+						</h2>
+			</div>
+			<p>&nbsp;</p>
+			<div class="slide-content">
+			
+Considere uma música amostrada com $f_s=44.1kHz$. Se cada operação computacional levar $1ns$ para ser executado, então a DFT de 120s (2min) de música precisa de um total de 
+<p class="lightup">
+$$
+				\Delta t = (44100\times 120)^2\times 10^{-9}  \text{s}\\
+				\approx 8h
+
+$$
+</p>
+		</div>
+		
+	</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Exemplo de sinal real (FFT)
+						</h2>
+			</div>
+			<p>&nbsp;</p>
+			<div class="slide-content">
+			
+Considere uma música amostrada com $f_s=44.1kHz$. Se cada operação computacional levar $1ns$ para ser executado, então a DFT de 120s (2min) de música precisa de um total de 
+<p class="lightup">
+$$
+				\Delta t = (44100\times 120)\log_2(44100\times 120) \times 10^{-9}  \text{s}\\
+				 \approx 0.12s
+
+$$
+</p>
+		</div>
+		
+	</section>
+
+
+
+	
+				<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+			
+		 <pre><code class="language-matlab">
+		X=fft(x);
+		f=Fs/N*(0:N-1);
+		stem(f,abs(X)) //não-centralizado
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab.png" width="600">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+		 <pre><code class="language-matlab">
+		X=fft(x);
+		f=Fs/N*(0:N-1);
+		stem(f,abs(X)) //não-centralizado
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab_pos_neg.png" width="600">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+		 <pre><code class="language-matlab">
+		X=fftshift(fft(x));
+		f=Fs/N*(N/2:N/2-1);
+		stem(f,abs(X)) // bilateral
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab_shift.png" width="600">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+				
+		 <pre><code class="language-matlab">
+		X=fftshift(fft(x));
+		f=Fs/N*(N/2:N/2-1);
+		stem(f,abs(X)) // bilateral
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab_shift_pos_neg.png" width="600">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+		
+		 <pre><code class="language-matlab">
+Y=fft(X);
+f=Fs/N*(0:N/2);
+absY = abs(Y);
+absY = absY(1:N/2+1);
+absY(2:end) = 2*absY(2:end);
+stem(f,absY) //unilateral
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab_one_sided.png" width="550">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>FFT Bilateral vs Unilateral
+						</h2>
+			</div>
+			<div class="slide-content">
+			<center class="">
+		
+		 <pre><code class="language-matlab">
+Y=fft(X);
+f=Fs/N*(0:N/2);
+absY = abs(Y);
+absY = absY(1:N/2+1);
+absY(2:end) = 2*absY(2:end);
+stem(f,absY) //unilateral
+      </code></pre>
+		
+
+		</center>
+		<center>
+			<img src="../images/fft_matlab_one_sided_pos.png" width="550">
+		</center>
+
+
+		</div>
+		
+	</section>
+
+
+	
+				<section>
+
+			<div class="slide-title">
+				<h2>Aplicações da FFT
+						</h2>
+			</div>
+			<p>&nbsp;</p>
+			<div class="slide-content">
+				<ul>
+					<li>Remoção de ruído (denoising);</li>
+					<li>Compressão de sinais (MP3, JPEG, etc)</li>
+					<li>Solução de EDP (Eq. Diferenciais Parciais);</li>
+					<li>Convolução;</li>
+					<li>Derivada númerica;</li>
+					<li>etc...</li>
+				</ul>
+		</div>
+		
+	</section>
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Remoção de ruído
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/signal_noise.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+	
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Remoção de ruído
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/signal_noise_fft.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+
+	
+				<section>
+
+			<div class="slide-title">
+				<h2>Remoção de ruído
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/signal_noise_fft_denoise.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Remoção de ruído
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/signal_noise_fft_denoise_ifft.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Remoção de ruído
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/signal_noise_fft_denoise_ifft_continuo.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/conv_example1.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/conv_example1_fft.png" width="900">
+				</center>
+				</div>
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+			 <pre><code class="language-matlab">
+y=conv(x,h); 
+y_fft=ifft(fft(x).*fft(h)) 
+figure
+stem(y,linewidth=2)
+hold on
+stem(y_fft,'r--',linewidth=2)
+      </code></pre>
+			<center>
+				<img src="../images/conv_example1_fft_ifft.png" width="550">
+				</center>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução Linear vs Circular
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<p class="lightup2">
+						Convolução Linear
+					$$
+				y[k]=x[k]\ast h[k]=\sum_{m=-\infty}^\infty x[m]h[k-m]
+				$$
+				</p>
+				<ul>
+					<li>Reversão no tempo ($h[-m]$);</li>
+					<li>Translação no tempo;</li>
+					<li>Multiplicação e Soma;</li>
+				</ul>
+				</center>
+				</div>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução Linear
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/convolution_discrete_exemplo1.gif" width="1200">					
+				</center>
+				</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução Linear vs Circular
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<p class="lightup2">
+						Convolução Circular
+					$$
+				y[k]=x[k]\circledast h[k]=\sum_{m=0}^{N-1} x[m]h[(k-m)\text{mod}(N)]
+				$$
+				</p>
+				<ul>
+					<li>Reversão no tempo ($h[-m]$);</li>
+					<li>Translação circular no tempo;</li>
+					<li>Multiplicação e Soma;</li>
+				</ul>
+				</center>
+				</div>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução Circular
+						</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/convolution_circ.gif" width="550">					
+				</center>
+				</div>
+		
+	</section>
+
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+			 <pre><code class="language-matlab">
+y=conv(x,h);  %conv. linear
+y_fft=ifft(fft(x).*fft(h)) %conv. circular 
+figure
+stem(y,linewidth=2)
+hold on
+stem(y_fft,'r--',linewidth=2)
+      </code></pre>
+			<center>
+				<img src="../images/conv_example1_fft_ifft.png" width="550">
+				</center>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+			 <pre><code class="language-matlab">
+    L = length(x) + length(h) - 1;
+    xpad = [x zeros(1,L - length(x))]; %padding 
+    hpad = [h zeros(1,L - length(h))]; %padding
+    y=conv(x,h); %linear conv
+    y_fft=ifft(fft(xpad).*fft(hpad)) %circular conv
+    figure
+    stem(y,linewidth=2)
+    hold on
+    stem(y_fft,'r--',linewidth=2)
+    legend('x[k]\ast h[k]','ifft(X[n]H[n])')
+    grid on
+      </code></pre>
+		
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Convolução
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+				<img src="../images/conv_example1_fft_ifft_circular.png" width="850">
+				</center>
+		
+	</section>
+	
+	
+
+
+	
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								Análise tempo-frequência e Janelamento
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+		
+	</body>
+</html>
+

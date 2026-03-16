@@ -553,7 +553,7 @@
 
 		<center class="lightup">
 		$$
-			G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}=\sum_{m=0}^{N-1} g[m]e^{j\omega m},\quad \omega\in\mathbb{R}?
+			G_d(e^{j\omega})=\mathcal{F}_d\{g[k]\}=\sum_{m=0}^{N-1} g[m]e^{-j\omega m},\quad \omega\in\mathbb{R}?
 		$$
 
 		</center>
@@ -605,7 +605,7 @@
 	 <p>&nbsp;</p>
 		<center class="lightup">
 		$$
-			\hat{g}_n=G_d(e^{jn\frac{2\pi}{N}})=\sum_{m=0}^{N-1} g[m]e^{jn\frac{2\pi}{N} m},\quad n=0,1,\ldots,N-1
+			\hat{g}_n=G_d(e^{jn\frac{2\pi}{N}})=\sum_{m=0}^{N-1} g[m]e^{-jn\frac{2\pi}{N} m},\quad n=0,1,\ldots,N-1
 		$$
 
 		</center>
@@ -683,7 +683,7 @@
 		<center class="lightup">
 		$$
 			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N-1]e^0\\
-			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)}\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{-j\frac{2\pi}{N}}+\ldots+g[N-1]e^{-j\frac{2\pi}{N}(N-1)}\\
 		$$
 
 		</center>
@@ -706,9 +706,9 @@
 		<center class="lightup">
 		$$
 			\hat{g}_0=g[0]e^{0}+g[1]e^{0}+\ldots+g[N-1]e^0\\
-			\hat{g}_1=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)}\\
+			\hat{g}_1=g[0]e^{0}+g[1]e^{-j\frac{2\pi}{N}}+\ldots+g[N-1]e^{-j\frac{2\pi}{N}(N-1)}\\
 			\vdots\\
-			\hat{g}_N=g[0]e^{0}+g[1]e^{j\frac{2\pi}{N}(N-1)}+\ldots+g[N-1]e^{j\frac{2\pi}{N}(N-1)^2}
+			\hat{g}_N=g[0]e^{0}+g[1]e^{-j\frac{2\pi}{N}(N-1)}+\ldots+g[N-1]e^{-j\frac{2\pi}{N}(N-1)^2}
 		$$
 
 		</center>
@@ -719,47 +719,6 @@
 
 		</section>
 
-
-<!-- 
-		<section>
-
-			<div class="slide-title">
-				<h2>Transformada de Fourier Discreta (DFT)</h2>
-			</div>
-			<div class="slide-content">
-			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
-
-		<center class="lightup">
-		$$
-		\begin{bmatrix}
-			\hat{g}_0 \\
-			\hat{g}_1\\
-			\hat{g}_2\\
-			\vdots\\
-			\hat{g}_{N-1}
-			\end{bmatrix}=\begin{bmatrix}
-			1 & 1 & 1 & \ldots & 1\\
-			1 & e^{j\frac{2\pi}{N}} & e^{j\frac{2\pi}{N}2} & \ldots & e^{j\frac{2\pi}{N}(N-1)}\\
-			1 & e^{j\frac{2\pi}{N}2} & e^{j\frac{2\pi}{N}4} & \ldots & e^{j\frac{2\pi}{N}2(N-1)}\\
-			\vdots & \vdots & \vdots & \ddots & \vdots\\
-			1 & e^{j\frac{2\pi}{N}(N-1)} & e^{j\frac{2\pi}{N}2(N-1)} & \ldots & e^{j\frac{2\pi}{N}(N-1)^2}
-			\end{bmatrix}						
-			\begin{bmatrix}
-			g_0 \\
-			g_1\\
-			g_2\\	
-			\vdots\\
-			g_{N-1}
-			\end{bmatrix}	
-		$$
-
-		</center>
-
-
-		
-				   </div>
-
-		</section> -->
 
 
 
@@ -797,7 +756,7 @@
 
 		</center>
 		<center>
-		$\phi=e^{\frac{j2\pi}{N}}$
+		$\phi=e^{-j\frac{2\pi}{N}}$
 		</center>
 
 
