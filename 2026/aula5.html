@@ -1,0 +1,736 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+
+		<script
+		type="text/javascript"
+		src="../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 5: <br>Transformada de Fourier de Tempo Curto <br>(Short-time FFT)<br>SEL0343</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;"> 24 de março de 2026</p>
+				</div>
+
+				</section>
+
+
+
+				
+					
+			
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Objetivos
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Análise tempo-frequência</li>
+			<li>Transformada de Fourier de tempo curto</li>
+			<li>Espectrograma</li>
+			<li>Janelamento</li>
+			<li>Exemplos</li>
+		</ul>
+	
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 		<center class="lightup">
+		$$
+			\hat{g}_n=G_d[n]=\sum_{k=0}^{N-1} g[k]e^{-j\frac{2\pi}{N}nk}
+		$$
+			com  $n=0,1,\ldots,N-1$
+		</center>
+		$$
+			\omega = \frac{2\pi }{N}n
+		$$
+
+
+		
+				   </div>
+
+		</section>
+
+		
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup">
+		$$
+			g[k]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk}
+		$$
+
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+
+
+		
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta</h2>
+			</div>
+			<div class="slide-content">
+
+				<p>&nbsp;</p>
+	 		<center class="lightup">
+		Discretização no tempo causa periodicidade na frequência (DTFT)!
+		</center>
+		<center>
+		<img src="../images/DTFT_sinal_discreto_periodicidade_frequencia.png" width="1100">
+</center>
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta</h2>
+			</div>
+			<div class="slide-content">
+					<p>&nbsp;</p>
+		<center class="lightup">
+		Discretização na frequência causa periodicidade no tempo (IDFT)
+		</center>
+	<center>
+		<img src="../images/DFT_sinal_discreto_periodicidade_tempo.png" width="1100">
+</center>
+		
+		
+				   </div>
+
+		</section>
+
+
+	
+
+		
+						<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+		<center>
+				<img src="../images/fft_sinal_discreto.png"  width="800">
+				$$
+					N=8
+				$$
+	</center>
+				   </div>
+
+		</section>
+
+
+
+			
+						<section>
+
+			<div class="slide-title">
+			<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+
+		<center>
+				<img src="../images/fft_sinal_discreto_decomposition.png"  width="1000">
+		
+	</center>
+				   </div>
+
+		</section>
+		
+
+
+	
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Rápida (FFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 
+		<center class="lightup">
+		$$
+		\hat{g}=\text{fft}(g)
+		$$
+		</center>
+		<center>
+		Custo computacional: $$O(N\log_2(N))$$
+em que $N$ é o número de amostras do sinal.
+
+		</center>
+				   </div>
+
+		</section>
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+			<p class="lightup">A Transformada de Fourier Clássica (FT) nos diz <strong>quais</strong> frequências existem em um sinal, mas não <strong>quando</strong> elas ocorrem.</p>
+			<img src="../images/audio_yes_no_hello.png" width="650">
+				</center>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+			<p class="lightup">A Transformada de Fourier Clássica (FT) nos diz <strong>quais</strong> frequências existem em um sinal, mas não <strong>quando</strong> elas ocorrem.</p>
+			<img src="../images/audio_yes_no_hello_fft.png" width="650">
+				</center>
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_window1.png" width="950">
+				</center>
+		
+	</section>
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_window2.png" width="950">
+				</center>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_window3.png" width="950">
+				</center>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_window.gif" width="1000">
+				</center>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Espectrograma
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_spectrogram.png" width="1000">
+				</center>
+		
+	</section>
+
+
+
+		
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Espalhamento Espectral
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Espalhamento Espectral
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_DFT.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Espalhamento Espectral
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_fft.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>DFT com Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+<center class="lightup">
+		$$
+			G_d[n,m]=\sum_{k=0}^{N-1} g[k]w[k-m]e^{-j\frac{2\pi}{N} nk}
+		$$
+em que $w[k]$ é o janelamento adotado.
+		</center>
+			<center>
+				Exemplo (janelamento Retangular):
+				$$
+					w[k]=\begin{cases} 
+					1, 0 \le k \le  L -1, \\
+					0, \text{caso contrário}.
+					\end{cases}
+				$$
+				</center>
+		
+	</section>
+
+
+
+	
+				<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+		<center class="lightup">
+
+		$$
+			g[k]w[k] \Leftrightarrow \frac{1}{N }G[n]\circledast W[n]
+		$$
+		</center>
+		<center>
+			<img src="../images/gate_fft.png" width="950">
+		</center>
+		
+		
+	</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+			<img src="../images/signal_senoide_conv.png" width="1100">
+		</center>
+		
+		
+	</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+<p>&nbsp;</p>
+	<img src="../images/signal_senoide_conv2.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+<p>&nbsp;</p>
+	<img src="../images/signal_senoide.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+<p>&nbsp;</p>
+	<img src="../images/signal_senoide_long.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_window.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_window2.png" width="900">
+		</center>
+		
+		
+	</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_window2_fft.png" width="900">
+		</center>
+		
+		
+	</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Funções de Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/janelamento_funcoes_basicas.png" width="700">
+		</center>
+		
+		
+	</section>
+
+<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_hann.png" width="1100">
+		</center>
+		
+		
+	</section>
+
+
+
+	<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_hann2.png" width="1100">
+		</center>
+		
+		
+	</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Efeito do Janelamento
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+
+	<img src="../images/signal_senoide_hann_fft.png" width="1100">
+		</center>
+		
+		
+	</section>
+	
+	
+	
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Exemplos
+						</h2>
+			</div>
+			<div class="slide-content">
+			
+<center class="">
+<p>&nbsp;</p>
+	<img src="../images/matlab_logo.png" width="500">
+		</center>
+		
+		
+	</section>
+
+	
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+								Introdução ao Wavelets
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+		
+	</body>
+</html>
+
