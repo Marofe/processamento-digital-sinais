@@ -1,0 +1,1031 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+
+		<script
+		type="text/javascript"
+		src="../reveal.js/dist/vis-graph3d.min.js"
+	  ></script>
+	  
+	</head>
+	<!-- <body onload="drawVisualization();"> -->
+		<body>
+		
+		<div class="reveal">
+			<div class="slides">
+
+
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 6: <br>Introdução à Transformada de Wavelet<br>SEL0343</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;"> 07 de abril de 2026</p>
+				</div>
+
+				</section>
+
+
+
+				
+					
+			
+
+
+
+<section>
+
+	<div class="slide-title">
+		<h2>Objetivos
+		</h2>
+	</div>
+	<div class="slide-content">
+		<p>&nbsp;</p>
+
+		<ul>
+			<li>Análise tempo-frequência</li>
+			<li>Transformada de Wavelet Continua</li>
+			<li>Transformada de Wavelet Discreta</li>
+			<li>Exemplos</li>
+		</ul>
+	
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+			Considere um sinal $g[k]$ com $k=0,1,\ldots,N-1$.
+	 		<center class="lightup">
+		$$
+			\hat{g}_n=G_d[n]=\sum_{k=0}^{N-1} g[k]e^{-j\frac{2\pi}{N}nk}
+		$$
+			com  $n=0,1,\ldots,N-1$
+		</center>
+		$$
+			\omega = \frac{2\pi }{N}n
+		$$
+
+
+		
+				   </div>
+
+		</section>
+
+		
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta Inversa (IDFT)</h2>
+			</div>
+			<div class="slide-content">
+			Dado a discretização em frequência
+			a IDFT é dada por
+	 		<center class="lightup">
+		$$
+			g[k]=\frac{1}{N}\sum_{n=0}^{N-1} G_d[n]e^{j\frac{2\pi}{N} nk}
+		$$
+
+		</center>
+
+		
+				   </div>
+
+		</section>
+
+
+		
+					<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello.png" width="950">
+				</center>
+		
+	</section>
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_fft.png" width="950">
+				</center>
+		
+	</section>
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_window3.png" width="950">
+				</center>
+		
+	</section>
+
+
+	
+			<section>
+
+			<div class="slide-title">
+				<h2>Análise Tempo-Frequência
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_window.gif" width="1000">
+				</center>
+		
+	</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Espectrograma
+						</h2>
+			</div>
+			<div class="slide-content">
+
+			<center>
+					<img src="../images/audio_yes_no_hello_spectrogram.png" width="1000">
+				</center>
+		
+	</section>
+
+
+	
+		<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+	<img src="../images/bases_DFT.png" width="900">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Fourier Discreta (DFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			$$G(e^{j\omega})=\langle g[k], e^{j\omega k} \rangle$$
+		</center>
+
+		<center>
+			Então, a base de representação é
+			$$
+				\{e^{j\omega k}=\cos(\omega k)+j\sin(\omega k)\},
+			$$
+			com 
+			$$
+\omega=n\frac{2\pi}{N}, n=0,\ldots,N-1
+			$$
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+			
+
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Resolução no tempo (sinal no tempo)</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+		<img src="../images/resolucao_tempo.png" width="600">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Resolução na frequência (DFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+		<img src="../images/resolucao_frequencia.png" width="600">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Resolução Tempo-Frequência (STFT)</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+		<img src="../images/resolucao_tempo_frequencia.png" width="600">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Limitações da STFT</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+			<p>&nbsp;</p>
+				<p>&nbsp;</p>
+			<ul><li>
+			<b>Tamanho da janela é finito</b>, portanto, diminui resolução na frequência;
+		</li>
+		<li><b>Tamanho da janela é fixo</b>, então a resolução no tempo e frequência também são fixos;</li>
+		<li>Permite saber apenas a <b>banda de frequência</b> em um dado <b>intervalo de tempo</b>.</li>
+	</ul>
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (contínuo)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			Mother wavelet $\psi(t)$
+			$$
+				\Psi_{a,b}(t)=\frac{1}{\sqrt{a}}\psi(\frac{t-b}{a})
+			$$
+		</center>
+
+
+				<center class="lightup">
+					Wavelet coeficiente
+			$$\mathcal{W}_\psi(g)(a,b)=\langle g(t), \Psi_{a,b}(t) \rangle$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (contínuo)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			Mother wavelet $\psi(t)$
+			$$
+				\Psi_{a,b}(t)=\frac{1}{\sqrt{a}}\psi(\frac{t-b}{a})
+			$$
+		</center>
+
+
+				<center class="lightup">
+					Wavelet coeficiente
+			$$\mathcal{W}_\psi(g)(a,b)=\int_{-\infty}^\infty g(t)\frac{1}{\sqrt{a}}\psi^*(\frac{t-b}{a})dt$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Função Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup2">
+			<ul>
+				<li><p>Média zero:</p>
+					$$
+					\int_{-\infty}^\infty \psi(t)dt=0
+					$$
+				</li>
+				<li>
+					<p>Energia finita:</p>
+					$$
+					\int_{-\infty}^\infty |\psi(t)|^2 dt<\infty
+					$$
+				</li>
+			</ul>
+		</center>
+
+
+				
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+				<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			Wavelet de Haar 
+
+			<p>
+		<img src="../images/wavelet_haar.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			Wavelet de Haar 
+
+			<p>
+		<img src="../images/wavelet_haar2.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			Wavelet de Haar 
+
+			<p>
+		<img src="../images/wavelet_haar3.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			Wavelet de Haar 
+
+			<p>
+		<img src="../images/wavelet_haar4.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			Wavelet de Haar 
+
+			<p>
+		<img src="../images/wavelet_haar5.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			<p>
+		<img src="../images/6_wavelets.png" width="850">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			<p>
+		<img src="../images/wavelet_morlet.png" width="800">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		<p>&nbsp;</p>
+	 <p>&nbsp;</p>
+		<center class="lightup">
+		$$
+			\psi(t)=k_0e^{j\omega t}e^{-t^2/2}
+		$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			<p>
+		<img src="../images/morlet.gif" width="850">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+						<section>
+
+			<div class="slide-title">
+				<h2>Exemplos de Wavelet</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="">
+			<p>
+		<img src="../images/morlet2.gif" width="850">
+		</p>
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+		
+					<section>
+
+			<div class="slide-title">
+				<h2>Multiresolução Tempo-Frequência</h2>
+			</div>
+			<div class="slide-content">
+		
+		<center>
+		<img src="../images/multiresolucao_tempo_frequencia.png" width="600">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Capturar Anomalias</h2>
+			</div>
+			<div class="slide-content">
+		<p>&nbsp;</p>
+		<center>
+		<video src="../videos/wavelet.mp4" controls="true"></video>
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+			<section>
+
+			<div class="slide-title">
+				<h2>Exemplo no MATLAB</h2>
+			</div>
+		
+			<div class="slide-content">
+				<center>
+					<p><a href="https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html">https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html</a></p>
+		<img src="../images/signal_chirp_hyperbolic.png" width="800">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+				
+			<section>
+
+			<div class="slide-title">
+				<h2>Exemplo no MATLAB</h2>
+			</div>
+		
+			<div class="slide-content">
+				<center>
+					<p><a href="https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html">https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html</a></p>
+		<img src="../images/signal_chirp_hyperbolic_stft.png" width="800">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Exemplo no MATLAB</h2>
+			</div>
+		
+			<div class="slide-content">
+				<center>
+					<p><a href="https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html">https://www.mathworks.com/help/wavelet/ug/time-frequency-analysis-and-continuous-wavelet-transform.html</a></p>
+		<img src="../images/signal_chirp_hyperbolic_cwt.png" width="800">
+		</center>
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+		
+
+
+
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			Mother wavelet $\psi[k]$
+			$$
+				\Psi_{a,b}[k]=\frac{1}{\sqrt{a}}\psi[\frac{k-b}{a}]
+			$$
+		</center>
+
+
+				<center class="lightup">
+					Wavelet coeficiente
+			$$\mathcal{W}_\psi(g)(a,b)=\langle g[k], \Psi_{a,b}[k] \rangle$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+					<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			Mother wavelet $\psi[k]$
+			$$
+				\Psi_{a,b}[k]=\frac{1}{\sqrt{a}}\psi[\frac{k-b}{a}]
+			$$
+		</center>
+
+
+				<center class="lightup2">
+					Wavelet coeficiente
+			$$\mathcal{W}_\psi(g)(a,b)=\sum_{k=0}^{N-1} g[k]\frac{1}{\sqrt{a}}\psi^*[\frac{k-b}{a}]$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	 
+		<center class="lightup">
+			Mother wavelet $\psi[k]$
+			$$
+				\Psi_{a,b}[k]=\frac{1}{\sqrt{a}}\psi[\frac{k-b}{a}]
+			$$
+		</center>
+
+
+				<center class="lightup">
+				$$a=\frac{k}{2^j},\quad b=\frac{1}{2^j}$$
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+
+			<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	
+				<center class="">
+					
+				<img src="../images/signal_multiresolution.png" width="1200">
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Decomposição Multinível</h2>
+			</div>
+			<div class="slide-content">
+		
+	
+				<center class="">
+			
+				<img src="../images/wavelet_decomp.png" width="1000">
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+
+
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	
+				<center class="">
+			
+				<img src="../images/signal_multiresolution2.png" width="650">
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+
+
+		
+				<section>
+
+			<div class="slide-title">
+				<h2>Transformada de Wavelet (discreto)</h2>
+			</div>
+			<div class="slide-content">
+		
+	
+				<center class="">
+			
+				<img src="../images/eeg_signal.png" width="950">
+		</center>
+
+
+
+		
+				   </div>
+
+		</section>
+		
+		
+
+
+
+	
+
+		
+				<section>
+
+					<div class="slide-title">
+						<h2>Próxima aula</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+			
+							<h3>
+							P1!
+							</h3>
+								
+				</center>
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-content">
+			<center>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<h2>
+						Até a próxima aula!
+					</h2>
+				</center>
+								
+					
+					   </div>
+
+				</section>
+
+
+
+
+		
+				
+			
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+		
+	</body>
+</html>
+
