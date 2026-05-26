@@ -1,0 +1,1752 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2><br>Transformada Z e Sistemas em Tempo Discreto</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+				<p style="text-align: center;font-size: 0.8em;">26 de maio de 2026</p>
+				</div>
+
+				</section>
+
+
+				
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Compreender a motivação para o uso da Transformada Z em PDS.</li>
+							<li>Dominar o conceito de Região de Convergência (ROC) e suas propriedades.</li>
+						<li>Explorar as propriedades operacionais da Transformada Z.</li>
+							<li>Analisar Causalidade e Estabilidade de Sistemas LTI com polos e zeros.</li>
+					</p>
+					</div>
+
+		</section>
+				
+
+
+		<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x(t):\mathbb{R}\to\mathbb{R}
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							X(s)=\mathcal{L}\{x(t)\}=\int_{-\infty}^\infty x(t)e^{-st}dt
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace: exemplo
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/degrau_unitario.png" width="700" alt="">
+						$$
+							U(s)=\frac{1}{s}
+						$$
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sequencia_sinal.png" width="650" alt="">
+						</center>
+					</div>
+	
+				</section>
+
+
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sequencia_sinal.png" width="350" alt="">
+							<p class="lightup">
+							<b>Limitação da DTFT:</b> $$\sum_k |x[k]| < \infty$$
+							</p>
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+				
+				
+				<section>
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/unstable_signal1.png" width="650" alt="">
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+						<section>
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/unstable_signal2.png" width="650" alt="">
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+							<section>
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/unstable_signal3.png" width="650" alt="">
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+							<section>
+					<div class="slide-title">
+						<h2>DTFT "Adaptada"</h2>
+					</div>
+
+					<div class="slide-content">
+						<center>
+							Considere que
+							$$
+								|y[k]| \le \alpha^k, \quad \forall k
+							$$
+							<p class="lightup">
+							$$
+							\mathcal{F}\{y[k]r^{-k}\},\quad |r|>|\alpha|
+							$$
+							</p>
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+								<section>
+					<div class="slide-title">
+						<h2>DTFT "Adaptada"</h2>
+					</div>
+
+					<div class="slide-content">
+						<center>
+							Considere que
+							$$
+								|y[k]| \le \alpha^k, \quad \forall k
+							$$
+							<p class="lightup">
+							$$
+							\sum_{k=-\infty}^\infty y[k]r^{-k} e^{-j\omega k},\quad |r|>|\alpha|
+							$$
+							</p>
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+				
+								<section>
+					<div class="slide-title">
+						<h2>DTFT "Adaptada"</h2>
+					</div>
+
+					<div class="slide-content">
+						<center>
+							Considere que
+							$$
+								|y[k]| \le \alpha^k, \quad \forall k
+							$$
+							<p class="lightup">
+							$$
+							\sum_{k=-\infty}^\infty y[k](re^{j\omega})^{-k},\quad |r|>|\alpha|
+							$$
+							</p>
+							
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+										<section>
+					<div class="slide-title">
+						<h2>DTFT "Adaptada"</h2>
+					</div>
+
+					<div class="slide-content">
+						<center>
+							Considere que
+							$$
+								|y[k]| \le \alpha^k, \quad \forall k
+							$$
+							<p class="lightup">
+							$$
+							\sum_{k=-\infty}^\infty y[k](re^{j\omega})^{-k},\quad |r|>|\alpha|
+							$$
+							</p>
+							Let 
+							$$
+								z=re^{j\omega }
+							$$
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+				
+										<section>
+					<div class="slide-title">
+						<h2>DTFT "Adaptada"=Transformada Z</h2>
+					</div>
+
+					<div class="slide-content">
+						<center>
+							Considere que
+							$$
+								|y[k]| \le \alpha^k, \quad \forall k
+							$$
+							<p class="lightup">
+							$$
+							\sum_{k=-\infty}^\infty y[k]z^{-k},\quad |r|>|\alpha|
+							$$
+							</p>
+							Let 
+							$$
+								z=re^{j\omega }
+							$$
+							
+						</center>
+					</div>
+	
+				</section>
+
+
+
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x[k]=x(kT), \quad k\in\mathbb{Z}
+							$$
+						<img src="../images/sequencia_sinal.png" width="600" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x_a^*(t)=\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)
+							$$
+						<img src="../images/modular_amostragem2.png" width="550" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}=\int_{-\infty}^\infty \Bigl(\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)\Bigr)e^{-st}dt
+							$$
+				
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)\int_{-\infty}^\infty\delta(t-kT)e^{-st}dt
+						$$
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)e^{-skT}
+						$$
+					</center>
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}=\int_{-\infty}^\infty \Bigl(\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)\Bigr)e^{-st}dt
+							$$
+				
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)\int_{-\infty}^\infty\delta(t-kT)e^{-st}dt
+						$$
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x[k](e^{sT})^{-k}
+						$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}= \sum_{k=-\infty}^\infty x[k]z^{-k}
+							$$
+							Na qual 
+							<p class="lightup">
+							$$
+							z=e^{sT}
+							$$
+						</p>
+
+					</center>
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}= \sum_{k=-\infty}^\infty x[k]z^{-k}
+							$$
+							Na qual 
+							<p class="lightup">
+							$$
+							z=e^{\sigma T}e^{j\omega T}
+							$$
+						</p>
+$$
+						s=\sigma+j\omega
+$$
+					</center>
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}= \sum_{k=-\infty}^\infty x[k]z^{-k}
+							$$
+							Na qual 
+							<p class="lightup">
+							$$
+							z=\underbrace{e^{\sigma T}}_{r}e^{j\omega T}
+							$$
+						</p>
+$$
+						s=\sigma+j\omega
+$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z (Bilateral)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{Z}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=-\infty}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z (Unilateral)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{N}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=0}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z vs DTFT</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							Note que
+							<p class="lightup">
+							$$
+							\mathcal{F}\{x[k]\}=\mathcal{Z}\{x[k]\}\Bigr|_{r=1}
+							$$
+						</p>
+
+						No plano-z, o circulo unitário corresponde a transformada de Fourier!
+						
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z vs DTFT</h2>
+					</div>
+					<div class="slide-content">
+						<center>					
+							<p>&nbsp;</p>	
+								<img src="../images/plano_z_fourier.png" alt="">
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z vs DTFT</h2>
+					</div>
+					<div class="slide-content">
+						<center>					
+							<p>&nbsp;</p>	
+								<img src="../images/plano_z_fourier2.png" alt="">
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Série Geométrica</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							Considere $z \in \mathbb{C}$. Se $|z|<1$, então
+							<p class="lightup">
+							$$
+							\sum_{k=0}^\infty z^k = \frac{1}{1-z}
+							$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Região de Convergência (ROC)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+							$z \in \mathbb{C}$ tal que $|z|<1$
+							<p>
+							<img src="../images/ROC_ztrans.png" width="550"><br>Plano-Z
+						</p>
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Região de Convergência (ROC)</h2>
+					</div>
+					<div class="slide-content">
+						<p>A ROC é o domínio do plano complexo $z$ para o qual a série de potências converge de maneira absoluta:</p>
+						<center class="lightup">
+							$$\text{ROC} = \left\{ z \in \mathbb{C} \ \middle| \ \sum_{k=-\infty}^{\infty} |x[k] z^{-k}| < \infty \right\}$$
+						</center>
+						<p>&nbsp;</p>
+						<ul>
+							<li><b>Unicidade:</b> Expressões matemáticas $X(z)$ idênticas só definem sinais únicos quando associadas à sua respectiva ROC!</li>
+						</ul>
+					</div>
+				</section>
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Considere a sequência gerada pela função
+							$$
+								f[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\in\mathbb{N}
+							$$
+						</p>
+
+					</center>
+
+					<center class="lightup">
+						$$F(z)=\mathcal{Z}\{f[k]\}=?$$
+
+					</center>
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Portanto,
+							<p class="lightup">
+							$$
+								\mathcal{Z}\Bigl\{\Bigl(\frac{1}{2}\Bigr)^k\Bigr\}=\frac{z}{z-\frac{1}{2}},\quad k\in\mathbb{N}
+							$$
+						</p>
+						em que
+						$$
+						\mathcal{D}=\{z\in\mathbb{C}: |z|>\frac{1}{2}\}
+						$$
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						
+				
+						<img src="../images/ROC_ztrans0.png" width="550"><br>Plano-Z
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+			
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						
+						<center>
+												$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+						
+							<img src="../images/degrau_unitario_discreto.png" width="700">
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{u[k]\}=\frac{z}{z-1},\quad |z|>1
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans1.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=\begin{cases} 
+								0, \text{ se } k\in(-\infty,-1)\\
+								a^k, \text{ se } k\in\mathbb{N}
+								\end{cases}
+							$$
+						
+						em que $a\in\mathbb{C}$.
+
+					</center>
+
+				
+					   </div>
+
+				</section>
+
+				
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/exponenciais_1.png" width="600">
+							<p>$|a|<1 $</p>
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/exponenciais_2.png" width="600">
+							<p>$|a|>1 $</p>
+					</center>
+		
+
+					   </div>
+
+				</section>
+			
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=a^ku[k]
+							$$
+						
+						em que $a\in\mathbb{C}$, então
+						<p class="lightup ">
+						$$
+						F(z)=\frac{z}{z-a},\quad \mathcal{D}=\{z\in\mathbb{C}: |z|>|a|\}
+						$$
+					</p>
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans_a.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+			
+				<section>
+
+					<div class="slide-title">
+						<h2>Impulso unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							\delta[k]=\begin{cases} 
+							1,\text{ se } k=0,\\
+							0, \text{ se } k\neq 0.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{\delta[k]\}=1,\quad \mathcal{D}=\mathbb{C}
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+						
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Linearidade:
+
+								$$
+								\mathcal{Z}\{\alpha x[k]+\beta y[k]\}=\alpha X(z)+\beta Y(z)
+								$$
+							</li>
+
+							<li>
+								Atraso no tempo
+								$$
+								\mathcal{Z}\{x[k-l]\}=z^{-l}X(z)
+								$$
+							</li>
+
+							<li>
+								Avanço no tempo
+								$$
+								\mathcal{Z}\{x[k+l]\}=z^{l}X(z)
+								$$
+							</li>
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Amortecimento:
+<p>
+								$
+								\mathcal{Z}\{a^{k}x[k]\}=X(az),\quad |a|< 1
+								$
+							</p>
+							</li>
+
+							<li>
+								Diferenciação:
+								<p>
+								$
+								\mathcal{Z}\{kx[k]\}=-z\frac{dX}{dz}
+								$
+							</p>
+							</li>
+
+							<li>Convolução:
+<p>
+								$
+								\mathcal{Z}\{x[k]\ast y[k]\}=X(z)Y(z)
+							$
+						</p>
+							</li>
+
+				
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Soma de sequências</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado a definição de Transformada Z de $x[k]$ na forma:
+
+							$$
+							X(z)= \sum_{k=0}^\infty x[k]z^{-k}
+							$$
+
+							Então, para $z=1$, tem-se
+							<p class="lightup">
+							$$
+								X(1)=\sum_{k=0}^\infty x[k]
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Inicial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{z\to\infty}X(z)$ existe, então 
+						<p class="lightup">
+						$$
+							x[0]=\lim_{z\to\infty} X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Final</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{k\to\infty}x[k]$ existe, então 
+						<p class="lightup">
+						$$
+							\lim_{k\to\infty} x[k]= \lim_{z\to 1} (z-1)X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+			
+
+
+				
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						Exemplo:
+						$$
+						3y[k-2]+2y[k-1]+y[k]=x[k]-2x[k-1]
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					<p>A Transformada Z permite obter uma representação na forma de uma função racional da Eq. à Diferenças!</p>
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-m}+\cdots+\beta_1z^{-1}+\beta_0}{\alpha_nz^{-n}+\cdots+\alpha_1z^{-1}+\alpha_0}
+					$$
+				</p>
+					</center>
+
+					<p align="center" class="">Usualmente, considera-se $\alpha_0=1$ (normalização)</p>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Implementação de Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<p>&nbsp;</p>
+					
+					<p class="lightup">
+						$$
+						y[k] = -\sum_{i=1}^n \alpha_i y[k-i] + \sum_{i=0}^m \beta_i x[k-i]
+					$$
+				</p>
+					</center>
+
+					<p align="center">Implementação em tempo real exige que a amostra presente seja uma relação das amostras do passado e ou presente! (nunca do futuro) 
+						
+			
+					</p>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+					
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Seja $X(z)$ a transformada Z de $x[k]$ com $k\in\mathbb{N}$. Então, a Transformada Z Inversa é definida como
+						<p class="lightup">
+						$$
+							\mathcal{Z}^{-1}\{X(z)\}=x[k]
+						$$
+					</p>
+						
+					</center>
+
+					<center class="">
+						$$
+						x[k]=\frac{1}{2\pi j}\oint_\Gamma \Bigl(\frac{X(z)}{z}\Bigr)z^k dz,\quad k\in\mathbb{N}
+					$$
+
+					</center>
+		
+					<center class="">
+						<b>Tabelas de Transformada Z!</b>
+					</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: exemplos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">
+								$$
+									\mathcal{Z}^{-1}\Bigl\{1\Bigr\}=\delta[k]
+								$$
+							</p>
+						<p class="lightup">
+						$$
+							\mathcal{Z}^{-1}\Bigl\{\frac{z}{z-a}\Bigr\}=a^ku[k]
+						$$
+					</p>
+						
+					</center>
+
+	
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: fatoração</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							$$
+    X(z)=\frac{Az}{z-1}+\frac{Bz}{(z-1)^2}+\frac{Cz}{z-a}+\frac{Dz}{a_2z^2+a_1z+a_0}
+$$
+
+que resulta em
+<p class="lightup">
+$$
+    x[k]=(A+Bk+Ca^k+D\beta^k\sin(\omega kT))u[k]
+$$
+</p>
+						
+					</center>
+
+
+
+
+	
+					   </div>
+
+				</section>
+
+	
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Solução de Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+					</p>
+					<p>A Transformada Z Inversa permite obter a solução $y[k]$ para um dado sinal $x[k]$!</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sequência de Fibonacci</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+
+					<img src="../images/fibonacci.webp" width="850">
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+								
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sequência de Fibonacci</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+
+						$$
+							y[0]=0\\
+							y[1]=1\\
+							y[k]=y[k-1]+y[k-2]
+						$$
+					</p>
+					
+					</center>
+
+					<pre style="width: 100%; margin: 0; font-size: 0.45em; line-height: 1.25em;"><code class="language-matlab">
+% Parâmetros de Simulação
+N = 12;
+y = zeros(1, N);
+
+% Condições Iniciais
+y(1) = 0; % y[0]
+y(2) = 1; % y[1]
+
+% Simulação via laço FOR
+for k = 3:N
+    y(k) = y(k-1) + y(k-2);
+end								</code></pre>
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sequência de Fibonacci</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+
+						$$
+							y[0]=0\\
+							y[1]=1\\
+							y[k]=y[k-1]+y[k-2]
+						$$
+					</p>
+					Qual o valor da Sequência de Fibonacci para qualquer $k\in\mathbb{N}$ sem  ter que fazer iterações de $1:k$?
+					
+					</center>
+
+			
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sequência de Fibonacci</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+
+						$$
+							y[0]=0\\
+							y[1]=1\\
+							y[k]=y[k-1]+y[k-2]
+						$$
+					</p>
+					Qual o valor da Sequência de Fibonacci para qualquer $k\in\mathbb{N}$ sem  ter que fazer iterações de $1:k$?
+					
+					</center>
+
+					<center class=" lightup">
+						$y[k]=\frac{1}{\sqrt{5}}\Bigl[\Bigl(\frac{1+\sqrt{5}}{2}\Bigr)^k-\Bigl(\frac{1-\sqrt{5}}{2}\Bigr)^k\Bigr]$
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sistema_discreto.png" width="800">
+							<p class="lightup">
+							$$
+								y[k]=g[k]\ast x[k]
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sistema_discreto.png" width="800">
+							<p class="lightup">
+							$$
+								Y(z)=G(z)X(z)
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sistema_discreto.png" width="800">
+							<p class="lightup">
+								Resposta em frequência
+							$$
+								G(z)\Rightarrow G(e^{j\omega})
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+								y[k]=0.9y[k-1]+0.2y[k-2]+x[k]
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+								Y(z)=0.9z^{-1}y(z)+0.2z^{-2}Y(z)+X(z)
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+							(1-0.9z^{-1}-0.2z^{-2})Y(z)=X(z)
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+							
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+							\frac{Y(z)}{X(z)}=\frac{1}{1-0.9z^{-1}-0.2z^{-2}}=G(z)
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+							\frac{Y(z)}{X(z)}=\frac{z^2}{z^2-0.9z-0.2}=G(z)
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sistema de Processamento Digital</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Exemplo		
+						<p>
+							<img src="../images/sistema_discreto.png" width="800">	
+							</p>		
+							<p class="lightup">
+								
+							$$
+							\Rightarrow G(e^{j\omega})=\frac{e^{j2\omega}} {e^{j2\omega}-0.9e^{j\omega}-0.2}
+							$$
+							</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+
+
+			
+			
+			
+			
+
+		
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
