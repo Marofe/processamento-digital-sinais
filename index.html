@@ -17,7 +17,6 @@
             --card-border: rgba(255, 255, 255, 0.08);
             --primary-g-start: #0077b6;
             --primary-g-end: #00b4d8;
-            --accent-color: #ffb703;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --glass-bg: rgba(15, 23, 42, 0.6);
@@ -109,18 +108,9 @@
 
         /* --- Main Layout --- */
         .dashboard-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 3rem auto 0;
             padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 2.5rem;
-        }
-
-        @media (max-width: 1024px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
         }
 
         .section-title {
@@ -130,24 +120,28 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-left: 0.75rem;
+            text-align: center;
         }
 
         .section-title::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 15%;
-            height: 70%;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary-g-start), var(--primary-g-end));
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            top: auto;
+            height: 3px;
+            width: 60px;
+            background: linear-gradient(to right, var(--primary-g-start), var(--primary-g-end));
             border-radius: 2px;
         }
 
         /* --- Lectures Grid --- */
         .lectures-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .lecture-card {
@@ -163,6 +157,7 @@
             overflow: hidden;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
+            min-height: 280px;
         }
 
         .lecture-card::before {
@@ -210,7 +205,7 @@
 
         .lecture-card h3 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.3;
@@ -267,111 +262,6 @@
             transform: scale(1.02);
         }
 
-        /* --- Sidebar & Resources --- */
-        .resources-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .resource-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            position: relative;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .resource-widget {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .resource-widget:hover {
-            border-color: rgba(255, 183, 3, 0.3);
-            background: rgba(255, 183, 3, 0.02);
-        }
-
-        .resource-widget h4 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .resource-widget h4 svg {
-            color: var(--accent-color);
-        }
-
-        .resource-widget p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .btn-resource {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            background: rgba(255, 183, 3, 0.15);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            color: #ffca3a;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            gap: 0.4rem;
-        }
-
-        .btn-resource:hover {
-            background: #ffb703;
-            color: #000;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(255, 183, 3, 0.4);
-        }
-
-        .matlab-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .matlab-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .matlab-btn:hover {
-            color: var(--text-main);
-            border-color: rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -407,7 +297,7 @@
         <h1>Processamento Digital de Sinais</h1>
         <p class="course-info">
             <b>SEL0343</b> -- 1º Semestre / 2026<br>
-            Curso focado na análise espectral, amostragem, projeto de filtros digitais e equações recursivas de tempo discreto.<br>
+            Acesso rápido aos slides das aulas de tempo discreto, amostragem e análise espectral.<br>
             <b>Prof. Dr. Marcos Rogério Fernandes</b>
         </p>
     </header>
@@ -415,218 +305,163 @@
     <!-- CONTAINER DA HOME PAGE -->
     <div class="dashboard-container">
         
-        <!-- COLUNA DA ESQUERDA: GRID DE AULAS -->
-        <main>
-            <h2 class="section-title">Slides das Aulas</h2>
-            <div class="lectures-grid">
-                
-                <!-- CARD AULA 1 -->
-                <article class="lecture-card">
-                    <span class="card-number">01</span>
-                    <div>
-                        <span class="card-meta">Introdução</span>
-                        <h3>Aula 1: Introdução ao PDS</h3>
-                        <ul>
-                            <li>Apresentação da disciplina SEL0343</li>
-                            <li>Definição física de sinais e sistemas</li>
-                            <li>Ortogonalidade no espaço contínuo e discreto</li>
-                            <li>Arquitetura básica de sistemas de PDS</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula1.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 2 -->
-                <article class="lecture-card">
-                    <span class="card-number">02</span>
-                    <div>
-                        <span class="card-meta">Amostragem</span>
-                        <h3>Aula 2: Teorema da Amostragem</h3>
-                        <ul>
-                            <li>Conversão Contínuo-Discreto (C/D)</li>
-                            <li>Critério de amostragem de Nyquist-Shannon</li>
-                            <li>Aliasing no tempo e na frequência</li>
-                            <li>Reconstrução ideal e filtros anti-aliasing</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula2.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 3 -->
-                <article class="lecture-card">
-                    <span class="card-number">03</span>
-                    <div>
-                        <span class="card-meta">Fourier Discreto</span>
-                        <h3>Aula 3: Transformada DTFT</h3>
-                        <ul>
-                            <li>Transformada de Fourier em Tempo Discreto</li>
-                            <li>Comportamento espectral periódico</li>
-                            <li>Passagem do espaço infinito ao finito</li>
-                            <li>Definição da DFT (Transformada Discreta)</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula3.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 4 -->
-                <article class="lecture-card">
-                    <span class="card-number">04</span>
-                    <div>
-                        <span class="card-meta">Espectro Rápido</span>
-                        <h3>Aula 4: Transformada FFT</h3>
-                        <ul>
-                            <li>Algoritmo da Fast Fourier Transform (FFT)</li>
-                            <li>Redução de complexidade de O(N²) para O(N log N)</li>
-                            <li>Decimação no tempo e na frequência</li>
-                            <li>Implementação computacional e aplicações</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula4.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 5 -->
-                <article class="lecture-card">
-                    <span class="card-number">05</span>
-                    <div>
-                        <span class="card-meta">Tempo-Frequência</span>
-                        <h3>Aula 5: STFT (Tempo Curto)</h3>
-                        <ul>
-                            <li>Short-Time Fourier Transform (STFT)</li>
-                            <li>Análise de sinais não-estacionários</li>
-                            <li>Conceito de Janelamento (Hanning, Hamming)</li>
-                            <li>Espectrogramas e o Princípio de Incerteza</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula5.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 6 -->
-                <article class="lecture-card">
-                    <span class="card-number">06</span>
-                    <div>
-                        <span class="card-meta">Multiresolução</span>
-                        <h3>Aula 6: Transf. Wavelet</h3>
-                        <ul>
-                            <li>Introdução aos conceitos de Wavelet</li>
-                            <li>Análise multiresolução temporal e espectral</li>
-                            <li>Decomposição por Wavelet de Haar e Morlet</li>
-                            <li>Processamento de transitórios e ruidos</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula6.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA 7 -->
-                <article class="lecture-card">
-                    <span class="card-number">07</span>
-                    <div>
-                        <span class="card-meta">Plano Complexo Z</span>
-                        <h3>Aula 7: A Transformada Z</h3>
-                        <ul>
-                            <li>Conceito de Transformada Z Bilateral/Unilateral</li>
-                            <li>Região de Convergência (ROC) e suas propriedades</li>
-                            <li>Cálculo analítico da Transformada Inversa (IZT)</li>
-                            <li>Sinal 2^k u[k] e Simulação da Série de Fibonacci</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula7.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-                <!-- CARD AULA COMPLEMENTAR (T.Z) -->
-                <article class="lecture-card">
-                    <span class="card-number">EX</span>
-                    <div>
-                        <span class="card-meta">Complementar</span>
-                        <h3>Extra: Aprofundamento T.Z</h3>
-                        <ul>
-                            <li>Funções de Transferência adicionais de sistemas</li>
-                            <li>Propriedades avançadas do mapeamento contínuo-discreto</li>
-                            <li>Cálculo de resíduos e polos complexos adicionais</li>
-                            <li>Resolução de equações com outras condições iniciais</li>
-                        </ul>
-                    </div>
-                    <a href="2026/aula_tranf_z.html" target="_blank" class="btn-access">
-                        Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </article>
-
-            </div>
-        </main>
+        <h2 class="section-title">Aulas Disponíveis</h2>
         
-        <!-- COLUNA DA DIREITA: RECURSOS ACADÊMICOS -->
-        <aside class="resources-sidebar">
-            <h2 class="section-title">Recursos Acadêmicos</h2>
-            <div class="resource-card">
-                
-                <!-- WIDGET LISTA DE EXERCÍCIOS -->
-                <div class="resource-widget">
-                    <h4>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                        Lista de Exercícios
-                    </h4>
-                    <p>Lista de exercícios analíticos e computacionais sobre a Transformada Z elaborada sob demanda acadêmica em LaTeX.</p>
-                    <a href="lista_exercicios_transformada_z.pdf" target="_blank" class="btn-resource">
-                        Download PDF
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    </a>
+        <div class="lectures-grid">
+            
+            <!-- CARD AULA 1 -->
+            <article class="lecture-card">
+                <span class="card-number">01</span>
+                <div>
+                    <span class="card-meta">Introdução</span>
+                    <h3>Aula 1: Introdução ao PDS</h3>
+                    <ul>
+                        <li>Apresentação da disciplina SEL0343</li>
+                        <li>Sinais e sistemas contínuos e discretos</li>
+                        <li>Ortogonalidade e produto escalar</li>
+                        <li>Introdução prática a PDS</li>
+                    </ul>
                 </div>
+                <a href="2026/aula1.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
 
-                <!-- WIDGET CAPÍTULO DE LIVRO -->
-                <div class="resource-widget">
-                    <h4>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"></path></svg>
-                        Capítulo do Livro
-                    </h4>
-                    <p>Capítulo acadêmico autoral detalhado sobre a Transformada Z aplicada a PDS, com ilustrações geométricas e demonstrações matemáticas completas.</p>
-                    <a href="capitulo_transformada_z.pdf" target="_blank" class="btn-resource">
-                        Download PDF
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    </a>
+            <!-- CARD AULA 2 -->
+            <article class="lecture-card">
+                <span class="card-number">02</span>
+                <div>
+                    <span class="card-meta">Amostragem</span>
+                    <h3>Aula 2: Teorema da Amostragem</h3>
+                    <ul>
+                        <li>Critério de amostragem de Nyquist-Shannon</li>
+                        <li>Efeito do Aliasing no tempo e frequência</li>
+                        <li>Reconstrução ideal e ZOH</li>
+                        <li>Filtros anti-aliasing analógicos</li>
+                    </ul>
                 </div>
+                <a href="2026/aula2.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
 
-                <!-- WIDGET SCRIPTS MATLAB -->
-                <div class="resource-widget">
-                    <h4>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                        Scripts MATLAB
-                    </h4>
-                    <p>Códigos executáveis criados especificamente para a modelagem temporal e no domínio da frequência complexa.</p>
-                    <div class="matlab-links">
-                        <a href="plot_exponencial_2k.m" target="_blank" class="matlab-btn">
-                            <span>plot_exponencial_2k.m</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </a>
-                        <a href="plot_fibonacci_loop.m" target="_blank" class="matlab-btn">
-                            <span>plot_fibonacci_loop.m</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </a>
-                    </div>
+            <!-- CARD AULA 3 -->
+            <article class="lecture-card">
+                <span class="card-number">03</span>
+                <div>
+                    <span class="card-meta">Fourier Discreto</span>
+                    <h3>Aula 3: Transformada DTFT</h3>
+                    <ul>
+                        <li>Definição da DTFT e espectro periódico</li>
+                        <li>Propriedades fundamentais</li>
+                        <li>Representação de sinais finitos</li>
+                        <li>Definição da DFT (Transformada Discreta)</li>
+                    </ul>
                 </div>
+                <a href="2026/aula3.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
 
-            </div>
-        </aside>
+            <!-- CARD AULA 4 -->
+            <article class="lecture-card">
+                <span class="card-number">04</span>
+                <div>
+                    <span class="card-meta">Espectro Rápido</span>
+                    <h3>Aula 4: Transformada FFT</h3>
+                    <ul>
+                        <li>Algoritmo Fast Fourier Transform (FFT)</li>
+                        <li>Redução de complexidade para O(N log N)</li>
+                        <li>Decimação no tempo e na frequência</li>
+                        <li>Aplicações práticas da FFT em PDS</li>
+                    </ul>
+                </div>
+                <a href="2026/aula4.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
+
+            <!-- CARD AULA 5 -->
+            <article class="lecture-card">
+                <span class="card-number">05</span>
+                <div>
+                    <span class="card-meta">Tempo-Frequência</span>
+                    <h3>Aula 5: STFT (Tempo Curto)</h3>
+                    <ul>
+                        <li>Conceito de Short-Time Fourier Transform</li>
+                        <li>Análise espectral variante no tempo</li>
+                        <li>Funções de Janelamento</li>
+                        <li>Espectrogramas e Princípio de Incerteza</li>
+                    </ul>
+                </div>
+                <a href="2026/aula5.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
+
+            <!-- CARD AULA 6 -->
+            <article class="lecture-card">
+                <span class="card-number">06</span>
+                <div>
+                    <span class="card-meta">Multiresolução</span>
+                    <h3>Aula 6: Transf. Wavelet</h3>
+                    <ul>
+                        <li>Limitações da STFT e multiresolução</li>
+                        <li>Wavelet Contínua e Discreta</li>
+                        <li>Wavelets de Haar e Morlet</li>
+                        <li>Filtragem e processamento de transitórios</li>
+                    </ul>
+                </div>
+                <a href="2026/aula6.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
+
+            <!-- CARD AULA 7 -->
+            <article class="lecture-card">
+                <span class="card-number">07</span>
+                <div>
+                    <span class="card-meta">Plano Complexo Z</span>
+                    <h3>Aula 7: A Transformada Z</h3>
+                    <ul>
+                        <li>Transformada Z Bilateral e Unilateral</li>
+                        <li>Propriedades da Região de Convergência (ROC)</li>
+                        <li>Métodos de cálculo da Inversa (IZT)</li>
+                        <li>Estabilidade e Causalidade em Sistemas LTI</li>
+                    </ul>
+                </div>
+                <a href="2026/aula7.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
+
+            <!-- CARD AULA COMPLEMENTAR (T.Z) -->
+            <article class="lecture-card">
+                <span class="card-number">EX</span>
+                <div>
+                    <span class="card-meta">Complementar</span>
+                    <h3>Extra: Aprofundamento Z</h3>
+                    <ul>
+                        <li>Estudo de funções de transferência complexas</li>
+                        <li>Poles e zeros em outros quadrantes complexos</li>
+                        <li>Resolução analítica de transientes do sistema</li>
+                        <li>Análise de polos complexos conjugados</li>
+                    </ul>
+                </div>
+                <a href="2026/aula_tranf_z.html" target="_blank" class="btn-access">
+                    Acessar Slides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </article>
+
+        </div>
     </div>
 
     <!-- RODAPÉ DA PÁGINA -->
@@ -634,7 +469,7 @@
         <p><b>SEL0343 -- Processamento Digital de Sinais (PDS)</b></p>
         <p>Departamento de Engenharia Elétrica e de Computação (SEL)</p>
         <p>Escola de Engenharia de São Carlos -- Universidade de São Paulo (EESC-USP)</p>
-        <p class="copyright">&copy; 2026 Todos os direitos reservados. Design moderno desenvolvido sob demanda docente.</p>
+        <p class="copyright">&copy; 2026 Todos os direitos reservados. Design moderno estruturado sob demanda acadêmica.</p>
     </footer>
 </body>
 </html>
