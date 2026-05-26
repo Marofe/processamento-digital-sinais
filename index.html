@@ -109,7 +109,7 @@
 
         /* --- Main Layout --- */
         .dashboard-container {
-            max-width: 1300px;
+            max-width: 1100px;
             margin: 3rem auto 0;
             padding: 0 2rem;
             display: flex;
@@ -210,130 +210,117 @@
             border-radius: 2px;
         }
 
-        /* --- Lectures Grid --- */
-        .lectures-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+        /* --- Lectures Vertical List --- */
+        .lectures-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
-        .lecture-card {
+        .lecture-row {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.8rem;
+            border-radius: 14px;
+            padding: 1.2rem 1.8rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            min-height: 280px;
+            gap: 1.5rem;
         }
 
-        .lecture-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 100% 0%, var(--glow-color) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .lecture-card:hover {
-            transform: translateY(-5px);
+        .lecture-row:hover {
+            transform: scale(1.01) translateY(-2px);
             border-color: rgba(0, 180, 216, 0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 180, 216, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 12px rgba(0, 180, 216, 0.08);
+            background-color: rgba(22, 28, 45, 0.6);
         }
 
-        .lecture-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-number {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.15) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: absolute;
-            right: 1.5rem;
-            top: 1rem;
-        }
-
-        .card-meta {
-            font-size: 0.75rem;
-            color: var(--primary-g-end);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .lecture-card h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            color: var(--text-main);
-            padding-right: 2rem;
-        }
-
-        .lecture-card ul {
-            list-style: none;
-            margin-bottom: 1.8rem;
+        .lecture-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             flex-grow: 1;
         }
 
-        .lecture-card ul li {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1rem;
-            line-height: 1.4;
+        .row-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-g-start), var(--primary-g-end));
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3);
+            flex-shrink: 0;
         }
 
-        .lecture-card ul li::before {
-            content: '•';
-            color: var(--primary-g-end);
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1rem;
+        .lecture-row:hover .row-number {
+            background: linear-gradient(135deg, var(--primary-g-end), #80e2ff);
+            box-shadow: 0 4px 14px rgba(0, 180, 216, 0.4);
+        }
+
+        .lecture-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .lecture-details h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .lecture-details p.topics-line {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
 
         .btn-access {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-main);
-            padding: 0.75rem 1.25rem;
-            border-radius: 10px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-decoration: none;
             transition: all 0.3s ease;
-            gap: 0.5rem;
-            z-index: 2;
+            gap: 0.4rem;
+            flex-shrink: 0;
         }
 
-        .lecture-card:hover .btn-access {
+        .lecture-row:hover .btn-access {
             background: linear-gradient(135deg, var(--primary-g-start), var(--primary-g-end));
             border-color: transparent;
-            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.4);
-            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.4);
+        }
+
+        @media (max-width: 640px) {
+            .lecture-row {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem;
+            }
+            .lecture-left {
+                gap: 1rem;
+            }
+            .btn-access {
+                width: 100%;
+            }
         }
 
         /* --- Footer --- */
@@ -420,163 +407,131 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 2: MATERIAL DE AULA (APENAS SLIDES) -->
+        <!-- SEÇÃO 2: MATERIAL DE AULA (FORMATO LISTA) -->
         <section>
             <h2 class="section-title">Aulas Disponíveis (Slides)</h2>
             
-            <div class="lectures-grid">
+            <div class="lectures-list">
                 
-                <!-- CARD AULA 1 -->
-                <article class="lecture-card">
-                    <span class="card-number">01</span>
-                    <div>
-                        <span class="card-meta">Introdução</span>
-                        <h3>Aula 1: Introdução ao PDS</h3>
-                        <ul>
-                            <li>Apresentação da disciplina SEL0343</li>
-                            <li>Sinais e sistemas contínuos e discretos</li>
-                            <li>Ortogonalidade e produto escalar</li>
-                            <li>Introdução prática a PDS</li>
-                        </ul>
+                <!-- LIST ROW AULA 1 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">01</span>
+                        <div class="lecture-details">
+                            <h3>Aula 1: Introdução ao PDS</h3>
+                            <p class="topics-line">Apresentação da disciplina SEL0343 • Sinais e sistemas contínuos e discretos • Ortogonalidade e produto escalar • Introdução prática a PDS</p>
+                        </div>
                     </div>
                     <a href="2026/aula1.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA 2 -->
-                <article class="lecture-card">
-                    <span class="card-number">02</span>
-                    <div>
-                        <span class="card-meta">Amostragem</span>
-                        <h3>Aula 2: Teorema da Amostragem</h3>
-                        <ul>
-                            <li>Critério de amostragem de Nyquist-Shannon</li>
-                            <li>Efeito do Aliasing no tempo e frequência</li>
-                            <li>Reconstrução ideal e ZOH</li>
-                            <li>Filtros anti-aliasing analógicos</li>
-                        </ul>
+                <!-- LIST ROW AULA 2 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">02</span>
+                        <div class="lecture-details">
+                            <h3>Aula 2: Teorema da Amostragem</h3>
+                            <p class="topics-line">Critério de amostragem de Nyquist-Shannon • Efeito do Aliasing no tempo e frequência • Reconstrução ideal e ZOH • Filtros anti-aliasing analógicos</p>
+                        </div>
                     </div>
                     <a href="2026/aula2.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA 3 -->
-                <article class="lecture-card">
-                    <span class="card-number">03</span>
-                    <div>
-                        <span class="card-meta">Fourier Discreto</span>
-                        <h3>Aula 3: Transformada DTFT</h3>
-                        <ul>
-                            <li>Definição da DTFT e espectro periódico</li>
-                            <li>Propriedades fundamentais</li>
-                            <li>Representação de sinais finitos</li>
-                            <li>Definição da DFT (Transformada Discreta)</li>
-                        </ul>
+                <!-- LIST ROW AULA 3 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">03</span>
+                        <div class="lecture-details">
+                            <h3>Aula 3: Transformada DTFT</h3>
+                            <p class="topics-line">Definição da DTFT e espectro periódico • Propriedades fundamentais • Representação de sinais finitos • Definição da DFT (Transformada Discreta)</p>
+                        </div>
                     </div>
                     <a href="2026/aula3.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA 4 -->
-                <article class="lecture-card">
-                    <span class="card-number">04</span>
-                    <div>
-                        <span class="card-meta">Espectro Rápido</span>
-                        <h3>Aula 4: Transformada FFT</h3>
-                        <ul>
-                            <li>Algoritmo Fast Fourier Transform (FFT)</li>
-                            <li>Redução de complexidade para O(N log N)</li>
-                            <li>Decimação no tempo e na frequência</li>
-                            <li>Aplicações práticas da FFT em PDS</li>
-                        </ul>
+                <!-- LIST ROW AULA 4 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">04</span>
+                        <div class="lecture-details">
+                            <h3>Aula 4: Transformada FFT</h3>
+                            <p class="topics-line">Algoritmo Fast Fourier Transform (FFT) • Redução de complexidade para O(N log N) • Decimação no tempo e na frequência • Aplicações práticas da FFT em PDS</p>
+                        </div>
                     </div>
                     <a href="2026/aula4.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA 5 -->
-                <article class="lecture-card">
-                    <span class="card-number">05</span>
-                    <div>
-                        <span class="card-meta">Tempo-Frequência</span>
-                        <h3>Aula 5: STFT (Tempo Curto)</h3>
-                        <ul>
-                            <li>Conceito de Short-Time Fourier Transform</li>
-                            <li>Análise espectral variante no tempo</li>
-                            <li>Funções de Janelamento</li>
-                            <li>Espectrogramas e Princípio de Incerteza</li>
-                        </ul>
+                <!-- LIST ROW AULA 5 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">05</span>
+                        <div class="lecture-details">
+                            <h3>Aula 5: STFT (Tempo Curto)</h3>
+                            <p class="topics-line">Conceito de Short-Time Fourier Transform • Análise espectral variante no tempo • Funções de Janelamento • Espectrogramas e Princípio de Incerteza</p>
+                        </div>
                     </div>
                     <a href="2026/aula5.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
-                </article>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                </div>
 
-                <!-- CARD AULA 6 -->
-                <article class="lecture-card">
-                    <span class="card-number">06</span>
-                    <div>
-                        <span class="card-meta">Multiresolução</span>
-                        <h3>Aula 6: Transf. Wavelet</h3>
-                        <ul>
-                            <li>Limitações da STFT e multiresolução</li>
-                            <li>Wavelet Contínua e Discreta</li>
-                            <li>Wavelets de Haar e Morlet</li>
-                            <li>Filtragem e processamento de transitórios</li>
-                        </ul>
+                <!-- LIST ROW AULA 6 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">06</span>
+                        <div class="lecture-details">
+                            <h3>Aula 6: Transf. Wavelet</h3>
+                            <p class="topics-line">Limitações da STFT e multiresolução • Wavelet Contínua e Discreta • Wavelets de Haar e Morlet • Filtragem e processamento de transitórios</p>
+                        </div>
                     </div>
                     <a href="2026/aula6.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA 7 -->
-                <article class="lecture-card">
-                    <span class="card-number">07</span>
-                    <div>
-                        <span class="card-meta">Plano Complexo Z</span>
-                        <h3>Aula 7: A Transformada Z</h3>
-                        <ul>
-                            <li>Transformada Z Bilateral e Unilateral</li>
-                            <li>Propriedades da Região de Convergência (ROC)</li>
-                            <li>Métodos de cálculo da Inversa (IZT)</li>
-                            <li>Estabilidade e Causalidade em Sistemas LTI</li>
-                        </ul>
+                <!-- LIST ROW AULA 7 -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">07</span>
+                        <div class="lecture-details">
+                            <h3>Aula 7: A Transformada Z</h3>
+                            <p class="topics-line">Transformada Z Bilateral e Unilateral • Propriedades da Região de Convergência (ROC) • Métodos de cálculo da Inversa (IZT) • Estabilidade e Causalidade em Sistemas LTI</p>
+                        </div>
                     </div>
                     <a href="2026/aula7.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
-                <!-- CARD AULA COMPLEMENTAR (T.Z) -->
-                <article class="lecture-card">
-                    <span class="card-number">EX</span>
-                    <div>
-                        <span class="card-meta">Complementar</span>
-                        <h3>Extra: Aprofundamento Z</h3>
-                        <ul>
-                            <li>Estudo de funções de transferência complexas</li>
-                            <li>Polos e zeros em outros quadrantes complexos</li>
-                            <li>Resolução analítica de transientes do sistema</li>
-                            <li>Análise de polos complexos conjugados</li>
-                        </ul>
+                <!-- LIST ROW AULA COMPLEMENTAR (T.Z) -->
+                <div class="lecture-row">
+                    <div class="lecture-left">
+                        <span class="row-number">EX</span>
+                        <div class="lecture-details">
+                            <h3>Extra: Aprofundamento Z</h3>
+                            <p class="topics-line">Estudo de funções de transferência complexas • Polos e zeros em outros quadrantes complexos • Resolução analítica de transientes do sistema • Análise de polos complexos conjugados</p>
+                        </div>
                     </div>
                     <a href="2026/aula_tranf_z.html" target="_blank" class="btn-access">
                         Acessar Slides
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
-                </article>
+                </div>
 
             </div>
         </section>
