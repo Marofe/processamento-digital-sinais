@@ -1,0 +1,72 @@
+<svg width="600" height="240" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#000000" />
+    </marker>
+    <!-- Red Arrow Marker -->
+    <marker id="red-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- Grid Lines (Subtle) -->
+  <line x1="50" y1="40" x2="550" y2="40" stroke="#f1f5f9" stroke-width="1.5" />
+  <line x1="50" y1="120" x2="550" y2="120" stroke="#f1f5f9" stroke-width="1.5" />
+  <line x1="50" y1="200" x2="550" y2="200" stroke="#e2e8f0" stroke-width="1.5" />
+
+  <!-- Horizontal Axis (Frequency) -->
+  <line x1="40" y1="200" x2="560" y2="200" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="570" y="204" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000">ω</text>
+
+  <!-- Vertical Axis (Magnitude in dB) -->
+  <line x1="300" y1="20" x2="300" y2="215" stroke="#000000" stroke-width="1.5" />
+  <text x="290" y="16" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000" text-anchor="end">|W(e^{jω})| (dB)</text>
+
+  <!-- Window Spectrum Curve (Sinc-like dB representation) -->
+  <path d="M 60 195 
+           C 70 195, 80 185, 90 185 
+           C 100 185, 110 195, 120 195 
+           C 130 195, 140 165, 150 165 
+           C 160 165, 170 195, 180 195 
+           C 192 195, 204 125, 215 125 
+           C 226 125, 236 195, 246 195 
+           C 260 195, 275 40, 300 40 
+           C 325 40, 340 195, 354 195 
+           C 364 195, 374 125, 385 125 
+           C 396 125, 408 195, 420 195 
+           C 430 195, 440 165, 450 165 
+           C 460 165, 470 195, 480 195 
+           C 490 195, 500 185, 510 185 
+           C 520 185, 530 195, 540 195" 
+        fill="none" stroke="#0284c7" stroke-width="2.5" />
+
+  <!-- Lobe Labels -->
+  <!-- Main Lobe Label -->
+  <text x="300" y="90" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0284c7" text-anchor="middle">LÓBULO PRINCIPAL</text>
+  <text x="300" y="103" font-family="Arial, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">(Define a Largura de Transição)</text>
+
+  <!-- Side Lobe Label -->
+  <text x="430" y="145" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ea580c" text-anchor="start">Lóbulos Secundários</text>
+  <text x="430" y="157" font-family="Arial, sans-serif" font-size="9" fill="#64748b" text-anchor="start">(Causam Vazamento Espectral)</text>
+
+  <!-- Main Lobe Width Indicator -->
+  <line x1="246" y1="212" x2="354" y2="212" stroke="#0f172a" stroke-width="1.2" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+  <line x1="246" y1="197" x2="246" y2="218" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2" />
+  <line x1="354" y1="197" x2="354" y2="218" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2" />
+  <text x="300" y="226" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Largura do Lóbulo Principal (Δω)</text>
+
+  <!-- Peak Side Lobe Attenuation Indicator -->
+  <!-- Level Line at Peak of First Side Lobe -->
+  <line x1="300" y1="125" x2="385" y2="125" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3,3" />
+  <!-- Vertical Double Arrow -->
+  <line x1="315" y1="42" x2="315" y2="123" stroke="#ef4444" stroke-width="1.5" marker-start="url(#red-arrow)" marker-end="url(#red-arrow)" />
+  <text x="323" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="start">Atenuação do Lóbulo</text>
+  <text x="323" y="97" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="start">Secundário (ex: -53 dB)</text>
+
+  <!-- 0 dB reference label -->
+  <text x="290" y="44" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="end">0 dB</text>
+</svg>

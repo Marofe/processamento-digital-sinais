@@ -1,0 +1,105 @@
+<svg width="600" height="230" viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="axisArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 Z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- ================= LEFT PLOT: FIR (FASE LINEAR) ================= -->
+  <g transform="translate(10, 0)">
+    <!-- Plot Frame Box (MATLAB style) -->
+    <rect x="50" y="45" width="210" height="130" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Thin Grid Lines -->
+    <line x1="50" y1="77" x2="260" y2="77" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="50" y1="110" x2="260" y2="110" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="50" y1="142" x2="260" y2="142" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="102" y1="45" x2="102" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="155" y1="45" x2="155" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="207" y1="45" x2="207" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    
+    <!-- Linear Phase Plot (Solid MATLAB Blue Line) -->
+    <!-- Perfect straight line from (50, 55) to (250, 165) -->
+    <line x1="50" y1="55" x2="250" y2="165" stroke="#0072bd" stroke-width="2.5" />
+    
+    <!-- Outer tick marks -->
+    <line x1="50" y1="175" x2="50" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="155" y1="175" x2="155" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="260" y1="175" x2="260" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="45" x2="55" y2="45" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="110" x2="55" y2="110" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="175" x2="55" y2="175" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Axis Labels -->
+    <text x="155" y="193" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">Frequência (rad)</text>
+    <text x="15" y="110" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle" transform="rotate(-90 15 110)">Fase (rad)</text>
+    
+    <!-- Tick values -->
+    <text x="50" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">0</text>
+    <text x="155" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">π/2</text>
+    <text x="260" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">π</text>
+    
+    <text x="44" y="58" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">0</text>
+    <text x="44" y="113" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">-π/2</text>
+    <text x="44" y="168" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">-π</text>
+    
+    <!-- Header Text -->
+    <text x="155" y="25" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0072bd" text-anchor="middle">FILTRO FIR (FASE LINEAR)</text>
+    
+    <!-- Bullet Descriptions -->
+    <text x="155" y="212" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#0072bd" text-anchor="middle">Atraso de Grupo Constante (Flat)</text>
+    <text x="155" y="225" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Preserva a forma de onda do sinal</text>
+  </g>
+
+  <!-- Central Split Line -->
+  <line x1="300" y1="20" x2="300" y2="190" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4,3" />
+
+  <!-- ================= RIGHT PLOT: IIR (FASE NÃO-LINEAR) ================= -->
+  <g transform="translate(320, 0)">
+    <!-- Plot Box (MATLAB style) -->
+    <rect x="50" y="45" width="210" height="130" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Grid Lines -->
+    <line x1="50" y1="77" x2="260" y2="77" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="50" y1="110" x2="260" y2="110" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="50" y1="142" x2="260" y2="142" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="102" y1="45" x2="102" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="155" y1="45" x2="155" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="207" y1="45" x2="207" y2="175" stroke="#f1f5f9" stroke-width="0.6" />
+    
+    <!-- Non-Linear Phase Plot (Solid MATLAB Red/Orange Line) -->
+    <!-- Beautiful Bezier curve from (50, 55) through (150, 65) to (250, 165) -->
+    <path d="M 50 55 C 100 50, 140 120, 250 165" fill="none" stroke="#d90429" stroke-width="2.5" />
+    
+    <!-- Outer tick marks -->
+    <line x1="50" y1="175" x2="50" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="155" y1="175" x2="155" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="260" y1="175" x2="260" y2="171" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="45" x2="55" y2="45" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="110" x2="55" y2="110" stroke="#000000" stroke-width="0.8" />
+    <line x1="50" y1="175" x2="55" y2="175" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Axis Labels -->
+    <text x="155" y="193" font-family="Arial, sans-serif" font-size="9" fill="#000000" text-anchor="middle">Frequência (rad)</text>
+    
+    <!-- Tick values -->
+    <text x="50" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">0</text>
+    <text x="155" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">π/2</text>
+    <text x="260" y="184" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">π</text>
+    
+    <text x="44" y="58" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">0</text>
+    <text x="44" y="113" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">-π/2</text>
+    <text x="44" y="168" font-family="Arial, sans-serif" font-size="8" fill="#64748b" text-anchor="end">-π</text>
+    
+    <!-- Header Text -->
+    <text x="155" y="25" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d90429" text-anchor="middle">FILTRO IIR (FASE NÃO-LINEAR)</text>
+    
+    <!-- Bullet Descriptions -->
+    <text x="155" y="212" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#d90429" text-anchor="middle">Atraso de Grupo Variável (Distorcido)</text>
+    <text x="155" y="225" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Modifica as fases relativas das harmônicas</text>
+  </g>
+</svg>

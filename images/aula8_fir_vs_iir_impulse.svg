@@ -1,0 +1,198 @@
+<svg width="650" height="280" viewBox="0 0 650 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- ================= LEFT PLOT: FIR (PULSO / GATE) ================= -->
+  <g transform="translate(10, 0)">
+    <!-- Plot Frame Box (MATLAB style) -->
+    <rect x="45" y="45" width="250" height="160" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Thin Grid Lines -->
+    <line x1="45" y1="115" x2="295" y2="115" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="45" y1="65" x2="295" y2="65" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="100" y1="45" x2="100" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="140" y1="45" x2="140" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="180" y1="45" x2="180" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="220" y1="45" x2="220" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="260" y1="45" x2="260" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    
+    <!-- Baseline (y = 0) -->
+    <line x1="45" y1="165" x2="295" y2="165" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Ticks -->
+    <!-- X Ticks -->
+    <line x1="60" y1="205" x2="60" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="100" y1="205" x2="100" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="140" y1="205" x2="140" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="180" y1="205" x2="180" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="220" y1="205" x2="220" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="260" y1="205" x2="260" y2="201" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Y Ticks -->
+    <line x1="45" y1="165" x2="50" y2="165" stroke="#000000" stroke-width="0.8" />
+    <line x1="45" y1="115" x2="50" y2="115" stroke="#000000" stroke-width="0.8" />
+    <line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Axis Labels -->
+    <text x="170" y="232" font-family="Arial, sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Amostras (k)</text>
+    <text x="15" y="125" font-family="Arial, sans-serif" font-size="10.5" fill="#000000" text-anchor="middle" transform="rotate(-90 15 125)">g[k]</text>
+    
+    <!-- Tick values -->
+    <text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>
+    <text x="100" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">0</text>
+    <text x="140" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">2</text>
+    <text x="180" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">4</text>
+    <text x="220" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">6</text>
+    <text x="260" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">8</text>
+    
+    <text x="38" y="168" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.0</text>
+    <text x="38" y="118" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.5</text>
+    <text x="38" y="68" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">1.0</text>
+    
+    <!-- Header Text -->
+    <text x="170" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0072bd" text-anchor="middle">RESPOSTA AO IMPULSO FIR (PULSO)</text>
+    
+    <!-- STEMS for FIR (Gate/Pulse Function) -->
+    <!-- k = -2, -1: 0.0 -->
+    <circle cx="60" cy="165" r="4" fill="#0072bd" />
+    <circle cx="80" cy="165" r="4" fill="#0072bd" />
+    
+    <!-- k = 0 to 4: 1.0 -->
+    <line x1="100" y1="165" x2="100" y2="65" stroke="#0072bd" stroke-width="2" />
+    <circle cx="100" cy="65" r="4" fill="#0072bd" />
+    
+    <line x1="120" y1="165" x2="120" y2="65" stroke="#0072bd" stroke-width="2" />
+    <circle cx="120" cy="65" r="4" fill="#0072bd" />
+    
+    <line x1="140" y1="165" x2="140" y2="65" stroke="#0072bd" stroke-width="2" />
+    <circle cx="140" cy="65" r="4" fill="#0072bd" />
+    
+    <line x1="160" y1="165" x2="160" y2="65" stroke="#0072bd" stroke-width="2" />
+    <circle cx="160" cy="65" r="4" fill="#0072bd" />
+    
+    <line x1="180" y1="165" x2="180" y2="65" stroke="#0072bd" stroke-width="2" />
+    <circle cx="180" cy="65" r="4" fill="#0072bd" />
+    
+    <!-- k = 5 to 9: 0.0 -->
+    <circle cx="200" cy="165" r="4" fill="#0072bd" />
+    <circle cx="220" cy="165" r="4" fill="#0072bd" />
+    <circle cx="240" cy="165" r="4" fill="#0072bd" />
+    <circle cx="260" cy="165" r="4" fill="#0072bd" />
+    <circle cx="280" cy="165" r="4" fill="#0072bd" />
+
+    <!-- Dashed boundary indicating finite length -->
+    <path d="M 90 65 L 190 65" fill="none" stroke="#0072bd" stroke-width="1" stroke-dasharray="3,3" />
+
+    <!-- Bullet Descriptions -->
+    <text x="170" y="248" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#0072bd" text-anchor="middle">Duração Finita (M = 4)</text>
+    <text x="170" y="262" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Resposta é exatamente zero para k &gt; 4</text>
+  </g>
+
+  <!-- Central Split Line -->
+  <line x1="325" y1="20" x2="325" y2="235" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4,3" />
+
+  <!-- ================= RIGHT PLOT: IIR (DEC DECRESCENTE) ================= -->
+  <g transform="translate(340, 0)">
+    <!-- Plot Box (MATLAB style) -->
+    <rect x="45" y="45" width="250" height="160" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Grid Lines -->
+    <line x1="45" y1="115" x2="295" y2="115" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="45" y1="65" x2="295" y2="65" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="100" y1="45" x2="100" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="140" y1="45" x2="140" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="180" y1="45" x2="180" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="220" y1="45" x2="220" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="260" y1="45" x2="260" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+    
+    <!-- Baseline (y = 0) -->
+    <line x1="45" y1="165" x2="295" y2="165" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Ticks -->
+    <!-- X Ticks -->
+    <line x1="60" y1="205" x2="60" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="100" y1="205" x2="100" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="140" y1="205" x2="140" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="180" y1="205" x2="180" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="220" y1="205" x2="220" y2="201" stroke="#000000" stroke-width="0.8" />
+    <line x1="260" y1="205" x2="260" y2="201" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Y Ticks -->
+    <line x1="45" y1="165" x2="50" y2="165" stroke="#000000" stroke-width="0.8" />
+    <line x1="45" y1="115" x2="50" y2="115" stroke="#000000" stroke-width="0.8" />
+    <line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Axis Labels -->
+    <text x="170" y="232" font-family="Arial, sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Amostras (k)</text>
+    
+    <!-- Tick values -->
+    <text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>
+    <text x="100" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">0</text>
+    <text x="140" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">2</text>
+    <text x="180" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">4</text>
+    <text x="220" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">6</text>
+    <text x="260" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">8</text>
+    
+    <text x="38" y="168" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.0</text>
+    <text x="38" y="118" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.5</text>
+    <text x="38" y="68" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">1.0</text>
+    
+    <!-- Header Text -->
+    <text x="170" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d90429" text-anchor="middle">RESPOSTA AO IMPULSO IIR (EXPONENCIAL)</text>
+    
+    <!-- STEMS for IIR (Decaying Exponential h[k] = 0.7^k) -->
+    <!-- k = -2, -1: 0.0 -->
+    <circle cx="60" cy="165" r="4" fill="#d90429" />
+    <circle cx="80" cy="165" r="4" fill="#d90429" />
+    
+    <!-- k = 0: 1.0 -->
+    <line x1="100" y1="165" x2="100" y2="65" stroke="#d90429" stroke-width="2" />
+    <circle cx="100" cy="65" r="4" fill="#d90429" />
+    
+    <!-- k = 1: 0.7 -->
+    <line x1="120" y1="165" x2="120" y2="95" stroke="#d90429" stroke-width="2" />
+    <circle cx="120" cy="95" r="4" fill="#d90429" />
+    
+    <!-- k = 2: 0.49 -->
+    <line x1="140" y1="165" x2="140" y2="116" stroke="#d90429" stroke-width="2" />
+    <circle cx="140" cy="116" r="4" fill="#d90429" />
+    
+    <!-- k = 3: 0.34 -->
+    <line x1="160" y1="165" x2="160" y2="131" stroke="#d90429" stroke-width="2" />
+    <circle cx="160" cy="131" r="4" fill="#d90429" />
+    
+    <!-- k = 4: 0.24 -->
+    <line x1="180" y1="165" x2="180" y2="141" stroke="#d90429" stroke-width="2" />
+    <circle cx="180" cy="141" r="4" fill="#d90429" />
+    
+    <!-- k = 5: 0.17 -->
+    <line x1="200" y1="165" x2="200" y2="148" stroke="#d90429" stroke-width="2" />
+    <circle cx="200" cy="148" r="4" fill="#d90429" />
+    
+    <!-- k = 6: 0.12 -->
+    <line x1="220" y1="165" x2="220" y2="153" stroke="#d90429" stroke-width="2" />
+    <circle cx="220" cy="153" r="4" fill="#d90429" />
+    
+    <!-- k = 7: 0.08 -->
+    <line x1="240" y1="165" x2="240" y2="157" stroke="#d90429" stroke-width="2" />
+    <circle cx="240" cy="157" r="4" fill="#d90429" />
+    
+    <!-- k = 8: 0.06 -->
+    <line x1="260" y1="165" x2="260" y2="159" stroke="#d90429" stroke-width="2" />
+    <circle cx="260" cy="159" r="4" fill="#d90429" />
+    
+    <!-- k = 9: 0.04 (decays further, show ellipsis / arrow) -->
+    <line x1="280" y1="165" x2="280" y2="161" stroke="#d90429" stroke-width="2" />
+    <circle cx="280" cy="161" r="4" fill="#d90429" />
+
+    <!-- Dotted curve envelope for IIR -->
+    <path d="M 100 65 Q 120 95 140 116 T 280 161" fill="none" stroke="#d90429" stroke-width="1.2" stroke-dasharray="3,3" />
+
+    <!-- Text showing infinite continuation -->
+    <text x="290" y="162" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d90429">...</text>
+
+    <!-- Bullet Descriptions -->
+    <text x="170" y="248" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#d90429" text-anchor="middle">Duração Infinita</text>
+    <text x="170" y="262" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Decai assintoticamente, mas nunca zera</text>
+  </g>
+</svg>

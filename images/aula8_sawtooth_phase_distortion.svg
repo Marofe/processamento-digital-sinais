@@ -1,0 +1,69 @@
+<svg width="630" height="260" viewBox="0 0 630 260" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- ================= PANEL 1: ORIGINAL SAWTOOTH ================= -->
+  <g transform="translate(10, 0)">
+    <!-- Title -->
+    <text x="120" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">1. SINAL ORIGINAL</text>
+    
+    <!-- Plot Box -->
+    <rect x="40" y="45" width="160" height="110" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Grid Line -->
+    <line x1="40" y1="100" x2="200" y2="100" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="120" y1="45" x2="120" y2="155" stroke="#f1f5f9" stroke-width="0.6" />
+
+    <!-- Waveform (Sawtooth) -->
+    <path d="M 40 73.3 L 60 55 L 60 145 L 120 55 L 120 145 L 180 55 L 180 145 L 200 115" fill="none" stroke="#475569" stroke-width="2" />
+    
+    <!-- Description -->
+    <text x="120" y="180" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="middle">Dente de Serra Original</text>
+    <text x="120" y="193" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">Harmônicas perfeitamente em fase</text>
+  </g>
+
+  <!-- ================= PANEL 2: LINEAR PHASE (FIR) ================= -->
+  <g transform="translate(215, 0)">
+    <!-- Title -->
+    <text x="120" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0072bd" text-anchor="middle">2. SAÍDA (FASE LINEAR)</text>
+    
+    <!-- Plot Box -->
+    <rect x="40" y="45" width="160" height="110" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Grid Line -->
+    <line x1="40" y1="100" x2="200" y2="100" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="120" y1="45" x2="120" y2="155" stroke="#f1f5f9" stroke-width="0.6" />
+
+    <!-- Delayed Sawtooth (Exact same shape, shifted x by 20px) -->
+    <path d="M 40 115 L 80 55 L 80 145 L 140 55 L 140 145 L 200 55" fill="none" stroke="#0072bd" stroke-width="2" />
+    
+    <!-- Delay indicator arrow -->
+    <path d="M 50 40 L 70 40" fill="none" stroke="#0072bd" stroke-width="0.8" marker-end="url(#axisArrow)" />
+    <text x="60" y="35" font-family="Arial, sans-serif" font-size="7.5" fill="#0072bd" text-anchor="middle">Atraso</text>
+
+    <!-- Description -->
+    <text x="120" y="180" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#0072bd" text-anchor="middle">Forma de Onda Preservada</text>
+    <text x="120" y="193" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">Todas as harmônicas atrasadas de forma idêntica</text>
+  </g>
+
+  <!-- ================= PANEL 3: NON-LINEAR PHASE ================= -->
+  <g transform="translate(420, 0)">
+    <!-- Title -->
+    <text x="120" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d90429" text-anchor="middle">3. SAÍDA (FASE NÃO-LINEAR)</text>
+    
+    <!-- Plot Box -->
+    <rect x="40" y="45" width="160" height="110" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+    
+    <!-- Grid Line -->
+    <line x1="40" y1="100" x2="200" y2="100" stroke="#f1f5f9" stroke-width="0.6" />
+    <line x1="120" y1="45" x2="120" y2="155" stroke="#f1f5f9" stroke-width="0.6" />
+
+    <!-- Distorted Sawtooth (Fourier synthesis with phase shifts) -->
+    <!-- Represents wave dispersion and ripples near edges -->
+    <path d="M 40 85 C 48 110, 52 140, 60 140 C 72 140, 80 80, 90 70 C 100 60, 108 55, 115 130 C 122 142, 130 115, 140 100 C 150 85, 158 55, 168 55 C 175 55, 180 135, 192 125 C 196 120, 198 100, 200 95" fill="none" stroke="#d90429" stroke-width="2" />
+
+    <!-- Description -->
+    <text x="120" y="180" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#d90429" text-anchor="middle">Dispersão e Deformação</text>
+    <text x="120" y="193" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">Harmônicas desalinhadas devido a atrasos distintos</text>
+  </g>
+</svg>

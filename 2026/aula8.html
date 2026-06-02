@@ -1,0 +1,973 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<!-- Slide 1: Capa -->
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+						<h2><br>Filtros Digitais do Tipo FIR (Finite Impulse Response)</h2>
+					</div>
+					<div class="author">
+						<h3>Prof. Marcos Rogério Fernandes</h3>
+					</div>
+					<div class="advisor">
+						<p style="text-align: center; font-size: 0.8em;">02 de junho de 2026</p>
+					</div>
+				</section>
+
+				<!-- Slide 2: Objetivos Parte 1 -->
+				<section>
+					<div class="slide-title">
+						<h2>Objetivos</h2>
+					</div>
+					<div class="slide-content">
+						<p>Os objetivos teóricos desta aula são compreender:</p>
+						<ul>
+							<li>A definição dos filtros <b>FIR (Finite Impulse Response)</b>;</li>
+							<li>A representação em diagrama de blocos;</li>
+							<li>A propriedade de <b>Fase Linear</b>;</li>
+							<li>Análise de estabilidade;</li>
+							<li>Exemplos.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 4: O que é um Filtro Digital -->
+				<section>
+					<div class="slide-title">
+						<h2>O que é um Filtro Digital?</h2>
+					</div>
+					<div class="slide-content">
+						<p>No processamento digital de sinais, um filtro é um sistema que:</p>
+						<ul>
+							<li>É Linear e Invariante no Tempo (LIT) discreto no tempo.</li>
+							<li>Modifica as características espectrais (amplitude e fase) de um sinal de entrada $x[k]$.</li>
+							<li>Produz um sinal de saída processado $y[k]$ com as frequências desejadas.</li>
+						</ul>
+					</div>
+					<center>
+							<img src="../images/sistema_discreto.png" width="600" alt="Sistema Discreto">
+						</center>
+				</section>
+
+
+					<!-- Slide 5: Diagrama Geral Filtro -->
+				<section>
+					<div class="slide-title">
+						<h2>Sinal com ruído</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sinal_ruidoso.png" width="950" alt="Sistema Discreto">							
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 5: Diagrama Geral Filtro -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtros Digitais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sistema_discreto.png" width="600" alt="Sistema Discreto">							
+							<p>Os filtros digitais são classificados de acordo com a duração de sua resposta ao impulso:</p>
+						<ul>
+							<li><b>FIR (Finite Impulse Response):</b> Resposta ao impulso tem duração finita (amostras limitadas).</li>
+							<li><b>IIR (Infinite Impulse Response):</b> Resposta ao impulso se estende indefinidamente (duração infinita).</li>
+						</ul>
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 6: Resposta ao Impulso FIR vs IIR (Visual) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso: FIR vs IIR</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/aula8_fir_vs_iir_impulse.svg" width="950" alt="Resposta ao Impulso FIR vs IIR">
+						</center>
+					</div>
+				</section>
+
+
+								<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo FIR 1° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1]$$
+							</p>
+							ou
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = b_0+ b_1 z^{-1}$$
+							</p>
+						</p>
+
+					</div>
+				</section>
+
+
+				
+								<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo FIR 2° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1]+b_2x[k-2]$$
+							</p>
+							ou
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = b_0+ b_1 z^{-1}+b_2z^{-2}$$
+							</p>
+						</p>
+
+					</div>
+				</section>
+
+
+									<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo FIR 3° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1]+b_2x[k-2]+b_3x[k-3]$$
+							</p>
+							ou
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = b_0+ b_1 z^{-1}+b_2z^{-2}+b_3z^{-3}$$
+							</p>
+						</p>
+
+					</div>
+				</section>
+
+				<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro FIR de ordem M</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1] + \dots + b_M x[k-M]$$
+							</p>
+						</p>
+						<ul>
+							<li>$b_k$: São os <b>coeficientes</b> (ou parâmetros) do filtro.</li>
+							<li>$M$: É a <b>ordem do filtro</b> (representa o atraso máximo).</li>
+							<li>$N = M + 1$: É o comprimento do filtro (número de coeficientes ou <i>taps</i>).</li>
+						</ul>
+					</div>
+				</section>
+
+
+							<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro FIR de ordem M</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = b_0 + b_1 z^{-1} + \dots + b_M z^{-M}$$
+							</p>
+						</p>
+						<ul>
+							<li>$b_k$: São os <b>coeficientes</b> (ou parâmetros) do filtro.</li>
+							<li>$M$: É a <b>ordem do filtro</b> (representa o atraso máximo).</li>
+							<li>$N = M + 1$: É o comprimento do filtro (número de coeficientes ou <i>taps</i>).</li>
+						</ul>
+					</div>
+				</section>
+
+
+				
+				<!-- Slide 7: Definição Matemática -->
+				<section>
+					<div class="slide-title">
+						<h2>Definição do Filtro FIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Um filtro FIR é caracterizado por uma equação de diferenças:</p>
+						<center class="lightup2">
+							$$y[k] = \sum_{i=0}^{M} b_i x[k-i]$$
+						</center>
+						<ul>
+							<li>A saída depende <b>exclusivamente</b> de valores presentes e passados da entrada.</li>
+							<li>Não há realimentação (feedback) de valores anteriores da saída $y[k-1], y[k-2], \dots$</li>
+						</ul>
+					</div>
+				</section>
+
+				
+
+
+				<!-- Slide 9: Resposta ao Impulso g[k] -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do filtro FIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Ao aplicarmos um impulso unitário $x[k] = \delta[k]$ ao filtro, tem-se:</p>
+						<center>
+							<p class="lightup2">
+							$$y[k] = g[k] = \sum_{i=0}^{M} b_i \delta[k-i]$$
+							</p>
+						</center>
+						<ul>
+							<li>Pela propriedade de amostragem da função delta, $\delta[k-i]$ é diferente de zero apenas em $k = i$.</li>
+						</ul>
+					</div>
+				</section>
+
+
+									<!-- Slide 8: Parâmetros Principais -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo FIR 2° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças 
+							<p class="lightup2">
+							$$y[k] = 0.5 x[k] + 0.9 x[k-1] + 0.4 x[k-2]$$
+							</p>
+							então,
+							<p class="lightup2">
+							$$
+								g[k] = 0.5\delta[k] + 0.9\delta[k-1] + 0.4\delta[k-2]
+							$$
+							</p>
+						</p>
+
+					</div>
+				</section>
+
+				<!-- Slide: Gráfico da Resposta ao Impulso FIR 2ª Ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Gráfico da Resposta ao Impulso (2ª ordem)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/aula8_fir_2nd_order_impulse.svg" width="900" alt="Gráfico da Resposta ao Impulso FIR de 2a ordem">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 10: Amostras Coeficientes -->
+				<section>
+					<div class="slide-title">
+						<h2>Consequência Importante</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<p>Os coeficientes do filtro $b_k$ são idênticos às amostras da resposta ao impulso do sistema:</p>
+						<center>
+							
+							<p class="lightup">$$
+									g[k-i]=b_i\delta[k-i],\quad i=0,\ldots,M
+								$$
+							</p>
+						</center>
+						<p style="text-align: center; font-size: 0.9em;margin-top: 5px;">A resposta é naturalmente nula fora do intervalo $[0, M]$.</p>
+					</div>
+				</section>
+
+
+					<!-- Slide 12: Elementos do Diagrama -->
+				<section>
+					<div class="slide-title">
+						<h2>Elementos da Estrutura</h2>
+					</div>
+					<div class="slide-content">
+						<p>O hardware/software do filtro FIR é constituído por três blocos simples:</p>
+						<ul>
+							<li><b>Atrasos ($z^{-1}$):</b> Registradores de memória que guardam amostras anteriores da entrada.</li>
+							<li><b>Multiplicadores ($b_k$):</b> Escalam os sinais atrasados pelos coeficientes do filtro.</li>
+							<li><b>Somadores:</b> Acumulam os produtos para gerar a saída final $y[k]$.</li>
+						</ul>
+						<center>
+						<img src="../images/aula8_fir_elements.svg" width="750" alt="Elementos do Filtro FIR">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 11: Diagrama em Blocos SVG -->
+				<section>
+					<div class="slide-title">
+						<h2>Diagrama em Blocos (Forma Direta)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							
+							<img src="../images/diagrama_fir.svg" width="1200" alt="Diagrama em Blocos Filtro FIR">
+						</center>
+					</div>
+				</section>
+
+			
+
+				<!-- Slide 12B: O Filtro de Média Móvel (Definição) -->
+				<section>
+					<div class="slide-title">
+						<h2>O Filtro de Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<p>O <b>Filtro de Média Móvel (Moving Average)</b> é o caso mais simples e intuitivo de um filtro FIR:</p>
+						<center class="lightup2">
+							$$y[k] = \frac{1}{N} \sum_{i=0}^{N-1} x[k-i]$$
+						</center>
+						<ul>
+							<li><b>Funcionamento:</b> Calcula a média aritmética das últimas $N$ amostras do sinal de entrada.</li>
+							<li><b>Coeficientes:</b> Todos os coeficientes são idênticos: $b_i = \frac{1}{N}$.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide: Resposta ao Impulso Média Móvel (Ordem 4) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula8_moving_average_impulse.svg" width="900" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+							<p>$
+								y[k]=\frac{1}{5} \sum_{i=0}^{4} x[k-i]
+							$
+							</p>
+						</center>
+					</div>
+				</section>
+
+									<!-- Slide: Resposta ao Impulso Média Móvel (Ordem 4) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/convolution_media_movel.gif" width="900" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+			
+						</center>
+					</div>
+				</section>
+				
+
+
+								<!-- Slide: Resposta ao Impulso Média Móvel (Ordem 4) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sinal_ruidoso_avg4.png" width="900" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+			
+						</center>
+					</div>
+				</section>
+
+					<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/convolution_media_movel_avg10.gif" width="900" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+			
+						</center>
+					</div>
+				</section>
+
+
+				
+					<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/convolution_media_movel_avg20.gif" width="900" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+			
+						</center>
+					</div>
+				</section>
+
+
+					
+					<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro Média Móvel</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sinal_ruidoso_avg_results.png" width="820" alt="Resposta ao Impulso Média Móvel de Ordem 4">
+							
+			
+						</center>
+					</div>
+				</section>
+				
+
+				<!-- Slide 13: Função de Transferência G(z) -->
+				<section>
+					<div class="slide-title">
+						<h2>Função de Transferência $G(z)$</h2>
+					</div>
+					<div class="slide-content">
+						<p>Aplicando a Transformada Z em ambos os lados da equação de diferenças:</p>
+						<center class="lightup">
+							$$G(z) = \sum_{k=0}^{M} g[k] z^{-k} = b_0 + b_1 z^{-1} + \dots + b_M z^{-M}$$
+						</center>
+						<ul>
+							<li>Representação do filtro FIR em termos de potências negativas de $z$.</li>
+							
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 14: Polinômio Denominador -->
+				<section>
+					<div class="slide-title">
+						<h2>Forma Polinomial do Filtro</h2>
+					</div>
+					<div class="slide-content">
+						<p>Podemos expressar $G(z)$ utilizando potências positivas para facilitar a análise:</p>
+						<center class="lightup">
+							$$G(z) = \frac{b_0 z^M + b_1 z^{M-1} + \dots + b_M}{z^M}$$
+						</center>
+						<ul>
+							<li>O numerador é um polinômio de ordem $M$ cujas raízes determinam os <b>zeros</b>.</li>
+							<li>O denominador é o termo monomial $z^M$.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 15: Polos na Origem -->
+				<section>
+					<div class="slide-title">
+						<h2>Distribuição de Polos</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<p>Analisando o denominador $z^M = 0$:</p>
+						<ul>
+							<li>Um filtro FIR de ordem $M$ possui exatamente <b>$M$ polos localizados na origem</b> ($z = 0$).</li>
+							<li>Não existem polos em nenhuma outra região do plano complexo $z$.</li>
+							<li>Isso simplifica drasticamente a análise de estabilidade do sistema.</li>
+						</ul>
+					</div>
+				</section>
+
+
+						<!-- Slide 18: Mapa de Polos e Zeros PNG -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: Polos e Zeros</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p style="font-size: 0.9em; margin-bottom: 5px;">Mapa de polos e zeros obtido na simulação MATLAB de ordem $M=60$:</p>
+							<img src="../images/aula8_fir_poles_zeros.png" width="500" alt="Mapa de Polos e Zeros FIR">
+							
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 17: Estabilidade Garantida -->
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade BIBO Garantida</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<p>Pelo critério de estabilidade em tempo discreto:</p>
+						<ul>
+							<li>Um sistema LIT é estável se todos os seus polos residem estritamente dentro do círculo unitário ($|z| < 1$).</li>
+							<li>Como todos os polos de um filtro FIR estão exatamente em $z = 0$:
+								<p>&nbsp;</p>
+							<p class="lightup">
+								Filtros FIR são intrinsecamente estáveis!
+								</p>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				
+				<!-- Slide 21: Fase Linear -->
+				<section>
+					<div class="slide-title">
+						<h2>Fase linear vs Não-linear</h2>
+					</div>
+					<div class="slide-content">
+						<p>Um filtro possui <b>Fase Linear</b> se a resposta de fase varia linearmente com a frequência angular $\omega$:</p>
+						<center class="lightup">
+							$$\angle G(e^{j\omega}) = -\alpha \omega$$
+						</center>
+						<ul>
+							<li>No qual $\alpha$ é uma constante real positiva.</li>
+							<li>Esta propriedade garante distorção harmônica zero na fase do sinal.</li>
+						</ul>
+					</div>
+				</section>
+
+
+				
+				<!-- Slide 22: Atraso de Grupo -->
+				<section>
+					<div class="slide-title">
+						<h2>Atraso de Grupo Constante</h2>
+					</div>
+					<div class="slide-content">
+						<p>O atraso de grupo ($\tau_g$) é a taxa de variação da fase com a frequência:</p>
+						<center>
+							<p class="lightup">
+							$$\tau_g(\omega) = -\frac{d \angle G(e^{j\omega})}{d\omega} = \alpha \quad \text{amostras}$$
+							</p>
+						</center>
+						<ul>
+							<li>Como $\tau_g(\omega) = \alpha$ é <b>constante</b>:</li>
+							<li><b>Todas as componentes harmônicas sofrem exatamente o mesmo atraso de tempo ao cruzar o filtro.</b></li>
+						</ul>
+					</div>
+				</section>
+
+
+
+				<!-- Slide 22B: Comparação de Fase Linear vs Não-Linear -->
+				<section>
+					<div class="slide-title">
+						<h2>Fase Linear vs Fase Não-Linear</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula8_phase_comparison_stressed.svg" width="1100" alt="Comparação de Fase Linear vs Não-Linear">
+							<p style="font-size: 0.8em; color: #64748b; margin-top: 5px;">A fase linear garante atraso de grupo constante, enquanto a fase não-linear causa dispersão devido a atrasos variáveis.</p>
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 22C: Efeito da Fase em um Sinal Dente de Serra -->
+				<section>
+					<div class="slide-title">
+						<h2>Efeito da Fase: Sinal Dente de Serra</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula8_sawtooth_phase_distortion.svg" width="1100" alt="Efeito da Fase em um Sinal Dente de Serra">
+							<p style="font-size: 0.8em; color: #64748b; margin-top: 5px;">No filtro de fase linear, todas as componentes harmônicas sofrem o mesmo atraso temporal, preservando a forma da onda. Na fase não-linear, o desalinhamento de fase deforma o sinal.</p>
+						</center>
+					</div>
+				</section>
+
+
+
+
+				
+
+				<!-- Slide 23: Importância didática -->
+				<section>
+					<div class="slide-title">
+						<h2>Por que a Fase Linear é Crucial?</h2>
+					</div>
+					<div class="slide-content">
+						<p>A constância do atraso de grupo impede a distorção dispersiva do sinal:</p>
+						<ul>
+							<li><b>Sinais Biomédicos (ECG/EEG):</b> Evita alterar a forma geométrica do batimento cardíaco, preservando o valor diagnóstico.</li>
+							<li><b>Sistemas de Áudio de Alta Fidelidade:</b> Mantém o alinhamento temporal entre graves, médios e agudos.</li>
+							<li><b>Telecomunicações:</b> Previne a distorção intersimbólica em canais de dados de alta taxa.</li>
+							<li>etc...</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 24: Condição Simetria -->
+				<section>
+					<div class="slide-title">
+						<h2>Condições para Fase Linear no FIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para obter fase linear exata com coeficientes reais, a resposta ao impulso $g[k]$ deve ser simétrica em relação ao centro físico do filtro $\alpha = M/2$:</p>
+						<center class="lightup">
+							$$g[k] = g[M - k]$$
+						</center>
+						<ul>
+							<li>Os coeficientes do filtro são perfeitamente espelhados a partir do centro da sequência.</li>
+							<li>Garante uma resposta de fase linear com atraso de grupo de exatamente $\alpha = M/2$ amostras.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 24B: Ilustração Simetria -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: Resposta ao Impulso Simétrica </h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p style="font-size: 0.9em; margin-bottom: 5px;">Representação gráfica com simetria par ($M=6$, centro em $\alpha = 3$):</p>
+							<img src="../images/aula8_symmetric_fir.svg" width="950" alt="Resposta Simétrica FIR">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 25: Condição Antissimetria -->
+				<section>
+					<div class="slide-title">
+						<h2>Condição de Antissimetria para FIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>A fase linear também pode ser obtida por meio de coeficientes antissimétricos:</p>
+						<center class="lightup">
+							$$g[k] = -g[M - k]$$
+						</center>
+						<ul>
+							<li>Os coeficientes têm valores invertidos de sinal simetricamente a partir do centro.</li>
+							<li>Esta condição introduz uma defasagem constante adicional de $\pm 90^\circ$ ($\pi/2$ rad).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 25B: Ilustração Antissimetria -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: Resposta ao Impulso Antissimétrica</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p style="font-size: 0.9em; margin-bottom: 5px;">Representação gráfica com simetria ímpar ($M=6$, centro em $\alpha = 3$):</p>
+							<img src="../images/aula8_antisymmetric_fir.svg" width="950" alt="Resposta Antissimétrica FIR">
+						</center>
+					</div>
+				</section>
+
+				
+				<!-- Slide 31: Passa-baixas Ideal -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro Passa-Baixa Ideal</h2>
+					</div>
+					<div class="slide-content">
+
+						<center>
+							Para um filtro passa-baixas ideal com frequência de corte $\omega_c$ rad/amostra:
+							$$G_d(e^{j\omega}) = \begin{cases} 1, & |\omega| \le \omega_c \\ 0, & \omega_c < |\omega| \le \pi \end{cases}$$
+							<img src="../images/filtro_passa_baixa.png" width="700">
+						</center>
+					
+					</div>
+				</section>
+
+
+								
+				<!-- Slide 31: Passa-baixas Ideal -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro Passa-Baixa Ideal</h2>
+					</div>
+					<div class="slide-content">
+			<p>&nbsp;</p>
+						<p>A resposta ao impulso ideal calculada resulta em uma função <b>sinc</b> infinita e não-causal:</p>
+						<center class="lightup">
+							$$g_d[k] = \frac{\sin(\omega_c k)}{\pi k}, \quad -\infty < k < \infty$$
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Gráfico da Resposta ao Impulso Ideal (Sinc) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso Ideal (Sinc)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_discreta.svg" width="900" alt="Gráfico da Resposta ao Impulso Ideal (Sinc)">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Gráfico da Resposta ao Impulso Truncada (Ordem 30) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso Truncada (M = 30)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_truncada.svg" width="900" alt="Gráfico da Resposta ao Impulso Truncada (M = 30)">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Gráfico da Resposta ao Impulso Causal (Ordem 30) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso Causal (M = 30)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_deslocada.svg" width="900" alt="Gráfico da Resposta ao Impulso Causal (M = 30)">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Animação da Convolução Sinc (Causal, M=30) -->
+				<section>
+					<div class="slide-title">
+						<h2>Simulação da Convolução no Tempo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+			
+							<img src="../images/convolucao_sinc.gif" width="1100" alt="Animação da Convolução da Sinc Causal">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Resposta em Frequência (Fourier) da Sinc Truncada e Deslocada -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta em Frequência (M = 30)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_fourier_response.svg" width="1300" alt="Resposta em Frequência da Sinc Truncada e Deslocada">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Comparação da Resposta em Frequência (M = 20, 30, 40) -->
+				<section>
+					<div class="slide-title">
+						<h2>Comparação da Resposta em Frequência</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_fourier_response_comparison.svg" width="1300" alt="Comparação da Resposta em Frequência para M=20, 30, 40">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 32: Janelamento e Causalidade -->
+				<section>
+					<div class="slide-title">
+						<h2>Tornando o Filtro Causal e Finito</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para obter coeficientes causais e finitos de ordem $M$:</p>
+						<ul>
+							<li>Desloca-se $g_d[k]$ no tempo por $\alpha = M/2$ amostras para torná-la causal.</li>
+							<li>Multiplica-se a sequência deslocada por uma função janela $w[k]$ de comprimento $M+1$:</li>
+							<li class="lightup" style="list-style-type: none; text-align: center; font-weight: bold;">
+								$$g[k] = g_d[k - \alpha] \cdot w[k], \quad 0 \le k \le M$$
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 33: Fenômeno de Gibbs -->
+				<section>
+					<div class="slide-title">
+						<h2>O Fenômeno de Gibbs</h2>
+					</div>
+					<div class="slide-content">
+						<p>O truncamento seco do sinal ideal (Janela Retangular $w[k]=1$) causa ondulações na resposta de frequência próximo à transição:</p>
+						<ul>
+							<li>Esse efeito oscilatório em degraus abruptos chama-se <b>Fenômeno de Gibbs</b>.</li>
+							<li>A ondulação máxima (~9% na amplitude) <b>não diminui</b> com o aumento da ordem do filtro (apenas se comprime em frequência).</li>
+							<li><b>Solução:</b> Usar funções janela suaves para atenuar as bordas de $g[k]$.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 34: Janela de Hamming -->
+				<section>
+					<div class="slide-title">
+						<h2>A Janela de Hamming</h2>
+					</div>
+					<div class="slide-content">
+						<p>A janela de Hamming reduz significativamente as oscilações espectrais secundárias:</p>
+						<center class="lightup">
+							$$w[k] = 0.54 - 0.46 \cos\left(\frac{2\pi k}{M}\right), \quad 0 \le k \le M$$
+						</center>
+						<ul>
+							<li>Atenua suavemente as amostras da resposta nas pontas.</li>
+							<li>Atenuação máxima típica na banda de rejeição: <b>-53 dB</b>.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide: Comparação da Resposta em Frequência (Retangular vs Hamming, M=30) -->
+				<section>
+					<div class="slide-title">
+						<h2>Retangular vs. Hamming (M = 30)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_fourier_hamming_comparison.svg" width="1300" alt="Comparação da Resposta em Frequência: Retangular vs Hamming (M=30)">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 35: Janela de Blackman -->
+				<section>
+					<div class="slide-title">
+						<h2>A Janela de Blackman</h2>
+					</div>
+					<div class="slide-content">
+						<p>A janela de Blackman fornece uma transição temporal ainda mais suave:</p>
+						<center class="lightup">
+							$$w[k] = 0.42 - 0.5 \cos\left(\frac{2\pi k}{M}\right) + 0.08 \cos\left(\frac{4\pi k}{M}\right)$$
+						</center>
+						<ul>
+							<li>Proporciona uma excelente atenuação de alta frequência.</li>
+							<li>Atenuação máxima típica na banda de rejeição: <b>-74 dB</b>.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide: Comparação da Resposta em Frequência (Três Janelas, M=30) -->
+				<section>
+					<div class="slide-title">
+						<h2>Retangular vs. Hamming vs. Blackman</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/sinc_fourier_three_windows_comparison.svg" width="1300" alt="Comparação da Resposta em Frequência: Retangular vs Hamming vs Blackman (M=30)">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 36: Trade-off de Projeto -->
+				<section>
+					<div class="slide-title">
+						<h2>O Compromisso do Projeto (Trade-off)</h2>
+					</div>
+					<div class="slide-content">
+						<p>Existe um compromisso fundamental no janelamento:</p>
+						<ul>
+							<li><b>Janelas suaves (Hamming, Blackman):</b> Oferecem alta atenuação na rejeição (menores lóbulos secundários).</li>
+							<li><b>Preço a pagar:</b> Apresentam lóbulos principais mais largos, resultando em uma <b>banda de transição mais larga</b> (menor seletividade espectral para uma mesma ordem $M$).</li>
+						</ul>
+					</div>
+				</section>
+
+			
+
+				<!-- Slide: Vantagens FIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Principais Vantagens do Filtro FIR</h2>
+					</div>
+					<p>&nbsp;</p>
+					<div class="slide-content">
+						<ul>
+							<li><b>Estabilidade Absoluta:</b> Polos na origem impedem instabilidades causadas por alteração de parâmetros.</li>
+							<li><b>Fase Linear Exata:</b> Filtro pode ser projetado para não causar distorção de fase no sinal.</li>
+							<li><b>Sem Realimentação:</b> Imunidade a ruídos de quantização recursivos e transbordamento numérico (overflow).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide: Desvantagens FIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Limitações e Desvantagens</h2>
+					</div>
+					<div class="slide-content">
+							<p>&nbsp;</p>
+						<ul>
+							<li><b>Alta Ordem (M grande):</b> Exige muitos coeficientes para transições espectrais abruptas.</li>
+							<li><b>Alto Custo Computacional:</b> Elevado número de multiplicações e somas necessárias por amostra.</li>
+							<li><b>Latência Temporal:</b> O atraso introduzido é proporcional à ordem ($\tau_g = M/2$), limitando seu uso em algumas aplicações, por exemplo, em malhas de controle.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 46: Resumo da Aula -->
+				<section>
+					<div class="slide-title">
+						<h2>Resumo dos Conceitos Importantes</h2>
+					</div>
+					<p>&nbsp;</p>
+					<div class="slide-content">
+						<ul>
+							<li><b>Filtros FIR:</b> Sistemas de resposta finita, sem realimentação e inerentemente estáveis (polos na origem $z=0$).</li>
+							<li><b>Fase Linear:</b> Mantém o atraso de grupo constante para todas as componentes, evitando distorções de fase nas formas de onda.</li>
+							<li><b>Janelamento:</b> Substitui o truncamento abrupto de Gibbs por transições suaves nas bordas, aprimorando a rejeição de ruídos.</li>
+						</ul>
+					</div>
+				</section>
+
+
+				<!-- Slide 47: Encerramento -->
+				<section>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<h2>Até a próxima aula!</h2>
+						</center>
+					</div>
+				</section>
+
+				<!------------------------>
+			</div>
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>

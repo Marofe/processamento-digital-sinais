@@ -1,0 +1,89 @@
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- ================= 1. ELEMENTO DE ATRASO (DELAY) ================= -->
+  <g transform="translate(10, 0)">
+    <!-- Labels -->
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">ATRASO UNITÁRIO</text>
+    
+    <!-- Delay Box -->
+    <rect x="60" y="45" width="60" height="40" rx="6" fill="#fcd5b5" stroke="#000000" stroke-width="1.5" />
+    <text x="90" y="70" font-family="Georgia, serif" font-size="15" font-style="italic" font-weight="bold" fill="#000000" text-anchor="middle">z⁻¹</text>
+    
+    <!-- Flow Lines -->
+    <line x1="15" y1="65" x2="53" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <line x1="120" y1="65" x2="158" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    
+    <!-- Signals labels -->
+    <text x="35" y="55" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="middle">x[k]</text>
+    <text x="145" y="55" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="middle">x[k-1]</text>
+    
+    <!-- Underneath Description -->
+    <text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Elemento de Memória</text>
+    <text x="90" y="130" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">y[k] = x[k-1]</text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="200" y1="20" x2="200" y2="150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" />
+
+  <!-- ================= 2. MULTIPLICADOR (GANHO) ================= -->
+  <g transform="translate(210, 0)">
+    <!-- Labels -->
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">MULTIPLICADOR</text>
+    
+    <!-- Gain Triangle -->
+    <path d="M 65 45 L 65 85 L 105 65 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+    <text x="78" y="70" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="bold" fill="#000000" text-anchor="middle">bᵢ</text>
+    
+    <!-- Flow Lines -->
+    <line x1="20" y1="65" x2="58" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <line x1="105" y1="65" x2="153" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    
+    <!-- Signals labels -->
+    <text x="35" y="55" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="middle">v[k]</text>
+    <text x="140" y="55" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="middle">bᵢ v[k]</text>
+    
+    <!-- Underneath Description -->
+    <text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Ganho de Escala</text>
+    <text x="90" y="130" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">y[k] = bᵢ · v[k]</text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="410" y1="20" x2="410" y2="150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" />
+
+  <!-- ================= 3. SOMADOR (ADDER) ================= -->
+  <g transform="translate(420, 0)">
+    <!-- Labels -->
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">SOMADOR</text>
+    
+    <!-- Adder Circle -->
+    <circle cx="80" cy="65" r="14" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+    <line x1="73" y1="65" x2="87" y2="65" stroke="#000000" stroke-width="1.5" />
+    <line x1="80" y1="58" x2="80" y2="72" stroke="#000000" stroke-width="1.5" />
+    
+    <!-- Flow Lines -->
+    <!-- Left Input -->
+    <line x1="15" y1="65" x2="59" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Top Input -->
+    <line x1="80" y1="28" x2="80" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <!-- Output -->
+    <line x1="94" y1="65" x2="148" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    
+    <!-- Signals labels -->
+    <text x="35" y="55" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="middle">A[k]</text>
+    <text x="102" y="38" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#000000" text-anchor="start">B[k]</text>
+    <text x="138" y="55" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#000000" text-anchor="middle">A[k] + B[k]</text>
+    
+    <!-- Underneath Description -->
+    <text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Acumulador Linear</text>
+    <text x="90" y="130" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">y[k] = A[k] + B[k]</text>
+  </g>
+</svg>

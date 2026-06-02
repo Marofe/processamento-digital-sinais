@@ -127,5 +127,34 @@
 }
 .imgContainer img {
     float: left;
+}
 
+/* Standard Responsive Styling for Slide Images */
+.reveal .slides section img {
+    max-width: 100%;
+    height: auto;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Exclusion rule to keep logos, math equations, or explicitly excluded icons unstyled */
+.reveal .slides section .logo img,
+.reveal .slides section .logo2 img,
+.reveal .slides section img.no-style,
+.reveal .slides section img.math,
+.reveal .slides section img.latex,
+.reveal .slides section img[src*="logo"],
+.reveal .slides section img[src*="Logo"],
+.reveal .slides section img[src*="MathJax"],
+.reveal .slides section img[src*="katex"],
+.reveal .slides section img[src*="Formula"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    transform: none !important;
 }

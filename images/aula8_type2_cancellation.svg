@@ -1,0 +1,59 @@
+<svg width="600" height="230" viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- Bounding Title -->
+  <text x="300" y="25" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">PROVA VISUAL: CANCELAMENTO DO TIPO II EM ω = π</text>
+
+  <!-- ================= PAIRING ARCHES ================= -->
+  <!-- Outer Arch (g[0] & g[5]) - Blue -->
+  <path d="M 77 95 Q 277 -10, 477 95" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3" />
+  <text x="277" y="32" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#0284c7" text-anchor="middle" font-weight="bold">g[0] = g[5]</text>
+
+  <!-- Middle Arch (g[1] & g[4]) - Orange -->
+  <path d="M 157 95 Q 277 25, 397 95" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="4,3" />
+  <text x="277" y="52" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#d97706" text-anchor="middle" font-weight="bold">g[1] = g[4]</text>
+
+  <!-- Inner Arch (g[2] & g[3]) - Green -->
+  <path d="M 237 95 Q 277 65, 317 95" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="4,3" />
+  <text x="277" y="74" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#059669" text-anchor="middle" font-weight="bold">g[2] = g[3]</text>
+
+  <!-- ================= COEFFICIENT BLOCKS (N=6, M=5) ================= -->
+  <!-- block 0 (g[0]) - y=95, x=50 to 105 -->
+  <rect x="50" y="95" width="54" height="40" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" />
+  <text x="77" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#0369a1" text-anchor="middle">g[0]</text>
+  <text x="77" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (+1)</text>
+
+  <!-- block 1 (g[1]) - x=130 to 184 -->
+  <rect x="130" y="95" width="54" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+  <text x="157" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#b45309" text-anchor="middle">g[1]</text>
+  <text x="157" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (-1)</text>
+
+  <!-- block 2 (g[2]) - x=210 to 264 -->
+  <rect x="210" y="95" width="54" height="40" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="1.5" />
+  <text x="237" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#047857" text-anchor="middle">g[2]</text>
+  <text x="237" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (+1)</text>
+
+  <!-- block 3 (g[3]) - x=290 to 344 -->
+  <rect x="290" y="95" width="54" height="40" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="1.5" />
+  <text x="317" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#047857" text-anchor="middle">g[3]</text>
+  <text x="317" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (-1)</text>
+
+  <!-- block 4 (g[4]) - x=370 to 424 -->
+  <rect x="370" y="95" width="54" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+  <text x="397" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#b45309" text-anchor="middle">g[4]</text>
+  <text x="397" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (+1)</text>
+
+  <!-- block 5 (g[5]) - x=450 to 504 -->
+  <rect x="450" y="95" width="54" height="40" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" />
+  <text x="477" y="119" font-family="Georgia, serif" font-size="12" font-style="italic" font-weight="bold" fill="#0369a1" text-anchor="middle">g[5]</text>
+  <text x="477" y="152" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">· (-1)</text>
+
+  <!-- ================= MATHEMATICAL RESULT ================= -->
+  <rect x="50" y="177" width="454" height="35" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+  
+  <text x="277" y="199" font-family="Georgia, serif" font-size="11" fill="#1e293b" text-anchor="middle">
+    G(e<tspan dy="-4" font-size="8">jπ</tspan><tspan dy="4" font-size="11">) = [g[0] - g[0]] + [-g[1] + g[1]] + [g[2] - g[2]] = </tspan>
+    <tspan font-weight="bold" fill="#d90429" font-size="12">0</tspan>
+  </text>
+</svg>

@@ -1,0 +1,147 @@
+<svg width="780" height="220" viewBox="0 0 780 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- Transparent Background -->
+  <rect width="100%" height="100%" fill="none" />
+
+  <!-- ================= 1. FILTRO IDEAL ================= -->
+  <g transform="translate(15, 45)">
+    <!-- Box -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#f8fafc" stroke="#000000" stroke-width="1.5" />
+    <!-- Label -->
+    <text x="80" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">1. ESPECIFICAÇÃO IDEAL</text>
+    <text x="80" y="38" font-family="Georgia, serif" font-size="12" font-style="italic" fill="#0f172a" text-anchor="middle">G_d(e^jω)</text>
+    
+    <!-- Mini Plot (Low Pass) -->
+    <!-- Axes -->
+    <line x1="20" y1="100" x2="140" y2="100" stroke="#94a3b8" stroke-width="1" />
+    <line x1="80" y1="50" x2="80" y2="105" stroke="#94a3b8" stroke-width="1" />
+    <!-- Brickwall Curve -->
+    <path d="M 30 100 L 55 100 L 55 65 L 105 65 L 105 100 L 130 100" fill="none" stroke="#0284c7" stroke-width="2" />
+    <!-- Labels -->
+    <text x="80" y="112" font-family="Georgia, serif" font-size="9" fill="#64748b" text-anchor="middle">0</text>
+    <text x="55" y="112" font-family="Georgia, serif" font-size="9" fill="#64748b" text-anchor="middle">-ω_c</text>
+    <text x="105" y="112" font-family="Georgia, serif" font-size="9" fill="#64748b" text-anchor="middle">ω_c</text>
+  </g>
+
+  <!-- Connection Arrow 1 -->
+  <g>
+    <line x1="180" y1="105" x2="238" y2="105" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <text x="210" y="95" font-family="Arial, sans-serif" font-size="10" font-style="italic" fill="#0284c7" font-weight="bold" text-anchor="middle">IDTFT</text>
+  </g>
+
+  <!-- ================= 2. RESPOSTA AO IMPULSO IDEAL ================= -->
+  <g transform="translate(245, 45)">
+    <!-- Box -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#f8fafc" stroke="#000000" stroke-width="1.5" />
+    <!-- Label -->
+    <text x="80" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">2. RESPOSTA IDEAL</text>
+    <text x="80" y="38" font-family="Georgia, serif" font-size="12" font-style="italic" fill="#0f172a" text-anchor="middle">g_d[k] (Sinc Infinita)</text>
+    
+    <!-- Mini Plot (Sinc) -->
+    <!-- Axes -->
+    <line x1="20" y1="85" x2="140" y2="85" stroke="#94a3b8" stroke-width="1" />
+    <line x1="80" y1="50" x2="80" y2="105" stroke="#94a3b8" stroke-width="1" />
+    <!-- Sinc stems -->
+    <line x1="80" y1="85" x2="80" y2="55" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="80" cy="55" r="2.5" fill="#0284c7" />
+    
+    <line x1="90" y1="85" x2="90" y2="70" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="90" cy="70" r="2" fill="#0284c7" />
+    <line x1="70" y1="85" x2="70" y2="70" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="70" cy="70" r="2" fill="#0284c7" />
+
+    <line x1="100" y1="85" x2="100" y2="92" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="100" cy="92" r="2" fill="#0284c7" />
+    <line x1="60" y1="85" x2="60" y2="92" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="60" cy="92" r="2" fill="#0284c7" />
+
+    <line x1="110" y1="85" x2="110" y2="80" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="110" cy="80" r="1.5" fill="#0284c7" />
+    <line x1="50" y1="85" x2="50" y2="80" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="50" cy="80" r="1.5" fill="#0284c7" />
+
+    <text x="130" y="80" font-family="Arial, sans-serif" font-size="12" fill="#64748b">...</text>
+    <text x="25" y="80" font-family="Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="end">...</text>
+  </g>
+
+  <!-- Connection to Multiplier -->
+  <line x1="410" y1="105" x2="445" y2="105" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- ================= MULTIPLIER NODE ================= -->
+  <g transform="translate(450, 90)">
+    <circle cx="15" cy="15" r="14" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+    <line x1="6" y1="6" x2="24" y2="24" stroke="#000000" stroke-width="1.5" />
+    <line x1="24" y1="6" x2="6" y2="24" stroke="#000000" stroke-width="1.5" />
+  </g>
+
+  <!-- ================= WINDOW FUNCTION BOX ================= -->
+  <g transform="translate(380, 5)">
+    <!-- Box -->
+    <rect x="0" y="0" width="150" height="65" rx="6" fill="#fcd5b5" stroke="#000000" stroke-width="1.5" />
+    <text x="75" y="16" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">FUNÇÃO JANELA w[k]</text>
+    
+    <!-- Mini Bell curve -->
+    <line x1="20" y1="52" x2="130" y2="52" stroke="#475569" stroke-width="1" />
+    <!-- Bell shape stems -->
+    <path d="M 30 52 C 50 52, 60 28, 75 28 C 90 28, 100 52, 120 52" fill="none" stroke="#ea580c" stroke-width="1.5" />
+    <line x1="75" y1="52" x2="75" y2="28" stroke="#ea580c" stroke-width="1" />
+    <circle cx="75" cy="28" r="2" fill="#ea580c" />
+    <line x1="60" y1="52" x2="60" y2="38" stroke="#ea580c" stroke-width="1" />
+    <circle cx="60" cy="38" r="1.5" fill="#ea580c" />
+    <line x1="90" y1="52" x2="90" y2="38" stroke="#ea580c" stroke-width="1" />
+    <circle cx="90" cy="38" r="1.5" fill="#ea580c" />
+  </g>
+
+  <!-- Arrow from Window to Multiplier -->
+  <line x1="465" y1="73" x2="465" y2="85" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- Connection from Multiplier to Box 3 -->
+  <g>
+    <line x1="483" y1="105" x2="598" y2="105" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <text x="540" y="95" font-family="Arial, sans-serif" font-size="10" fill="#ea580c" font-weight="bold" text-anchor="middle">JANELAMENTO</text>
+    <text x="540" y="120" font-family="Georgia, serif" font-size="9" font-style="italic" fill="#64748b" text-anchor="middle">g[k] = g_d[k-α] · w[k]</text>
+  </g>
+
+  <!-- ================= 3. FILTRO FIR RESULTANTE ================= -->
+  <g transform="translate(605, 45)">
+    <!-- Box -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#bae6fd" stroke="#000000" stroke-width="1.5" />
+    <!-- Label -->
+    <text x="80" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">3. FILTRO FIR FINAL</text>
+    <text x="80" y="38" font-family="Georgia, serif" font-size="12" font-style="italic" fill="#0f172a" text-anchor="middle">g[k] (Causal, Finito)</text>
+    
+    <!-- Mini Plot (Causal, Truncated Sinc) -->
+    <!-- Axes -->
+    <line x1="20" y1="95" x2="140" y2="95" stroke="#94a3b8" stroke-width="1" />
+    <!-- Sinc stems shifted to center -->
+    <line x1="80" y1="95" x2="80" y2="60" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="80" cy="60" r="2.5" fill="#0284c7" />
+    
+    <line x1="95" y1="95" x2="95" y2="78" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="95" cy="78" r="2" fill="#0284c7" />
+    <line x1="65" y1="95" x2="65" y2="78" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="65" cy="78" r="2" fill="#0284c7" />
+
+    <line x1="110" y1="95" x2="110" y2="98" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="110" cy="98" r="2" fill="#0284c7" />
+    <line x1="50" y1="95" x2="50" y2="98" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="50" cy="98" r="2" fill="#0284c7" />
+    
+    <line x1="125" y1="95" x2="125" y2="92" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="125" cy="92" r="1.5" fill="#0284c7" />
+    <line x1="35" y1="95" x2="35" y2="92" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="35" cy="92" r="1.5" fill="#0284c7" />
+    
+    <!-- Boundaries -->
+    <line x1="35" y1="102" x2="35" y2="108" stroke="#ef4444" stroke-width="1" />
+    <line x1="125" y1="102" x2="125" y2="108" stroke="#ef4444" stroke-width="1" />
+    <text x="35" y="117" font-family="Georgia, serif" font-size="8" fill="#ef4444" text-anchor="middle">k=0</text>
+    <text x="125" y="117" font-family="Georgia, serif" font-size="8" fill="#ef4444" text-anchor="middle">k=M</text>
+  </g>
+</svg>
