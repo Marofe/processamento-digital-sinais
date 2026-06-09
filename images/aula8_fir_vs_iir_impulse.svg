@@ -34,8 +34,16 @@
     <line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
     
     <!-- Axis Labels -->
-    <text x="170" y="232" font-family="Arial, sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Amostras (k)</text>
-    <text x="15" y="125" font-family="Arial, sans-serif" font-size="10.5" fill="#000000" text-anchor="middle" transform="rotate(-90 15 125)">g[k]</text>
+    <foreignObject x="110" y="218" width="120" height="20">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; text-align: center; color: #000000;">
+        Amostras ($k$)
+      </div>
+    </foreignObject>
+    <foreignObject x="5" y="110" width="20" height="30" transform="rotate(-90 15 125)">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 10.5px; text-align: center; color: #000000;">
+        $g[k]$
+      </div>
+    </foreignObject>
     
     <!-- Tick values -->
     <text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>
@@ -84,8 +92,16 @@
     <path d="M 90 65 L 190 65" fill="none" stroke="#0072bd" stroke-width="1" stroke-dasharray="3,3" />
 
     <!-- Bullet Descriptions -->
-    <text x="170" y="248" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#0072bd" text-anchor="middle">Duração Finita (M = 4)</text>
-    <text x="170" y="262" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Resposta é exatamente zero para k &gt; 4</text>
+    <foreignObject x="70" y="236" width="200" height="20">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; font-weight: bold; text-align: center; color: #0072bd;">
+        Duração Finita ($M = 4$)
+      </div>
+    </foreignObject>
+    <foreignObject x="20" y="250" width="300" height="20">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9px; text-align: center; color: #475569;">
+        Resposta é exatamente zero para $k &gt; 4$
+      </div>
+    </foreignObject>
   </g>
 
   <!-- Central Split Line -->
@@ -123,7 +139,11 @@
     <line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
     
     <!-- Axis Labels -->
-    <text x="170" y="232" font-family="Arial, sans-serif" font-size="9.5" fill="#000000" text-anchor="middle">Amostras (k)</text>
+    <foreignObject x="110" y="218" width="120" height="20">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; text-align: center; color: #000000;">
+        Amostras ($k$)
+      </div>
+    </foreignObject>
     
     <!-- Tick values -->
     <text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>

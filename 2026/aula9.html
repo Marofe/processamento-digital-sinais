@@ -1,0 +1,2640 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<!-- Slide 1: Capa -->
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+						<h2><br>Filtros Digitais do Tipo IIR (Infinite Impulse Response)</h2>
+					</div>
+					<div class="author">
+						<h3>Prof. Marcos Rogério Fernandes</h3>
+					</div>
+					<div class="advisor">
+						<p style="text-align: center; font-size: 0.8em;">09 de junho de 2026</p>
+					</div>
+				</section>
+
+				<!-- Slide 2: Objetivos -->
+				<section>
+					<div class="slide-title">
+						<h2>Objetivos</h2>
+					</div>
+					<div class="slide-content">
+						<p>Os objetivos teóricos desta aula são compreender:</p>
+						<ul>
+							<li>A definição dos filtros <b>IIR (Infinite Impulse Response)</b>;</li>
+							<li>A representação matemática (equação de diferenças e função de transferência);</li>
+							<li>Análise de estabilidade (polos e o círculo unitário);</li>
+							<li>Estruturas de realização em diagramas de blocos (Formas Diretas);</li>
+							<li>Métodos clássicos de projeto (Butterworth, Chebyshev e Elíptico);</li>
+							<li>Comparação com filtros FIR (Vantagens e Desvantagens).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 3: O que é um Filtro Digital -->
+				<section>
+					<div class="slide-title">
+						<h2>O que é um Filtro Digital?</h2>
+					</div>
+					<div class="slide-content">
+						<p>No processamento digital de sinais, um filtro é um sistema que:</p>
+						<ul>
+							<li>É Linear e Invariante no Tempo (LIT) discreto no tempo.</li>
+							<li>Modifica as características espectrais (amplitude e fase) de um sinal de entrada $x[k]$.</li>
+							<li>Produz um sinal de saída processado $y[k]$ com as frequências desejadas.</li>
+						</ul>
+					</div>
+					<center>
+						<img src="../images/sistema_discreto.png" width="600" alt="Sistema Discreto">
+					</center>
+				</section>
+
+				<!-- Slide 4: Sinal com ruído -->
+				<section>
+					<div class="slide-title">
+						<h2>Sinal com ruído</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sinal_ruidoso.png" width="950" alt="Sinal Ruidoso">							
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 5: Filtros Digitais -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtros Digitais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sistema_discreto.png" width="600" alt="Sistema Discreto">							
+							<p>Os filtros digitais são classificados de acordo com a duração de sua resposta ao impulso:</p>
+						<ul>
+							<li><b>FIR (Finite Impulse Response):</b> Resposta ao impulso tem duração finita (sem realimentação).</li>
+							<li><b>IIR (Infinite Impulse Response):</b> Resposta ao impulso se estende indefinidamente (com realimentação).</li>
+						</ul>
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 6: Resposta ao Impulso FIR vs IIR (Visual) -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso: FIR vs IIR</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<div style="width: 950px;">
+								<svg width="100%" height="auto" viewBox="0 0 650 280" xmlns="http://www.w3.org/2000/svg">
+									<!-- Transparent Background -->
+									<rect width="100%" height="100%" fill="none" />
+
+									<!-- ================= LEFT PLOT: FIR (PULSO / GATE) ================= -->
+									<g transform="translate(10, 0)">
+										<!-- Plot Frame Box (MATLAB style) -->
+										<rect x="45" y="45" width="250" height="160" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Grid Lines -->
+										<line x1="45" y1="115" x2="295" y2="115" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="45" y1="65" x2="295" y2="65" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="100" y1="45" x2="100" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="140" y1="45" x2="140" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="180" y1="45" x2="180" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="220" y1="45" x2="220" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="260" y1="45" x2="260" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										
+										<!-- Baseline (y = 0) -->
+										<line x1="45" y1="165" x2="295" y2="165" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Ticks -->
+										<!-- X Ticks -->
+										<line x1="60" y1="205" x2="60" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="100" y1="205" x2="100" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="140" y1="205" x2="140" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="180" y1="205" x2="180" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="220" y1="205" x2="220" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="260" y1="205" x2="260" y2="201" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Y Ticks -->
+										<line x1="45" y1="165" x2="50" y2="165" stroke="#000000" stroke-width="0.8" />
+										<line x1="45" y1="115" x2="50" y2="115" stroke="#000000" stroke-width="0.8" />
+										<line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Axis Labels -->
+										<foreignObject x="110" y="218" width="120" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; text-align: center; color: #000000;">
+												Amostras ($k$)
+											</div>
+										</foreignObject>
+										<foreignObject x="5" y="110" width="20" height="30" transform="rotate(-90 15 125)">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 10.5px; text-align: center; color: #000000;">
+												$g[k]$
+											</div>
+										</foreignObject>
+										
+										<!-- Tick values -->
+										<text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>
+										<text x="100" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">0</text>
+										<text x="140" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">2</text>
+										<text x="180" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">4</text>
+										<text x="220" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">6</text>
+										<text x="260" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">8</text>
+										
+										<text x="38" y="168" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.0</text>
+										<text x="38" y="118" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.5</text>
+										<text x="38" y="68" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">1.0</text>
+										
+										<!-- Header Text -->
+										<text x="170" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0072bd" text-anchor="middle">RESPOSTA AO IMPULSO FIR (PULSO)</text>
+										
+										<!-- STEMS for FIR (Gate/Pulse Function) -->
+										<!-- k = -2, -1: 0.0 -->
+										<circle cx="60" cy="165" r="4" fill="#0072bd" />
+										<circle cx="80" cy="165" r="4" fill="#0072bd" />
+										
+										<!-- k = 0 to 4: 1.0 -->
+										<line x1="100" y1="165" x2="100" y2="65" stroke="#0072bd" stroke-width="2" />
+										<circle cx="100" cy="65" r="4" fill="#0072bd" />
+										
+										<line x1="120" y1="165" x2="120" y2="65" stroke="#0072bd" stroke-width="2" />
+										<circle cx="120" cy="65" r="4" fill="#0072bd" />
+										
+										<line x1="140" y1="165" x2="140" y2="65" stroke="#0072bd" stroke-width="2" />
+										<circle cx="140" cy="65" r="4" fill="#0072bd" />
+										
+										<line x1="160" y1="165" x2="160" y2="65" stroke="#0072bd" stroke-width="2" />
+										<circle cx="160" cy="65" r="4" fill="#0072bd" />
+										
+										<line x1="180" y1="165" x2="180" y2="65" stroke="#0072bd" stroke-width="2" />
+										<circle cx="180" cy="65" r="4" fill="#0072bd" />
+										
+										<!-- k = 5 to 9: 0.0 -->
+										<circle cx="200" cy="165" r="4" fill="#0072bd" />
+										<circle cx="220" cy="165" r="4" fill="#0072bd" />
+										<circle cx="240" cy="165" r="4" fill="#0072bd" />
+										<circle cx="260" cy="165" r="4" fill="#0072bd" />
+										<circle cx="280" cy="165" r="4" fill="#0072bd" />
+
+										<!-- Dashed boundary indicating finite length -->
+										<path d="M 90 65 L 190 65" fill="none" stroke="#0072bd" stroke-width="1" stroke-dasharray="3,3" />
+
+										<!-- Bullet Descriptions -->
+										<foreignObject x="70" y="236" width="200" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; font-weight: bold; text-align: center; color: #0072bd;">
+												Duração Finita ($M = 4$)
+											</div>
+										</foreignObject>
+										<foreignObject x="20" y="250" width="300" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9px; text-align: center; color: #475569;">
+												Resposta é exatamente zero para $k &gt; 4$
+											</div>
+										</foreignObject>
+									</g>
+
+									<!-- Central Split Line -->
+									<line x1="325" y1="20" x2="325" y2="235" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4,3" />
+
+									<!-- ================= RIGHT PLOT: IIR (DEC DECRESCENTE) ================= -->
+									<g transform="translate(340, 0)">
+										<!-- Plot Box (MATLAB style) -->
+										<rect x="45" y="45" width="250" height="160" fill="#ffffff" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Grid Lines -->
+										<line x1="45" y1="115" x2="295" y2="115" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="45" y1="65" x2="295" y2="65" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="100" y1="45" x2="100" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="140" y1="45" x2="140" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="180" y1="45" x2="180" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="220" y1="45" x2="220" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										<line x1="260" y1="45" x2="260" y2="205" stroke="#f1f5f9" stroke-width="0.6" />
+										
+										<!-- Baseline (y = 0) -->
+										<line x1="45" y1="165" x2="295" y2="165" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Ticks -->
+										<!-- X Ticks -->
+										<line x1="60" y1="205" x2="60" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="100" y1="205" x2="100" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="140" y1="205" x2="140" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="180" y1="205" x2="180" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="220" y1="205" x2="220" y2="201" stroke="#000000" stroke-width="0.8" />
+										<line x1="260" y1="205" x2="260" y2="201" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Y Ticks -->
+										<line x1="45" y1="165" x2="50" y2="165" stroke="#000000" stroke-width="0.8" />
+										<line x1="45" y1="115" x2="50" y2="115" stroke="#000000" stroke-width="0.8" />
+										<line x1="45" y1="65" x2="50" y2="65" stroke="#000000" stroke-width="0.8" />
+										
+										<!-- Axis Labels -->
+										<foreignObject x="110" y="218" width="120" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 9.5px; text-align: center; color: #000000;">
+												Amostras ($k$)
+											</div>
+										</foreignObject>
+										
+										<!-- Tick values -->
+										<text x="60" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">-2</text>
+										<text x="100" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">0</text>
+										<text x="140" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">2</text>
+										<text x="180" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">4</text>
+										<text x="220" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">6</text>
+										<text x="260" y="217" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="middle">8</text>
+										
+										<text x="38" y="168" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.0</text>
+										<text x="38" y="118" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">0.5</text>
+										<text x="38" y="68" font-family="Arial, sans-serif" font-size="8.5" fill="#64748b" text-anchor="end">1.0</text>
+										
+										<!-- Header Text -->
+										<text x="170" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d90429" text-anchor="middle">RESPOSTA AO IMPULSO IIR (EXPONENCIAL)</text>
+										
+										<!-- STEMS for IIR (Decaying Exponential h[k] = 0.7^k) -->
+										<!-- k = -2, -1: 0.0 -->
+										<circle cx="60" cy="165" r="4" fill="#d90429" />
+										<circle cx="80" cy="165" r="4" fill="#d90429" />
+										
+										<!-- k = 0: 1.0 -->
+										<line x1="100" y1="165" x2="100" y2="65" stroke="#d90429" stroke-width="2" />
+										<circle cx="100" cy="65" r="4" fill="#d90429" />
+										
+										<!-- k = 1: 0.7 -->
+										<line x1="120" y1="165" x2="120" y2="95" stroke="#d90429" stroke-width="2" />
+										<circle cx="120" cy="95" r="4" fill="#d90429" />
+										
+										<!-- k = 2: 0.49 -->
+										<line x1="140" y1="165" x2="140" y2="116" stroke="#d90429" stroke-width="2" />
+										<circle cx="120" cy="95" r="4" fill="#d90429" />
+										
+										<!-- k = 3: 0.34 -->
+										<line x1="160" y1="165" x2="160" y2="131" stroke="#d90429" stroke-width="2" />
+										<circle cx="160" cy="131" r="4" fill="#d90429" />
+										
+										<!-- k = 4: 0.24 -->
+										<line x1="180" y1="165" x2="180" y2="141" stroke="#d90429" stroke-width="2" />
+										<circle cx="180" cy="141" r="4" fill="#d90429" />
+										
+										<!-- k = 5: 0.17 -->
+										<line x1="200" y1="165" x2="200" y2="148" stroke="#d90429" stroke-width="2" />
+										<circle cx="200" cy="148" r="4" fill="#d90429" />
+										
+										<!-- k = 6: 0.12 -->
+										<line x1="220" y1="165" x2="220" y2="153" stroke="#d90429" stroke-width="2" />
+										<circle cx="220" cy="153" r="4" fill="#d90429" />
+										
+										<!-- k = 7: 0.08 -->
+										<line x1="240" y1="165" x2="240" y2="157" stroke="#d90429" stroke-width="2" />
+										<circle cx="240" cy="157" r="4" fill="#d90429" />
+										
+										<!-- k = 8: 0.06 -->
+										<line x1="260" y1="165" x2="260" y2="159" stroke="#d90429" stroke-width="2" />
+										<circle cx="260" cy="159" r="4" fill="#d90429" />
+										
+										<!-- k = 9: 0.04 (decays further, show ellipsis / arrow) -->
+										<line x1="280" y1="165" x2="280" y2="161" stroke="#d90429" stroke-width="2" />
+										<circle cx="280" cy="161" r="4" fill="#d90429" />
+
+										<!-- Dotted curve envelope for IIR -->
+										<path d="M 100 65 Q 120 95 140 116 T 280 161" fill="none" stroke="#d90429" stroke-width="1.2" stroke-dasharray="3,3" />
+
+										<!-- Text showing infinite continuation -->
+										<text x="290" y="162" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d90429">...</text>
+
+										<!-- Bullet Descriptions -->
+										<text x="170" y="248" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#d90429" text-anchor="middle">Duração Infinita</text>
+										<text x="170" y="262" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Decai assintoticamente, mas nunca zera</text>
+									</g>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 7: Exemplo IIR 1° ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo IIR 1° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças:
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1] - a_1 y[k-1]$$
+							</p>
+							ou aplicando a Transformada Z:
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1}}{1 + a_1 z^{-1}}$$
+							</p>
+						</p>
+			
+					</div>
+				</section>
+
+				<!-- Slide 8: Exemplo IIR 2° ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo IIR 2° ordem</h2>
+					</div>
+					<div class="slide-content">
+						<p>Na equação de diferenças:
+							<p class="lightup2">
+							$$y[k] = b_0 x[k] + b_1 x[k-1] + b_2 x[k-2] \\- a_1 y[k-1] - a_2 y[k-2]$$
+							</p>
+							ou aplicando a Transformada Z:
+							<p class="lightup2">
+							$$G(z)=\frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}$$
+							</p>
+						</p>
+					</div>
+				</section>
+
+				<!-- Slide 9: Filtro IIR Geral de ordem N -->
+				<section>
+					<div class="slide-title">
+						<h2>Definição do Filtro IIR geral</h2>
+					</div>
+					<div class="slide-content">
+						
+						<center class="lightup2">
+							$$y[k] = \sum_{i=0}^{M} b_i x[k-i] - \sum_{j=1}^{N} a_j y[k-j]$$
+						</center>
+						<ul>
+							<li><b>Realimentação (Feedback):</b> A saída depende de valores anteriores dela mesma ($y[k-1], y[k-2], \dots$).</li>
+							<li>$b_i$: Coeficientes da parte direta (feedforward) - determinam os zeros.</li>
+							<li>$a_j$: Coeficientes da realimentação (feedback) - determinam os polos.</li>
+							<li>$N$: Ordem do filtro (atraso máximo da realimentação).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 10: Função de Transferência G(z) -->
+				<section>
+					<div class="slide-title">
+						<h2>Definição do Filtro IIR geral</h2>
+					</div>
+					<div class="slide-content">
+					
+						<center class="lightup">
+							$$G(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + \dots + b_M z^{-M}}{1 + a_1 z^{-1} + \dots + a_N z^{-N}}$$
+						</center>
+								<ul>
+							<li><b>Realimentação (Feedback):</b> A saída depende de valores anteriores dela mesma ($y[k-1], y[k-2], \dots$).</li>
+							<li>$b_i$: Coeficientes da parte direta (feedforward) - determinam os zeros.</li>
+							<li>$a_j$: Coeficientes da realimentação (feedback) - determinam os polos.</li>
+							<li>$N$: Ordem do filtro (atraso máximo da realimentação).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 11: Resposta ao Impulso de um Filtro IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso do Filtro IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Ao aplicarmos um impulso unitário $x[k] = \delta[k]$ no filtro, tem-se
+						<center class="lightup">
+							$$g[k] = \mathcal{Z}^{-1}\{G(z)\}$$
+						
+						</center>
+						<center>
+							<ul>
+								<li>Se 
+									$$
+									\sum_{k=0}^\infty |g[k]| < \infty 
+									$$
+									então o filtro IIR é BIBO estável!
+								</li>
+							</ul>
+							</center>
+					
+					</div>
+				</section>
+
+				<!-- Slide 13: Análise de Estabilidade (Plano Z) -->
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade no Plano Z</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para um filtro IIR ser estável no sentido BIBO (Bounded Input, Bounded Output):</p>
+						<ul>
+							<li>Todos os polos da função de transferência $G(z)$ devem residir <b>estritamente dentro do círculo unitário</b> no plano Z:
+								<p class="lightup" style="font-weight: bold; text-align: center; margin: 10px 0;">
+									$$|z_p| < 1, \quad \forall p = 1, \dots, N$$
+								</p>
+							</li>
+							<li>Se qualquer polo estiver no círculo ($|z_p|=1$) ou fora dele ($|z_p| > 1$), o filtro torna-se marginalmente estável ou instável, respectivamente.</li>
+						</ul>
+					</div>
+
+				</section>
+
+				<!-- Slide 14: Mapa de Polos e Zeros (Estabilidade) -->
+				<section>
+					<div class="slide-title">
+						<h2>Distribuição de Polos e Estabilidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/aula9_iir_poles_zeros.png" width="1200" alt="Plano Z Estabilidade IIR">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 12: Estabilidade e Resposta ao Impulso -->
+				<section>
+					<div class="slide-title">
+						<h2>Resposta ao Impulso e Estabilidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula9_iir_stability_comparison.png" width="950" alt="Comparação de Resposta ao Impulso e Estabilidade">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 15: Elementos da Estrutura -->
+				<section>
+					<div class="slide-title">
+						<h2>Elementos de Realização do Filtro IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O hardware/software do filtro IIR é composto pelos mesmos três elementos, mas inclui realimentação:</p>
+						<ul>
+							<li><b>Atrasos ($z^{-1}$):</b> Armazenam amostras passadas de entradas e saídas.</li>
+							<li><b>Multiplicadores:</b> Escalam por $b_i$ (direto) e $-a_j$ (realimentação).</li>
+							<li><b>Somadores:</b> Combinam todos os termos diretos e recursivos.</li>
+						</ul>
+						<center>
+							<div style="width: 750px;">
+								<svg width="100%" height="auto" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<!-- Arrow Marker -->
+										<marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+											<path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#000000" />
+										</marker>
+									</defs>
+
+									<!-- Transparent Background -->
+									<rect width="100%" height="100%" fill="none" />
+
+									<!-- ================= 1. ELEMENTO DE ATRASO (DELAY) ================= -->
+									<g transform="translate(10, 0)">
+										<text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">ATRASO UNITÁRIO</text>
+										
+										<rect x="60" y="45" width="60" height="40" rx="6" fill="#fcd5b5" stroke="#000000" stroke-width="1.5" />
+										<foreignObject x="70" y="53" width="40" height="25">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 15px; text-align: center; color: #000000; font-weight: bold; font-style: italic;">
+												$z^{-1}$
+											</div>
+										</foreignObject>
+										
+										<line x1="15" y1="65" x2="53" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+										<line x1="120" y1="65" x2="158" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+										
+										<foreignObject x="15" y="42" width="40" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #000000;">
+												$v[k]$
+											</div>
+										</foreignObject>
+
+										<foreignObject x="120" y="42" width="50" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #000000;">
+												$v[k-1]$
+											</div>
+										</foreignObject>
+										
+										<text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Memória de Estado</text>
+										<foreignObject x="20" y="118" width="140" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #64748b;">
+												$y[k] = v[k-1]$
+											</div>
+										</foreignObject>
+									</g>
+
+									<!-- Divider Line -->
+									<line x1="200" y1="20" x2="200" y2="150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" />
+
+									<!-- ================= 2. MULTIPLICADORES (AVANÇO / REALIMENTAÇÃO) ================= -->
+									<g transform="translate(210, 0)">
+										<text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">MULTIPLICADORES</text>
+										
+										<!-- Feedforward gain -->
+										<path d="M 40 45 L 40 75 L 75 60 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+										<foreignObject x="38" y="50" width="25" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #000000; font-weight: bold;">
+												$b_i$
+											</div>
+										</foreignObject>
+										<text x="55" y="40" font-family="Arial, sans-serif" font-size="9" fill="#0284c7" text-anchor="middle">Direto</text>
+
+										<!-- Feedback gain -->
+										<path d="M 105 45 L 105 75 L 140 60 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+										<foreignObject x="105" y="50" width="30" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #000000; font-weight: bold;">
+												$-a_j$
+											</div>
+										</foreignObject>
+										<text x="122" y="40" font-family="Arial, sans-serif" font-size="9" fill="#b91c1c" text-anchor="middle">Realiment.</text>
+
+										<!-- Flow Lines -->
+										<line x1="10" y1="60" x2="33" y2="60" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+										<line x1="75" y1="60" x2="98" y2="60" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+										
+										<text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Ganhos do Filtro</text>
+										<foreignObject x="10" y="118" width="160" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #64748b;">
+												$b_i$ (zeros) / $-a_j$ (polos)
+											</div>
+										</foreignObject>
+									</g>
+
+									<!-- Divider Line -->
+									<line x1="410" y1="20" x2="410" y2="150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" />
+
+									<!-- ================= 3. SOMADOR (ADDER) ================= -->
+									<g transform="translate(420, 0)">
+										<text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">SOMADOR</text>
+										
+										<circle cx="80" cy="65" r="14" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+										<line x1="73" y1="65" x2="87" y2="65" stroke="#000000" stroke-width="1.5" />
+										<line x1="80" y1="58" x2="80" y2="72" stroke="#000000" stroke-width="1.5" />
+										
+										<line x1="15" y1="65" x2="59" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+										<line x1="80" y1="28" x2="80" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+										<line x1="94" y1="65" x2="148" y2="65" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+										
+										<foreignObject x="15" y="42" width="40" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #000000;">
+												$A[k]$
+											</div>
+										</foreignObject>
+
+										<foreignObject x="98" y="25" width="40" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; color: #000000;">
+												$B[k]$
+											</div>
+										</foreignObject>
+
+										<foreignObject x="105" y="42" width="65" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 10px; text-align: center; color: #000000;">
+												$A[k] + B[k]$
+											</div>
+										</foreignObject>
+										
+										<text x="90" y="115" font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Acumulador Linear</text>
+										<foreignObject x="20" y="118" width="140" height="20">
+											<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 11px; text-align: center; color: #64748b;">
+												$y[k] = A[k] + B[k]$
+											</div>
+										</foreignObject>
+									</g>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 16: Diagrama em Blocos (Forma Direta I) -->
+				<section>
+					<div class="slide-title">
+						<h2>Estrutura de Realização: Forma Direta </h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p style="font-size: 0.85em; margin-bottom: 5px;">Separação clara entre a parte direta (zeros) e a parte recursiva (polos). Requer $M+N$ atrasos.</p>
+							<div style="width: 950px;">
+								<svg width="100%" height="auto" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<!-- Arrow Marker -->
+										<marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+											<path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#000000" />
+										</marker>
+									</defs>
+
+									<!-- Transparent Background -->
+									<rect width="100%" height="100%" fill="none" />
+
+									<!-- Title -->
+									<text x="400" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">Forma Direta I (Filtro IIR de 2ª Ordem)</text>
+
+									<!-- ================= INPUT & FEEDFORWARD SECTION (LEFT) ================= -->
+									<!-- Input Node -->
+									<foreignObject x="25" y="42" width="40" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 12px; color: #000000;">
+											$x[k]$
+										</div>
+									</foreignObject>
+									<circle cx="70" cy="60" r="3" fill="#000000" />
+									
+									<!-- Horizontal Top Feedforward Line -->
+									<line x1="70" y1="60" x2="198" y2="60" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+									
+									<!-- Vertical Input Delay Line -->
+									<line x1="100" y1="60" x2="100" y2="220" stroke="#000000" stroke-width="1.5" />
+									<circle cx="100" cy="60" r="3" fill="#000000" />
+									
+									<!-- Delay Box 1 (Left) -->
+									<rect x="75" y="90" width="50" height="30" rx="4" fill="#fcd5b5" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="80" y="93" width="40" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000;">
+											$z^{-1}$
+										</div>
+									</foreignObject>
+									
+									<!-- Node after delay 1 -->
+									<circle cx="100" cy="140" r="3" fill="#000000" />
+									<line x1="100" y1="140" x2="198" y2="140" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+									
+									<!-- Delay Box 2 (Left) -->
+									<rect x="75" y="170" width="50" height="30" rx="4" fill="#fcd5b5" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="80" y="173" width="40" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000;">
+											$z^{-1}$
+										</div>
+									</foreignObject>
+									
+									<!-- Line after delay 2 -->
+									<line x1="100" y1="220" x2="198" y2="220" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+
+									<!-- Multipliers (Left) -->
+									<!-- b0 -->
+									<path d="M 200 44 L 200 76 L 235 60 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="200" y="51" width="26" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000; font-weight: bold;">
+											$b_0$
+										</div>
+									</foreignObject>
+									
+									<!-- b1 -->
+									<path d="M 200 124 L 200 156 L 235 140 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="200" y="131" width="26" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000; font-weight: bold;">
+											$b_1$
+										</div>
+									</foreignObject>
+									
+									<!-- b2 -->
+									<path d="M 200 204 L 200 236 L 235 220 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="200" y="211" width="26" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000; font-weight: bold;">
+											$b_2$
+										</div>
+									</foreignObject>
+
+									<!-- Feedforward Adders -->
+									<!-- Bottom Adder -->
+									<circle cx="280" cy="220" r="10" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<line x1="275" y1="220" x2="285" y2="220" stroke="#000000" stroke-width="1" />
+									<line x1="280" y1="215" x2="280" y2="225" stroke="#000000" stroke-width="1" />
+									<line x1="235" y1="220" x2="268" y2="220" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									
+									<!-- Middle Adder -->
+									<circle cx="280" cy="140" r="10" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<line x1="275" y1="140" x2="285" y2="140" stroke="#000000" stroke-width="1" />
+									<line x1="280" y1="135" x2="280" y2="145" stroke="#000000" stroke-width="1" />
+									<line x1="235" y1="140" x2="268" y2="140" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									<line x1="280" y1="210" x2="280" y2="152" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									
+									<!-- Connection to Main Central Line -->
+									<line x1="235" y1="60" x2="358" y2="60" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+									<line x1="280" y1="130" x2="280" y2="85" stroke="#000000" stroke-width="1.2" />
+									<line x1="280" y1="85" x2="370" y2="85" stroke="#000000" stroke-width="1.2" />
+									
+									<!-- Intermediate signal label v[k] -->
+									<foreignObject x="270" y="38" width="60" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 10px; color: #64748b;">
+											$b_0 x[k]$
+										</div>
+									</foreignObject>
+									
+									<!-- ================= CENTRAL ADDER & OUTPUT SECTION ================= -->
+									<!-- Main Adder -->
+									<circle cx="380" cy="60" r="12" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+									<line x1="373" y1="60" x2="387" y2="60" stroke="#000000" stroke-width="1.2" />
+									<line x1="380" y1="53" x2="380" y2="67" stroke="#000000" stroke-width="1.2" />
+									
+									<!-- Input from feedforward sum -->
+									<line x1="280" y1="85" x2="380" y2="85" stroke="#000000" stroke-width="1.2" />
+									<line x1="380" y1="85" x2="380" y2="74" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									
+									<!-- Top line connecting main adder to output -->
+									<line x1="392" y1="60" x2="728" y2="60" stroke="#000000" stroke-width="1.8" marker-end="url(#arrow)" />
+									<foreignObject x="735" y="42" width="40" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 12px; color: #000000;">
+											$y[k]$
+										</div>
+									</foreignObject>
+
+									<!-- ================= FEEDBACK SECTION (RIGHT) ================= -->
+									<!-- Vertical Output Delay Line -->
+									<line x1="680" y1="60" x2="680" y2="220" stroke="#000000" stroke-width="1.5" />
+									<circle cx="680" cy="60" r="3" fill="#000000" />
+									
+									<!-- Delay Box 1 (Right) -->
+									<rect x="655" y="90" width="50" height="30" rx="4" fill="#fcd5b5" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="660" y="93" width="40" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000;">
+											$z^{-1}$
+										</div>
+									</foreignObject>
+									
+									<!-- Node after output delay 1 -->
+									<circle cx="680" cy="140" r="3" fill="#000000" />
+									<line x1="680" y1="140" x2="577" y2="140" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+									
+									<!-- Delay Box 2 (Right) -->
+									<rect x="655" y="170" width="50" height="30" rx="4" fill="#fcd5b5" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="660" y="173" width="40" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000;">
+											$z^{-1}$
+										</div>
+									</foreignObject>
+									
+									<!-- Line after output delay 2 -->
+									<line x1="680" y1="220" x2="577" y2="220" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)" />
+
+									<!-- Multipliers (Right - Note: pointing left) -->
+									<!-- -a1 -->
+									<path d="M 575 124 L 575 156 L 540 140 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="546" y="131" width="30" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000; font-weight: bold;">
+											$-a_1$
+										</div>
+									</foreignObject>
+									
+									<!-- -a2 -->
+									<path d="M 575 204 L 575 236 L 540 220 Z" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<foreignObject x="546" y="211" width="30" height="20">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #000000; font-weight: bold;">
+											$-a_2$
+										</div>
+									</foreignObject>
+
+									<!-- Feedback Adders -->
+									<!-- Bottom Feedback Adder -->
+									<circle cx="480" cy="220" r="10" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<line x1="475" y1="220" x2="485" y2="220" stroke="#000000" stroke-width="1" />
+									<line x1="480" y1="215" x2="480" y2="225" stroke="#000000" stroke-width="1" />
+									<line x1="540" y1="220" x2="492" y2="220" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									
+									<!-- Middle Feedback Adder -->
+									<circle cx="480" cy="140" r="10" fill="#ffffff" stroke="#000000" stroke-width="1.2" />
+									<line x1="475" y1="140" x2="485" y2="140" stroke="#000000" stroke-width="1" />
+									<line x1="480" y1="135" x2="480" y2="145" stroke="#000000" stroke-width="1" />
+									<line x1="540" y1="140" x2="492" y2="140" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									<line x1="480" y1="210" x2="480" y2="152" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+									<!-- Connection back to Main Adder -->
+									<line x1="480" y1="130" x2="480" y2="95" stroke="#000000" stroke-width="1.2" />
+									<line x1="480" y1="95" x2="390" y2="95" stroke="#000000" stroke-width="1.2" />
+									<line x1="390" y1="95" x2="390" y2="73" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)" />
+									
+									<!-- Feedback label under arrow -->
+									<text x="440" y="112" font-family="Arial, sans-serif" font-size="9" fill="#b91c1c" text-anchor="middle">Realimentação</text>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+				
+				<!-- Slide 19: Propriedade de Fase dos Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>A Fase Não-Linear dos Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Diferente dos filtros FIR, os filtros causais IIR <b>não podem apresentar fase linear</b>:</p>
+						<ul>
+							<li>A presença de polos fora da origem impede a simetria exata de coeficientes necessária para fase linear.</li>
+							<li>O <b>atraso de grupo ($\tau_g(\omega)$) varia com a frequência</b>.</li>
+							<li>Diferentes componentes de frequência sofrem diferentes atrasos de tempo, causando <b>distorção de fase (dispersão)</b>.</li>
+						</ul>
+					</div>
+				</section>
+
+
+
+					<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR (Visão Geral) -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR </h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" />
+									<foreignObject x="10" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" />
+
+									<!-- Step 2: Protótipo (Roxo) -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" />
+									<foreignObject x="200" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" />
+
+									<!-- Step 3: Mapeamento (Laranja) -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+									<foreignObject x="390" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" />
+
+									<!-- Step 4: Discretização (Verde) -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2" />
+									<foreignObject x="580" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" />
+
+									<!-- Step 5: Implementação (Rosa) -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2" />
+									<foreignObject x="770" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+					<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) - DESTACADO -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="3" style="filter: drop-shadow(0px 0px 8px rgba(2, 132, 199, 0.65));" />
+									<foreignObject x="10" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 2: Protótipo (Roxo) - Faded -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" opacity="0.3" />
+									<foreignObject x="200" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 3: Mapeamento (Laranja) - Faded -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" opacity="0.3" />
+									<foreignObject x="390" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 4: Discretização (Verde) - Faded -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2" opacity="0.3" />
+									<foreignObject x="580" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 5: Implementação (Rosa) - Faded -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2" opacity="0.3" />
+									<foreignObject x="770" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+
+	
+
+
+				<!-- Slide: Projeto de Filtros: Especificações e Envelope -->
+				<section>
+					<div class="slide-title">
+						<h2>Projeto de Filtros: Especificações de Desempenho</h2>
+					</div>
+					<div class="slide-content">
+					
+
+						<center>
+							<div style="width: 1100px;">
+								<svg width="100%" height="auto" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<!-- Arrow Marker -->
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+											<path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#475569" />
+										</marker>
+										<!-- Diagonal Stripes Pattern for Forbidden Regions -->
+										<pattern id="hatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+											<line x1="0" y1="0" x2="0" y2="10" stroke="#f87171" stroke-width="1.5" stroke-opacity="0.4" />
+										</pattern>
+									</defs>
+
+									<!-- Background -->
+									<rect width="100%" height="100%" fill="#ffffff" />
+
+									<!-- Shaded Band Regions at the bottom -->
+									<!-- Passband Shading -->
+									<rect x="100" y="360" width="220" height="25" fill="#e0f2fe" rx="3" />
+									<text x="210" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">BANDA PASSANTE</text>
+
+									<!-- Transition Band Shading -->
+									<rect x="320" y="360" width="160" height="25" fill="#fef9c3" rx="3" />
+									<text x="400" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#a16207" text-anchor="middle">BANDA DE TRANSIÇÃO</text>
+
+									<!-- Stopband Shading -->
+									<rect x="480" y="360" width="270" height="25" fill="#f1f5f9" rx="3" />
+									<text x="615" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">BANDA DE REJEIÇÃO</text>
+
+									<!-- ================= FORBIDDEN REGIONS (ENVELOPE TOLErANCES) ================= -->
+									<!-- Passband Upper Forbidden Zone (above 1) -->
+									<rect x="100" y="35" width="220" height="35" fill="#fee2e2" fill-opacity="0.4" />
+									<rect x="100" y="35" width="220" height="35" fill="url(#hatch)" />
+									<line x1="100" y1="70" x2="320" y2="70" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+									<!-- Passband Lower Forbidden Zone (below 1-delta_p) -->
+									<rect x="100" y="110" width="220" height="230" fill="#fee2e2" fill-opacity="0.4" />
+									<rect x="100" y="110" width="220" height="230" fill="url(#hatch)" />
+									<line x1="100" y1="110" x2="320" y2="110" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+									<!-- Stopband Upper Forbidden Zone (above delta_s) -->
+									<rect x="480" y="35" width="270" height="265" fill="#fee2e2" fill-opacity="0.4" />
+									<rect x="480" y="35" width="270" height="265" fill="url(#hatch)" />
+									<line x1="480" y1="300" x2="750" y2="300" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+									<!-- ================= AXES & LABELS ================= -->
+									<!-- Y-Axis (Magnitude) -->
+									<line x1="100" y1="360" x2="100" y2="25" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+									<foreignObject x="10" y="5" width="80" height="30">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: right; color: #334155;">
+											$|H(j\omega)|$
+										</div>
+									</foreignObject>
+
+									<!-- X-Axis (Frequency) -->
+									<line x1="80" y1="340" x2="770" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+									<foreignObject x="755" y="342" width="30" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 14px; text-align: center; color: #334155;">
+											$\omega$
+										</div>
+									</foreignObject>
+
+									<!-- Y-axis ticks and labels -->
+									<!-- 1 -->
+									<line x1="95" y1="70" x2="100" y2="70" stroke="#475569" stroke-width="1.5" />
+									<foreignObject x="40" y="58" width="50" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+											$1$
+										</div>
+									</foreignObject>
+
+									<!-- 1 - δ_p -->
+									<line x1="95" y1="110" x2="100" y2="110" stroke="#475569" stroke-width="1.5" />
+									<foreignObject x="10" y="98" width="80" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+											$1 - \delta_p$
+										</div>
+									</foreignObject>
+
+									<!-- δ_s -->
+									<line x1="95" y1="300" x2="100" y2="300" stroke="#475569" stroke-width="1.5" />
+									<foreignObject x="40" y="288" width="50" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+											$\delta_s$
+										</div>
+									</foreignObject>
+
+									<!-- X-axis ticks and labels -->
+									<!-- ω_p -->
+									<line x1="320" y1="340" x2="320" y2="345" stroke="#475569" stroke-width="1.5" />
+									<line x1="320" y1="110" x2="320" y2="340" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+									<foreignObject x="295" y="342" width="50" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #334155;">
+											$\omega_p$
+										</div>
+									</foreignObject>
+
+									<!-- ω_s -->
+									<line x1="480" y1="340" x2="480" y2="345" stroke="#475569" stroke-width="1.5" />
+									<line x1="480" y1="300" x2="480" y2="340" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+									<foreignObject x="455" y="342" width="50" height="25">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #334155;">
+											$\omega_s$
+										</div>
+									</foreignObject>
+
+									<!-- ================= TYPICAL FILTER RESPONSE CURVE ================= -->
+									<path d="M 100 95 
+											 C 140 82, 180 118, 220 95 
+											 C 260 82, 290 118, 320 95
+											 C 380 95, 420 325, 480 320
+											 C 540 338, 600 308, 660 330
+											 C 700 342, 730 328, 750 335" 
+										  fill="none" stroke="#0284c7" stroke-width="3" />
+
+									<!-- Label for the filter response curve -->
+									<foreignObject x="240" y="132" width="220" height="30">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; color: #0284c7;">
+											Resposta do Filtro $|H(j\omega)|$
+										</div>
+									</foreignObject>
+									<path d="M 240 138 L 200 112" fill="none" stroke="#0284c7" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow)" />
+									
+									<!-- Forbidden Area Labels -->
+									<text x="210" y="55" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+									<text x="210" y="200" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+									<text x="615" y="160" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+
+							<!-- Slide: Projeto de Filtros: Especificações e Envelope -->
+				<section>
+					<div class="slide-title">
+						<h2>Projeto de Filtros: Especificações de Desempenho</h2>
+					</div>
+					<div class="slide-content">
+						<p>O projeto de filtros é guiado por um <b>envelope de tolerâncias</b> na magnitude da resposta em frequência $|H(j\omega)|$:</p>
+						<ul>
+							<li><b>Banda Passante ($0 \le \omega \le \omega_p$):</b> O ganho deve oscilar no máximo $\delta_p$ em torno de 1 ($1 - \delta_p \le |H(j\omega)| \le 1$).</li>
+							<li><b>Banda de Rejeição ($\omega \ge \omega_s$):</b> A atenuação mínima exige que o ganho fique abaixo de $\delta_s$ ($|H(j\omega)| \le \delta_s$).</li>
+							<li><b>Banda de Transição ($\omega_p < \omega < \omega_s$):</b> Região de decaimento entre a banda passante e a de rejeição.</li>
+						</ul>
+						
+					</div>
+				</section>
+
+
+				<!-- Slide: Relação entre os Parâmetros Epsilon e Delta_P -->
+				<section>
+					<div class="slide-title">
+						<h2>Parâmetro de ondulação $\epsilon$ e $\delta_p$</h2>
+					</div>
+					<div class="slide-content">
+						<p>O parâmetro de ondulação $\epsilon$ e a tolerância da banda passante $\delta_p$ representam a mesma restrição física sobre o ganho mínimo na banda passante:</p>
+						<center class="lightup" style="margin: 10px 0;">
+							$1 - \delta_p = \frac{1}{\sqrt{1 + \epsilon^2}}$
+						</center>
+						<p>Dessa igualdade, derivam-se as relações de transformação:</p>
+						<b>De $\delta_p$ para $\epsilon$:</b>
+								<center class="lightup" style="margin: 5px 0;">
+									$\epsilon = \frac{\sqrt{2\delta_p - \delta_p^2}}{1 - \delta_p}$
+								ou 
+									$\delta_p = 1 - \frac{1}{\sqrt{1 + \epsilon^2}}$ 
+								</center>
+						
+					
+					</div>
+				</section>
+
+
+								<!-- Slide: Parâmetros de Desempenho para Projeto -->
+				<section>
+					<div class="slide-title">
+						<h2>Parâmetros de Desempenho do Projeto</h2>
+					</div>
+					<div class="slide-content">
+						
+						<ul style="margin-top: 15px;">
+							<li><b>Frequências Limites:</b>
+								<ul>
+									<li>$\omega_p$: Frequência de corte da banda passante (fim da banda passante).</li>
+									<li>$\omega_s$: Frequência de corte da banda de rejeição (início da banda de rejeição).</li>
+								</ul>
+							</li>
+							<li><b>Tolerâncias de Ganho:</b>
+								<ul>
+									<li>$\delta_p$ (ou $\epsilon$): Ondulação na banda passante, determinando a variação máxima do ganho.</li>
+									<li>$\delta_s$: Atenuação máxima permitida na banda de rejeição.</li>
+								</ul>
+							</li>
+						</ul>
+						<p style="font-size: 0.8em; margin-top: 15px;">Esses parâmetros definem as "áreas proibidas" no envelope de resposta do filtro.</p>
+					</div>
+				</section>
+
+				<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) - Faded -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" opacity="0.3" />
+									<foreignObject x="10" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 2: Protótipo (Roxo) - DESTACADO -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="3" style="filter: drop-shadow(0px 0px 8px rgba(139, 92, 246, 0.65));" />
+									<foreignObject x="200" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 3: Mapeamento (Laranja) - Faded -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" opacity="0.3" />
+									<foreignObject x="390" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 4: Discretização (Verde) - Faded -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2" opacity="0.3" />
+									<foreignObject x="580" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 5: Implementação (Rosa) - Faded -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2" opacity="0.3" />
+									<foreignObject x="770" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+
+				<!-- Slide: Filtro Protótipo Passa-Baixas -->
+				<section>
+					<div class="slide-title">
+						<h2>O Filtro Protótipo Passa-Baixas</h2>
+					</div>
+					<div class="slide-content">
+						<p>O projeto de filtros analógicos geralmente parte de um <b>filtro protótipo passa-baixas normalizado</b>, com frequência de corte $\omega_0 = 1$ rad/s:</p>
+						<p>&nbsp;</p>
+						<center class="lightup">
+							$$G(s) = \frac{1}{s + 1}$$
+						</center>
+		
+					</div>
+				</section>
+
+
+					<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) - Faded -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" opacity="0.3" />
+									<foreignObject x="10" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 2: Protótipo (Roxo) - Faded -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" opacity="0.3" />
+									<foreignObject x="200" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 3: Mapeamento (Laranja) - DESTACADO -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="3" style="filter: drop-shadow(0px 0px 8px rgba(249, 115, 22, 0.65));" />
+									<foreignObject x="390" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 4: Discretização (Verde) - Faded -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2" opacity="0.3" />
+									<foreignObject x="580" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 5: Implementação (Rosa) - Faded -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2" opacity="0.3" />
+									<foreignObject x="770" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+
+
+
+								<!-- Slide: Filtro Protótipo Passa-Baixas -->
+				<section>
+					<div class="slide-title">
+						<h2>O Filtro Protótipo Passa-Baixas</h2>
+					</div>
+					<div class="slide-content">
+
+						<p style="margin-top: 15px;">Para alterar a frequência de corte para um valor arbitrário $\omega_c$, realiza-se o <b>mapeamento em frequência</b> substituindo $s \leftarrow \frac{s}{\omega_c}$:</p>
+						<center class="lightup">
+							$$H_a(s) = G\left(\frac{s}{\omega_c}\right) = \frac{1}{\frac{s}{\omega_c} + 1} = \frac{\omega_c}{s + \omega_c}$$
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Resposta em Frequência do Filtro Protótipo -->
+				<section>
+					<div class="slide-title">
+						<h2>Efeito do Mapeamento de Frequência</h2>
+					</div>
+					<div class="slide-content">
+					
+						<center>
+							$s\leftarrow \frac{s}{5}$<br>
+							<img src="../images/resposta_filtro_prototipo.png" width="700" alt="Resposta em Frequência Filtro Protótipo">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Conversão Passa-Baixas para Passa-Altas -->
+				<section>
+					<div class="slide-title">
+						<h2>Conversão Passa-Baixas para Passa-Altas</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para converter o filtro protótipo passa-baixas em um <b>filtro passa-altas</b> com frequência de corte $\omega_c$, aplica-se o mapeamento:</p>
+						<center class="" style="margin: 15px 0;">
+							$$s \leftarrow \frac{\omega_c}{s}$$
+						</center>
+						<center class="lightup" style="margin: 15px 0;">
+							$$H_{HP}(s) = G\left(\frac{\omega_c}{s}\right) = \frac{1}{\frac{\omega_c}{s} + 1} = \frac{s}{s + \omega_c}$$
+						</center>
+						
+					</div>
+				</section>
+
+				<!-- Slide: Exemplo de Resposta em Frequência Passa-Altas -->
+				<section>
+					<div class="slide-title">
+						<h2>Efeito do Mapeamento Passa-Altas</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$s \leftarrow \frac{5}{s}$<br>
+							<img src="../images/resposta_filtro_passa_altas.png" width="700" alt="Resposta em Frequência Filtro Passa-Altas">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Conversão Passa-Baixas para Passa-Faixa (Mapeamento) -->
+				<section>
+					<div class="slide-title">
+						<h2>Conversão Passa-Baixas para Passa-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para converter o filtro protótipo passa-baixas em um <b>filtro passa-faixa</b> com frequências de corte inferior $\omega_l$ e superior $\omega_h$, aplica-se o mapeamento:</p>
+						<center class="lightup" style="margin: 15px 0;">
+							$$s \leftarrow \frac{s^2 + \omega_0^2}{s W}$$
+						</center>
+						<p>em que $W = \omega_h - \omega_l$ é a largura de banda e $\omega_0 = \sqrt{\omega_h \omega_l}$ é a frequência central.</p>
+					</div>
+				</section>
+
+				<!-- Slide: Conversão Passa-Baixas para Passa-Faixa (Função de Transferência) -->
+				<section>
+					<div class="slide-title">
+						<h2>Conversão Passa-Baixas para Passa-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<p>Substituindo em $G(s) = \frac{1}{s + 1}$, obtemos a função de transferência do passa-faixa de 2ª ordem:</p>
+						<center class="lightup" style="margin: 15px 0;">
+							$$H_{BP}(s) = G\left(\frac{s^2 + \omega_0^2}{s W}\right) = \frac{1}{\frac{s^2 + \omega_0^2}{s W} + 1} = \frac{s W}{s^2 + s W + \omega_0^2}$$
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Exemplo de Resposta em Frequência Passa-Faixa -->
+				<section>
+					<div class="slide-title">
+						<h2>Efeito do Mapeamento Passa-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$s \leftarrow \frac{s^2 + 4^2}{s \cdot 6}$<br>
+							<img src="../images/resposta_filtro_passa_faixa.png" width="700" alt="Resposta em Frequência Filtro Passa-Faixa">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Conversão Passa-Baixas para Rejeita-Faixa (Mapeamento) -->
+				<section>
+					<div class="slide-title">
+						<h2>Conversão Passa-Baixas para Rejeita-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para converter o protótipo passa-baixas em um <b>filtro rejeita-faixa</b> (notch / bandstop), aplica-se a transformação inversa em frequência:</p>
+						<center class="lightup" style="margin: 15px 0;">
+							$$s \leftarrow \frac{s W}{s^2 + \omega_0^2}$$
+						</center>
+						<p>em que $W = \omega_h - \omega_l$ é a largura de banda e $\omega_0 = \sqrt{\omega_h \omega_l}$ é a frequência central de rejeição.</p>
+					</div>
+				</section>
+
+				<!-- Slide: Conversão Passa-Baixas para Rejeita-Faixa (Função de Transferência) -->
+				<section>
+					<div class="slide-title">
+						<h2>Conversão Passa-Baixas para Rejeita-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<p>Substituindo em $G(s) = \frac{1}{s + 1}$, obtemos a função de transferência do rejeita-faixa de 2ª ordem:</p>
+						<center class="lightup" style="margin: 15px 0;">
+							$$H_{BS}(s) = G\left(\frac{s W}{s^2 + \omega_0^2}\right) = \frac{1}{\frac{s W}{s^2 + \omega_0^2} + 1} = \frac{s^2 + \omega_0^2}{s^2 + s W + \omega_0^2}$$
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Exemplo de Resposta em Frequência Rejeita-Faixa -->
+				<section>
+					<div class="slide-title">
+						<h2>Efeito do Mapeamento Rejeita-Faixa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$s \leftarrow \frac{s \cdot 6}{s^2 + 4^2}$<br>
+							<img src="../images/resposta_filtro_rejeita_faixa.png" width="700" alt="Resposta em Frequência Filtro Rejeita-Faixa">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 20: Projeto de Filtros IIR por Protótipos Analógicos -->
+				<section>
+					<div class="slide-title">
+						<h2>Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>Filtros IIR digitais são projetados mapeando filtros analógicos clássicos bem conhecidos:</p>
+						<ul>
+							<li><b>Butterworth:</b> Resposta de magnitude maximamente plana na banda passante, transição suave.</li>
+							<li><b>Chebyshev Tipo I:</b> Ondulações (ripples) na banda passante, transição mais rápida que Butterworth.</li>
+							<li><b>Chebyshev Tipo II:</b> Ondulações na banda de rejeição, banda passante plana.</li>
+							<li><b>Elíptico (Cauer):</b> Ondulações em ambas as bandas, transição extremamente abrupta (ordem mínima).</li>
+						</ul>
+					</div>
+				</section>
+
+
+				<!-- Slide: Resposta em Frequência Butterworth -->
+				<section>
+					<div class="slide-title">
+						<h2>Butterworth: Resposta em Frequência</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/resposta_butterworth.png" width="750" alt="Resposta em Frequência Butterworth">
+						</center>
+					</div>
+				</section>
+
+
+				<!-- Slide: Resposta em Frequência Chebyshev Tipo I -->
+				<section>
+					<div class="slide-title">
+						<h2>Chebyshev Tipo I: Resposta em Frequência</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/resposta_chebyshev1.png" width="750" alt="Resposta em Frequência Chebyshev Tipo I">
+						</center>
+					</div>
+				</section>
+
+
+				<!-- Slide: Resposta em Frequência Chebyshev Tipo II -->
+				<section>
+					<div class="slide-title">
+						<h2>Chebyshev Tipo II: Resposta em Frequência</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/resposta_chebyshev2.png" width="750" alt="Resposta em Frequência Chebyshev Tipo II">
+						</center>
+					</div>
+				</section>
+
+
+				<!-- Slide: Resposta em Frequência Elíptico -->
+				<section>
+					<div class="slide-title">
+						<h2>Elíptico: Resposta em Frequência</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/resposta_eliptico.png" width="750" alt="Resposta em Frequência Elíptico">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Comparação das Respostas em Frequência (Sobrepostas) -->
+				<section>
+					<div class="slide-title">
+						<h2>Sobreposição das Respostas (N=5)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/resposta_comparativa.png" width="750" alt="Comparação das Respostas em Frequência">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide: Protótipos Butterworth de Ordem 1, 2 e 3 -->
+				<section>
+					<div class="slide-title">
+						<h2>Protótipos Butterworth (Ordem 1, 2 e 3)</h2>
+					</div>
+					<div class="slide-content">
+						<p>Polinômios de Butterworth normalizados para frequência de corte $\omega_0 = 1$ rad/s e ondulação de $3$ dB ($\epsilon = 1$):</p>
+						<center>
+
+						<ul style="margin-top: 15px;">
+							<li><b>1ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_1(s) = \frac{1}{s + 1}$
+								</center>
+							</li>
+							<li><b>2ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_2(s) = \frac{1}{s^2 + \sqrt{2}s + 1}$
+								</center>
+							</li>
+							<li><b>3ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_3(s) = \frac{1}{s^3 + 2s^2 + 2s + 1}$
+								</center>
+							</li>
+						</ul>
+						</center>
+						
+					</div>
+				</section>
+
+				<!-- Slide: Protótipos Chebyshev Tipo I de Ordem 1, 2 e 3 -->
+				<section>
+					<div class="slide-title">
+						<h2>Protótipos Chebyshev Tipo I (Ordem 1, 2 e 3)</h2>
+					</div>
+					<div class="slide-content">
+						<p>Polinômios de Chebyshev Tipo I para frequência de corte $\omega_p = 1$ rad/s e ondulação de $3$ dB ($\epsilon = 1$):</p>
+						<center>
+						<ul style="margin-top: 15px;">
+							<li><b>1ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_1(s) = \frac{1}{s + 1}$
+								</center>
+							</li>
+							<li><b>2ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_2(s) = \frac{0{,}5}{s^2 + 0{,}6436s + 0{,}7071}$
+								</center>
+							</li>
+							<li><b>3ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_3(s) = \frac{0{,}25}{s^3 + 0{,}5960s^2 + 0{,}9278s + 0{,}25}$
+								</center>
+							</li>
+						</ul>
+						</center>
+						
+					</div>
+				</section>
+
+
+				
+				<!-- Slide: Protótipos Chebyshev Tipo II de Ordem 1, 2 e 3 -->
+				<section>
+					<div class="slide-title">
+						<h2>Protótipos Chebyshev Tipo II (Ordem 1, 2 e 3)</h2>
+					</div>
+					<div class="slide-content">
+						<p>Polinômios de Chebyshev Tipo II (Inverso) para frequência limite de rejeição $\omega_s = 1$ rad/s e atenuação mínima de $\delta_s = 40\text{ dB}$:</p>
+						<center>
+						<ul style="margin-top: 15px;">
+							<li><b>1ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_1(s) = \frac{1}{s + 1}$
+								</center>
+							</li>
+							<li><b>2ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_2(s) = \frac{0{,}3096(s^2 + 2)}{s^2 + 0{,}7288s + 0{,}6192}$
+								</center>
+							</li>
+							<li><b>3ª Ordem:</b>
+								<center class="" style="margin: 5px 0;">
+									$G_3(s) = \frac{0{,}3818(s^2 + 1{,}3333)}{s^3 + 1{,}1639s^2 + 1{,}0441s + 0{,}5090}$
+								</center>
+							</li>
+						</ul>
+						</center>
+						
+					</div>
+				</section>
+
+
+					<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) - Faded -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" opacity="0.3" />
+									<foreignObject x="10" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 2: Protótipo (Roxo) - Faded -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" opacity="0.3" />
+									<foreignObject x="200" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 3: Mapeamento (Laranja) - Faded -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" opacity="0.3" />
+									<foreignObject x="390" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 4: Discretização (Verde) - DESTACADO -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="3" style="filter: drop-shadow(0px 0px 8px rgba(16, 185, 129, 0.65));" />
+									<foreignObject x="580" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 5: Implementação (Rosa) - Faded -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2" opacity="0.3" />
+									<foreignObject x="770" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+				
+				
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Discretização
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Considere um integrador na forma:
+						<p class="lightup">
+						$$
+							y(t)=\int_{-\infty}^t u(\tau)d\tau
+						$$
+					</p>
+						Como aproximar essa integral?
+					
+						
+					</center>
+
+					<center class="">
+		
+						<ul>
+							<li>Método Euler-Forward;</li>
+							<li>Método Euler-Backward;</li>
+							<li>Método Tustin.</li>
+
+						</ul>
+					</center>
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+u[k]T
+						$$
+						<img src="../images/integracao_numerica_forwad.png" width="500">
+						
+					
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+U(z)T
+						$$
+												
+					</center>
+
+					<center class="">
+						
+						$$
+						\Rightarrow	Y(z)=\frac{T}{z-1}U(z)
+						$$
+												
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+		
+
+					<center class="lightup">
+						
+						$$
+						\Rightarrow	s=\frac{z-1}{T}=\frac{1-z^{-1}}{Tz^{-1}}
+						$$
+												
+					</center>
+
+					<center >
+						Portanto,
+						
+						$$
+						G_d(z)=G(s)|_{s=\frac{z-1}{T}}
+						$$
+												
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+			
+
+	
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+u[k+1]T
+						$$
+						
+						<img src="../images/integracao_numerica_backward.png" width="500">
+						
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+zU(z)T
+						$$
+					
+						
+						
+					</center>
+
+
+					<center class="">
+					
+						$$
+							\Rightarrow Y(z)=\frac{zT}{z-1}U(z)
+						$$
+					
+						
+						
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						
+						<p class="lightup">
+						$$
+							s=\frac{z-1}{zT}
+						$$
+					</p>
+					
+						
+						
+					</center>
+
+
+					<center>
+						Portanto,
+						$$
+							G_d(z)=G(s)|_{s=\frac{z-1}{zT}}
+						$$
+					
+						
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+(u[k]+u[k+1])T/2
+						$$
+						
+						<img src="../images/integracao_numerica_tustin.png" width="500">
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+(U(z)+zU(z))T/2
+						$$
+						
+						
+						
+					</center>
+
+					<center class="">
+						
+						$$
+							\Rightarrow Y(z)=\frac{T}{2}\frac{z+1}{z-1}U(z)
+						$$
+						
+						
+						
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center class="lightup">
+					
+						$$
+							s=\frac{2}{T}\frac{z-1}{z+1}
+						$$
+						
+						
+						
+					</center>
+
+					<center>
+						Portanto, 
+						$$
+							G_d(z)=G(s)|_{s=\frac{2}{T}\frac{z-1}{z+1}}
+						$$
+						
+						
+						
+					</center>
+
+
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+
+
+				
+		
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Equivalência por integração numérica
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center>
+						<table>
+							<tr><td align="center"><b>Euler-Forward:</b>
+								$$
+									s=\frac{z-1}{T}
+								$$</td><td align="center"><b>Euler-Backward:</b>
+									$$
+										s=\frac{z-1}{Tz}
+									$$</td><td align="center"><b>Tustin (Bilinear):</b>
+										$$
+											s=\frac{2}{T}\frac{z-1}{z+1}
+										$$</td></tr>
+										<tr>
+											<td><img src="../images/integracao_numerica_forwad.png" width="400"></td>
+											<td><img src="../images/integracao_numerica_backward.png" width="400"></td>
+											<td><img src="../images/integracao_numerica_tustin.png" width="400"></td>
+										</tr>
+						</table>
+						
+
+						
+
+						
+						
+					
+						
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+					<!-- Slide: Diagrama de Etapas do Projeto de Filtros IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Fluxograma do Projeto de Filtros IIR</h2>
+					</div>
+					<div class="slide-content">
+						<p>O fluxo de projeto de um filtro digital IIR a partir de especificações analógicas segue as seguintes etapas principais:</p>
+						<center>
+							<p>&nbsp;</p>
+							<div style="width: 1150px; margin-top: 15px;">
+								<svg width="100%" height="auto" viewBox="0 0 950 240" xmlns="http://www.w3.org/2000/svg">
+									<defs>
+										<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+											<path d="M 0 1 L 8 5 L 0 9 z" fill="#334155" />
+										</marker>
+									</defs>
+
+									<!-- Step 1: Especificações (Azul) - Faded -->
+									<rect x="10" y="20" width="160" height="180" rx="8" ry="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" opacity="0.3" />
+									<foreignObject x="10" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #0369a1; border-bottom: 1px dashed #bae6fd; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">1. Especificações</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Definição das tolerâncias e frequências limite do filtro:
+												<div style="font-weight: bold; margin-top: 6px; color: #0284c7; font-size: 12px;">
+													$\delta_p$ (ou $\epsilon$), $\delta_s$<br />
+													$\omega_p$, $\omega_s$
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 1 -> 2 -->
+									<line x1="170" y1="110" x2="192" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 2: Protótipo (Roxo) - Faded -->
+									<rect x="200" y="20" width="160" height="180" rx="8" ry="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" opacity="0.3" />
+									<foreignObject x="200" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #6d28d9; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">2. Filtro Protótipo</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Escolha do protótipo analógico passa-baixas normalizado:
+												<div style="font-weight: bold; margin-top: 6px; color: #7c3aed; font-size: 12px;">
+													$G(s) = \frac{1}{B_n(s)}$
+												</div>
+												<div style="font-size: 9.5px; color: #6d28d9; margin-top: 3px;">
+													(Ex: Butterworth, Chebyshev)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 2 -> 3 -->
+									<line x1="360" y1="110" x2="382" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 3: Mapeamento (Laranja) - Faded -->
+									<rect x="390" y="20" width="160" height="180" rx="8" ry="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" opacity="0.3" />
+									<foreignObject x="390" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #c2410c; border-bottom: 1px dashed #fed7aa; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">3. Mapeamento</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Transformação de frequência no domínio analógico:
+												<div style="font-weight: bold; margin-top: 6px; color: #ea580c; font-size: 12px;">
+													$H_a(s) = G(f(s))$
+												</div>
+												<div style="font-size: 9.5px; color: #ea580c; margin-top: 3px;">
+													(Passa-Altas, Passa-Faixa, Rejeita-Faixa)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 3 -> 4 -->
+									<line x1="550" y1="110" x2="572" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 4: Discretização (Verde) - Faded -->
+									<rect x="580" y="20" width="160" height="180" rx="8" ry="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2" opacity="0.3" />
+									<foreignObject x="580" y="20" width="160" height="180" opacity="0.3">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #047857; border-bottom: 1px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">4. Discretização</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Mapeamento analógico-digital para obter a FT digital:
+												<div style="font-weight: bold; margin-top: 6px; color: #059669; font-size: 12px;">
+													$H(z) = H_a(g(z))$
+												</div>
+												<div style="font-size: 9.5px; color: #059669; margin-top: 3px;">
+													(Ex: Transformação Bilinear)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+
+									<!-- Connection 4 -> 5 -->
+									<line x1="740" y1="110" x2="762" y2="110" stroke="#334155" stroke-width="3" marker-end="url(#arrow)" opacity="0.3" />
+
+									<!-- Step 5: Implementação (Rosa) - DESTACADO -->
+									<rect x="770" y="20" width="160" height="180" rx="8" ry="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="3" style="filter: drop-shadow(0px 0px 8px rgba(236, 72, 153, 0.65));" />
+									<foreignObject x="770" y="20" width="160" height="180">
+										<div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; padding: 10px; color: #1e293b; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+											<div style="font-weight: bold; text-align: center; color: #db2777; border-bottom: 1px dashed #fbcfe8; padding-bottom: 4px; margin-bottom: 6px; font-size: 12.5px;">5. Implementação</div>
+											<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+												Obtenção e codificação da equação a diferenças:
+												<div style="font-weight: bold; margin-top: 6px; color: #db2777; font-size: 11px;">
+													$y[k] = \sum b_i x[k-i] - \sum a_j y[k-j]$
+												</div>
+												<div style="font-size: 9.5px; color: #db2777; margin-top: 3px;">
+													(Estrutura direta I ou II)
+												</div>
+											</div>
+										</div>
+									</foreignObject>
+								</svg>
+							</div>
+						</center>
+					</div>
+				</section>
+
+
+				
+
+				<!-- Slide: Exemplo de Projeto: IIR Butterworth Rejeita-Faixa de 3ª Ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Implementação</h2>
+					</div>
+					<center>
+						Converter a função de transferência 
+						<p class="lightup2">
+								$$
+									H(z)=\frac{N(z)}{D(z)}
+								$$
+						</p>
+						em um equação à diferenças 
+						<p class="lightup2">
+						$$
+							y[k]=\sum_{i=0}^M b_ix[k-i]-\sum_{j=1}^N a_jy[k-j]
+						$$
+						</p>
+					</center>
+					
+				</section>
+
+
+
+
+				<!-- Slide: Exemplo de Projeto: IIR Butterworth Rejeita-Faixa de 3ª Ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: Butterworth Rejeita-Faixa</h2>
+					</div>
+					<center>
+						<p>&nbsp;</p>
+						<p class="lightup">Projete um filtro digital rejeita-faixa do tipo Butterworth de 2° ordem, com $\omega_0=10rad/s$ e $W=8rad/s$, oscilação da banda de passagem de $3dB$ ($\epsilon=1$) e frequência de amostragem $f_s=1kHz$. </p>
+					</center>
+					
+				</section>
+
+
+
+							<!-- Slide: Exemplo de Projeto: IIR Butterworth Rejeita-Faixa de 3ª Ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: Butterworth Rejeita-Faixa</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em; line-height: 1.35;">
+						
+						<ol style="margin-top: 10px;">
+							<li><b>Passo 1: Seleção do Protótipo Passa-Baixas ($G(s)$):</b>
+								<center class="lightup" style="margin: 5px 0;">
+									$G(s) = \frac{1}{s+1}$
+								</center>
+							</li>
+							<li><b>Passo 2: Mapeamento em Frequência (Passa-Baixas para Rejeita-Faixa):</b>
+								<p>Substitui-se a variável $s$ do protótipo por:</p>
+								<center class="lightup" style="margin: 5px 0;">
+									$s \leftarrow \frac{s W}{s^2 + \omega_0^2}$
+								</center>
+								<p>em que $W = \omega_h - \omega_l$ e $\omega_0 = \sqrt{\omega_h \omega_l}$. Obtém-se a função analógica final de 6ª ordem $$H_a(s) = G\left(\frac{s W}{s^2 + \omega_0^2}\right)$$</p>
+							</li>
+						
+						</ol>
+					</div>
+				</section>
+
+
+							
+				<!-- Slide: Exemplo de Projeto: IIR Butterworth Rejeita-Faixa de 3ª Ordem -->
+				<section>
+					<div class="slide-title">
+						<h2>Exemplo: IIR Butterworth Rejeita-Faixa</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em; line-height: 1.35;">
+						<p>Passo a passo do projeto de um filtro digital IIR rejeita-faixa (6ª ordem final) a partir de um protótipo Butterworth de 3ª ordem:</p>
+						<ol style="margin-top: 10px;">
+	
+							<li><b>Passo 3: Discretização via Transformação Bilinear (Tustin):</b>
+								<p>Mapeia-se $H_a(s)$ para o domínio $z$ fazendo a substituição:</p>
+								<center class="lightup" style="margin: 5px 0;">
+									$s \leftarrow \frac{2}{T} \frac{1 - z^{-1}}{1 + z^{-1}}$
+								</center>
+								<p>em que $T$ é o período de amostragem. A função resultante do filtro digital é $$H(z) = H_a\left(\frac{2}{T} \frac{1 - z^{-1}}{1 + z^{-1}}\right)$$</p>
+							</li>
+						</ol>
+					</div>
+				</section>
+
+
+
+
+				<!-- Slide 28: Principais Vantagens do Filtro IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Principais Vantagens do Filtro IIR</h2>
+					</div>
+					<p>&nbsp;</p>
+					<div class="slide-content">
+						<ul>
+							<li><b>Elevada Eficiência Computacional:</b> Consegue transições espectrais abruptas com ordens muito baixas comparadas aos filtros FIR.</li>
+							<li><b>Menos Memória e Processamento:</b> Exige muito menos multiplicações, somas e atrasos para o mesmo nível de atenuação.</li>
+							<li><b>Baixa Latência:</b> Apresenta menor atraso de grupo na banda passante do que um filtro FIR equivalente de alta ordem.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 29: Limitações e Desvantagens do IIR -->
+				<section>
+					<div class="slide-title">
+						<h2>Limitações e Desvantagens do IIR</h2>
+					</div>
+					<p>&nbsp;</p>
+					<div class="slide-content">
+						<ul>
+							<li><b>Problemas de Estabilidade:</b> Um filtro IIR mal projetado ou afetado por ruídos numéricos pode tornar-se instável.</li>
+							<li><b>Sensibilidade a Efeitos de Precisão Finita:</b> Erros de arredondamento de coeficientes (quantização) podem deslocar polos para fora do círculo unitário ou gerar oscilações de ciclo limite (limit cycles).</li>
+							<li><b>Distorção de Fase:</b> A fase não-linear causa deformação de formas de onda (crítico em ECG, áudio, etc.).</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 31: Encerramento -->
+				<section>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<h2>Até a próxima aula!</h2>
+						</center>
+					</div>
+				</section>
+
+				<!------------------------>
+			</div>
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>

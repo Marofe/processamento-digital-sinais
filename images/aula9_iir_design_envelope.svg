@@ -1,0 +1,131 @@
+<svg width="800" height="420" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 Z" fill="#475569" />
+    </marker>
+    <!-- Diagonal Stripes Pattern for Forbidden Regions -->
+    <pattern id="hatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#f87171" stroke-width="1.5" stroke-opacity="0.4" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- Shaded Band Regions at the bottom -->
+  <!-- Passband Shading -->
+  <rect x="100" y="360" width="220" height="25" fill="#e0f2fe" rx="3" />
+  <text x="210" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">BANDA PASSANTE</text>
+
+  <!-- Transition Band Shading -->
+  <rect x="320" y="360" width="160" height="25" fill="#fef9c3" rx="3" />
+  <text x="400" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#a16207" text-anchor="middle">BANDA DE TRANSIÇÃO</text>
+
+  <!-- Stopband Shading -->
+  <rect x="480" y="360" width="270" height="25" fill="#f1f5f9" rx="3" />
+  <text x="615" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">BANDA DE REJEIÇÃO</text>
+
+
+  <!-- ================= FORBIDDEN REGIONS (ENVELOPE TOLErANCES) ================= -->
+  <!-- Passband Upper Forbidden Zone (above 1) -->
+  <rect x="100" y="35" width="220" height="35" fill="#fee2e2" fill-opacity="0.4" />
+  <rect x="100" y="35" width="220" height="35" fill="url(#hatch)" />
+  <line x1="100" y1="70" x2="320" y2="70" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <!-- Passband Lower Forbidden Zone (below 1-delta_p) -->
+  <rect x="100" y="110" width="220" height="230" fill="#fee2e2" fill-opacity="0.4" />
+  <rect x="100" y="110" width="220" height="230" fill="url(#hatch)" />
+  <line x1="100" y1="110" x2="320" y2="110" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <!-- Stopband Upper Forbidden Zone (above delta_s) -->
+  <rect x="480" y="35" width="270" height="265" fill="#fee2e2" fill-opacity="0.4" />
+  <rect x="480" y="35" width="270" height="265" fill="url(#hatch)" />
+  <line x1="480" y1="300" x2="750" y2="300" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" />
+
+
+  <!-- ================= AXES & LABELS ================= -->
+  <!-- Y-Axis (Magnitude) -->
+  <line x1="100" y1="360" x2="100" y2="25" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+  <foreignObject x="10" y="5" width="80" height="30">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: right; color: #334155;">
+      $|H(j\omega)|$
+    </div>
+  </foreignObject>
+
+  <!-- X-Axis (Frequency) -->
+  <line x1="80" y1="340" x2="770" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+  <foreignObject x="755" y="342" width="30" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 14px; text-align: center; color: #334155;">
+      $\omega$
+    </div>
+  </foreignObject>
+
+  <!-- Y-axis ticks and labels -->
+  <!-- 1 -->
+  <line x1="95" y1="70" x2="100" y2="70" stroke="#475569" stroke-width="1.5" />
+  <foreignObject x="40" y="58" width="50" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+      $1$
+    </div>
+  </foreignObject>
+
+  <!-- 1 - δ_p -->
+  <line x1="95" y1="110" x2="100" y2="110" stroke="#475569" stroke-width="1.5" />
+  <foreignObject x="10" y="98" width="80" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+      $1 - \delta_p$
+    </div>
+  </foreignObject>
+
+  <!-- δ_s -->
+  <line x1="95" y1="300" x2="100" y2="300" stroke="#475569" stroke-width="1.5" />
+  <foreignObject x="40" y="288" width="50" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; text-align: right; color: #334155;">
+      $\delta_s$
+    </div>
+  </foreignObject>
+
+  <!-- X-axis ticks and labels -->
+  <!-- ω_p -->
+  <line x1="320" y1="340" x2="320" y2="345" stroke="#475569" stroke-width="1.5" />
+  <line x1="320" y1="110" x2="320" y2="340" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+  <foreignObject x="295" y="342" width="50" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #334155;">
+      $\omega_p$
+    </div>
+  </foreignObject>
+
+  <!-- ω_s -->
+  <line x1="480" y1="340" x2="480" y2="345" stroke="#475569" stroke-width="1.5" />
+  <line x1="480" y1="300" x2="480" y2="340" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+  <foreignObject x="455" y="342" width="50" height="25">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, serif; font-size: 13px; text-align: center; color: #334155;">
+      $\omega_s$
+    </div>
+  </foreignObject>
+
+
+  <!-- ================= TYPICAL FILTER RESPONSE CURVE ================= -->
+  <path d="M 100 95 
+           C 140 82, 180 118, 220 95 
+           C 260 82, 290 118, 320 95
+           C 380 95, 420 325, 480 320
+           C 540 338, 600 308, 660 330
+           C 700 342, 730 328, 750 335" 
+        fill="none" stroke="#0284c7" stroke-width="3" />
+
+  <!-- Label for the filter response curve -->
+  <foreignObject x="240" y="132" width="220" height="30">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; font-size: 12px; color: #0284c7;">
+      Resposta do Filtro $|H(j\omega)|$
+    </div>
+  </foreignObject>
+  <path d="M 240 138 L 200 112" fill="none" stroke="#0284c7" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arrow)" />
+  
+  <!-- Forbidden Area Labels -->
+  <text x="210" y="55" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+  <text x="210" y="200" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+  <text x="615" y="160" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">ÁREA PROIBIDA</text>
+
+</svg>
