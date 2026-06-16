@@ -1,0 +1,786 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0343 - Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<!-- Slide 1: Capa -->
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+						<h2><br>Processamento de Sinais Aleatórios:<br> Filtro de Wiener & Filtro de Kalman</h2>
+					</div>
+					<div class="author">
+						<h3>Prof. Marcos Rogério Fernandes</h3>
+					</div>
+					<div class="advisor">
+						<p style="text-align: center; font-size: 0.8em;">16 de junho de 2026</p>
+					</div>
+				</section>
+
+				<!-- Slide 2: Objetivos -->
+				<section>
+					<div class="slide-title">
+						<h2>Objetivos da Aula</h2>
+					</div>
+					<div class="slide-content">
+						<p>Os objetivos desta aula são compreender:</p>
+						<ul>
+							<li>A definição e propriedades do <b>Ruído Branco</b>;</li>
+							<li>O conceito de autocorrelação e densidade espectral de potência (PSD);</li>
+							<li>O <b>Filtro de Wiener</b>;</li>
+							<li>A resolução prática do filtro via <b>Equações de Wiener-Hopf</b>;</li>
+							<li>O <b>Filtro de Kalman</b>: estimador recursivo de estado ótimo no espaço de estados;</li>
+							<li>Exemplos.</li>
+						</ul>
+				</section>
+
+				<!-- Slide 3: Revisão: Variáveis Aleatórias (V.A.) -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Variáveis Aleatórias</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p class="lightup">Uma <b>Variável Aleatória (V.A.)</b> $X$ é uma função que associa um número real a cada resultado de um experimento aleatório</p>
+						
+						<p style="margin-top: 15px;">Para V.A. contínuas, definimos a <b>Função Densidade de Probabilidade (PDF)</b> $p(x)$, que satisfaz:</p>
+						<p class="lightup2" style="text-align: center; margin: 10px 0; padding: 5px;">
+							$$p(x) \ge 0 \quad \text{e} \quad \int_{-\infty}^{\infty} p(x) dx = 1$$
+						</p>
+					</div>
+				</section>
+
+				<!-- Slide 4: Revisão: Média (Esperança) e Variância -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Esperança e Variância</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>Dois operadores estatísticos fundamentais caracterizam uma variável aleatória:</p>
+						<ol style="margin-top: 10px;">
+							<li><b>Esperança Matemática (Média $\mu_X$):</b> representa o valor médio esperado da V.A.
+								<p class="lightup2" style="margin: 5px 0; padding: 2px;">
+									$$E[X] = \int_{-\infty}^{\infty} x p(x) dx$$
+								</p>
+							</li>
+							<li><b>Variância ($\sigma_X^2$):</b> representa o grau de dispersão da V.A. em torno de sua média.
+								<p class="lightup2" style="margin: 5px 0; padding: 2px;">
+									$$Var(X) = E[(X - \mu_X)^2] = E[X^2] - (E[X])^2$$
+								</p>
+							</li>
+						</ol>
+					</div>
+				</section>
+
+
+				<!-- Slide 6: Revisão: A Distribuição Gaussiana (Normal) -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Distribuição Gaussiana</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<div style="display: flex; gap: 20px; align-items: center;">
+							<div style="flex: 1.2;">
+								<p>A <b>Distribuição Normal (Gaussiana)</b> é a mais importante no contexto estocástico devido ao Teorema do Limite Central. Sua PDF é dada por:</p>
+								<p class="lightup2" style="margin: 10px 0; padding: 5px;">
+									$$p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)$$
+								</p>
+								<p>Notação usual: $X \sim \mathcal{N}(\mu, \sigma^2)$.</p>
+							</div>
+							<div style="flex: 0.8; text-align: center;">
+								<img src="../images/Carl_Friedrich_Gauss.jpg" style="max-height: 200px;" alt="Carl Friedrich Gauss">
+								<p style="font-size: 0.6em; margin: 5px 0 0 0; color: #64748b;">Carl Friedrich Gauss (1777-1855)</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Distribuição Gaussiana</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<div style="display: flex; gap: 20px; align-items: center;">
+							<div style="flex: 1.1;">
+								<p>Para uma variável aleatória com distribuição normal (Gaussiana), denota-se por $$X\sim\mathcal{N}(\mu,\sigma^2)$$
+									em que o desvio padrão ($\sigma$) determina a probabilidade de ocorrência:</p>
+								<ul style="margin-top: 10px; line-height: 1.35;">
+									<li style="margin-bottom: 5px;"><b>Intervalo $\pm1\sigma$:</b> <b>$68.27\%$</b> de probabilidade.</li>
+									<li style="margin-bottom: 5px;"><b>Intervalo $\pm2\sigma$:</b> <b>$95.45\%$</b> de probabilidade.</li>
+									<li style="margin-bottom: 5px;"><b>Intervalo $\pm3\sigma$:</b> <b>$99.73\%$</b> de probabilidade. </li>
+								</ul>
+							</div>
+							<div style="flex: 0.9; text-align: center;">
+								<img src="../images/aula10_gaussiana_sigmas.png" style="max-height: 350px; width: auto;" alt="Regra Empírica da Gaussiana">
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Slide 4a: Visualização de um Processo Estocástico -->
+				<section>
+					<div class="slide-title">
+						<h2>Processo Estocástico</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<center>
+									<img src="../images/aula10_processo_estocastico.png" width="900" alt="Média e Variância de Processo Estocástico">
+					</center>
+				
+					</div>
+				</section>
+
+				<!-- Slide 4b: Distribuição no Tempo (Visão Tridimensional) -->
+				<section>
+					<div class="slide-title">
+						<h2>Processo Estocástico</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<center>
+						<img src="../images/aula10_processo_estocastico_3d.png" width="900" alt="Distribuição Gaussiana 3D do Processo Estocástico">
+</center>
+						
+					</div>
+				</section>
+
+				<!-- Slide 5: Revisão: Covariância e Correlação -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Relação entre Duas V.A.s</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>Para analisar o comportamento conjunto de duas variáveis $X$ e $Y$:</p>
+						<ul>
+							<li><b>Covariância:</b> mede o grau de interdependência linear entre elas:
+								<p class="lightup2" style="margin: 5px 0; padding: 2px;">
+									$$Cov(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y]$$
+								</p>
+							</li>
+							<li><b>Não-Correlação:</b> se $Cov(X, Y) = 0$ (ou $E[XY] = E[X]E[Y]$), dizemos que $X$ e $Y$ são não-correlacionadas.</li>
+							<li><b>Independência Estatística:</b> a ocorrência de uma não altera a probabilidade da outra: $p_{XY}(x,y) = p_X(x)p_Y(y)$.
+								<ul>
+									<li>A independência sempre implica não-correlação, mas o inverso não é necessariamente verdadeiro.</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 5a: Revisão: Probabilidade Condicional -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Probabilidade Condicional</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>A probabilidade condicional mede a probabilidade de um evento $A$ ocorrer dado que outro evento $B$ já ocorreu:</p>
+						<p class="lightup">
+							$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad \text{se } P(B) > 0$$
+						</p>
+						<p style="margin-top: 20px;">O termo $P(A \cap B)$ representa a probabilidade conjunta (ambos os eventos ocorrendo simultaneamente), enquanto $P(B)$ atua como o espaço amostral reduzido.</p>
+					</div>
+				</section>
+
+				<!-- Slide 5b: Revisão: Regra de Bayes (Caso Geral) -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Regra de Bayes</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>Permite atualizar a probabilidade de uma hipótese $A$ a partir de uma nova evidência ou medição $B$:</p>
+						<p class="lightup2" style="margin: 20px auto; padding: 10px; max-width: 600px;">
+							$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+						</p>
+						<ul style="margin-top: 20px;">
+							<li><b>$P(A|B)$ (Posterior):</b> Probabilidade da hipótese corrigida pela evidência.</li>
+							<li><b>$P(B|A)$ (Verossimilhança):</b> Probabilidade de observar a evidência sob a hipótese.</li>
+							<li><b>$P(A)$ (Priori):</b> Probabilidade inicial antes da nova evidência.</li>
+							<li><b>$P(B)$ (Evidência):</b> Probabilidade total da evidência (fator de escala).</li>
+						</ul>
+					</div>
+				</section>
+
+
+
+						<!-- Slide 5b: Revisão: Regra de Bayes (Caso Geral) -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Probabilidade Total</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>&nbsp;
+						</p>
+						<p class="lightup2" style="margin: 20px auto; padding: 10px; max-width: 600px;">
+							$$P(A) = \int p(A,B) dB$$
+						</p>
+				Portanto,
+				$$
+						P(A)=\int p(A|B)p(B)dB
+				$$
+					</div>
+				</section>
+
+				
+			
+
+				
+
+				<!-- Slide 7: Sinais Aleatórios e Ruído -->
+				<section>
+					<div class="slide-title">
+						<h2>Processamento Estocástico de Sinais</h2>
+					</div>
+					<div class="slide-content">
+	
+								<p>No mundo real, os sinais de interesse são corrompidos por ruídos e incertezas que não podem ser descritos por funções determinísticas simples. Nós os modelamos como <b>processos estocásticos</b>:</p>
+					
+								<center>
+								<img src="../images/sinal_ruidoso.png" width="700" alt="Sinal com Ruído">
+								</center>
+		
+					</div>
+				</section>
+
+				<!-- Slide 4: Ruído Branco Gaussiano -->
+				<section>
+					<div class="slide-title">
+						<h2>Ruído Branco</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Um processo estocástico $w[k]$ é chamado de <b>ruído branco</b> se suas amostras em diferentes instantes são totalmente desconexas (não correlacionadas):</p>
+						<ul>
+							<li><b>Média Nula:</b> $\mu_w = E[w[k]] = 0$</li>
+							<li><b>Variância Constante:</b> $\sigma_w^2 = E[(w[k] - \mu_w)^2]$</li>
+							<li><b>Independência Temporal (Autocorrelação):</b>
+							
+							</li>
+						</ul>
+							<p class="lightup">
+									$$R_{ww}[m] = E[w[k]w[k+m]] = \sigma_w^2 \delta[m]$$
+								</p>
+					</div>
+				</section>
+
+				<!-- Slide 5: Propriedades do Ruído Branco -->
+				<section>
+					<div class="slide-title">
+						<h2>Por que "Branco"? A Analogia Óptica</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Assim como a luz branca contém todas as frequências visíveis com a mesma intensidade, a <b>Densidade Espectral de Potência (PSD)</b> do ruído branco é <b>constante</b> para todas as frequências:</p>
+						<p class="lightup2" style="text-align: center; margin: 10px 0;">
+							$$S_{ww}(e^{j\omega}) = \mathcal{F}\{R_{ww}[m]\} = \sum_{m=-\infty}^{\infty} \sigma_w^2 \delta[m] e^{-j\omega m} = \sigma_w^2$$
+						</p>
+						<ul>
+							<li>Espectro plano (Flat Spectrum) de $-\pi$ a $\pi$.</li>
+							<li>Contém potência igual em todas as faixas de frequência.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 6: Visualização do Ruído Branco -->
+				<section>
+					<div class="slide-title">
+						<h2>Ruído Branco no MATLAB</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula10_ruido_branco.png" width="800" alt="Análise de Ruído Branco">
+							
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 7: Filtro de Wiener -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro de Wiener</h2>
+					</div>
+					<div class="slide-content">
+						<p>Como recuperar o sinal útil $s[k]$ a partir de uma medição ruidosa $$x[k] = s[k] + \varepsilon[k]$$</p>
+						<p>O <b>Filtro de Wiener</b> é um sistema Linear Invariante no Tempo (LIT) ótimo que minimiza o <b>Erro Médio Quadrático (MSE)</b>:</p>
+						
+						<p class="lightup2" style="text-align: center; margin: 10px 0;">
+							$$\min_{h} E[e^2[k]] = E[(s[k] - \hat{s}[k])^2]$$
+						</p>
+					</div>
+				</section>
+
+				<!-- Slide 8: Formulação do Filtro FIR de Wiener -->
+				<section>
+					<div class="slide-title">
+						<h2>Estrutura do Filtro FIR de Wiener</h2>
+					</div>
+					<div class="slide-content">
+						<p>Para um filtro FIR causal com $M+1$ coeficientes $h = [h_0, h_1, \dots, h_M]^T$, a estimativa é:</p>
+						<p class="lightup2">
+							$$\hat{s}[k] = \sum_{i=0}^{M} h_i x[k-i] = h^T \mathbf{x}[k]$$
+						</p>
+						<p>em que $\mathbf{x}[k] = [x[k], x[k-1], \dots, x[k-M]]^T$.</p>
+						<p>Queremos encontrar os coeficientes $h$ que minimizam o erro médio quadrático:</p>
+						<p>$$J(h) = E[(s[k] - h^T \mathbf{x}[k])^2]$$</p>
+					</div>
+				</section>
+
+
+						<!-- Slide 8: Formulação do Filtro FIR de Wiener -->
+				<section>
+					<div class="slide-title">
+						<h2>Estrutura do Filtro FIR de Wiener</h2>
+					</div>
+					<div class="slide-content">
+					
+						<p class="lightup2">
+							$$\hat{s}[k] = \sum_{i=0}^{M} h_i x[k-i] = h^T \mathbf{x}[k]$$
+						</p>
+					
+						<p>Queremos encontrar os coeficientes $h$ que minimizam o erro médio quadrático:</p>
+						<p>$$J(h) = E[(s[k] - h^T \mathbf{x}[k])^2]$$</p>
+					</div>
+				</section>
+
+				<!-- Slide 9: O Princípio da Ortogonalidade -->
+				<section>
+					<div class="slide-title">
+						<h2>Princípio da Ortogonalidade</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Para minimizar $J(h)$, derivamos em relação a cada coeficiente $h_j$ e igualamos a zero:</p>
+						<p>$$\frac{\partial J(h)}{\partial h_j} = -2 E\left[ (s[k] - h^T \mathbf{x}[k]) x[k-j] \right] = 0$$</p>
+						<p>Isso resulta no <b>Princípio da Ortogonalidade</b>:</p>
+						<p class="lightup" style="text-align: center; font-weight: bold; margin: 10px 0;">
+							$$E[e[k] x[k-j]] = 0, \quad \forall j = 0, \dots, M$$
+						</p>
+						
+					</div>
+				</section>
+
+			
+
+				<!-- Slide 10: As Equações de Wiener-Hopf -->
+				<section>
+					<div class="slide-title">
+						<h2>A Equação de Wiener-Hopf</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Expandindo a relação de ortogonalidade:</p>
+						<p>$$E\left[ \left(s[k] - \sum_{i=0}^{M} h_i x[k-i]\right) x[k-j] \right] = 0$$</p>
+						Tem-se
+						<p class="lightup">$$\sum_{i=0}^{M} h_i E[x[k-i]x[k-j]] = E[s[k]x[k-j]]$$</p>
+					
+					</div>
+				</section>
+
+
+					<!-- Slide 10: As Equações de Wiener-Hopf -->
+				<section>
+					<div class="slide-title">
+							<h2>A Equação de Wiener-Hopf</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+					
+						<p>Definindo $$R_{xx}[j-i] = E[x[k-i]x[k-j]]\\R_{xs}[j] = E[s[k]x[k-j]]$$
+							Tem-se
+						</p>
+						<p class="lightup2" style="text-align: center;">
+							$$\sum_{i=0}^{M} h_i R_{xx}[j-i] = R_{xs}[j], \quad j = 0, 1, \dots, M$$
+						</p>
+					</div>
+				</section>
+
+				<!-- Slide 11: Resolução Matricial de Wiener-Hopf -->
+				<section>
+					<div class="slide-title">
+						<h2>Resolução Matricial</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>Em forma matricial, as equações de Wiener-Hopf tornam-se:</p>
+						<p class="lightup2" style="text-align: center; margin: 5px 0;">
+							$$\mathbf{R}_{xx} \mathbf{h} = \mathbf{R}_{xs}$$
+						</p>
+						<p>em que $\mathbf{R}_{xx}$ é a matriz de autocorrelação do sinal de entrada:</p>
+						<p style="font-size: 0.85em; margin: 5px 0;">
+							$$\begin{bmatrix}
+							R_{xx}[0] & R_{xx}[1] & \dots & R_{xx}[M] \\
+							R_{xx}[1] & R_{xx}[0] & \dots & R_{xx}[M-1] \\
+							\vdots & \vdots & \ddots & \vdots \\
+							R_{xx}[M] & R_{xx}[M-1] & \dots & R_{xx}[0]
+							\end{bmatrix} \begin{bmatrix} h_0 \\ h_1 \\ \vdots \\ h_M \end{bmatrix} = \begin{bmatrix} R_{xs}[0] \\ R_{xs}[1] \\ \vdots \\ R_{xs}[M] \end{bmatrix}$$
+						</p>
+						<p>A solução ótima é simplesmente: $\mathbf{h}_{opt} = \mathbf{R}_{xx}^{-1} \mathbf{R}_{xs}$.</p>
+					</div>
+				</section>
+
+				<!-- Slide 12: Caso Prático - Sinal + Ruído Branco -->
+				<section>
+					<div class="slide-title">
+						<h2>Wiener com Ruído Branco Aditivo</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Se o ruído $\varepsilon[k]$ for branco com variância $\sigma_v^2$ e independente do sinal $s[k]$:</p>
+						<ul>
+							<li>Autocorrelação da entrada: $R_{xx}[m] = R_{ss}[m] + \sigma_v^2 \delta[m]$.</li>
+							<li>Correlação cruzada: $R_{xs}[m] = R_{ss}[m]$ (pois $\varepsilon$ e $s$ não são correlacionados).</li>
+						</ul>
+						<p>Portanto, a equação se reescreve como:</p>
+						<p class="lightup" style="text-align: center; font-weight: bold;">
+							$$(\mathbf{R}_{ss} + \sigma_v^2 \mathbf{I}) \mathbf{h} = \mathbf{R}_{ss}$$
+						</p>
+						
+					</div>
+				</section>
+
+
+							<!-- Slide 12: Caso Prático - Sinal + Ruído Branco -->
+				<section>
+					<div class="slide-title">
+						<h2>Wiener com Ruído Branco Aditivo</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.9em;">
+						<p>Se o ruído $\varepsilon[k]$ for branco com variância $\sigma_v^2$ e independente do sinal $s[k]$:</p>
+						<ul>
+							<li>Autocorrelação da entrada: $R_{xx}[m] = R_{ss}[m] + \sigma_v^2 \delta[m]$.</li>
+							<li>Correlação cruzada: $R_{xs}[m] = R_{ss}[m]$ (pois $\varepsilon$ e $s$ não são correlacionados).</li>
+						</ul>
+						<p>Portanto, a equação se reescreve como:</p>
+						<p class="lightup" style="text-align: center; font-weight: bold;">
+							$$\mathbf{h}_\text{opt} = (\mathbf{R}_{ss} + \sigma_v^2 \mathbf{I})^{-1}\mathbf{R}_{ss}$$
+						</p>
+						
+					</div>
+				</section>
+
+				<!-- Slide 13: Resultados do Filtro de Wiener no MATLAB -->
+				<section>
+					<div class="slide-title">
+						<h2>Wiener: exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/aula10_filtro_wiener.png" width="800" alt="Resultados Filtro de Wiener">
+						</center>
+					</div>
+				</section>
+
+				<!-- Slide 14: Introdução ao Filtro de Kalman -->
+				<section>
+					<div class="slide-title">
+						<h2>Filtro de Kalman (Rudolf E. Kalman, 1960)</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<div style="display: flex; gap: 20px; align-items: center;">
+							<div style="flex: 1.3;">
+								<p>Diferente de Wiener, que projeta filtros fixos no domínio da frequência ou correlação temporal, o <b>Filtro de Kalman</b>:</p>
+								<ul style="margin-top: 10px;">
+									<li>É formulado no <b>domínio do tempo</b> no <b>espaço de estados</b>.</li>
+									<li>É <b>recursivo</b>: não requer armazenar um "buffer" de histórico de dados (ideal para sistemas em tempo real).</li>
+									<li>Combina previsões físicas de um modelo dinâmico com medições reais ruidosas de forma estatisticamente ótima.</li>
+								</ul>
+							</div>
+							<div style="flex: 0.7; text-align: center;">
+								<img src="../images/Rudolf_Kalman.jpg" style="max-height: 250px;" alt="Rudolf Kalman">
+								<p style="font-size: 0.65em; margin: 5px 0 0 0; color: #64748b;">Rudolf Emil Kálmán (1930-2016)</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Slide 15: O Modelo de Espaço de Estados Estocástico -->
+				<section>
+					<div class="slide-title">
+						<h2>Modelo Dinâmico Linear</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<div style="display: flex; gap: 20px;">
+							<div style="flex: 1.2;">
+								<p>O sistema dinâmico é representado por duas equações principais:</p>
+								<ol style="margin-top: 5px;">
+									<li><b>Transição de Estado (Física):</b>
+										<p class="lightup" style="margin: 5px 0; padding: 2px;">
+											$$\mathbf{x}_{k+1} = \mathbf{A} \mathbf{x}_{k} + \mathbf{B} \mathbf{u}_k + \mathbf{w}_k$$
+										</p>
+									</li>
+									<li><b>Equação de Medição (Sensores):</b>
+										<p class="lightup" style="margin: 5px 0; padding: 2px;">
+											$$\mathbf{y}_k = \mathbf{C} \mathbf{x}_k + \mathbf{v}_k$$
+										</p>
+									</li>
+								</ol>
+							</div>
+							<div style="flex: 0.8; background: rgba(0, 0, 0, 0.02); padding: 12px; border-radius: 8px; font-size: 0.9em; box-sizing: border-box;">
+								<p style="font-weight: bold; margin-bottom: 5px;">Legenda:</p>
+								<ul style="list-style-type: none; padding-left: 0; margin-left: 0; line-height: 1.35;">
+									<li style="margin-bottom: 5px;">$\mathbf{x}_k$: vetor de estados.</li>
+									<li style="margin-bottom: 5px;">$\mathbf{y}_k$: medições ruidosas.</li>
+									<li style="margin-bottom: 5px;">$\mathbf{w}_k \sim N(0, \mathbf{Q})$: ruído de processo.</li>
+									<li style="margin-bottom: 5px;">$\mathbf{v}_k \sim N(0, \mathbf{R})$: ruído de medição.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Slide 16: O Ciclo Recursivo de Kalman -->
+				<section>
+					<div class="slide-title">
+						<h2>O Ciclo Predição-Correção</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/kf_recursive_diagram.png" style="max-height: 400px; width: auto;" alt="Ciclo de Kalman">
+						</center>
+					</div>
+				</section>
+
+
+							<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>1. Etapa de Predição (Time Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenhos informações $\{y_0,\ldots,y_k\}$, qual é o estádo futuro $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k)=?
+									$$
+							</p>
+			
+					</div>
+				</section>
+
+
+				
+							<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>1. Etapa de Predição (Time Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenhos informações $\{y_0,\ldots,y_k\}$, qual é o estádo futuro $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k)=\int p(x_{k+1},x_k|y_0,\ldots,y_k)dx_k
+									$$
+							</p>
+			
+					</div>
+				</section>
+
+				<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>1. Etapa de Predição (Time Update)</h2>
+					
+					
+						
+						<ol style="margin-top: 15px;">
+							<li><b>Predição de Estado:</b>
+								<p class="lightup">
+									$$\hat{\mathbf{x}}_{k+1|k} = \mathbf{A} \hat{\mathbf{x}}_{k|k} + \mathbf{B} \mathbf{u}_k$$
+								</p>
+							</li>
+							<li><b>Predição da Covariância do Erro:</b>
+								<p class="lightup">
+									$$\mathbf{P}_{k+1|k} = \mathbf{A} \mathbf{P}_{k|k} \mathbf{A}^T + \mathbf{Q}$$
+								</p>
+							</li>
+						</ol>
+					
+					</div>
+				</section>
+
+
+
+				
+
+				<!-- Slide 18: As Equações de Correção (Measurement Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>2. Etapa de Correção (Measurement Update)</h2>
+					
+
+						<ol style="margin-top: 5px;">
+							<li style="padding-bottom: 0.1em;"><b>Ganho de Kalman ($\mathbf{K}_k$):</b>
+								<p class="lightup2" style="margin: 2px 0; padding: 2px;">
+									$$\mathbf{K}_k = \mathbf{P}_{k+1|k} \mathbf{C}^T (\mathbf{C} \mathbf{P}_{k+1|k} \mathbf{C}^T + \mathbf{R})^{-1}$$
+								</p>
+							</li>
+							<li style="padding-bottom: 0.1em;"><b>Atualização de Estado com Medição:</b>
+								<p class="lightup2" style="margin: 2px 0; padding: 2px;">
+									$$\hat{\mathbf{x}}_{k+1|k+1} = \hat{\mathbf{x}}_{k+1|k} + \mathbf{K}_k (\mathbf{y}_{k+1} - \mathbf{C} \hat{\mathbf{x}}_{k+1|k})$$
+								</p>
+							</li>
+							<li style="padding-bottom: 0.1em;"><b>Atualização da Covariância do Erro:</b>
+								<p class="lightup2" style="margin: 2px 0; padding: 2px;">
+									$$\mathbf{P}_{k+1|k+1} = (\mathbf{I} - \mathbf{K}_k \mathbf{C}) \mathbf{P}_{k+1|k}$$
+								</p>
+							</li>
+						</ol>
+					</div>
+				</section>
+
+
+						<!-- Slide 18: As Equações de Correção (Measurement Update) -->
+				<section>
+					<div class="slide-title">
+						<h2> Filtro de Kalman </h2>
+					
+<p>&nbsp;</p>
+								<p class="lightup2">
+									$$\hat{\mathbf{x}}_{k+1|k} = \mathbf{A} \hat{\mathbf{x}}_{k|k} + \mathbf{B} \mathbf{u}_k\\
+									\mathbf{P}_{k+1|k} = \mathbf{A} \mathbf{P}_{k|k} \mathbf{A}^T + \mathbf{Q}\\
+									\mathbf{K}_k = \mathbf{P}_{k+1|k} \mathbf{C}^T (\mathbf{C} \mathbf{P}_{k+1|k} \mathbf{C}^T + \mathbf{R})^{-1}\\
+									\hat{\mathbf{x}}_{k+1|k+1} = \hat{\mathbf{x}}_{k+1|k} + \mathbf{K}_k (\mathbf{y}_{k+1} - \mathbf{C} \hat{\mathbf{x}}_{k+1|k})\\
+									\mathbf{P}_{k+1|k+1} = (\mathbf{I} - \mathbf{K}_k \mathbf{C}) \mathbf{P}_{k+1|k}
+									$$
+								</p>
+					
+					</div>
+				</section>
+
+			
+
+										<!-- Slide 18: As Equações de Correção (Measurement Update) -->
+				<section>
+					<div class="slide-title">
+						<h2> Filtro de Kalman Escalar </h2>
+					
+<p>&nbsp;</p>
+								<p class="lightup2">
+									$$\hat{x}_{k+1|k} = a \hat{x}_{k|k} + b u_k\\
+									p_{k+1|k} = a^2p_{k|k} + q\\
+									k_k = \frac{p_{k+1|k} c}{c^2 p_{k+1|k} + r}\\
+									\hat{x}_{k+1|k+1} = \hat{x}_{k+1|k} + k_k (y_{k+1} - c \hat{x}_{k+1|k})\\
+									p_{k+1|k+1} = (1 - k_k c) p_{k+1|k}
+									$$
+								</p>
+					
+					</div>
+				</section>
+
+	
+				<!-- Slide 19: Análise do Ganho de Kalman -->
+				<section>
+					<div class="slide-title">
+						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
+						<p class="lightup" style="margin: 10px 0; padding: 5px;">
+							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
+						</p>
+						Note que
+						$$
+							\hat{x}_{k+1|k+1} = \hat{x}_{k+1|k} + k_k (y_{k+1} - c \hat{x}_{k+1|k})\\
+						$$
+					</div>
+				</section>
+
+
+					<!-- Slide 19: Análise do Ganho de Kalman -->
+				<section>
+					<div class="slide-title">
+						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
+						<p class="lightup" style="margin: 10px 0; padding: 5px;">
+							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
+						</p>
+						Note que
+						$$
+							\hat{x}_{k+1|k+1} = (1-k_kc)\hat{x}_{k+1|k} + k_k y_{k+1} \\
+						$$
+
+					</div>
+				</section>
+
+
+
+
+								<!-- Slide 19: Análise do Ganho de Kalman -->
+				<section>
+					<div class="slide-title">
+						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
+						<p class="lightup" style="margin: 10px 0; padding: 5px;">
+							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
+						</p>
+						<ul>
+							<li><b>Sensores muito precisos ($r \to 0$):</b> $k_k \to 1$. A estimativa ignora a predição e atualiza fortemente com a medição: $\hat{x}_{k|k} \approx y_k$.</li>
+							<li><b>Modelo físico muito preciso ou medições péssimas ($p_{pred} \to 0$ ou $r \to \infty$):</b> $k_k \to 0$. A estimativa segue estritamente a predição física: $\hat{x}_{k|k} \approx \hat{x}_{k|k-1}$.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 19a: Ciclo do Filtro de Kalman no Tempo -->
+				<section>
+					<div class="slide-title">
+						<h2>O Ciclo de Kalman ao Longo do Tempo</h2>
+		
+					<center>
+						<img src="../images/kalman_filter_update.gif" width="900" alt="Ciclo de Kalman no Tempo">
+						</center>
+						
+					</div>
+				</section>
+
+				<!-- Slide 20: Resultados de Rastreamento Kalman no MATLAB -->
+				<section>
+					<div class="slide-title">
+						<h2>Kalman: Sensor de Temperatura Ruidoso</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/aula10_filtro_kalman.png" width="900" alt="Resultados Filtro de Kalman">
+							
+						</center>
+					</div>
+				</section>
+
+
+			
+
+				<!-- Slide 23: Encerramento -->
+				<section>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<h2>Fim!</h2>
+						</center>
+					</div>
+				</section>
+
+				<!------------------------>
+			</div>
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
