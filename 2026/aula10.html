@@ -51,7 +51,8 @@
 						</ul>
 				</section>
 
-				<!-- Slide 3: Revisão: Variáveis Aleatórias (V.A.) -->
+
+					<!-- Slide 3: Revisão: Variáveis Aleatórias (V.A.) -->
 				<section>
 					<div class="slide-title">
 						<h2>Revisão: Variáveis Aleatórias</h2>
@@ -59,12 +60,109 @@
 					<div class="slide-content" style="font-size: 0.85em;">
 						<p class="lightup">Uma <b>Variável Aleatória (V.A.)</b> $X$ é uma função que associa um número real a cada resultado de um experimento aleatório</p>
 						
+						<div style="text-align: center; margin-top: 15px;">
+							<svg width="100%" height="360" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width: 960px; display: inline-block;">
+								<!-- Defs for markers and gradients -->
+								<defs>
+									<!-- Axis arrowheads -->
+									<marker id="axis-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+										<path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#000000" />
+									</marker>
+									<!-- Mapping arrowheads -->
+									<marker id="map-arrow-1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+										<path d="M 0 2 L 8 5 L 0 8 z" fill="#000000" />
+									</marker>
+									<marker id="map-arrow-2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+										<path d="M 0 2 L 8 5 L 0 8 z" fill="#000000" />
+									</marker>
+									<!-- Blob gradient -->
+									<linearGradient id="blob-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+										<stop offset="0%" stop-color="#ef4444" stop-opacity="0.1" />
+										<stop offset="100%" stop-color="#ef4444" stop-opacity="0.02" />
+									</linearGradient>
+								</defs>
+
+								<!-- Left: Event Space Omega -->
+								<!-- Blob path -->
+								<path d="M 90,140 C 90,70 180,50 250,90 C 320,130 310,210 250,240 C 190,270 90,220 90,140 Z" fill="url(#blob-grad)" stroke="#ef4444" stroke-width="2.5" />
+								
+								<!-- Omega Label -->
+								<text x="115" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="bold" fill="#991b1b" font-style="italic">Ω</text>
+								<text x="180" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#475569" text-anchor="middle">Espaço de Eventos (Ω)</text>
+
+								<!-- Other elements in Omega (unmapped) -->
+								<circle cx="130" cy="170" r="4" fill="#94a3b8" opacity="0.6" />
+								<circle cx="180" cy="100" r="4" fill="#94a3b8" opacity="0.6" />
+								<circle cx="250" cy="130" r="4" fill="#94a3b8" opacity="0.6" />
+								<circle cx="210" cy="150" r="4" fill="#94a3b8" opacity="0.6" />
+								<circle cx="160" cy="200" r="4" fill="#94a3b8" opacity="0.6" />
+
+								<!-- Selected elements to map -->
+								<!-- w_1 -->
+								<circle cx="150" cy="130" r="6" fill="#4f46e5" />
+								<text x="132" y="134" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-style="italic" font-weight="bold" fill="#4f46e5">ω₁</text>
+
+								<!-- w_2 -->
+								<circle cx="210" cy="180" r="6" fill="#d97706" />
+								<text x="192" y="184" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-style="italic" font-weight="bold" fill="#d97706">ω₂</text>
+
+								<!-- Right: Real Line R -->
+								<!-- Axis line -->
+								<line x1="420" y1="150" x2="720" y2="150" stroke="#000000" stroke-width="2.5" marker-end="url(#axis-arrow)" marker-start="url(#axis-arrow)" />
+								
+								<!-- Axis Label R -->
+								<text x="735" y="156" font-family="Cambria, 'Times New Roman', serif" font-size="24" font-weight="bold" fill="#1e293b">ℝ</text>
+								<text x="570" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#475569" text-anchor="middle">Reta Real (ℝ)</text>
+
+								<!-- Origin Tick -->
+								<line x1="570" y1="142" x2="570" y2="158" stroke="#475569" stroke-width="2" />
+								<text x="570" y="176" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">0</text>
+
+								<!-- Mapped Point 1: X(w_1) -->
+								<circle cx="500" cy="150" r="6" fill="#4f46e5" />
+								<text x="500" y="176" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#4f46e5" text-anchor="middle">X(ω₁)</text>
+
+								<!-- Mapped Point 2: X(w_2) -->
+								<circle cx="650" cy="150" r="6" fill="#d97706" />
+								<text x="650" y="176" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">X(ω₂)</text>
+
+								<!-- Mapping curves -->
+								<!-- Curve 1 (w_1 -> X(w_1)) -->
+								<path d="M 156,128 C 230,68 390,68 494,144" stroke="#000000" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#map-arrow-1)" />
+								
+								<!-- Curve 2 (w_2 -> X(w_2)) -->
+								<path d="M 216,182 C 310,230 530,230 644,158" stroke="#000000" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#map-arrow-2)" />
+
+								<!-- Mapping Function Labels -->
+								<text x="330" y="78" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" font-style="italic" fill="#000000">X</text>
+								<text x="430" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" font-style="italic" fill="#000000">X</text>
+
+								<!-- Title/Explanation -->
+								<text x="400" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#1e293b" text-anchor="middle">Mapeamento X: Ω → ℝ</text>
+							</svg>
+						</div>
+					</div>
+				</section>
+
+				<!-- Slide 3: Revisão: Variáveis Aleatórias (V.A.) -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Probabilidade</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+					
+					<p>&nbsp;</p>
+						
 						<p style="margin-top: 15px;">Para V.A. contínuas, definimos a <b>Função Densidade de Probabilidade (PDF)</b> $p(x)$, que satisfaz:</p>
 						<p class="lightup2" style="text-align: center; margin: 10px 0; padding: 5px;">
 							$$p(x) \ge 0 \quad \text{e} \quad \int_{-\infty}^{\infty} p(x) dx = 1$$
 						</p>
+
+						
 					</div>
 				</section>
+
+
 
 				<!-- Slide 4: Revisão: Média (Esperança) e Variância -->
 				<section>
@@ -89,6 +187,32 @@
 				</section>
 
 
+					<!-- Slide 5: Revisão: Covariância e Correlação -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Relação entre Duas V.A.s</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>Para analisar o comportamento conjunto de duas variáveis $X$ e $Y$:</p>
+						<ul>
+							<li><b>Covariância:</b> mede o grau de interdependência linear entre elas:
+								<p class="lightup2" style="margin: 5px 0; padding: 2px;">
+									$$Cov(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y]$$
+								</p>
+							</li>
+							<li><b>Não-Correlação:</b> se $Cov(X, Y) = 0$ (ou $E[XY] = E[X]E[Y]$), dizemos que $X$ e $Y$ são não-correlacionadas.</li>
+							<li><b>Independência Estatística:</b> a ocorrência de uma não altera a probabilidade da outra: $p_{XY}(x,y) = p_X(x)p_Y(y)$.
+								<ul>
+									<li>A independência sempre implica não-correlação, mas o inverso não é necessariamente verdadeiro.</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+
+
+
 				<!-- Slide 6: Revisão: A Distribuição Gaussiana (Normal) -->
 				<section>
 					<div class="slide-title">
@@ -104,10 +228,23 @@
 								<p>Notação usual: $X \sim \mathcal{N}(\mu, \sigma^2)$.</p>
 							</div>
 							<div style="flex: 0.8; text-align: center;">
-								<img src="../images/Carl_Friedrich_Gauss.jpg" style="max-height: 200px;" alt="Carl Friedrich Gauss">
+								<img src="../images/Carl_Friedrich_Gauss.jpg" style="max-height: 300px;" alt="Carl Friedrich Gauss">
 								<p style="font-size: 0.6em; margin: 5px 0 0 0; color: #64748b;">Carl Friedrich Gauss (1777-1855)</p>
 							</div>
 						</div>
+					</div>
+				</section>
+
+
+				
+					<!-- Slide 6b: Distribuição Gaussiana Escalar N(0,1) -->
+				<section>
+					<div class="slide-title">
+						<h2>Distribuição Gaussiana Escalar</h2>
+					</div>
+					<div class="slide-content" style="text-align: center;">
+						<p style="font-size: 0.85em; margin-bottom: 10px;">Distribuição Gaussiana Escalar Padrão (Média nula e Variância unitária): $$X \sim \mathcal{N}(0, 1)$$</p>
+						<img src="../images/gaussiana_escalar.png" width="950" style="max-height: 420px; object-fit: contain;" alt="Distribuição Gaussiana Escalar N(0,1)">
 					</div>
 				</section>
 
@@ -119,8 +256,8 @@
 					<div class="slide-content" style="font-size: 0.8em;">
 						<div style="display: flex; gap: 20px; align-items: center;">
 							<div style="flex: 1.1;">
-								<p>Para uma variável aleatória com distribuição normal (Gaussiana), denota-se por $$X\sim\mathcal{N}(\mu,\sigma^2)$$
-									em que o desvio padrão ($\sigma$) determina a probabilidade de ocorrência:</p>
+								<p>Para uma variável aleatória com distribuição normal (Gaussiana), denota-se por $$X\sim\mathcal{N}(\mu,\sigma^2).$$
+									O desvio padrão ($\sigma$) determina a probabilidade de ocorrência:</p>
 								<ul style="margin-top: 10px; line-height: 1.35;">
 									<li style="margin-bottom: 5px;"><b>Intervalo $\pm1\sigma$:</b> <b>$68.27\%$</b> de probabilidade.</li>
 									<li style="margin-bottom: 5px;"><b>Intervalo $\pm2\sigma$:</b> <b>$95.45\%$</b> de probabilidade.</li>
@@ -133,6 +270,8 @@
 						</div>
 					</div>
 				</section>
+
+			
 
 				<!-- Slide 4a: Visualização de um Processo Estocástico -->
 				<section>
@@ -160,25 +299,85 @@
 					</div>
 				</section>
 
-				<!-- Slide 5: Revisão: Covariância e Correlação -->
+				<!-- Slide 4c: Definição de um Processo Estocástico -->
 				<section>
 					<div class="slide-title">
-						<h2>Revisão: Relação entre Duas V.A.s</h2>
+						<h2>Definição de Processo Estocástico</h2>
 					</div>
-					<div class="slide-content" style="font-size: 0.85em;">
-						<p>Para analisar o comportamento conjunto de duas variáveis $X$ e $Y$:</p>
-						<ul>
-							<li><b>Covariância:</b> mede o grau de interdependência linear entre elas:
-								<p class="lightup2" style="margin: 5px 0; padding: 2px;">
-									$$Cov(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y]$$
-								</p>
-							</li>
-							<li><b>Não-Correlação:</b> se $Cov(X, Y) = 0$ (ou $E[XY] = E[X]E[Y]$), dizemos que $X$ e $Y$ são não-correlacionadas.</li>
-							<li><b>Independência Estatística:</b> a ocorrência de uma não altera a probabilidade da outra: $p_{XY}(x,y) = p_X(x)p_Y(y)$.
-								<ul>
-									<li>A independência sempre implica não-correlação, mas o inverso não é necessariamente verdadeiro.</li>
-								</ul>
-							</li>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<p>Matematicamente, um <b>Processo Estocástico</b> $\{X(t), t \in T\}$ é uma coleção de variáveis aleatórias definidas em um espaço de probabilidade comum $(\Omega, \mathcal{F}, P)$ e indexadas por um parâmetro $t$ pertencente a um conjunto de índices $T$ (geralmente representando o tempo):</p>
+						
+						<p class="lightup" style="margin: 15px auto; padding: 10px; max-width: 650px;">
+							$$X(t, \omega) : T \times \Omega \to \mathbb{R}$$
+						</p>
+						
+						<p style="margin-top: 15px;">Podemos analisar o processo sob duas perspectivas fundamentais:</p>
+						<ul style="margin-top: 10px; line-height: 1.4;">
+							<li><b>Para um instante de tempo $t$ fixado:</b> $X(t, \cdot)$ é uma <b>Variável Aleatória</b> convencional.</li>
+							<li><b>Para um resultado/evento $\omega$ fixado:</b> $X(\cdot, \omega)$ é uma função determinística do tempo $t$, chamada de <b>realização</b>, <b>trajetória</b> ou <b>caminho amostral</b> do processo.</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Slide 4d: Função de Correlação Cruzada -->
+				<section>
+					<div class="slide-title">
+						<h2>Função de Correlação</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<p>Para dois processos estocásticos $X(t)$ e $Y(t)$, a <b>função de correlação cruzada</b> $R_{xy}(t_1, t_2)$ mede a dependência linear e a correlação mútua entre os processos em diferentes instantes de tempo:</p>
+						
+						<p class="lightup" style="margin: 15px auto; padding: 10px; max-width: 650px;">
+							$$R_{xy}(t_1, t_2) = E[X(t_1) Y(t_2)] $$
+						</p>
+						
+						<p style="margin-top: 15px;">Se os processos forem conjuntamente estacionários no sentido amplo (WSS), a correlação depende apenas da diferença de tempo $\tau = t_2 - t_1$:</p>
+						<p class="lightup2" style="margin: 10px auto; padding: 5px; max-width: 500px;">
+							$$R_{xy}(\tau) = E[X(t) Y(t + \tau)]$$
+						</p>
+					</div>
+				</section>
+
+
+							<!-- Slide 4e: Função de Autocorrelação -->
+				<section>
+					<div class="slide-title">
+						<h2>Função de Autocorrelação</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+						<p>A <b>função de autocorrelação</b> $R_{xx}(t_1, t_2)$ descreve a correlação de um processo estocástico $X(t)$ consigo mesmo em instantes de tempo diferentes:</p>
+						
+						<p class="lightup" style="margin: 15px auto; padding: 10px; max-width: 650px;">
+							$$R_{xx}(t_1, t_2) = E[X(t_1) X(t_2)]$$
+						</p>
+						
+						<p style="margin-top: 15px;">Para processos estacionários no sentido amplo (WSS), ela depende apenas de $\tau = t_2 - t_1$:</p>
+						<p class="lightup2" style="margin: 10px auto; padding: 5px; max-width: 500px;">
+							$$R_{xx}(\tau) = E[X(t) X(t + \tau)]$$
+						</p>
+						
+						
+					</div>
+				</section>
+
+				<!-- Slide 4e: Função de Autocorrelação -->
+				<section>
+					<div class="slide-title">
+						<h2>Função de Autocorrelação</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.8em;">
+					
+						
+						<p style="margin-top: 15px;">Para processos estacionários no sentido amplo (WSS), ela depende apenas de $\tau = t_2 - t_1$:</p>
+						<p class="lightup2" style="margin: 10px auto; padding: 5px; max-width: 500px;">
+							$$R_{xx}(\tau) = E[X(t) X(t + \tau)]$$
+						</p>
+						
+						<p style="margin-top: 15px;">Principais propriedades (para processos WSS):</p>
+						<ul style="margin-top: 5px; line-height: 1.3;">
+							<li><b>Potência Média:</b> $R_{xx}(0) = E[X(t)^2]$ (sempre $\ge 0$).</li>
+							<li><b>Simetria Par:</b> $R_{xx}(\tau) = R_{xx}(-\tau)$.</li>
+							<li><b>Limite Superior:</b> $|R_{xx}(\tau)| \le R_{xx}(0)$ para todo $\tau$.</li>
 						</ul>
 					</div>
 				</section>
@@ -194,6 +393,21 @@
 							$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad \text{se } P(B) > 0$$
 						</p>
 						<p style="margin-top: 20px;">O termo $P(A \cap B)$ representa a probabilidade conjunta (ambos os eventos ocorrendo simultaneamente), enquanto $P(B)$ atua como o espaço amostral reduzido.</p>
+					</div>
+				</section>
+
+
+					<!-- Slide 5a: Revisão: Probabilidade Condicional -->
+				<section>
+					<div class="slide-title">
+						<h2>Revisão: Probabilidade Condicional</h2>
+					</div>
+					<div class="slide-content" style="font-size: 0.85em;">
+						<p>A probabilidade condicional mede a probabilidade de um evento $A$ ocorrer dado que outro evento $B$ já ocorreu:</p>
+						<p class="lightup">
+							$$P(A|B) = \frac{P(A , B)}{P(B)}, \quad \text{se } P(B) > 0$$
+						</p>
+						<p style="margin-top: 20px;">O termo $P(A , B)$ representa a probabilidade conjunta (ambos os eventos ocorrendo simultaneamente), enquanto $P(B)$ atua como o espaço amostral reduzido.</p>
 					</div>
 				</section>
 
@@ -582,6 +796,38 @@
 					</div>
 				</section>
 
+
+									<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>1. Etapa de Predição (Time Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenhos informações $\{y_0,\ldots,y_k\}$, qual é o estádo futuro $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k)=\int p(x_{k+1}|x_k)p(x_k|y_0,\ldots,y_k)dx_k
+									$$
+							</p>
+			
+					</div>
+				</section>
+
+
+													<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+						<h2>1. Etapa de Predição (Time Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenhos informações $\{y_0,\ldots,y_k\}$, qual é o estádo futuro $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k)=\mathcal{N}(\hat{x}_{k+1|k},P_{k+1|k})
+									$$
+							</p>
+			
+					</div>
+				</section>
+
 				<!-- Slide 17: As Equações de Predição (Time Update) -->
 				<section>
 					<div class="slide-title">
@@ -602,6 +848,57 @@
 							</li>
 						</ol>
 					
+					</div>
+				</section>
+
+
+									<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+					<h2>2. Etapa de Correção (Measurement Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenho uma nova informação $y_{k+1}$, qual é o estádo $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k,y_{k+1})=?
+									$$
+							</p>
+			
+					</div>
+				</section>
+
+
+				
+									<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+					<h2>2. Etapa de Correção (Measurement Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenho uma nova informação $y_{k+1}$, qual é o estádo $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k,y_{k+1})=\frac{p(y_{k+1}|x_{k+1})p(x_{k+1}|y_0,\ldots,y_{k})}{p(y_{k+1}|y_0,\ldots,y_k)}
+									$$
+							</p>
+			
+					</div>
+				</section>
+
+
+
+								
+									<!-- Slide 17: As Equações de Predição (Time Update) -->
+				<section>
+					<div class="slide-title">
+					<h2>2. Etapa de Correção (Measurement Update)</h2>
+					<p>&nbsp;</p>
+							<p class="lightup">
+									Dado que tenho uma nova informação $y_{k+1}$, qual é o estádo $x_{k+1}$?
+									$$
+										p(x_{k+1}|y_0,\ldots,y_k,y_{k+1})=\mathcal{N}(\hat{x}_{k+1|k+1},P_{k+1|k+1})
+									$$
+							</p>
+			
 					</div>
 				</section>
 
@@ -674,60 +971,49 @@
 					</div>
 				</section>
 
-	
-				<!-- Slide 19: Análise do Ganho de Kalman -->
+				<!-- Novo Slide: Medição Ruidosa de Temperatura -->
 				<section>
 					<div class="slide-title">
-						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+						<h2>Exemplo: Medição Ruidosa de Temperatura</h2>
 					</div>
-					<div class="slide-content" style="font-size: 0.85em;">
-						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
-						<p class="lightup" style="margin: 10px 0; padding: 5px;">
-							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
-						</p>
-						Note que
-						$$
-							\hat{x}_{k+1|k+1} = \hat{x}_{k+1|k} + k_k (y_{k+1} - c \hat{x}_{k+1|k})\\
-						$$
+					<div class="slide-content" style="text-align: center;">
+						<p>&nbsp;</p>
+						<center>
+						<img src="../images/aula10_temperatura_ruidosa.png" width="850" style="max-height: 420px; object-fit: contain;" alt="Temperatura Real e Medições Ruidosas">
+						</center>
 					</div>
 				</section>
 
-
-					<!-- Slide 19: Análise do Ganho de Kalman -->
+				<!-- Slide 19b: Kalman 2D - Predição -->
 				<section>
 					<div class="slide-title">
-						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+						<h2>Ciclo de Kalman: Predição (Prior)</h2>
 					</div>
-					<div class="slide-content" style="font-size: 0.85em;">
-						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
-						<p class="lightup" style="margin: 10px 0; padding: 5px;">
-							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
-						</p>
-						Note que
-						$$
-							\hat{x}_{k+1|k+1} = (1-k_kc)\hat{x}_{k+1|k} + k_k y_{k+1} \\
-						$$
-
+					<div class="slide-content" style="text-align: center;">
+						<p style="font-size: 0.85em; margin-bottom: 10px;">Com base no modelo de estado (predição física), estimamos a distribuição da variável:</p>
+						<img src="../images/aula10_kalman_2d_1_predicao.png" width="850" style="max-height: 420px; object-fit: contain;" alt="Filtro de Kalman 2D - Predição">
 					</div>
 				</section>
 
-
-
-
-								<!-- Slide 19: Análise do Ganho de Kalman -->
+				<!-- Slide 19c: Kalman 2D - Medição -->
 				<section>
 					<div class="slide-title">
-						<h2>A Intuição do Ganho de Kalman ($k_k$)</h2>
+						<h2>Ciclo de Kalman: Medição (Likelihood)</h2>
 					</div>
-					<div class="slide-content" style="font-size: 0.85em;">
-						<p>O ganho $k_k$ decide se confiamos mais no <b>modelo dinâmico</b> ou no <b>sensor</b>:</p>
-						<p class="lightup" style="margin: 10px 0; padding: 5px;">
-							$$k_k \approx \frac{\text{erro}_{pred}}{\text{erro}_{pred} + \text{erro}_{sensor}}$$
-						</p>
-						<ul>
-							<li><b>Sensores muito precisos ($r \to 0$):</b> $k_k \to 1$. A estimativa ignora a predição e atualiza fortemente com a medição: $\hat{x}_{k|k} \approx y_k$.</li>
-							<li><b>Modelo físico muito preciso ou medições péssimas ($p_{pred} \to 0$ ou $r \to \infty$):</b> $k_k \to 0$. A estimativa segue estritamente a predição física: $\hat{x}_{k|k} \approx \hat{x}_{k|k-1}$.</li>
-						</ul>
+					<div class="slide-content" style="text-align: center;">
+						<p style="font-size: 0.85em; margin-bottom: 10px;">O sensor fornece uma nova medição ruidosa com sua respectiva incerteza:</p>
+						<img src="../images/aula10_kalman_2d_2_medicao.png" width="850" style="max-height: 420px; object-fit: contain;" alt="Filtro de Kalman 2D - Medição">
+					</div>
+				</section>
+
+				<!-- Slide 19d: Kalman 2D - Correção/Posteriori -->
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo de Kalman: Correção (Posterior)</h2>
+					</div>
+					<div class="slide-content" style="text-align: center;">
+						<p style="font-size: 0.85em; margin-bottom: 10px;">A estimativa posterior (combinação ótima) possui incerteza (variância) menor do que ambas:</p>
+						<img src="../images/aula10_kalman_2d_3_posteriori.png" width="850" style="max-height: 420px; object-fit: contain;" alt="Filtro de Kalman 2D - Posteriori">
 					</div>
 				</section>
 
@@ -757,6 +1043,10 @@
 					</div>
 				</section>
 
+
+
+			
+			
 
 			
 
